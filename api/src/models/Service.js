@@ -3,13 +3,13 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("product", {
+  sequelize.define("service", {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      primaryKey: true
-    },
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,14 +22,13 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    stock: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    image: {
-      type: DataTypes.TEXT,
+    available: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
+    },
+    time: {
+        type: DataTypes.DATE,
+        allowNull: false,
     }
   });
 };
