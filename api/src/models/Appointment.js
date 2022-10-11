@@ -24,12 +24,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-    /*
-      admin y user con id propio?
-      
-      */
-      
     },
   );
 };

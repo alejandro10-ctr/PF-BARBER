@@ -57,15 +57,16 @@ module.exports = (sequelize) => {
             isNumeric: {
                 args: true,
                 msg: "You must enter a phone number"
-            }
+            },
             len: {
                 args: [11,11],
                 msg: "Phone number is invalid"
-            }
+            },
             isInt: {
                 args: true,
                 msg: "You must enter a phone number"
-            }
+            },
+            is: ^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$
         }
     },
     image: {
@@ -76,6 +77,22 @@ module.exports = (sequelize) => {
     isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    state: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: 
+    },
+    isBarber: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
+    addProduct : {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+    deleteProduct: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     }
 
   });
