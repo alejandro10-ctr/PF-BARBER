@@ -10,6 +10,9 @@ import {
   DELETE_USERS,
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
+  SEARCH_PRODUCTS,
+  SORT_PRICE,
+  ORDER_BY_SCORE,
 } from "./actions";
 
 const initialState = {
@@ -17,6 +20,7 @@ const initialState = {
   products: [],
   users: [],
   detail: [],
+  allProducts: [],
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -46,6 +50,54 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         detail: [],
       };
+    case SEARCH_PRODUCTS:
+      return { ...state, allProducts: payload };
+
+    case SORT_PRICE:
+      const sortPrice = state.products;
+      const sortLower =
+        payload === "lower"
+          ? sortPrice.sort(function (a, b) {
+              if (a.price > b.price) {
+                return -1;
+              }
+              if (b.price > a.price) {
+                return 1;
+              }
+              return 0;
+            })
+          : sortPrice.sort(function (a, b) {
+              if (a.price > b.price) {
+                return 1;
+              }
+              if (b.price > a.price) {
+                return -1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        products: sortLower,
+      };
+    case ORDER_BY_SCORE:
+      let sortedByScore = [...state.products];
+      sortedByScore =
+        payload === "high"
+          ? state.products.sort(function (a, b) {
+              if (a.score > b.score) return 1;
+              if (a.score < b.score) return -1;
+              return 0;
+            })
+          : state.products.sort(function (a, b) {
+              if (a.score < b.score) return 1;
+              if (a.score > b.score) return -1;
+              return 0;
+            });
+      return {
+        ...state,
+        products: sortedByScore,
+      };
+
     default:
       return state;
   }

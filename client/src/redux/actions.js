@@ -10,6 +10,9 @@ export const GET_USERS = "GET_USERS";
 export const DELETE_USERS = "DELETE_USERS";
 export const UPDATE_USERS = "UPDATE_USERS";
 export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
+export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
+export const SORT_PRICE = "SORT_PRICE";
+export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 
 export function setLoading(value) {
   return (dispatch) => {
@@ -156,5 +159,28 @@ export function getProductsDetail(id, errorCallback) {
 export function clearDetail() {
   return {
     type: CLEAR_PRODUCTS_DETAILS,
+  };
+}
+export function searchProducts(name, errorCallback) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/products/name?name=${name}`);
+      dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: SEARCH_PRODUCTS, payload: [] });
+      throw alert("Product not found");
+    }
+  };
+}
+export function sortByPrice() {
+  return {
+    type: SORT_PRICE,
+    payload,
+  };
+}
+export function orderByScore(payload) {
+  return {
+    type: ORDER_BY_SCORE,
+    payload,
   };
 }
