@@ -23,21 +23,15 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     birthday: {
-        type: DataTypes.TEXT,
+        type: DataTypes.DATE,
         allowNull: false,
-        validate: {
-            isDate: true
-        }
     },
     email: {
         type: DataTypes.TEXT,
         allowNull: false,
         unique: true,
-        validate: {
-            isEmail: {
-                args: true,
-                msg: "You must enter a valid email"
-            }
+        validate:{
+            isEmail: true
         }
     },
     password: {
@@ -54,18 +48,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isNumeric: {
-                args: true,
-                msg: "You must enter a phone number"
-            },
-            len: {
-                args: [11,11],
-                msg: "Phone number is invalid"
-            },
-            isInt: {
-                args: true,
-                msg: "You must enter a phone number"
-            },
             is: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/
         }
     },
