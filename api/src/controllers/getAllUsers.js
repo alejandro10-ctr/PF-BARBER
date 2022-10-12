@@ -1,18 +1,13 @@
 const { QueryTypes, Sequelize } = require('sequelize');
 const { User, conn, Op } = require('../db.js');
 
+const JSONUsers = require('../Data/users.json')
+
 const getDBUsers = async () => {
 
     let db = await User.findAll()
     if (!db.length) {
-        db = await User.bulkCreate([{
-            name: "yeiber",
-            lastname: "reyes",
-            birthday: "22-04",
-            email:"yeiberey@gmail.com",
-            password: "123456",
-            phone: "57-3203301329"
-        }])
+        db = await User.bulkCreate(JSONUsers,{validate:true})
     }
     return db
 }
