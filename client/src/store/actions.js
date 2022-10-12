@@ -8,7 +8,7 @@ export function setLoading(value) {
     dispatch({ type: SET_LOADING, payload: { loading: value } });
   };
 }
-
+//aksjdlkajsdklajsdklajsdklajslkdjakl
 export function getProducts(errorCallback) {
   return async (dispatch) => {
     try {
