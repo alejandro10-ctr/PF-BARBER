@@ -3,23 +3,15 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("sale", {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+  return sequelize.define('hour', {
+    first: {
+      type: DataTypes.STRING(4),
       allowNull: false,
-      primaryKey: true
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false
+    last: {
+      type: DataTypes.STRING(4),
+      allowNull: false,
     },
-    date: {
-        type: DataTypes.DATE,
-        validate: {
-            isDate: true,
-        }
-    }
   }, {
     timestamp: false,
     createdAt: false,

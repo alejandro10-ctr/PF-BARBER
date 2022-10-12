@@ -31,5 +31,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
     }
+  }, {
+    timestamp: false,
+    createdAt: false,
+    updatedAt: false,
   });
 };

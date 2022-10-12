@@ -66,7 +66,7 @@ module.exports = (sequelize) => {
                 args: true,
                 msg: "You must enter a phone number"
             },
-            is: ^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$
+            is: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/
         }
     },
     image: {
@@ -80,20 +80,24 @@ module.exports = (sequelize) => {
     },
     state: {
         type: DataTypes.BOOLEAN,
-        defaultValue: 
+        defaultValue: true
     },
     isBarber: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    }
+    },
     addProduct : {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-    }
+    },
     deleteProduct: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     }
 
+  }, {
+    timestamp: false,
+    createdAt: false,
+    updatedAt: false,
   });
 };

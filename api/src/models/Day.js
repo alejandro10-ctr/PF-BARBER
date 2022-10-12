@@ -14,5 +14,9 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false
     }
+  }, {
+    timestamp: false,
+    createdAt: false,
+    updatedAt: false,
   });
 };
