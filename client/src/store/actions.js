@@ -9,6 +9,7 @@ export function setLoading(value) {
   };
 }
 //aksjdlkajsdklajsdklajsdklajslkdjakl
+//asdasdasdasdasdas
 export function getProducts(errorCallback) {
   return async (dispatch) => {
     try {
