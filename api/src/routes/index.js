@@ -2,7 +2,7 @@ const { Router, json } = require('express');
 // import all routers;
 const userMiddleware = require('../middlewares/users');
 const serviceMiddleware = require('../middlewares/service');
-const scheduleMiddleware = require('../middlewares/schedule');
+const scheduleMiddleware = require('../middlewares/schedules');
 
 
 const router = Router();
