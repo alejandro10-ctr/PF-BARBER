@@ -31,6 +31,7 @@ import HeaderComponent from "./components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { createProducts, getProducts } from "./store/actions";
 import { IoAdd, IoPencil, IoSend, IoTrash } from "react-icons/io5";
+import ShoppingCart from "./components/Shopping/ShoppingCart";
 function App() {
   const dispatch = useDispatch();
   const { products, loading } = useSelector((store) => store);
@@ -47,6 +48,11 @@ function App() {
           templateColumns="auto 1fr"
           p={"1rem 1.5rem"}
         >
+
+<ShoppingCart/>
+
+
+
           <HeaderComponent />
           <Table gridColumn="1 / span 2">
             <Thead>
