@@ -10,8 +10,9 @@ import {
 } from "../../redux/actions";
 
 function Productos() {
+  
   const dispatch = useDispatch();
-  //const products = useState((state) => state.products);
+  const products = useSelector((state) => state.products);
   const [page, setPage] = useState(0);
   const [busqueda, setBusqueda] = useState("");
 
@@ -25,7 +26,9 @@ function Productos() {
     dispatch(getProducts());
   };
   useEffect(() => {
+   
     dispatch(getProducts());
+    console.log("hola")
   }, [dispatch]);
 
   return (
@@ -78,7 +81,7 @@ function Productos() {
                 <h2>{e.name}</h2>
                 <h3>{e.price}</h3>
                 <h3>{e.stock}</h3>
-                <button onClick={handlerBy}>COMPRAR</button>
+                <button onClick={console.log("comprar")}>COMPRAR</button>
               </div>
             );
           })}
@@ -86,4 +89,6 @@ function Productos() {
       </div>
     </div>
   );
+  
 }
+export default Productos;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function product() {
+function Product() {
   const { id } = useParams();
   const [products, setProducts] = useState();
   useEffect(() => {
@@ -33,4 +33,4 @@ function product() {
     </div>
   );
 }
-export default product;
+export default Product;

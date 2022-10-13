@@ -13,6 +13,7 @@ export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const SORT_PRICE = "SORT_PRICE";
 export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
+export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT"
 
 export function setLoading(value) {
   return (dispatch) => {
@@ -172,7 +173,7 @@ export function searchProducts(name, errorCallback) {
     }
   };
 }
-export function sortByPrice() {
+export function sortByPrice(payload) {
   return {
     type: SORT_PRICE,
     payload,
