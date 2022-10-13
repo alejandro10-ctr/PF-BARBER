@@ -13,7 +13,16 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.TEXT,
       allowNull: false
-    }
+    },
+    code: {
+      type: DataTypes.STRING(3),
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      valueDefault: true
+    },
   }, {
     timestamp: false,
     createdAt: false,
