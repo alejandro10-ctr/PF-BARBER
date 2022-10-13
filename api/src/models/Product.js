@@ -4,6 +4,12 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("product", {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,6 +21,17 @@ module.exports = (sequelize) => {
     price: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+    },
+    quality: {
+      type: DataTypes.ENUM(["basic", "premium"]),
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [["basic", "premium"]],
+          msg: "You must decide if basic or premium only"
+        }
+      },
+      defaultValue: "basic"
     },
     stock: {
       type: DataTypes.INTEGER,
