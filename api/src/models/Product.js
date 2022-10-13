@@ -22,6 +22,16 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    quality: {
+      type: DataTypes.ENUM(["basic", "premium"]),
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [["basic", "premium"]],
+          msg: "You must decide if basic or premium only"
+        }
+      }
+    },
     stock: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
