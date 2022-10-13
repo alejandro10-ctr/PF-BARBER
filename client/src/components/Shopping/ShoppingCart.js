@@ -1,6 +1,6 @@
 import {useReducer} from 'react'
-import { TYPES } from '../../redux/shoppingActions';
-import { shoppingInitialState, shoppingReducer } from '../../redux/shoppingReducer';
+import { TYPES } from '../../redux/actions';
+import { shoppingInitialState, shoppingReducer } from '../../redux/reducer';
 import CartItem from './CartItem';
 import ProductItem from './ProductsItem';
 import './ShoppingCart.css'
@@ -11,7 +11,7 @@ const ShoppingCart = () => {
     shoppingInitialState
     );
    
-    const {productsToCart, cart, localStorage} = state;
+    const {products, cart, localStorage} = state;
 
     const addToCart = (id) => {
        // console.log(id)
@@ -40,14 +40,14 @@ const ShoppingCart = () => {
     function addToLocalStorage(product){
      let productos = getProductsLs();
      productos.push(product);
-     localStorage.setItem('productsToCart',  JSON.stringify(productos))  // => 'products' o 'productos' ?
+     localStorage.setItem('products',  JSON.stringify(productos))  // => 'products' o 'productos' ?
     };
 
     function getProductsLs(){
-        if(localStorage.getItem('productsToCart') === null){
+        if(localStorage.getItem('products') === null){
             localStorage = []   // let productsLs = []
         }else{
-            localStorage = JSON.parse(localStorage.getItem('productsToCart'))
+            localStorage = JSON.parse(localStorage.getItem('products'))
         }
         return localStorage;  // return productsLs;
     };
@@ -59,7 +59,7 @@ const ShoppingCart = () => {
             productsLs.splice(index, 1)
         }
       });
-      localStorage.getItem('productsToCart', JSON.stringify(productsLs))
+      localStorage.getItem('products', JSON.stringify(productsLs))
     };
 
     function cleanLs (){
@@ -88,7 +88,7 @@ return (
         <h3>Products</h3>
         <article className="box grid-responsive">
         {
-            productsToCart.map((productsToCart)=> <ProductItem key={productsToCart.id} data={productsToCart} addToCart={addToCart} />)
+            products.map((products)=> <ProductItem key={products.id} data={products} addToCart={addToCart} />)
         }    
         </article>
         <h3>Cart</h3>

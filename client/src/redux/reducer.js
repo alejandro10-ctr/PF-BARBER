@@ -13,6 +13,7 @@ import {
   SEARCH_PRODUCTS,
   SORT_PRICE,
   ORDER_BY_SCORE,
+  TYPES,
 } from "./actions";
 
 const initialState = {
@@ -29,6 +30,8 @@ const initialState = {
   users: [],
   detail: [],
   allProducts: [],
+  cart: [],
+  localStorage: [],
 };
 
 
@@ -107,6 +110,52 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         products: sortedByScore,
       };
+
+
+
+      
+      case TYPES.ADD_TO_CART: {
+        let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
+       // console.log(newItem)
+       let itemInCart = state.cart.find(item => item.id === newItem.id)
+
+       return itemInCart ? {
+        ...state,
+        cart: state.cart.map(item => item.id === newItem.id ? {
+            ...item, 
+            quantity: item.quantity + 1 
+        } : item)
+       } 
+       : 
+       {...state,
+        cart: [...state.cart, {...newItem, quantity: 1}],
+    }
+        
+    }
+    case TYPES.REMOVE_ONE_FROM_CART: {
+        let itemToDelete = state.cart.find(item => item.id === payload);
+        
+        return itemToDelete.quantity > 1 ? {
+            ...state, 
+            cart: state.cart.map(item => item.id === payload ? {...item, quantity: item.quantity - 1} : item)
+        } 
+        :
+         {
+            ...state,
+            cart: state.cart.filter(item => item.id !== payload)
+         };
+    }
+    case TYPES.REMOVE_ALL_FROM_CART: {
+       return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== payload),
+       }
+    }
+    case TYPES.CLEAR_CART: 
+    return shoppingInitialState;
+
+
+
 
     default:
       return state;
