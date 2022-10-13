@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getDBUsers, getDBUserByPk } = require('../controllers/getAllUsers.js')
+const { getDBUsers, getDBUserByPk } = require('../middlewares/getAllUsers.js')
 
 const router = Router();
 

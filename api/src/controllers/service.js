@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getDBServices } = require('../controllers/getAllServices.js')
+const { getDBServices } = require('../middlewares/getAllServices.js')
 const router = Router();
 
 router.get('/', async (req, res) => {

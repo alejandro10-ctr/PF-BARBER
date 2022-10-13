@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const { getDBUsers} = require('../controllers/getAllUsers')
-const { getDBServices} = require('../controllers/getAllServices')
-const { getDBDays, dbCreateDay} = require('../controllers/getAllDays.js')
-const { getDBSchedules} = require('../controllers/getAllSchedules.js')
+const { getDBUsers} = require('../middlewares/getAllUsers')
+const { getDBServices} = require('../middlewares/getAllServices')
+const { getDBDays, dbCreateDay} = require('../middlewares/getAllDays.js')
+const { getDBSchedules} = require('../middlewares/getAllSchedules.js')
 
 const router = Router();
 router.get('/', async (req, res) => {

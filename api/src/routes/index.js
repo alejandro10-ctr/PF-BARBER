@@ -1,8 +1,8 @@
 const { Router, json } = require('express');
 // import all routers;
-const userMiddleware = require('../middlewares/users');
-const serviceMiddleware = require('../middlewares/service');
-const scheduleMiddleware = require('../middlewares/schedules');
+const userMiddleware = require('../controllers/users');
+const serviceMiddleware = require('../controllers/service');
+const scheduleMiddleware = require('../controllers/schedules');
 
 
 const router = Router();
