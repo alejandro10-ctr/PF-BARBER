@@ -24,6 +24,7 @@ validate={(valuesForm)=>{
         errorsCheck.name = 'Pls write a name...'
     } else if(/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valuesForm.name)){
         errorsCheck.name = 'We need a name without numbers... '
+
     }
     //validate email:
     if(!valuesForm.email){
@@ -124,6 +125,7 @@ onSubmit ={(valuesForm, {resetForm})=>{
     )}
 
     <div>probando</div>
+
 </Formik>
 
 

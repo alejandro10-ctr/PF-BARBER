@@ -1,10 +1,16 @@
 const { Router, json } = require('express');
 // import all routers;
-const userMiddleware = require('../middlewares/users');
+const userController = require('../controllers/users');
+const serviceController = require('../controllers/service');
+const scheduleController = require('../controllers/schedules');
+const productController = require('../controllers/product')
 
 
 const router = Router();
 router.use(json())
-router.use('/users', userMiddleware);
+router.use('/users', userController);
+router.use('/services', serviceController);
+router.use('/schedules',scheduleController)
+router.use('/products', productController)
 
 module.exports = router;
