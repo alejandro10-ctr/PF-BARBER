@@ -30,8 +30,12 @@ module.exports = (sequelize) => {
           args: [["basic", "premium"]],
           msg: "You must decide if basic or premium only"
         }
+
+      }
+
       },
       defaultValue: "basic"
+
     },
     stock: {
       type: DataTypes.INTEGER,
