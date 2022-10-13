@@ -25,6 +25,17 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    genre:{
+        type: DataTypes.ENUM(["man", "woman","binarie"]),
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [["man", "woman","binarie"]],
+            msg: "You must decide if man, woman or binarie only"
+          }
+        },
+        defaultValue: "binarie"
+    },
     email: {
         type: DataTypes.TEXT,
         allowNull: false,
