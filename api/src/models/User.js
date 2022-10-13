@@ -5,14 +5,13 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("user", {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
     name: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
       validate: {
         isAlpha: true,
@@ -47,8 +46,15 @@ module.exports = (sequelize) => {
     phone: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: {
+            args: true,
+            msg: "This phone number is already register"
+        },
         validate: {
-            is: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/
+            is: {
+                args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+                msg: "Enter a valid phone"
+            }
         }
     },
     image: {
