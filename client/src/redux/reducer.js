@@ -22,120 +22,120 @@ const initialState = {
   products: [{
     score: 20,
     id : 1,
-    name: "tijera",
+    name: "Beard Balm",
     price: 200,
-    quantity: 20,
+    quantity: "Premium",
     stock: 5,
     code: "123",
-    imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
+    imageProfile: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp"
   },{
     score: 50,
     id : 3,
-    name: "Mano",
+    name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
     price: 5400,
-    quantity: 40,
+    quantity: "Basic",
     stock: 52,
     code: "144",
-    imageProfile: "https://static8.depositphotos.com/1049680/1018/i/600/depositphotos_10182313-stock-photo-hand-symbol.jpg"
+    imageProfile: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg"
 },
 {
   id : 5,
-  name: "tijera",
+  name: "Edwin Jagger Marfil",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://i0.wp.com/megabahia.com/wp-content/uploads/2020/04/atomizador-de-pl%C3%A1stico-para-peluqueria-mega-bah%C3%ADa.jpg?resize=247%2C296&ssl=1"
+  imageProfile: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg"
 },
 {
   id : 87435634,
-  name: "tijera",
+  name: "Brosh Super Hard Gel 200gr",
   price: 200,
-  quantity: 20,
+  quantity: "Basic",
   stock: 5,
   code: "123",
-  imageProfile: "https://www.productospeluqueriacastro.com/8416-home_default/paletina-tinte-peluqueria.jpg"
+  imageProfile: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg"
 },
 {
   id : 4,
-  name: "tijera",
+  name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://www.pinedoyvilla.com/imagenes/productos/familia_20/familia_73298/6460188-2.jpg"
+  imageProfile: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg"
 },
 {
   id : 6,
-  name: "tijera",
+  name: "Fatip Chrome Slant Double Edge Safety Razor",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://www.comercialmoctezuma.com/archivo/2013/03/tij-lila-500x500.png"
+  imageProfile: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg"
 },
 {
   id : 7,
-  name: "tijera",
+  name: "Omega Garnet Shaving Bowl",
   price: 200,
-  quantity: 20,
+  quantity: "Basic",
   stock: 5,
   code: "123",
-  imageProfile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaMWI1A5n9y2UHQUJ7dw7k94K4V-vtnk06A&usqp=CAU"
+  imageProfile: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg"
 },
 {
   id : 8,
-  name: "tijera",
+  name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
   price: 200,
-  quantity: 20,
+  quantity: "Basic",
   stock: 5,
   code: "123",
-  imageProfile: "https://noticiaspmy.com/wp-content/uploads/2020/04/peluqeria.png"
+  imageProfile: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg"
 },
 {
   id : 9,
-  name: "tijera",
+  name: "Baxter of California Shave Tonic",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
+  imageProfile: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg"
 },
 {
   id : 1256,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
+  name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
+  price: 300,
+  quantity: "Basic",
   stock: 5,
   code: "123",
-  imageProfile: "https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/396fb521-ea28-469d-89e0-d8bf5f7dee2c?rule=detail_640x480_jpeg"
+  imageProfile: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg"
 },
 {
   id : 1743,
-  name: "tijera",
+  name: "Hey Joe Pre Shave Oil 50ml",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://i.pinimg.com/474x/63/0f/54/630f547cb0ccd4524454c8f815b4563a.jpg"
+  imageProfile: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg"
 },
 {
   id : 654,
-  name: "tijera",
+  name: "After Shave BeardLovers",
   price: 200,
-  quantity: 20,
+  quantity: "Basic",
   stock: 5,
   code: "123",
-  imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
+  imageProfile: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg"
 },
 {
   id : 213,
-  name: "tijera",
+  name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
   price: 200,
-  quantity: 20,
+  quantity: "Premium",
   stock: 5,
   code: "123",
-  imageProfile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUbtqmZ1ClNNAFC386N_u08HmTqzGnigwSQ&usqp=CAU"
+  imageProfile: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg"
 }
 ],
 
