@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import Paginado from '../Paginado/Paginado.jsx';
 import { getProducts, sortLower, orderByScore, sortHigh } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
+import { Link } from "react-router-dom";
 
 
 export default function Productos() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
-
 
     //logic pagination
     const [page, setPage] = useState(1);
@@ -31,11 +31,11 @@ export default function Productos() {
     //-----sort
     function handleSort(sort) {
         sort.preventDefault();
-        if (sort.target.value === "lower") dispatch(sortLower(e.target.value));
-        else if (e.target.value === "high") dispatch(sortHigh(e.target.value));
+        if (sort.target.value === "lower") dispatch(sortLower(sort.target.value));
+        else if (sort.target.value === "high") dispatch(sortHigh(sort.target.value));
     }
 
-    //----score--
+    //----score
     function handleScore(score) {
         score.preventDefault()
         dispatch(orderByScore(score.target.value))
@@ -70,15 +70,17 @@ export default function Productos() {
             <button> RESET  </button>
 
             <div>
-                {products.length === 0 && <h1>NO HAY PRODUCTOS</h1>}
+                {products.length === 0 && <h1>We dont Have that product!</h1>}
                 {showProducts.map((e) => {
                     return (
+                        
                         <div key={e.id}>
-                            <img src={e.imageProfile} alt="Imagen de Producto"></img>
+                            <img src={e.imageProfile} alt="img"></img>
                             <h2>{e.name}</h2>
                             <h3>{e.price}</h3>
                             <h3>{e.stock}</h3>
-                            <button onClick={console.log("comprar")}>COMPRAR</button>
+                            {/* <button onClick={console.log("comprar")}>COMPRAR</button> */}
+                            <Link to={`/product/${e.id}`}>Detail Product</Link>
                         </div>
                     );
                 })}
