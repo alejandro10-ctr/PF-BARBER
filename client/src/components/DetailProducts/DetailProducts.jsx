@@ -14,9 +14,9 @@ function Product() {
   if (!products) return null;
   return (
     <div>
-      <Link to="/" className="Home">
-        HOME
-      </Link>
+      <Link to="/" className="Home">Back</Link>
+       
+     
       <h3>{products.name}</h3>
       <img src={products.imageProfile} alt={products.imageProfile} />
       <div>

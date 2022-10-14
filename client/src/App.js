@@ -36,8 +36,8 @@ import ShoppingCart from "./components/Shopping/ShoppingCart";
 // =======
 import React, { Component }  from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Productos from "./components/Store/Store.jsx";
 import Product from "./components/DetailProducts/DetailProducts";
+import Ecommerce from './components/Ecommerce/Ecommerce';
 
 // >>>>>>> 3c87c3da8005cd8fd718710709ab935580bf7a7d
 function App() {
@@ -59,7 +59,7 @@ function App() {
             <BrowserRouter>
             {/* <ShoppingCart/> */}
             {/* <Route exact path={'/shopping'} component={ShoppingCart}></Route> */}
-            <Route exact path={'/'} component={Productos}></Route>
+            <Route exact path={'/'} component={Ecommerce}></Route>
             <Route patch ={'/products/:id'} component = {Product}></Route>
             </BrowserRouter>
             </div>
