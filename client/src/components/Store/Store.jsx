@@ -14,6 +14,7 @@ import {
 } from "../../redux/actions";
 
 
+
 function Productos() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
@@ -64,8 +65,7 @@ function Productos() {
 
   return (
     <div>
-    
-
+      
       <div>
     <label >Sort</label>
     <select  onChange={e=>handleSort(e)}>
