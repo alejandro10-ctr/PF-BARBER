@@ -1,35 +1,68 @@
-const Sequelize = require("sequelize");
-const { Product } = require("../db.js");
+const { Product, Image } = require("../db.js");
 const { Op } = require("sequelize");
 
-// const JsonProducts = require("../Data/products.json");
-
 const getAllProducts = async () => {
-  const dbInfo = await Product.findAll();
-  // if (!dbInfo) {
-  //   dbInfo = await Product.bulkCreate(JsonProducts);
-  // }
-  return dbInfo;
+  const products = await Product.findAll({
+    include: Image
+  });
+  return products;
 };
 
 const getProductByPk = async (id) => {
-  const dbInfo = await Product.findAll({ where: { id } });
-  return dbInfo[0];
+  const product = await Product.findAll({ 
+    where: { 
+      id 
+    },
+    include: Image 
+  });
+  
+  if (!product.length) {
+    throw new Error("product not found");
+  }
+  return product[0];
 };
 
 const getProductByName = async (name) => {
-  const db = await Product.findAll({
+  const product = await Product.findAll({
     where: {
       name: {
         [Op.iLike]: `%${name}%`,
       },
     },
   });
-  return db;
+  return product;
 };
-
+const dbCreateProduct = async (info) => {
+  await Product.create(info)
+  return `product ${info.name} created`
+}
+const dbUpdateProduct = async (info, id) => {
+  const [response] = await Product.update(
+    info,
+    {
+      where: {
+        id,
+      },
+    }
+  );
+  if (response) {
+    return `product id:${id} updated successfully`;
+  } else {
+    throw new Error("product not found");
+  }
+}
+const dbDeleteProduct = async (id) => {
+  await Product.destroy({
+    where: { id },
+    include: {model:Image},
+  });
+  return `product id:${id} deleted successfully`
+};
 module.exports = {
   getAllProducts,
   getProductByPk,
   getProductByName,
+  dbCreateProduct,
+  dbUpdateProduct,
+  dbDeleteProduct,
 };
