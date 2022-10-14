@@ -11,10 +11,10 @@ export const DELETE_USERS = "DELETE_USERS";
 export const UPDATE_USERS = "UPDATE_USERS";
 export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
-export const SORT_PRICE = "SORT_PRICE";
+export const SORT_LOWER = "SORT_LOWER";
+export const SORT_HIGH = "SORT_HIGH";
 export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT"
-
 export const TYPES = {
   ADD_TO_CART : "ADD_TO_CART",
   REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
@@ -22,6 +22,8 @@ export const TYPES = {
   CLEAR_CART : "CLEAR_CART",
 
 };
+
+
 
 
 
@@ -183,12 +185,20 @@ export function searchProducts(name, errorCallback) {
     }
   };
 }
-export function sortByPrice(payload) {
+export function sortLower(payload) {
   return {
-    type: SORT_PRICE,
+    type: SORT_LOWER,
     payload,
   };
 }
+
+export function sortHigh(payload) {
+  return {
+    type: SORT_HIGH,
+    payload,
+  };
+}
+
 export function orderByScore(payload) {
   return {
     type: ORDER_BY_SCORE,
