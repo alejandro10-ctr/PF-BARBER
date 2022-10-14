@@ -1,8 +1,6 @@
 const { QueryTypes, Sequelize } = require("sequelize");
 const { Service, Schedule, Day, Hour, conn, Op } = require("../db.js");
 
-// const JSONServices = require('../Data/services.json')
-
 const getDBServices = async () => {
   let db = await Service.findAll({
     include: {
@@ -13,9 +11,6 @@ const getDBServices = async () => {
       },
     },
   });
-  // if (!db.length) {
-  //     db = await Service.bulkCreate(JSONServices, { validate: true })
-  // }
   return db;
 };
 
@@ -65,7 +60,7 @@ const dbUpdateService = async (
       }
     );
     if (response) {
-      return `updated service id:${id}`;
+      return `service id:${id} updated successfully`;
     } else {
       throw new Error("service not found");
     }
@@ -86,6 +81,7 @@ const dbDeleteService = async (id) => {
       },
     },
   });
+  return `service id:${id} deleted successfully`
 };
 module.exports = {
   getDBServices,
