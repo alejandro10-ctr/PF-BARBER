@@ -69,11 +69,11 @@ console.log(sequelize.models)
 User.hasMany(Sale, { as: "Ventas", foreignKey: "userId" });
 Sale.belongsTo(User);
 
-Sale.belongsToMany(Product, {through:"Sale_Products"})
-Product.belongsToMany(Sale, {through:"Sale_Products"})
+Sale.belongsToMany(Product, { through: "Sale_Products" })
+Product.belongsToMany(Sale, { through: "Sale_Products" })
 
-Product.belongsToMany(Image, {through:"Product_Images"})
-Image.belongsToMany(Product, {through:"Product_Images"})
+Product.belongsToMany(Image, { through: "Product_Images" })
+Image.belongsToMany(Product, { through: "Product_Images" })
 
 //------------------------> Apointment
 User.hasMany(Appointment, { as: "Appointments", foreignKey: "userId" });
@@ -82,17 +82,17 @@ Appointment.belongsTo(User);
 Appointment.belongsToMany(Service, { through: "Appointment_Services" })
 Service.belongsToMany(Appointment, { through: "Appointment_Services" })
 
-Service.belongsToMany(Image, {through:"Service_Images"})
-Image.belongsToMany(Service, {through:"Service_Images"})
+Service.belongsToMany(Image, { through: "Service_Images" })
+Image.belongsToMany(Service, { through: "Service_Images" })
 
 //-----------------------> Schedule
-Schedule.hasOne(Service)
+Schedule.hasOne(Service, { onDelete: 'CASCADE' })
 Service.belongsTo(Schedule)
 
-Schedule.hasMany(Day);
+Schedule.hasMany(Day, { onDelete: 'CASCADE' });
 Day.belongsTo(Schedule);
 
-Day.hasMany(Hour)
+Day.hasMany(Hour, { onDelete: 'CASCADE' })
 Hour.belongsTo(Day)
 
 
