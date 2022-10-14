@@ -36,7 +36,7 @@ export function setLoading(value) {
 export function getProducts(errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products`);
+      const response = await axios.get(`/products`); //chequeada con yei-barbi
       if (response?.data) {
         dispatch({ type: GET_PRODUCTS, payload: { products: response.data } });
       }
@@ -49,7 +49,7 @@ export function createProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.post(`/products`, product);
+      const response = await axios.post(`/products`, product); //chequeada con yei-barbi
       if (response?.data) {
         dispatch(setLoading(false));
         return dispatch({
@@ -66,7 +66,7 @@ export function createProducts(product, errorCallback) {
 export function updateProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/products/${product.id}`, product);
+      const response = await axios.put(`/products/${product.id}`, product); //chequeada con yei-barbi
       if (response?.data) {
         return dispatch({
           type: UPDATE_PRODUCTS,
@@ -82,7 +82,7 @@ export function updateProducts(product, errorCallback) {
 export function deleteProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/products/${product.id}`);
+      const response = await axios.delete(`/products/${product.id}`); //chequeada con yei-barbi
       if (response?.data) {
         return dispatch({
           type: DELETE_PRODUCTS,
@@ -99,7 +99,7 @@ export function createUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.post(`/users`, users);
+      const response = await axios.post(`/users`, users); //chequeada con yei-barbi
       if (response?.data) {
         dispatch(setLoading(false));
         return dispatch({
@@ -116,7 +116,7 @@ export function createUsers(users, errorCallback) {
 export function getUsers(errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/users`);
+      const response = await axios.get(`/users`); //chequeada con yei-barbi
       if (response?.data) {
         dispatch({ type: GET_USERS, payload: { users: response.data } });
       }
@@ -128,7 +128,7 @@ export function getUsers(errorCallback) {
 export function deleteUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/users/${users.id}`);
+      const response = await axios.delete(`/users/${users.id}`); //falta, se agregara..volver a revisar
       if (response?.data) {
         return dispatch({
           type: DELETE_USERS,
@@ -144,7 +144,7 @@ export function deleteUsers(users, errorCallback) {
 export function updateUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/users/${users.id}`, users);
+      const response = await axios.put(`/users/${users.id}`, users);//falta, se agregara..volver a revisar
       if (response?.data) {
         return dispatch({
           type: UPDATE_USERS,
@@ -160,7 +160,7 @@ export function updateUsers(users, errorCallback) {
 export function getProductsDetail(id, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products/${id}`);
+      const response = await axios.get(`/products/${id}`); //chequeada con yei-barbi
       if (response?.data) {
         dispatch({ type: GET_DETAILPRODUCT, payload: response.data });
       }
@@ -177,7 +177,7 @@ export function clearDetail() {
 export function searchProducts(name, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products/name?name=${name}`);
+      const response = await axios.get(`/products/?name=${name}`);//chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
       dispatch({ type: SEARCH_PRODUCTS, payload: [] });
@@ -205,3 +205,5 @@ export function orderByScore(payload) {
     payload,
   };
 }
+//actions for delete & add ----> IMAGES
+// falta ruta delete y post de imagenes
