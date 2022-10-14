@@ -1,62 +1,72 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  ChakraProvider,
-  Box,
-  Grid,
-  theme,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  ButtonGroup,
-  IconButton,
-  Tbody,
-  Td,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Textarea,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+// <<<<<<< HEAD
+// import React, { useEffect } from "react";
+// import {
+//   Button,
+//   FormControl,
+//   FormLabel,
+//   ChakraProvider,
+//   Box,
+//   Grid,
+//   theme,
+//   Table,
+//   Thead,
+//   Tr,
+//   Th,
+//   ButtonGroup,
+//   IconButton,
+//   Tbody,
+//   Td,
+//   Input,
+//   Modal,
+//   ModalBody,
+//   ModalContent,
+//   ModalFooter,
+//   ModalHeader,
+//   ModalOverlay,
+//   Textarea,
+//   useDisclosure,
+// } from "@chakra-ui/react";
 import "./App.css";
-import HeaderComponent from "./components/Header";
-import { useDispatch, useSelector } from "react-redux";
-import { createProducts, getProducts } from "./store/actions";
-import { IoAdd, IoPencil, IoSend, IoTrash } from "react-icons/io5";
+import { Form, Formik } from "formik";
+// import HeaderComponent from "./components/Header";
+// import { useDispatch, useSelector } from "react-redux";
+ import { createProducts, getProducts } from "./store/actions";
+// import { IoAdd, IoPencil, IoSend, IoTrash } from "react-icons/io5";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
-=======
+// =======
 import React, { Component }  from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Productos from "./components/Store/Store.jsx";
 import Product from "./components/DetailProducts/DetailProducts";
 
->>>>>>> 3c87c3da8005cd8fd718710709ab935580bf7a7d
+// >>>>>>> 3c87c3da8005cd8fd718710709ab935580bf7a7d
 function App() {
   return (
-<<<<<<< HEAD
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center">
-        <Grid
-          minH="100vh"
-          templateRows="auto 1fr"
-          templateColumns="auto 1fr"
-          p={"1rem 1.5rem"}
-        >
-
-<ShoppingCart/>
+// <<<<<<< HEAD
+    // <ChakraProvider theme={theme}>
+    //   <Box textAlign="center">
+    //     <Grid
+    //       minH="100vh"
+    //       templateRows="auto 1fr"
+    //       templateColumns="auto 1fr"
+    //       p={"1rem 1.5rem"}
+    //     >
 
 
 
-          <HeaderComponent />
+
+            <div className="App">
+            <BrowserRouter>
+            {/* <ShoppingCart/> */}
+            {/* <Route exact path={'/shopping'} component={ShoppingCart}></Route> */}
+            <Route exact path={'/'} component={Productos}></Route>
+            <Route patch ={'/products/:id'} component = {Product}></Route>
+            </BrowserRouter>
+            </div>
+
+            );
+            }
+          {/* <HeaderComponent />
           <Table gridColumn="1 / span 2">
             <Thead>
               <Tr>
@@ -91,7 +101,7 @@ function App() {
                         aria-label="update"
                         icon={<IoPencil />}
                         variant="ghost"
-                      />
+                        />
                       <IconButton
                         aria-label="delete"
                         icon={<IoTrash />}
@@ -106,8 +116,8 @@ function App() {
         </Grid>
       </Box>
       <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
-        <ModalOverlay />
-        <Formik
+        <ModalOverlay /> */}
+        {/* <Formik
           initialValues={{ name: "", description: "", price: 0, stock: 0 }}
           onSubmit={async (values) => {
             dispatch(createProducts(values));
@@ -176,16 +186,7 @@ function App() {
         </Formik>
       </Modal>
     </ChakraProvider>
-=======
-    <div className="App">
-      <BrowserRouter>
-      <Route exact path={'/'} component={Productos}></Route>
-      <Route patch ={'/products/:id'} component = {Product}></Route>
-      </BrowserRouter>
-    </div>
->>>>>>> 3c87c3da8005cd8fd718710709ab935580bf7a7d
-  );
-}
+======= */}
 
 export default App;
 
@@ -202,18 +203,18 @@ export default App;
 
 
 
-
-  // const dispatch = useDispatch();
-  // const { products, loading } = useSelector((store) => store);
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  // useEffect(() => {
-  //   dispatch(getProducts());
+{/* 
+   const dispatch = useDispatch();
+  const { products, loading } = useSelector((store) => store);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => { */}
+  {/* //   dispatch(getProducts());
   // }, [dispatch]);
   // return (
   //   <ChakraProvider theme={theme}>
   //     <Box textAlign="center">
-  //       <Grid
-  //         minH="100vh"
+  //       <Grid */}
+  {/* //         minH="100vh"
   //         templateRows="auto 1fr"
   //         templateColumns="auto 1fr"
   //         p={"1rem 1.5rem"}
@@ -228,8 +229,8 @@ export default App;
   //               <Th>Stock:</Th>
   //               <Th textAlign="right">
   //                 <ButtonGroup isAttached>
-  //                   <IconButton
-  //                     aria-label="agregar"
+  //                   <IconButton */}
+  {/* //                     aria-label="agregar"
   //                     icon={<IoAdd />}
   //                     variant="ghost"
   //                     onClick={() => {
@@ -338,4 +339,4 @@ export default App;
   //       </Formik>
   //     </Modal>
   //   </ChakraProvider>
-  // );
+  // ); */}

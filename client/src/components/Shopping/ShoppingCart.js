@@ -1,15 +1,17 @@
 import {useReducer} from 'react'
 import { TYPES } from '../../redux/actions';
-import { shoppingInitialState, shoppingReducer } from '../../redux/reducer';
+// import { initialState, reducer } from '../../redux/reducer';
 import CartItem from './CartItem';
 import ProductItem from './ProductsItem';
 import './ShoppingCart.css'
 
 const ShoppingCart = () => {
-   const [state, dispatch] = useReducer(
-    shoppingReducer, 
-    shoppingInitialState
-    );
+//    const [state, dispatch] = useReducer(
+//     initialState, 
+//     reducer
+//     );
+    const [state, dispatch] = useReducer();
+   
    
     const {products, cart, localStorage} = state;
 
@@ -84,16 +86,16 @@ const ShoppingCart = () => {
 
 return (
     <div>
-        <h2>Shopping Cart</h2>
+        <h2>Barber Shop🛒</h2>
         <h3>Products</h3>
         <article className="box grid-responsive">
         {
             products.map((products)=> <ProductItem key={products.id} data={products} addToCart={addToCart} />)
         }    
         </article>
-        <h3>Cart</h3>
+        <h3>Buy!!</h3>
         <article className='box'>
-            <button onClick={clearCart}>Clean Cart</button>
+            <button onClick={clearCart}>Clean🛒</button>
             {
                 cart.map((item, index)=> <CartItem key={index} data={item} delFromCart={delFromCart}/>)
             }

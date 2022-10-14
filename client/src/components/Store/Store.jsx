@@ -2,11 +2,15 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Paginado from '../Paginado/Paginado.jsx';
+
+
 import {
   searchProducts,
   getProducts,
-  sortByPrice,
+  sortLower,
   orderByScore,
+  sortHigh,
 } from "../../redux/actions";
 
 function Productos() {
@@ -25,27 +29,60 @@ function Productos() {
   const homeHandler = () => {
     dispatch(getProducts());
   };
+
+
   useEffect(() => {
-   
     dispatch(getProducts());
     console.log("hola")
   }, [dispatch]);
 
+
+  //-----sort
+  function handleSort(sort){ 
+    sort.preventDefault()
+  //  dispatch(sortLower(sort.target.value))// se ejecuta y toma como payload el valor del click del usuario
+  if(sort.target.value === "Min")dispatch(sortLower(sort.target.value));
+  else if(sort.target.value === "Max")dispatch(sortHigh(sort.target.value));  
+  }
+//----score
+  function handleScore(score){
+    score.preventDefault()
+  }
+
+
   return (
     <div>
-      <button onClick={() => dispatch(sortByPrice("lower"))}>
-        Menor Precio
-      </button>
-      <button onClick={() => dispatch(sortByPrice("hight"))}>
-        Mayor Precio
-      </button>
-      <button onClick={() => dispatch(orderByScore("high"))}>
+    
+  
+{/* // ACA LO QUE ME DIJISTE DE TU PAGINADO MARTIN PARA CONECTARLO CON EL COMPONENTE*/}
+
+
+      <div>
+    <label >Sort</label>
+    <select  onChange={sort=>handleSort(sort)}>
+    <option  hidden value=''>⇅</option>
+    <option  value='lower'>-</option> 
+    <option  value='high'>+</option>
+    </select>
+    </div>
+
+     
+      <div>
+      <label >Score</label>
+      <select  onChange={score=>handleScore(score)}>
+      <option  hidden value=''>⇅</option>
+      <option  value='bottom'>-</option> 
+      <option  value='top'>+</option>
+      </select>
+      </div>
+ {/* <button onClick={() => dispatch(orderByScore("high"))}>
         ORD MAYORES
       </button>
       <button onClick={() => dispatch(orderByScore("lower"))}>
         ORD MAYORES
-      </button>
-      <input
+      </button> */}
+
+      {/* <input
         type="text"
         placeholder="Search by Name"
         className="InputSearch"
@@ -56,11 +93,11 @@ function Productos() {
       />
       <button className="Search" onClick={onClickHandler}>
         SEARCH
-      </button>
+      </button> */}
       <button className="Reset" onClick={homeHandler}>
         RESET
       </button>
-      <div className="ControlPag">
+      {/* <div className="ControlPag">
         <button onClick={() => setPage(page - 1)} disabled={page === 0}>
           {" "}
           Anterior
@@ -72,7 +109,10 @@ function Productos() {
           {" "}
           Siguiente
         </button>
-        <div>
+       */}  
+       
+       
+       <div>
           {products.length === 0 && <h1>NO HAY PRODUCTOS</h1>}
           {products.slice(page * 8, (page + 1) * 8).map((e) => {
             return (
@@ -87,7 +127,7 @@ function Productos() {
           })}
         </div>
       </div>
-    </div>
+    
   );
   
 }

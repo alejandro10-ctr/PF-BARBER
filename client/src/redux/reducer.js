@@ -11,7 +11,8 @@ import {
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
   SEARCH_PRODUCTS,
-  SORT_PRICE,
+  SORT_LOWER,
+  SORT_HIGH,
   ORDER_BY_SCORE,
   TYPES,
 } from "./actions";
@@ -26,7 +27,19 @@ const initialState = {
     stock: 5,
     code: "123",
     imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
-  }],
+  },{
+
+    id : 3,
+    name: "Mano",
+    price: 5400,
+    quantity: 40,
+    stock: 52,
+    code: "144",
+    imageProfile: "https://static8.depositphotos.com/1049680/1018/i/600/depositphotos_10182313-stock-photo-hand-symbol.jpg"
+}],
+
+
+
   users: [],
   detail: [],
   allProducts: [],
@@ -35,8 +48,7 @@ const initialState = {
 };
 
 
-
-export default (state = initialState, { type, payload }) => {
+export default function reducer(state = initialState, { type, payload }){
   switch (type) {
     case SET_LOADING:
       return { ...state, ...payload };
@@ -66,36 +78,35 @@ export default (state = initialState, { type, payload }) => {
     case SEARCH_PRODUCTS:
       return { ...state, allProducts: payload };
 
-    case SORT_PRICE:
-      const sortPrice = state.products;
-      const sortLower =
-        payload === "lower"
-          ? sortPrice.sort(function (a, b) {
-              if (a.price > b.price) {
-                return -1;
-              }
-              if (b.price > a.price) {
-                return 1;
-              }
-              return 0;
-            })
-          : sortPrice.sort(function (a, b) {
-              if (a.price > b.price) {
-                return 1;
-              }
-              if (b.price > a.price) {
-                return -1;
-              }
-              return 0;
-            });
-      return {
-        ...state,
-        products: sortLower,
-      };
+    // case SORT_PRICE:
+    //   const sortPrice = state.products;
+    //   const sortPriceMetod = payload === "lower" ? sortPrice.sort(function (a, b) {
+    //           if (a.price > b.price) {
+    //             return -1;
+    //           }
+    //           if (b.price > a.price) {
+    //             return 1;
+    //           }
+    //           return 0;
+    //         })
+    //       : sortPrice.sort(function (a, b) {
+    //           if (a.price > b.price) {
+    //             return 1;
+    //           }
+    //           if (b.price > a.price) {
+    //             return -1;
+    //           }
+    //           return 0;
+    //         });
+    //   return {
+    //     ...state,
+    //     products: sortPriceMetod,
+    //   };
+//--------------------------SCORE
     case ORDER_BY_SCORE:
       let sortedByScore = [...state.products];
       sortedByScore =
-        payload === "high"
+        payload === "top"
           ? state.products.sort(function (a, b) {
               if (a.score > b.score) return 1;
               if (a.score < b.score) return -1;
@@ -110,10 +121,26 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         products: sortedByScore,
       };
+//--------------------------PRICE
+    case SORT_LOWER:
+        let stateProd = state.products
+        return {
+            ...state,
+            products: stateProd.slice().sort((a, b) =>{
 
+                return a.price - b.price
+            }).reverse()
+        }
+    case SORT_HIGH:
+      let statePr = state.products
+                return {
+                ...state,
+                products: statePr.slice().sort((a, b) =>{
+                    return a.price - b.price
+                })
+                
+            }
 
-
-      
       case TYPES.ADD_TO_CART: {
         let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
        // console.log(newItem)
@@ -152,7 +179,7 @@ export default (state = initialState, { type, payload }) => {
        }
     }
     case TYPES.CLEAR_CART: 
-    return shoppingInitialState;
+    return 'shoppingInitialState';
 
 
 
