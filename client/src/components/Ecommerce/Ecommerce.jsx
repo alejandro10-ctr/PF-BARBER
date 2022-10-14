@@ -5,7 +5,8 @@ import Paginado from "../Paginado/Paginado.jsx";
 import {
   getProducts,
   sortLower,
-  orderByScore,
+  scoreHigh,
+  scoreLower,
   sortHigh,
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
@@ -42,7 +43,9 @@ export default function Productos() {
   //----score
   function handleScore(score) {
     score.preventDefault();
-    dispatch(orderByScore(score.target.value));
+    if (score.target.value === "lower") dispatch(scoreLower(score.target.value));
+    else if (score.target.value === "high")
+      dispatch(scoreHigh(score.target.value));
   }
   //---reset
   function handleReset() {
@@ -73,8 +76,8 @@ export default function Productos() {
           <option hidden value="">
             ⇅
           </option>
-          <option value="bottom">-</option>
-          <option value="top">+</option>
+          <option value="lower">-</option>
+          <option value="high">+</option>
         </select>
       </div>
 

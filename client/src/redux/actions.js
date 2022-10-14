@@ -13,8 +13,9 @@ export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const SORT_LOWER = "SORT_LOWER";
 export const SORT_HIGH = "SORT_HIGH";
-export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT"
+export const SCORE_LOWER = "SCORE_LOWER"
+export const SCORE_HIGH = "SCORE_HIGH"
 export const TYPES = {
   ADD_TO_CART : "ADD_TO_CART",
   REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
@@ -199,9 +200,16 @@ export function sortHigh(payload) {
   };
 }
 
-export function orderByScore(payload) {
+export function scoreLower(payload) {
   return {
-    type: ORDER_BY_SCORE,
+    type: SCORE_LOWER,
+    payload,
+  };
+}
+
+export function scoreHigh(payload) {
+  return {
+    type: SCORE_HIGH,
     payload,
   };
 }

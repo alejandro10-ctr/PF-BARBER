@@ -13,8 +13,9 @@ import {
   SEARCH_PRODUCTS,
   SORT_LOWER,
   SORT_HIGH,
-  ORDER_BY_SCORE,
   TYPES,
+  SCORE_HIGH,
+  SCORE_LOWER,
 } from "./actions";
 
 const initialState = {
@@ -39,6 +40,7 @@ const initialState = {
     imageProfile: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg"
 },
 {
+  score: 5,
   id : 5,
   name: "Edwin Jagger Marfil",
   price: 200,
@@ -48,6 +50,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg"
 },
 {
+  score: 5230,
   id : 87435634,
   name: "Brosh Super Hard Gel 200gr",
   price: 200,
@@ -57,6 +60,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg"
 },
 {
+  score: 530,
   id : 4,
   name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
   price: 200,
@@ -66,6 +70,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg"
 },
 {
+  score: 1230,
   id : 6,
   name: "Fatip Chrome Slant Double Edge Safety Razor",
   price: 200,
@@ -75,6 +80,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg"
 },
 {
+  score: 533330,
   id : 7,
   name: "Omega Garnet Shaving Bowl",
   price: 200,
@@ -84,6 +90,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg"
 },
 {
+  score: 12333,
   id : 8,
   name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
   price: 200,
@@ -93,6 +100,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg"
 },
 {
+  score: 543256,
   id : 9,
   name: "Baxter of California Shave Tonic",
   price: 200,
@@ -102,6 +110,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg"
 },
 {
+  score:  99,
   id : 1256,
   name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
   price: 300,
@@ -111,6 +120,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg"
 },
 {
+  score: 583566,
   id : 1743,
   name: "Hey Joe Pre Shave Oil 50ml",
   price: 200,
@@ -120,6 +130,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg"
 },
 {
+  score: 86,
   id : 654,
   name: "After Shave BeardLovers",
   price: 200,
@@ -129,6 +140,7 @@ const initialState = {
   imageProfile: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg"
 },
 {
+  score: 210,
   id : 213,
   name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
   price: 200,
@@ -204,26 +216,26 @@ export default function reducer(state = initialState, { type, payload }){
     //     products: sortPriceMetod,
     //   };
 //--------------------------SCORE
-    case ORDER_BY_SCORE:
-      let sortedByScore = [...state.products];
-      sortedByScore =
-        payload === "lower"
-          ? state.products.sort(function (a, b) {
-              if (a.score > b.score) return 1;
-              if (a.score < b.score) return -1;
-              return 0;
-            })
-          : state.products.sort(function (a, b) {
-              if (a.score < b.score) return 1;
-              if (a.score > b.score) return -1;
-              return 0;
-            });
-      return {
-        ...state,
-        products: sortedByScore,
-      };
+case SCORE_HIGH:
+  let stateScoreLower = state.products
+  return {
+      ...state,
+      products: stateScoreLower.slice().sort((a, b) =>{
+
+          return a.score - b.score
+      }).reverse()
+  }
+case SCORE_LOWER:
+let stateScoreHigh = state.products
+          return {
+          ...state,
+          products: stateScoreHigh.slice().sort((a, b) =>{
+              return a.score - b.score
+          })
+          
+      }
 //--------------------------PRICE
-    case SORT_LOWER:
+    case SORT_HIGH:
         let stateProd = state.products
         return {
             ...state,
@@ -232,7 +244,7 @@ export default function reducer(state = initialState, { type, payload }){
                 return a.price - b.price
             }).reverse()
         }
-    case SORT_HIGH:
+    case SORT_LOWER:
       let statePr = state.products
                 return {
                 ...state,
