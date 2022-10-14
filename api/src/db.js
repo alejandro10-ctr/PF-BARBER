@@ -65,33 +65,34 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Appointment, Image, Product, Rol, Sale, Schedule, Day, Hour, Service, User } = sequelize.models;
 console.log(sequelize.models)
 
+//-----------------------> Sale
 User.hasMany(Sale, { as: "Ventas", foreignKey: "userId" });
 Sale.belongsTo(User);
-//-----------------------> Sale
-Sale.belongsToMany(Product, {through:"Sale_Products"})
-Product.belongsToMany(Sale, {through:"Sale_Products"})
 
-Product.belongsToMany(Image, {through:"Product_Images"})
-Image.belongsToMany(Product, {through:"Product_Images"})
+Sale.belongsToMany(Product, { through: "Sale_Products" })
+Product.belongsToMany(Sale, { through: "Sale_Products" })
+
+Product.belongsToMany(Image, { through: "Product_Images" })
+Image.belongsToMany(Product, { through: "Product_Images" })
 
 //------------------------> Apointment
-User.hasMany(Appointment, { as: "MyBarbers", foreignKey: "userId" });
+User.hasMany(Appointment, { as: "Appointments", foreignKey: "userId" });
 Appointment.belongsTo(User);
 
 Appointment.belongsToMany(Service, { through: "Appointment_Services" })
 Service.belongsToMany(Appointment, { through: "Appointment_Services" })
 
-Service.belongsToMany(Image, {through:"Service_Images"})
-Image.belongsToMany(Service, {through:"Service_Images"})
+Service.belongsToMany(Image, { through: "Service_Images" })
+Image.belongsToMany(Service, { through: "Service_Images" })
 
 //-----------------------> Schedule
-Service.hasOne(Schedule)
-Schedule.belongsTo(Service)
+Schedule.hasOne(Service)
+Service.belongsTo(Schedule)
 
-Schedule.hasMany(Day);
+Schedule.hasMany(Day, { onDelete: 'CASCADE' });
 Day.belongsTo(Schedule);
 
-Day.hasMany(Hour)
+Day.hasMany(Hour, { onDelete: 'CASCADE' })
 Hour.belongsTo(Day)
 
 
