@@ -12,8 +12,6 @@ export default function SearchBar({}){
     //creo estado local: 
     const [nameProd, setProd] = useState('')
 
- 
-
     function handleInputChange(e){ // setea el estaedo
         e.preventDefault();
         setProd(e.target.value)    
