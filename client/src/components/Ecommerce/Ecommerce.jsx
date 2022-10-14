@@ -77,8 +77,9 @@ export default function Productos() {
                         <div key={e.id}>
                             <img src={e.imageProfile} alt="img"></img>
                             <h2>{e.name}</h2>
-                            <h3>{e.price}</h3>
-                            <h3>{e.stock}</h3>
+                            <h3>Price: ${e.price}</h3>
+                            <h3>Stock: {e.stock}</h3>
+                            <h3>Score: {e.score}</h3>
                             {/* <button onClick={console.log("comprar")}>COMPRAR</button> */}
                             <Link to={`/product/${e.id}`}>Detail Product</Link>
                         </div>
@@ -88,13 +89,19 @@ export default function Productos() {
             <div >
 
                 <div>
-                    {products.length > 9 ?
-                        <div><Paginado productsPage={productsPage} showedProducts={products.length}
-                            paged={paged} setPage={setPage} page={page}></Paginado>
+
+                    { <Paginado productsPage={productsPage} showedProducts={products.length}
+                            paged={paged} setPage={setPage} page={page}>
+                            </Paginado>}
+                    {/* {products.length > 9 ?
+                     
+                            <Paginado productsPage={productsPage} showedProducts={products.length}
+                            paged={paged} setPage={setPage} page={page}>
+                            </Paginado>
                             <span > {page} of {Math.ceil(products.length / productsPage)} </span>
-                        </div> :
+                        :
                         <div><span > {page} of {Math.ceil(products.length / productsPage)} </span></div>
-                    }
+                    } */}
 
                 </div>
             </div>
