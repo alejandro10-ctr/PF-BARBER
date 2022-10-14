@@ -14,7 +14,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
+        isAlpha: {
+            msg: "The name must contain only letters"
+        },
+        len: {
+            args: [2,255],
+            msg: "The name must only contain at least two letters"
+        }
       }
     },
     lastname: {
@@ -24,6 +30,17 @@ module.exports = (sequelize) => {
     birthday: {
         type: DataTypes.DATE,
         allowNull: false,
+    },
+    genre:{
+        type: DataTypes.ENUM(["man", "woman","binarie"]),
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [["man", "woman","binarie"]],
+            msg: "You must decide if man, woman or binarie only"
+          }
+        },
+        defaultValue: "binarie"
     },
     email: {
         type: DataTypes.TEXT,
@@ -38,8 +55,8 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
             len: { 
-                args: [6, 20],
-                msg: "The password length should be between 6 and 20 characters."
+                args: [6, 255],
+                msg: "The password length should be between 6 and 255 characters."
              }
         } 
     },
