@@ -6,8 +6,11 @@ import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "./redux/index.js";
-
 import { BrowserRouter, Routes } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
+//para el deploy
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store}>
