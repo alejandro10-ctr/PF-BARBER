@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize')
 const {Product, Op} = require('../db.js') 
 
-const JsonProducts = require('../Data/products.json')
+// const JsonProducts = require('../Data/products.json')
 
 const getAllProducts = async () => {
     const dbInfo = await Product.findAll()
-    if(!dbInfo) {
-        dbInfo =  await Product.bulkCreate(JsonProducts)
-    }
+    // if(!dbInfo) {
+    //     dbInfo =  await Product.bulkCreate(JsonProducts)
+    // }
     return dbInfo;
 }
 

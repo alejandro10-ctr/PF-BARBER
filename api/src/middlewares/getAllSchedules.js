@@ -10,18 +10,37 @@ const getDBSchedules = async () => {
     })
     return db
 }
-const dbUpdateSchedule = async (body, service) => {
-    const { state } = body
+const dbUpdateSchedule = async ({ state }, service) => {
     if (typeof state !== "undefined") {
-        let schedule = await Schedule.findByPk(service.scheduleId)
-        schedule.state = state
-        schedule.save()
-        return `updated schedule id:${service.scheduleId}`
+        const [response] = await Schedule.update({ state }, {
+            where: {
+                id: service.scheduleId
+            }
+        })
+        if (response) {
+            return `updated schedule id:${service.scheduleId}`
+        } else {
+            throw new Error('schedule not found')
+        }
     } else {
         throw new Error('missing params')
+    }
+}
+const dbDeleteSchedule = async (id, service) => {
+    if (service.scheduleId) {
+        await Schedule.destroy({
+            where: { id },
+            include: {
+                model: Day,
+                include: Hour
+            }
+        })
+    } else {
+        throw new Error('schedule not found')
     }
 }
 module.exports = {
     getDBSchedules,
     dbUpdateSchedule,
+    dbDeleteSchedule,
 }

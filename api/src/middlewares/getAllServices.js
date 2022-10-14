@@ -45,15 +45,48 @@ const getDBServiceByPk = async id => {
 }
 const getDBServiceCreate = async (body) => {
     const {name , price , available , time} = body
-    if (name && price && available && time) {
+    if (name && price && typeof available !== "undefined" && time) {
         return await Service.create(body)
     } else {
         throw new Error('missing params')
     }
 }
+
+const dbUpdateService = async ({name , description, price , available , time}, id) => {
+    if (name && price && typeof available !== "undefined"&& time) {
+        const [response] = await Service.update({name , description, price , available , time}, {
+            where: {
+                id
+            }
+        })
+        if (response) {
+            return `updated service id:${id}`
+        } else {
+            throw new Error('service not found')
+        }
+    } else {
+        throw new Error('missing params')
+    }
+}
+const dbDeleteService = async id =>{
+    await Service.destroy({
+        where: { id },
+        force: true,
+        include: {
+            model: Schedule,
+            destroy: Schedule,
+            include: {
+                model: Day,
+                include: Hour
+            }
+        }
+    })
+}
 module.exports = {
     getDBServices,
     getDBServiceByPk,
     getDBServiceCreate,
+    dbUpdateService,
+    dbDeleteService,
 
 }

@@ -30,8 +30,6 @@ const dbCreateDay = async (body, service) => {
             })
             return day
         }
-
-
         if (typeof code === "string") {
             const day = await findCreateDay(code)
             return `day ${code} created`
@@ -39,35 +37,41 @@ const dbCreateDay = async (body, service) => {
             code.map(async code => {
                 const day = await findCreateDay(code)
             })
-            return `days ${code.length > 2 ?code.splice(0,code.length-2).join(', ')+", "+code[code.length-2]+" and "+code[code.length-1]:code.length === 2?code[0]+" and "+code[1]:code[0]} created`
+            return `days ${code.length > 2 ? code.splice(0, code.length - 2).join(', ') + ", " + code[code.length - 2] + " and " + code[code.length - 1] : code.length === 2 ? code[0] + " and " + code[1] : code[0]} created`
         }
     } else {
-        console.log('missing params')
         throw new Error('missing params')
     }
 }
-const dbUpdateDay = async (body, code,service) => {
-    const { state } = body
+const dbUpdateDay = async ({ state }, { code }, service) => {
     if (typeof state !== "undefined") {
-        let day = await Day.findAll({
-            where:{
+        const [response] = await Day.update({ state }, {
+            where: {
                 scheduleId: service.scheduleId,
-                code 
+                code
             }
         })
-        if(day.length){
-            day = day[0]
-            day.state = state
-            day.save()
-            return `updated schedule id:${code}`
-        }else{
+        if (response) {
+            return `updated day code:${code}`
+        } else {
             throw new Error('day not found')
         }
     } else {
         throw new Error('missing params')
     }
 }
+const dbDeleteDay = async (code, service) => {
+    if (service.scheduleId) {
+        await Day.destroy({
+            where: { code, scheduleId: service.scheduleId, },
+            include: Hour
+        })
+    } else {
+        throw new Error('schedule not found')
+    }
+}
 module.exports = {
     dbCreateDay,
     dbUpdateDay,
+    dbDeleteDay,
 }
