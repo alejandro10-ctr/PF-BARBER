@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Paginado from '../Paginado/Paginado.jsx';
+import Nav from "../Paginado/Paginado.jsx";
 
 
 import {
@@ -13,11 +13,24 @@ import {
   sortHigh,
 } from "../../redux/actions";
 
+
 function Productos() {
-  
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const [page, setPage] = useState(0);
+
+
+  // Lógica para mostrar 9 recetas por página
+  const [page, setPage] = useState(1);
+  const productsPage = 9;
+  const numberOfProducts = page * productsPage;
+  const firstProducts = numberOfProducts - productsPage;
+  const showProducts = products.slice(firstProducts, numberOfProducts);
+
+  const paged = function (pageNumber) {
+      setPage(pageNumber)
+  };
+
+
   const [busqueda, setBusqueda] = useState("");
 
   const inputHandler = (e) => {
@@ -38,11 +51,10 @@ function Productos() {
 
 
   //-----sort
-  function handleSort(sort){ 
-    sort.preventDefault()
-  //  dispatch(sortLower(sort.target.value))// se ejecuta y toma como payload el valor del click del usuario
-  if(sort.target.value === "Min")dispatch(sortLower(sort.target.value));
-  else if(sort.target.value === "Max")dispatch(sortHigh(sort.target.value));  
+  function handleSort(e){ 
+    e.preventDefault()
+    
+
   }
 //----score
   function handleScore(score){
@@ -53,13 +65,10 @@ function Productos() {
   return (
     <div>
     
-  
-{/* // ACA LO QUE ME DIJISTE DE TU PAGINADO MARTIN PARA CONECTARLO CON EL COMPONENTE*/}
-
 
       <div>
     <label >Sort</label>
-    <select  onChange={sort=>handleSort(sort)}>
+    <select  onChange={e=>handleSort(e)}>
     <option  hidden value=''>⇅</option>
     <option  value='lower'>-</option> 
     <option  value='high'>+</option>
@@ -114,7 +123,7 @@ function Productos() {
        
        <div>
           {products.length === 0 && <h1>NO HAY PRODUCTOS</h1>}
-          {products.slice(page * 8, (page + 1) * 8).map((e) => {
+          {showProducts.map((e) => {
             return (
               <div key={e.id}>
                 <img src={e.imageProfile} alt="Imagen de Producto"></img>
@@ -126,6 +135,22 @@ function Productos() {
             );
           })}
         </div>
+        <div >
+
+        <div>
+                {
+                   products.length > 9 ?
+                        <div >
+                            <Nav productsPage={productsPage} showedProducts={products.length} paged={paged} setPage={setPage} page={page}></Nav>
+                            <span > {page} of {Math.ceil(products.length / productsPage)} </span>
+                        </div> :
+                        <div><span > {page} of {Math.ceil(products.length / productsPage)} </span></div>
+                }
+
+            </div>
+
+
+</div>
       </div>
     
   );
