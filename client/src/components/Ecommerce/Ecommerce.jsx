@@ -35,17 +35,17 @@ export default function Productos() {
   //-----sort
   function handleSort(sort) {
     sort.preventDefault();
-    if (sort.target.value === "lower") dispatch(sortLower(sort.target.value));
+    if (sort.target.value === "lower") dispatch(sortLower());
     else if (sort.target.value === "high")
-      dispatch(sortHigh(sort.target.value));
+      dispatch(sortHigh());
   }
 
   //----score
   function handleScore(score) {
     score.preventDefault();
-    if (score.target.value === "lower") dispatch(scoreLower(score.target.value));
+    if (score.target.value === "lower") dispatch(scoreLower());
     else if (score.target.value === "high")
-      dispatch(scoreHigh(score.target.value));
+      dispatch(scoreHigh());
   }
   //---reset
   function handleReset() {
