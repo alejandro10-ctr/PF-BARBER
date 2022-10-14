@@ -1,23 +1,34 @@
-const { QueryTypes, Sequelize } = require('sequelize');
-const { User, conn, Op } = require('../db.js');
+const { QueryTypes, Sequelize } = require("sequelize");
+const { User, conn } = require("../db.js");
+const { Op } = require("sequelize");
 
-const JSONUsers = require('../Data/users.json')
+const JSONUsers = require("../Data/users.json");
 
 const getDBUsers = async () => {
-
-    let db = await User.findAll()
-    if (!db.length) {
-        db = await User.bulkCreate(JSONUsers,{validate:true})
-    }
-    return db
-}
-const getDBUserByPk = async id => {
-    const db = await User.findAll({
-        where: { id },
-    })
-    return db
-}
+  let db = await User.findAll();
+  if (!db.length) {
+    db = await User.bulkCreate(JSONUsers, { validate: true });
+  }
+  return db;
+};
+getUserByName = async (name) => {
+  let db = await User.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+  });
+  return db;
+};
+const getDBUserByPk = async (id) => {
+  const db = await User.findAll({
+    where: { id },
+  });
+  return db;
+};
 module.exports = {
-    getDBUsers,
-    getDBUserByPk,
-}
+  getDBUsers,
+  getDBUserByPk,
+  getUserByName,
+};
