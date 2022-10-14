@@ -34,7 +34,7 @@ router.put('/:serviceId', async (req, res) => {
 router.delete('/:serviceId', async (req, res) => {
     try {
         const service = await getDBServiceByPk(req.params.serviceId)
-        await dbDeleteSchedule(req.params.serviceId, service)
+        await dbDeleteSchedule(service)
         res.status(200).send("deleted successfully")
     } catch (error) {
         res.status(404).send(error.message)

@@ -86,7 +86,7 @@ Service.belongsToMany(Image, { through: "Service_Images" })
 Image.belongsToMany(Service, { through: "Service_Images" })
 
 //-----------------------> Schedule
-Schedule.hasOne(Service, { onDelete: 'CASCADE' })
+Schedule.hasOne(Service)
 Service.belongsTo(Schedule)
 
 Schedule.hasMany(Day, { onDelete: 'CASCADE' });

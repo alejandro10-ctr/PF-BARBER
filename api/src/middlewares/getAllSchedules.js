@@ -26,10 +26,10 @@ const dbUpdateSchedule = async ({ state }, service) => {
         throw new Error('missing params')
     }
 }
-const dbDeleteSchedule = async (id, service) => {
+const dbDeleteSchedule = async (service) => {
     if (service.scheduleId) {
         await Schedule.destroy({
-            where: { id },
+            where: { id: service.scheduleId },
             include: {
                 model: Day,
                 include: Hour
