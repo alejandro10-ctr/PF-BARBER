@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Paginado from '../Paginado/Paginado.jsx';
+import SearchBar from "../SearchBar/SearchBar.jsx";
 
 
 import {
@@ -54,7 +55,7 @@ function Productos() {
     <div>
     
   
-{/* // ACA LO QUE ME DIJISTE DE TU PAGINADO MARTIN PARA CONECTARLO CON EL COMPONENTE*/}
+    <SearchBar/> 
 
 
       <div>
