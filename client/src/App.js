@@ -1,22 +1,22 @@
 import "./App.css";
 import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Product from "./components/DetailProducts/DetailProducts";
 import Ecommerce from './components/Ecommerce/Ecommerce';
-import { createProducts, getProducts } from "./store/actions";
-import ShoppingCart from "./components/Shopping/ShoppingCart";
+// import { createProducts, getProducts } from "./store/actions";
+// import ShoppingCart from "./components/Shopping/ShoppingCart";
 
 function App() {
   return (
-            <div className="App">
-            <BrowserRouter>
-            <Route exact path={'/'} component={Ecommerce}></Route>
-            <Route patch ={'/products/:id'} component = {Product}></Route>
-            </BrowserRouter>
-            </div>
+    <div className="App">
 
-            );
-            }
+      <Route exact path={'/'} component={Ecommerce}></Route>
+      <Route patch={'/products/:id'} component={Product}></Route>
+
+    </div>
+
+  );
+}
 
 export default App;
 
@@ -38,13 +38,13 @@ export default App;
   const { products, loading } = useSelector((store) => store);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => { */}
-  {/* //   dispatch(getProducts());
+{/* //   dispatch(getProducts());
   // }, [dispatch]);
   // return (
   //   <ChakraProvider theme={theme}>
   //     <Box textAlign="center">
   //       <Grid */}
-  {/* //         minH="100vh"
+{/* //         minH="100vh"
   //         templateRows="auto 1fr"
   //         templateColumns="auto 1fr"
   //         p={"1rem 1.5rem"}
@@ -60,7 +60,7 @@ export default App;
   //               <Th textAlign="right">
   //                 <ButtonGroup isAttached>
   //                   <IconButton */}
-  {/* //                     aria-label="agregar"
+{/* //                     aria-label="agregar"
   //                     icon={<IoAdd />}
   //                     variant="ghost"
   //                     onClick={() => {

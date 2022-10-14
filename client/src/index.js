@@ -9,12 +9,8 @@ import store from "./redux/index.js";
 
 import { BrowserRouter, Routes } from "react-router-dom";
 
-
-
-
 ReactDOM.render(
   <Provider store={store}>
-
   <BrowserRouter>
     <App />
   </BrowserRouter>
