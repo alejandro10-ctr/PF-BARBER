@@ -308,8 +308,8 @@ export default function reducer(state = initialState, { type, payload }) {
     case FILTER_SHOP:
       const allAccesory = state.products;
 
-      const logicFilter = payload === 'balm' ? allAccesory.filter(r => r.name.includes('balm'))
-      : allAccesory.filter(r => r.name.includes('razor'))
+      const logicFilter = payload === 'all' ? allAccesory 
+      :  allAccesory.filter(r => r.name.toLowerCase().includes(payload))
       
       return {
           ...state,

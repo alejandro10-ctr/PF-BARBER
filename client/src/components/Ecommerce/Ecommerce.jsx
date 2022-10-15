@@ -94,10 +94,11 @@ const Productos = ({ products, getProducts, allProducts }) => {
         
         {/* filter anidado */}
         <div>
-          <label></label>
-          <select defaultValue={'Options'} onChange={shop => handleShop(shop)}>
-            <option hidden value="Options">Shop</option>
-            <option value="balm">Beard Balm</option>
+          <label>Category</label>
+          <select onChange={shop => handleShop(shop)}>
+            <option hidden value="all">Shop</option>
+            <option value="all">All</option>
+            <option value="after shave">After Shave</option>
             <option value="razor">Razors</option>
           </select>
         </div>
