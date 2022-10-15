@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       },
       description: {
         type: DataTypes.TEXT,
-        defaultValue: "",
+        defaultValue: "Without",
       },
       price: {
         type: DataTypes.INTEGER,
@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+
       image: {
         type: DataTypes.TEXT,
         allowNull: false,

@@ -11,11 +11,11 @@ import {
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
   SEARCH_PRODUCTS,
-  SORT_LOWER,
-  SORT_HIGH,
+  PRICE_LOWER,
+  PRICE_HIGH,
   TYPES,
-  SCORE_HIGH,
-  SCORE_LOWER,
+  SORT_SCORE,
+  FILTER_QUALITY
 } from "./actions";
 
 const initialState = {
@@ -25,7 +25,8 @@ const initialState = {
     id: 1,
     name: "Beard Balm",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
+    description: "The best product for beard",
     stock: 5,
     code: "123",
     image: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp"
@@ -34,7 +35,7 @@ const initialState = {
     id: 3,
     name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
     price: 5400,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 52,
     code: "144",
     image: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg"
@@ -43,8 +44,9 @@ const initialState = {
     score: 5,
     id: 5,
     name: "Edwin Jagger Marfil",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg"
@@ -53,8 +55,9 @@ const initialState = {
     score: 5230,
     id: 87435634,
     name: "Brosh Super Hard Gel 200gr",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg"
@@ -63,8 +66,9 @@ const initialState = {
     score: 530,
     id: 4,
     name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg"
@@ -73,8 +77,9 @@ const initialState = {
     score: 1230,
     id: 6,
     name: "Fatip Chrome Slant Double Edge Safety Razor",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg"
@@ -83,8 +88,9 @@ const initialState = {
     score: 533330,
     id: 7,
     name: "Omega Garnet Shaving Bowl",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg"
@@ -93,8 +99,9 @@ const initialState = {
     score: 12333,
     id: 8,
     name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg"
@@ -103,8 +110,9 @@ const initialState = {
     score: 543256,
     id: 9,
     name: "Baxter of California Shave Tonic",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg"
@@ -113,8 +121,9 @@ const initialState = {
     score: 99,
     id: 1256,
     name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
+    description: "The best product for beard",
     price: 300,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg"
@@ -124,17 +133,19 @@ const initialState = {
     id: 1743,
     name: "Hey Joe Pre Shave Oil 50ml",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
+    description: 'the best pre shave you ever know',
     image: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg"
   },
   {
     score: 86,
     id: 654,
     name: "After Shave BeardLovers",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Basic",
+    quality: "Basic",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg"
@@ -143,8 +154,9 @@ const initialState = {
     score: 210,
     id: 213,
     name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
+    description: "The best product for beard",
     price: 200,
-    quantity: "Premium",
+    quality: "Premium",
     stock: 5,
     code: "123",
     image: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg"
@@ -158,7 +170,9 @@ const initialState = {
   allProducts: [],
   cart: [],
   localStorage: [],
+
 };
+
 
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -166,7 +180,7 @@ export default function reducer(state = initialState, { type, payload }) {
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
-      return { ...state, products: [...payload] };
+      return { ...state, allProducts: [...payload] };
     // case CREATE_PRODUCTS:
     //   return { ...state, products: payload };
     case UPDATE_PRODUCTS:
@@ -191,64 +205,45 @@ export default function reducer(state = initialState, { type, payload }) {
     case SEARCH_PRODUCTS:
       return { ...state, allProducts: payload };
 
-    // case SORT_PRICE:
-    //   const sortPrice = state.products;
-    //   const sortPriceMetod = payload === "lower" ? sortPrice.sort(function (a, b) {
-    //           if (a.price > b.price) {
-    //             return -1;
-    //           }
-    //           if (b.price > a.price) {
-    //             return 1;
-    //           }
-    //           return 0;
-    //         })
-    //       : sortPrice.sort(function (a, b) {
-    //           if (a.price > b.price) {
-    //             return 1;
-    //           }
-    //           if (b.price > a.price) {
-    //             return -1;
-    //           }
-    //           return 0;
-    //         });
-    //   return {
-    //     ...state,
-    //     products: sortPriceMetod,
-    //   };
-    //--------------------------SCORE
-    case SCORE_HIGH:
-      let stateScoreLower = state.products
-      return {
-        ...state,
-        products: stateScoreLower.slice().sort((a, b) => {
-
-          return a.score - b.score
-        }).reverse()
-      }
-    case SCORE_LOWER:
-      let stateScoreHigh = state.products
-      return {
-        ...state,
-        products: stateScoreHigh.slice().sort((a, b) => {
-          return a.score - b.score
-        })
-
-      }
+      //--------------------------SCORE
+      // case SORT_SCORE:
+      // const sortScore = state.products
+      // const sortByScore = payload === 'bottom' ? sortScore.sort(function (a, b) {
+      //   if (a.score > b.score) {
+      //     return -1;
+      //   }
+      //   if (b.score > a.score) {
+      //     return 1;
+      //   }
+      //   return 0
+      // }) : sortScore.sort(function (a, b) {
+      //   if (a.score > b.score) {
+      //     return 1;
+      //   }
+      //   if (b.score > a.score) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // })
+      // return {
+      //   ...state,
+      //   products: sortByScore
+      // }
     //--------------------------PRICE
-    case SORT_HIGH:
-      let stateProd = state.products
+    case PRICE_HIGH:
+      let stateProd = state.allProducts
       return {
         ...state,
-        products: stateProd.slice().sort((a, b) => {
+        allProducts: stateProd.slice().sort((a, b) => {
 
           return a.price - b.price
         }).reverse()
       }
-    case SORT_LOWER:
-      let statePr = state.products
+    case PRICE_LOWER:
+      let statePr = state.allProducts
       return {
         ...state,
-        products: statePr.slice().sort((a, b) => {
+        allProducts: statePr.slice().sort((a, b) => {
           return a.price - b.price
         })
 
@@ -295,6 +290,20 @@ export default function reducer(state = initialState, { type, payload }) {
     case TYPES.CLEAR_CART:
       return 'shoppingInitialState';
 
+    // case FILTER_QUALITY:    
+    // const all = state.products;
+    // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
+    // return {
+    //     ...state,
+    //     allProducts: filter //lista que recortamos lo que necesitemos
+    // };
+    case FILTER_QUALITY: 
+    const all = state.products;
+    const filter = payload === 'default' ? all : all.filter(r => r.quality === payload)
+    return {
+        ...state,
+        allProducts: filter
+    };
 
 
 
