@@ -39,7 +39,7 @@ export function getProducts(errorCallback) {
     try {
       const response = await axios.get(`/products`); //chequeada con yei-barbi
       if (response?.data) {
-        dispatch({ type: GET_PRODUCTS, payload: { products: response.data } });
+        dispatch({ type: GET_PRODUCTS, payload: response.data });
       }
     } catch (error) {
       errorCallback && errorCallback(error);

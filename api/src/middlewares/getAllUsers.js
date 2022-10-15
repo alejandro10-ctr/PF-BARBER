@@ -6,9 +6,6 @@ const JSONUsers = require("../Data/users.json");
 
 const getDBUsers = async () => {
   let db = await User.findAll();
-  if (!db.length) {
-    db = await User.bulkCreate(JSONUsers, { validate: true });
-  }
   return db;
 };
 getUserByName = async (name) => {
