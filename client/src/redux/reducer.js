@@ -15,7 +15,8 @@ import {
   PRICE_HIGH,
   TYPES,
   SORT_SCORE,
-  FILTER_QUALITY
+  FILTER_QUALITY,
+  FILTER_SHOP
 } from "./actions";
 
 const initialState = {
@@ -304,6 +305,16 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         allProducts: filter
     };
+    case FILTER_SHOP:
+      const allAccesory = state.products;
+
+      const logicFilter = payload === 'balm' ? allAccesory.filter(r => r.name.includes('balm'))
+      : allAccesory.filter(r => r.name.includes('razor'))
+      
+      return {
+          ...state,
+          allProducts: logicFilter
+      };
 
 
 

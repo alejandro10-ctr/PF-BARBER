@@ -11,7 +11,8 @@ import {
   priceLower,
   priceHigh,
   sortScore,
-  filterQuality
+  filterQuality,
+  filterShop
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
@@ -48,7 +49,11 @@ const Productos = ({ products, getProducts, allProducts }) => {
     quality.preventDefault();
     dispatch(filterQuality(quality.target.value))
   }
-
+  //----filter anidado
+  function handleShop(shop){
+    shop.preventDefault()
+    dispatch(filterShop(shop.target.value))
+  }
 
   return (
     <div>
@@ -83,6 +88,17 @@ const Productos = ({ products, getProducts, allProducts }) => {
             <option value="default">All</option>
             <option value="Premium">Premium</option>
             <option value="Basic">Basic</option>
+          </select>
+        </div>
+
+        
+        {/* filter anidado */}
+        <div>
+          <label></label>
+          <select defaultValue={'Options'} onChange={shop => handleShop(shop)}>
+            <option hidden value="Options">Shop</option>
+            <option value="balm">Beard Balm</option>
+            <option value="razor">Razors</option>
           </select>
         </div>
 

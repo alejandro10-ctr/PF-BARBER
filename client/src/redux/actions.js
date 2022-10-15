@@ -15,6 +15,7 @@ export const PRICE_LOWER = "PRICE_LOWER";
 export const PRICE_HIGH = "PRICE_HIGH";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY= "FILTER_QUALITY";
+export const FILTER_SHOP="FILTER_SHOP";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
@@ -208,6 +209,13 @@ export function filterQuality(payload){
      payload
   }
 }   
+
+export function filterShop(payload){
+    return{
+      type: FILTER_SHOP,
+      payload
+    }
+}
 
 // export function scoreLower(payload) {
 //   return {

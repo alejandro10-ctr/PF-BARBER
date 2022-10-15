@@ -11,7 +11,6 @@ function DetailProduct({ match }) {
   const id = match.params.id;
   console.log(id)
 
-
   const detailOfProducts = useSelector((state) => state.detail)
   console.log(detailOfProducts)
 
@@ -40,7 +39,7 @@ function DetailProduct({ match }) {
 
 
       {/* Card */}
-      <div className={styles.boxCard}>
+      <div>
         <h3>{detailOfProducts.name}</h3>
         <img src={detailOfProducts.image} alt={detailOfProducts.image} />
         <h3>Price: ${detailOfProducts.price}</h3>
