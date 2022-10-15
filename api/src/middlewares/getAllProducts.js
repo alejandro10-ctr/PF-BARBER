@@ -1,7 +1,7 @@
 const { Product, Image } = require("../db.js");
 const { Op } = require("sequelize");
 
-let JSONUsers = [{
+const JSONUsers = [{
   name: "Beard Balm",
   price: 200,
   quality: "premium",
@@ -94,7 +94,7 @@ let JSONUsers = [{
 ]
 
 const getAllProducts = async () => {
-  const products = await Product.findAll({
+  let products = await Product.findAll({
     include: Image
   });
   if (!products.length) {

@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
       res.status(200).json(productByName);
       return
     }
-    console.log("ok")
     const products = await getAllProducts();
     res.status(200).json(products);
   } catch (error) {
