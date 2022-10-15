@@ -71,9 +71,9 @@ Sale.belongsTo(User);
 
 Sale.belongsToMany(Product, { through: "Sale_Products" })
 Product.belongsToMany(Sale, { through: "Sale_Products" })
-
-Product.belongsToMany(Image, { through: "Product_Images" })
-Image.belongsToMany(Product, { through: "Product_Images" })
+//-------------------------------------> Image
+Product.belongsToMany(Image, { through: "Product_Images"})
+Image.belongsToMany(Product, { through: "Product_Images"})
 
 //------------------------> Apointment
 User.hasMany(Appointment, { as: "Appointments", foreignKey: "userId" });

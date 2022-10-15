@@ -2,8 +2,6 @@ const { Router } = require('express');
 const { getDBServices, getDBServiceByPk, getDBServiceCreate, dbUpdateService, dbDeleteService } = require('../middlewares/getAllServices.js')
 
 const { dbDeleteSchedule } = require('../middlewares/getAllSchedules.js')
-const { dbDeleteDay } = require('../middlewares/getAllDays.js')
-const { dbDeleteHour } = require('../middlewares/getAllHours.js')
 const router = Router();
 
 router.get('/', async (req, res) => {
@@ -46,9 +44,9 @@ router.delete('/:serviceId', async (req, res) => {
         
         const service = await getDBServiceByPk(req.params.serviceId)
         if(service.scheduleId) await dbDeleteSchedule(req.params.serviceId, service)
-        await dbDeleteService(req.params.serviceId)
+        const deletedService = await dbDeleteService(req.params.serviceId)
 
-        res.status(200).send("deleted successfully")
+        res.status(200).send(deletedService)
     } catch (error) {
         res.status(404).send(error.message)
     }
