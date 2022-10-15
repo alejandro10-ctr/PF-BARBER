@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductsDetail } from "../../redux/actions";
 
-function Product() {
+function DetailProduct({ match }) {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [detail, setDetail] = useState();
+  const id = match.params.id;
+  console.log(id)
+  const detail = useSelector((state) => state.detail)
   useEffect(() => {
     dispatch(getProductsDetail(id));
   }, [id]);
@@ -17,12 +18,9 @@ function Product() {
       <Link to="/">Back</Link>
       <Link to="/MercadoPago">PAGA CON MERCADO DE PAGO</Link>
       <h3>{detail.name}</h3>
-      <img src={detail.imageProfile} alt={detail.imageProfile} />
+      <img src={detail.image} alt={detail.image} />
       <div>
         <h3>{detail.price}</h3>
-      </div>
-      <div>
-        <h3>{detail.score}</h3>
       </div>
       <div>
         <div>{detail.description}</div>
@@ -31,4 +29,4 @@ function Product() {
     </div>
   );
 }
-export default Product;
+export default DetailProduct;
