@@ -1,44 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function Nav({ productsPage, showedProducts, paged, setPage, page }) {
 
-    const[input,setInput] = useState(1);
 
-    const back = () => {
-        setInput(parseInt(input) - 1);
-        setPage(parseInt(input) - 1 )
+export default function Paginado ({pag, setCurrentPage, max}){ //le paso las props/paramentros/estados
+  const arreglito = []
+
+for(let i= 1; i <= max; i++){
+    arreglito.push(i)
+
+}
+console.log(arreglito)
+
+    const nextPage = () => {
+        if (pag !== max ) return setCurrentPage(pag + 1);
+    }; 
+
+    const prevPage = ()=>{
+     if(pag !== 1)  return setCurrentPage(pag - 1);
     }
-    const next = () => {
-        setInput(parseInt(input) + 1);
-        setPage(parseInt(input) + 1 )
-    }
 
-    let pag = (p) => {
-        setInput(parseInt(p))
-        paged(p);
-    }
+ function handleClick(click){
+    click.preventDefault();
+    setCurrentPage(Number(click.target.value))
+ }
+    return(
 
-    const pages = [];
-
-    for (let i = 1; i <= Math.ceil(showedProducts / productsPage); i++) {
-        pages.push(i)
-    };
-
-    return (
-        <div >
-            <button  onClick={back} disabled={page <= 1}> ← </button>
-            {
-                <nav>
-                    <ul >
-                        {pages?.map((p) => (
-                            <li  key={p}>
-                                <button  onClick={() => pag(p)}>{p}</button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            }
-            <button  onClick={next} disabled={page === pages.length}> → </button>
-        </div>
+            <div >
+                <button  onClick={prevPage}>&#8249;</button>
+                <button onClick={nextPage}>&#8250;</button>
+            </div>
     )
 }

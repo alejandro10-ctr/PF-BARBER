@@ -1,28 +1,18 @@
 const { Router } = require('express');
-const { getDBUsers} = require('../middlewares/getAllUsers')
-const { getDBServices} = require('../middlewares/getAllServices')
-const { getDBDays, dbCreateDay} = require('../middlewares/getAllDays.js')
-const { getDBSchedules} = require('../middlewares/getAllSchedules.js')
+const serviceController = require('../controllers/scheduleService')
+const { getDBServiceByPk } = require('../middlewares/getAllServices')
+const { getDBSchedules, dbUpdateSchedule, dbDeleteSchedule } = require('../middlewares/getAllSchedules.js')
+const { dbCreateDay, dbUpdateDay, dbDeleteDay } = require('../middlewares/getAllDays.js')
+const { dbUpdateHour, dbDeleteHour } = require('../middlewares/getAllHours.js')
 
 const router = Router();
 router.get('/', async (req, res) => {
     try {
-        await getDBServices()
-        const apiInfo = await getDBSchedules()
-        res.status(200).json(apiInfo)
+        const allSchedules = await getDBSchedules()
+        res.status(200).json(allSchedules)
     } catch (error) {
-        console.log(error)
-        res.status(404).send(error)
+        res.status(404).send(error.message)
     }
 })
-router.post('/', async (req,res) =>{
-    try {
-        await getDBServices()
-        const createdDay = await dbCreateDay(req.body)
-        res.status(200).send(createdDay)
-    } catch (error) {
-        console.log(error)
-        res.status(404).send(error)
-    }
-})
+router.use('/services',serviceController)
 module.exports = router;

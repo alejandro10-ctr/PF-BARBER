@@ -1,9 +1,11 @@
-//Hacer el SORT.
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React from "react";
+import Carrusel from "../carrusel/carrusel";
 
-import { Link } from "react-router-dom";
-
-
-
+export default function Home() {
+  return (
+    <div>
+      {" "}
+      <Carrusel />{" "}
+    </div>
+  );
+}

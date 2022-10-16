@@ -1,63 +1,58 @@
-const {Router} = require('express')
-const {Product} = require('../db.js')
-const {getAllProducts, getProductByPk} = require('../middlewares/getAllProducts')
+const { Router } = require("express");
+const { getAllProducts, getProductByPk, getProductByName, dbCreateProduct, dbUpdateProduct, dbDeleteProduct } = require("../middlewares/getAllProducts");
 
 const router = Router();
 
-router.get('/', async (req,res) => {
-    try {
-        const apiInfo = await getAllProducts();
-        res.status(200).send(apiInfo)
-    } catch (error) {
-        res.status(404).send(error)
-        console.log(error)
+
+router.get("/", async (req, res) => {
+  const { name } = req.query;
+  try {
+    if (name) {
+      const productByName = await getProductByName(name);
+      res.status(200).json(productByName);
+      return
     }
-})
+    const products = await getAllProducts();
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
-router.get('/:id', async (req,res) => {
-    try {
-        const id = req.params.id
-        const apiInfo = await getProductByPk(id);
-        res.status(200).send(apiInfo)
-    } catch (error) {
-        res.status(404).json({"error": "El producto con ese id no existe"})
-        console.log(error)
-    }
-})
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await getProductByPk(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
-router.post('/', async (req,res)=> {
+router.post("/", async (req, res) => {
+  try {
+    const createdProduct = await dbCreateProduct(req.body);
+    res.send(createdProduct);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+});
 
-    const {name,description,price,stock,score,image,quality} = req.body
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedProduct = await dbUpdateProduct(req.body, req.params.id);
+    res.status(200).send(updatedProduct);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
-    
-    try {
-        const newProduct = await Product.create({
-            name,
-            description,
-            price,
-            stock,
-            score,
-            image,
-            quality
-        })
-        res.send(newProduct)
-    } catch (error) {
-        res.status(404).json(error.message)
-    }
-})
-
-router.put('/:id', async (req,res) => {
-    const id = req.params.id;
-    const change = req.body;
-    try {
-        if(id){
-            const productUpdate = await Product.update(change, {where:{id:id}})
-        }
-        res.status(200).send("Los cambios fueron realizados con exito")
-    } catch (error) {
-        res.status(404).send(error)
-    }
-
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedProduct = await dbDeleteProduct(req.params.id)
+    res.status(200).send(deletedProduct);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 })
 
 module.exports = router;

@@ -13,131 +13,143 @@ import {
   SEARCH_PRODUCTS,
   SORT_LOWER,
   SORT_HIGH,
-  ORDER_BY_SCORE,
   TYPES,
+  SCORE_HIGH,
+  SCORE_LOWER,
 } from "./actions";
 
 const initialState = {
   loading: false,
   products: [{
     score: 20,
-    id : 1,
-    name: "tijera",
+    id: 1,
+    name: "Beard Balm",
     price: 200,
-    quantity: 20,
+    quantity: "Premium",
     stock: 5,
     code: "123",
-    imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
-  },{
+    image: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp"
+  }, {
     score: 50,
-    id : 3,
-    name: "Mano",
+    id: 3,
+    name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
     price: 5400,
-    quantity: 40,
+    quantity: "Basic",
     stock: 52,
     code: "144",
-    imageProfile: "https://static8.depositphotos.com/1049680/1018/i/600/depositphotos_10182313-stock-photo-hand-symbol.jpg"
-},
-{
-  id : 5,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://i0.wp.com/megabahia.com/wp-content/uploads/2020/04/atomizador-de-pl%C3%A1stico-para-peluqueria-mega-bah%C3%ADa.jpg?resize=247%2C296&ssl=1"
-},
-{
-  id : 87435634,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://www.productospeluqueriacastro.com/8416-home_default/paletina-tinte-peluqueria.jpg"
-},
-{
-  id : 4,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://www.pinedoyvilla.com/imagenes/productos/familia_20/familia_73298/6460188-2.jpg"
-},
-{
-  id : 6,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://www.comercialmoctezuma.com/archivo/2013/03/tij-lila-500x500.png"
-},
-{
-  id : 7,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaMWI1A5n9y2UHQUJ7dw7k94K4V-vtnk06A&usqp=CAU"
-},
-{
-  id : 8,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://noticiaspmy.com/wp-content/uploads/2020/04/peluqeria.png"
-},
-{
-  id : 9,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
-},
-{
-  id : 1256,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/396fb521-ea28-469d-89e0-d8bf5f7dee2c?rule=detail_640x480_jpeg"
-},
-{
-  id : 1743,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://i.pinimg.com/474x/63/0f/54/630f547cb0ccd4524454c8f815b4563a.jpg"
-},
-{
-  id : 654,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://media.istockphoto.com/photos/isolated-shot-of-opened-black-handle-scissors-on-white-background-picture-id175601846?k=20&m=175601846&s=612x612&w=0&h=9avNkvSxOf1bAv27bdiZB0HU5_GAZvgFv6TE6pxvdYk="
-},
-{
-  id : 213,
-  name: "tijera",
-  price: 200,
-  quantity: 20,
-  stock: 5,
-  code: "123",
-  imageProfile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUbtqmZ1ClNNAFC386N_u08HmTqzGnigwSQ&usqp=CAU"
-}
-],
+    image: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg"
+  },
+  {
+    score: 5,
+    id: 5,
+    name: "Edwin Jagger Marfil",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg"
+  },
+  {
+    score: 5230,
+    id: 87435634,
+    name: "Brosh Super Hard Gel 200gr",
+    price: 200,
+    quantity: "Basic",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg"
+  },
+  {
+    score: 530,
+    id: 4,
+    name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg"
+  },
+  {
+    score: 1230,
+    id: 6,
+    name: "Fatip Chrome Slant Double Edge Safety Razor",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg"
+  },
+  {
+    score: 533330,
+    id: 7,
+    name: "Omega Garnet Shaving Bowl",
+    price: 200,
+    quantity: "Basic",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg"
+  },
+  {
+    score: 12333,
+    id: 8,
+    name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
+    price: 200,
+    quantity: "Basic",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg"
+  },
+  {
+    score: 543256,
+    id: 9,
+    name: "Baxter of California Shave Tonic",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg"
+  },
+  {
+    score: 99,
+    id: 1256,
+    name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
+    price: 300,
+    quantity: "Basic",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg"
+  },
+  {
+    score: 583566,
+    id: 1743,
+    name: "Hey Joe Pre Shave Oil 50ml",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg"
+  },
+  {
+    score: 86,
+    id: 654,
+    name: "After Shave BeardLovers",
+    price: 200,
+    quantity: "Basic",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg"
+  },
+  {
+    score: 210,
+    id: 213,
+    name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
+    price: 200,
+    quantity: "Premium",
+    stock: 5,
+    code: "123",
+    image: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg"
+  }
+  ],
 
 
 
@@ -149,14 +161,14 @@ const initialState = {
 };
 
 
-export default function reducer(state = initialState, { type, payload }){
+export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
-      return { ...state, products: payload };
-    case CREATE_PRODUCTS:
-      return { ...state, products: payload };
+      return { ...state, products: [...payload] };
+    // case CREATE_PRODUCTS:
+    //   return { ...state, products: payload };
     case UPDATE_PRODUCTS:
       return { ...state, products: payload };
     case DELETE_PRODUCTS:
@@ -203,84 +215,85 @@ export default function reducer(state = initialState, { type, payload }){
     //     ...state,
     //     products: sortPriceMetod,
     //   };
-//--------------------------SCORE
-    case ORDER_BY_SCORE:
-      let sortedByScore = [...state.products];
-      sortedByScore =
-        payload === "lower"
-          ? state.products.sort(function (a, b) {
-              if (a.score > b.score) return 1;
-              if (a.score < b.score) return -1;
-              return 0;
-            })
-          : state.products.sort(function (a, b) {
-              if (a.score < b.score) return 1;
-              if (a.score > b.score) return -1;
-              return 0;
-            });
+    //--------------------------SCORE
+    case SCORE_HIGH:
+      let stateScoreLower = state.products
       return {
         ...state,
-        products: sortedByScore,
-      };
-//--------------------------PRICE
-    case SORT_LOWER:
-        let stateProd = state.products
-        return {
-            ...state,
-            products: stateProd.slice().sort((a, b) =>{
+        products: stateScoreLower.slice().sort((a, b) => {
 
-                return a.price - b.price
-            }).reverse()
-        }
+          return a.score - b.score
+        }).reverse()
+      }
+    case SCORE_LOWER:
+      let stateScoreHigh = state.products
+      return {
+        ...state,
+        products: stateScoreHigh.slice().sort((a, b) => {
+          return a.score - b.score
+        })
+
+      }
+    //--------------------------PRICE
     case SORT_HIGH:
+      let stateProd = state.products
+      return {
+        ...state,
+        products: stateProd.slice().sort((a, b) => {
+
+          return a.price - b.price
+        }).reverse()
+      }
+    case SORT_LOWER:
       let statePr = state.products
-                return {
-                ...state,
-                products: statePr.slice().sort((a, b) =>{
-                    return a.price - b.price
-                })
-                
-            }
+      return {
+        ...state,
+        products: statePr.slice().sort((a, b) => {
+          return a.price - b.price
+        })
 
-      case TYPES.ADD_TO_CART: {
-        let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
-       // console.log(newItem)
-       let itemInCart = state.cart.find(item => item.id === newItem.id)
+      }
 
-       return itemInCart ? {
+    case TYPES.ADD_TO_CART: {
+      let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
+      // console.log(newItem)
+      let itemInCart = state.cart.find(item => item.id === newItem.id)
+
+      return itemInCart ? {
         ...state,
         cart: state.cart.map(item => item.id === newItem.id ? {
-            ...item, 
-            quantity: item.quantity + 1 
+          ...item,
+          quantity: item.quantity + 1
         } : item)
-       } 
-       : 
-       {...state,
-        cart: [...state.cart, {...newItem, quantity: 1}],
-    }
-        
+      }
+        :
+        {
+          ...state,
+          cart: [...state.cart, { ...newItem, quantity: 1 }],
+        }
+
     }
     case TYPES.REMOVE_ONE_FROM_CART: {
-        let itemToDelete = state.cart.find(item => item.id === payload);
-        
-        return itemToDelete.quantity > 1 ? {
-            ...state, 
-            cart: state.cart.map(item => item.id === payload ? {...item, quantity: item.quantity - 1} : item)
-        } 
+      let itemToDelete = state.cart.find(item => item.id === payload);
+
+      return itemToDelete.quantity > 1 ? {
+        ...state,
+        cart: state.cart.map(item => item.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
+      }
         :
-         {
-            ...state,
-            cart: state.cart.filter(item => item.id !== payload)
-         };
+        {
+          ...state,
+          cart: state.cart.filter(item => item.id !== payload)
+        };
     }
     case TYPES.REMOVE_ALL_FROM_CART: {
-       return {
+      return {
         ...state,
         cart: state.cart.filter((item) => item.id !== payload),
-       }
+      }
     }
-    case TYPES.CLEAR_CART: 
-    return 'shoppingInitialState';
+    case TYPES.CLEAR_CART:
+      return 'shoppingInitialState';
 
 
 
