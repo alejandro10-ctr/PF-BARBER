@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       },
       description: {
         type: DataTypes.TEXT,
-        defaultValue: "Without",
+        defaultValue: "",
       },
       price: {
         type: DataTypes.INTEGER,

@@ -12,12 +12,13 @@ import {
   priceHigh,
   sortScore,
   filterQuality,
-  filterShop
+  filterShop,
+
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 
-const Productos = ({ products, getProducts, allProducts }) => {
+const Productos = ({ products, getProducts, allProducts, filterstate }) => {
   const dispatch = useDispatch();
 
   const [state, setState] = useState(true)
@@ -50,7 +51,7 @@ const Productos = ({ products, getProducts, allProducts }) => {
     dispatch(filterQuality(quality.target.value))
   }
   //----filter anidado
-  function handleShop(shop){
+  function handleShop(shop) {
     shop.preventDefault()
     dispatch(filterShop(shop.target.value))
   }
@@ -81,17 +82,33 @@ const Productos = ({ products, getProducts, allProducts }) => {
 
 
         {/* quality sort */}
-        <div>
+        {/* <div>
           <label>Quality </label>
           <select defaultValue={'Options'} onChange={quality => handleQuality(quality)}>
-            <option hidden value="Options">Options</option>
+            {/* <option hidden value="Options">Options</option>
             <option value="default">All</option>
             <option value="Premium">Premium</option>
-            <option value="Basic">Basic</option>
+            <option value="Basic">Basic</option> 
+            
           </select>
-        </div>
+        </div> */}
 
+ 
+    
+
+        <button id="All" name="All" value="default" onClick= {quality => handleQuality(quality)}>All</button>
+       
+    
+              <button id="Premium" name="Premium" value="Premium" onClick= {quality => handleQuality(quality)}> Premium</button>
+           
+          
+<button id="Basic" name="Basic" value="Basic" onClick= {quality => handleQuality(quality)}>Basic</button>
         
+
+      
+        
+    
+
         {/* filter anidado */}
         <div>
           <label>Category</label>
@@ -115,8 +132,8 @@ const Productos = ({ products, getProducts, allProducts }) => {
 
 
         {/* card */}
-        {allProducts.length > 0 ?
-          allProducts.map((e) => {
+        {products.length > 0 ?
+          products.map((e) => {
             return (
               <div key={e.id}>
                 <img src={e.image} alt="img"></img>
@@ -129,7 +146,7 @@ const Productos = ({ products, getProducts, allProducts }) => {
               </div>
 
             );
-          }) : products.map((e) => {
+          }) : allProducts.map((e) => {
             return (
               <div key={e.id}>
                 <img src={e.image} alt="img"></img>
@@ -148,10 +165,11 @@ const Productos = ({ products, getProducts, allProducts }) => {
   );
 }
 
-export const mapStateToProps = ({ products, allProducts }) => {
+export const mapStateToProps = ({ products, allProducts, filterstate }) => {
   return {
     products,
-    allProducts
+    allProducts,
+    filterstate
   }
 }
 export const mapDispatchToProps = (dispatch) => {
