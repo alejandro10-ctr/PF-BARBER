@@ -67,8 +67,8 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
         {/* {products.length}
         {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
-{/* Searchbar */}
-<SearchBar/>
+        {/* Searchbar */}
+        <SearchBar />
 
         {/* price sort */}
         <div>
@@ -94,21 +94,21 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
           </select>
         </div> */}
 
- 
-    
 
-        <button id="All" name="All" value="default" onClick= {quality => handleQuality(quality)}>All</button>
-       
-    
-              <button id="Premium" name="Premium" value="Premium" onClick= {quality => handleQuality(quality)}> Premium</button>
-           
-          
-<button id="Basic" name="Basic" value="Basic" onClick= {quality => handleQuality(quality)}>Basic</button>
-        
 
-      
-        
-    
+
+        <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
+
+
+        <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
+
+
+        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
+
+
+
+
+
 
         {/* filter anidado */}
         <div>

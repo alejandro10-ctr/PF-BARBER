@@ -27,10 +27,6 @@ export const TYPES = {
 
 };
 
-
-
-
-
 export function setLoading(value) {
   return (dispatch) => {
     dispatch({ type: SET_LOADING, payload: { loading: value } });
@@ -178,14 +174,13 @@ export function clearDetail() {
     type: CLEAR_PRODUCTS_DETAILS,
   };
 }
-export function searchProducts(name, errorCallback) {
+export function searchProducts(name) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products/?name=${name}`);//chequeada con yei-barbi
+      const response = await axios.get(`http://localhost:3001/products?name=${name}`);//chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      dispatch({ type: SEARCH_PRODUCTS, payload: [] });
-      throw alert("Product not found");
+      throw alert('Not Found!')
     }
   };
 }

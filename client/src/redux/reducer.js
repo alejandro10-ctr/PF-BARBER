@@ -60,7 +60,7 @@ export default function reducer(state = initialState, { type, payload }) {
         detail: [],
       };
     case SEARCH_PRODUCTS:
-      return { ...state, allProducts: payload };
+      return { ...state, products: payload };
 
     //--------------------------SCORE
     // case SORT_SCORE:
