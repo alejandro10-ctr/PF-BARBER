@@ -67,7 +67,8 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
         {/* {products.length}
         {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
-
+{/* Searchbar */}
+<SearchBar/>
 
         {/* price sort */}
         <div>

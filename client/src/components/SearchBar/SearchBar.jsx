@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import { getProducts } from '../../redux/actions';
+import { getProducts, searchProducts } from '../../redux/actions';
 //import {Link} from 'react-router-dom';
 //import { getProducts } from '.././redux/actions'; // => hay un error aca!!!!
 
@@ -20,22 +20,22 @@ export default function SearchBar( /* {setPage} */ ){
         console.log(e.target.value) 
       }
       
-    /* function handleSearch(search){
+     function handleSearch(search){
         search.preventDefault();
         setInput(search.target.value);
         console.log(search.target.value)
         if(search.charCode === 13){
-        dispatch (getProducts(search.target.value))//query
+        dispatch (searchProducts(search.target.value))//query
     
-        }} */
+        }} 
       
     function handleInputSubmit(submit){
         submit.preventDefault();
         //setPage(1)
         if(input){
-        dispatch(getProducts(input));
+        dispatch(searchProducts(input));
         setSearch(true)
-        //setInput("")
+        setInput("")
         document.getElementById("input").value="";
         }else{
               setSearch(true)
@@ -50,11 +50,11 @@ export default function SearchBar( /* {setPage} */ ){
         <input 
        /*  value={input} */
         id = "input"
-        type="search" 
-        placeholder='Search a product' 
-        autoComplete='off'             
+        type="text" 
+        placeholder="Search a product..." 
+        autoComplete="off"             
         onChange={(e)=>handleInputChange(e)}
-       // onKeyPress={(search)=>handleSearch(search)}             
+        //onKeyPress={(search)=>handleSearch(search)}             
         />
         <button type='text' onClick={(submit) =>{handleInputSubmit(submit)}}>🔍</button>
 
