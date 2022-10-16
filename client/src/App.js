@@ -13,12 +13,12 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/">
-        <Ecommerce />
-      </Route>
-      <Route exact path="/Home">
         <Home />
       </Route>
-      <Route exact path="/AboutUs">
+      <Route exact path="/shop">
+        <Ecommerce />
+      </Route>
+      <Route exact path="/aboutus">
         <AboutUs />
       </Route>
 
