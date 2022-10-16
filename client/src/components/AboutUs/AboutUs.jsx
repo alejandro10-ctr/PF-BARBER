@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 export default function AboutUs() {
   return (
     <div>
@@ -22,6 +24,26 @@ export default function AboutUs() {
       <br></br>
       <br></br>
       <br></br>
+      <div>
+        <div>
+          <h4>Contact us</h4>
+        </div>
+        {/* * * * * * * COMPLETAR LOS MAILS Y NOMBRES DE CADA UNO * * * * * * * *  */}
+        <Link to="mail">Barbara Noriega</Link>
+        <br></br>
+        <Link to="mail">Yeiber Reyes</Link>
+        <br></br>
+        <Link to="mail">FedeSaffo</Link>
+        <br></br>
+        <Link to="mail">Fabri</Link>
+        <br></br>
+        <Link to="mail">Martin Horo</Link>
+        <br></br>
+        <Link to="mail">Alejandro Diez</Link> 
+        <br></br>
+        <br></br>
+        <br></br>
+      </div>
     </div>
   );
 }
