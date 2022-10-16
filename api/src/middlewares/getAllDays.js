@@ -31,14 +31,9 @@ const dbCreateDay = async (body, model) => {
             const day = await findCreateDay(code)
             return `day ${code} created successfully`
         } else {
-            let nameDays = []
             await code.map(async code => {
-
                 const day = await findCreateDay(code)
-
-                nameDays.push(day.name)
             })
-            console.log(nameDays)
             return `days ${code.length > 2 ? code.splice(0, code.length - 2).join(', ') + ", " + code[code.length - 2] + " and " + code[code.length - 1] : code.length === 2 ? code[0] + " and " + code[1] : code[0]} created successfully`
         }
     } else {
