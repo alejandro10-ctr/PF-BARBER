@@ -35,6 +35,7 @@ export default function SearchBar( /* {setPage} */ ){
         if(input){
         dispatch(getProducts(input));
         setSearch(true)
+        //setInput("")
         document.getElementById("input").value="";
         }else{
               setSearch(true)
