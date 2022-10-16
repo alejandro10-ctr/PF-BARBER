@@ -36,6 +36,8 @@ function DetailProduct({ match }) {
     <div>
       {/* <Link to="/">Back</Link> */}
       <Link to="/MercadoPago">Want to Buy🛒</Link>
+      <hr />
+      <Link to="/shop"> Volver atras </Link>
 
 
       {/* Card */}
