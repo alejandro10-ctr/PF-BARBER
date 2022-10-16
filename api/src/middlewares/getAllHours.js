@@ -9,7 +9,7 @@ const dbUpdateHour = async ({ first, last }, { code, hourId }) => {
                 }
             })
             if (response) {
-                return `updated hours of day code:${code}`
+                return `hours ${hourId} of day ${code} updated successfully`
             } else {
                 throw new Error('hours not found')
             }
@@ -25,6 +25,7 @@ const dbDeleteHour = async ({ hourId }) => {
     await Hour.destroy({
         where: { id: hourId }
     })
+    return `hours id:${hourId} deleted successfully`
 }
 module.exports = {
     dbUpdateHour,

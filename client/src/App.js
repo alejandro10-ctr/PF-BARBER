@@ -2,10 +2,10 @@ import React from "react";
 import { Route } from "react-router-dom";
 import DetailProduct from "./components/DetailProducts/DetailProducts";
 import Ecommerce from "./components/Ecommerce/Ecommerce";
-import Home from "./components/Home/Home";
+import Home from "./components/Home/Home.jsx";
 import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
-import AboutUs from "./components/AboutUs/AboutUs";
+import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import "./App.css";
 //holi
 
