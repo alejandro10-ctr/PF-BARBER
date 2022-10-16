@@ -1,21 +1,18 @@
 const { QueryTypes, Sequelize } = require('sequelize');
 const { Schedule, Day, Hour, conn, Op } = require('../db.js');
-const getDBDays = async () => {
-    let db = await Day.findAll()
-    return db
-}
-const dbCreateDay = async (body, service) => {
+
+const dbCreateDay = async (body, model) => {
     const { code, first, last } = body
     if (code.length && first && last) {
         const [schedule, createdSchedule] = await Schedule.findOrCreate({
-            where: { id: service.scheduleId },
+            where: { id: model.scheduleId },
             defaults: {
                 state: true
             }
         })
         if (createdSchedule) {
-            service.scheduleId = schedule.id
-            service.save()
+            model.scheduleId = schedule.id
+            model.save()
         }
         const name = (code) => {
             return code === 'dom' ? 'domingo' : code === 'lun' ? 'Lunes' : code === 'mar' ? 'Martes' : code === 'mie' ? 'Miércoles' : code === 'jue' ? 'Juevez' : code === 'vie' ? 'Viernes' : 'Sábado'
@@ -32,27 +29,27 @@ const dbCreateDay = async (body, service) => {
         }
         if (typeof code === "string") {
             const day = await findCreateDay(code)
-            return `day ${code} created`
+            return `day ${code} created successfully`
         } else {
-            code.map(async code => {
+            await code.map(async code => {
                 const day = await findCreateDay(code)
             })
-            return `days ${code.length > 2 ? code.splice(0, code.length - 2).join(', ') + ", " + code[code.length - 2] + " and " + code[code.length - 1] : code.length === 2 ? code[0] + " and " + code[1] : code[0]} created`
+            return `days ${code.length > 2 ? code.splice(0, code.length - 2).join(', ') + ", " + code[code.length - 2] + " and " + code[code.length - 1] : code.length === 2 ? code[0] + " and " + code[1] : code[0]} created successfully`
         }
     } else {
         throw new Error('missing params')
     }
 }
-const dbUpdateDay = async ({ state }, { code }, service) => {
+const dbUpdateDay = async ({ state }, { code }, model) => {
     if (typeof state !== "undefined") {
         const [response] = await Day.update({ state }, {
             where: {
-                scheduleId: service.scheduleId,
+                scheduleId: model.scheduleId,
                 code
             }
         })
         if (response) {
-            return `updated day code:${code}`
+            return `day ${code} updated successfully`
         } else {
             throw new Error('day not found')
         }
@@ -60,12 +57,13 @@ const dbUpdateDay = async ({ state }, { code }, service) => {
         throw new Error('missing params')
     }
 }
-const dbDeleteDay = async (code, service) => {
-    if (service.scheduleId) {
+const dbDeleteDay = async (code, model) => {
+    if (model.scheduleId) {
         await Day.destroy({
-            where: { code, scheduleId: service.scheduleId, },
+            where: { code, scheduleId: model.scheduleId, },
             include: Hour
         })
+        return `day ${code} deleted successfully`
     } else {
         throw new Error('schedule not found')
     }

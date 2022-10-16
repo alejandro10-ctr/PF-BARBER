@@ -1,8 +1,25 @@
 const { QueryTypes, Sequelize } = require("sequelize");
 const { Service, Schedule, Day, Hour, conn, Op } = require("../db.js");
 
+const JSONServices = [
+  {
+    name: "Corte de pelo",
+    description: "Aquí va una descripción de pelo",
+    price: 3,
+    available: true,
+    duration: 35
+  },
+  {
+    name: "Corte de barba",
+    description: "Aquí va una descripción de barba",
+    price: 5,
+    available: true,
+    duration: 20
+  },
+]
+
 const getDBServices = async () => {
-  let db = await Service.findAll({
+  let services = await Service.findAll({
     include: {
       model: Schedule,
       include: {
@@ -11,12 +28,16 @@ const getDBServices = async () => {
       },
     },
   });
-  return db;
+  
+  if (!services.length) {
+    services = await Service.bulkCreate(JSONServices, { validate: true });
+  }
+  return services;
 };
 
 const getDBServiceByPk = async (id) => {
   if (id) {
-    let db = await Service.findAll({
+    let services = await Service.findAll({
       where: {
         id,
       },
@@ -28,31 +49,32 @@ const getDBServiceByPk = async (id) => {
         },
       },
     });
-    if (!db.length) {
+    if (!services.length) {
       throw new Error("service not found");
     }
 
-    return db[0];
+    return services[0];
   } else {
     throw new Error("missing serviceId");
   }
 };
-const getDBServiceCreate = async (body) => {
-  const { name, price, available, time } = body;
-  if (name && price && typeof available !== "undefined" && time) {
-    return await Service.create(body);
+const dbDBServiceCreate = async (body) => {
+  const { name, price, available, duration } = body;
+  if (name && price && typeof available !== "undefined" && duration) {
+    await Service.create(body);
+    return `service ${body.name} created successfully`
   } else {
     throw new Error("missing params");
   }
 };
 
 const dbUpdateService = async (
-  { name, description, price, available, time },
+  { name, description, price, available, duration },
   id
 ) => {
-  if (name && price && typeof available !== "undefined" && time) {
+  if (name && price && typeof available !== "undefined" && duration) {
     const [response] = await Service.update(
-      { name, description, price, available, time },
+      { name, description, price, available, duration },
       {
         where: {
           id,
@@ -60,7 +82,7 @@ const dbUpdateService = async (
       }
     );
     if (response) {
-      return `service id:${id} updated successfully`;
+      return `service ${name} updated successfully`;
     } else {
       throw new Error("service not found");
     }
@@ -86,7 +108,7 @@ const dbDeleteService = async (id) => {
 module.exports = {
   getDBServices,
   getDBServiceByPk,
-  getDBServiceCreate,
+  dbDBServiceCreate,
   dbUpdateService,
   dbDeleteService,
 };

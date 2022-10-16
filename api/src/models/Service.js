@@ -20,9 +20,13 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    time: {
-        type: DataTypes.DATE,
-        allowNull: false,
+    duration: {
+        type: DataTypes.INTEGER,
+        valueDefault: 5,
+        validate: {
+          min:5,
+          max: 120
+        }
     }
   }, {
     timestamp: false,

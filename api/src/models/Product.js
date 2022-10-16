@@ -40,6 +40,11 @@ module.exports = (sequelize) => {
         defaultValue:
           "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
       },
+      score: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+        validate: { min: 1, max: 5 }
+      }
     },
     {
       timestamp: false,
