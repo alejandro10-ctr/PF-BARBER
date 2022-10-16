@@ -37,7 +37,7 @@ export default function AboutUs() {
         <br></br>
         <Link to="mail">Fabri</Link>
         <br></br>
-        <Link to="mail">Martin Horo</Link>
+        <Link to="mailto:martinhorodeski@gmail.com">Martin Horodeski</Link>
         <br></br>
         <Link to="mail">Alejandro Diez</Link> 
         <br></br>
