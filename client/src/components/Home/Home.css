@@ -1,0 +1,30 @@
+.btn{
+    background-color:black;
+    color:white;
+    margin-right: 2rem;
+
+}
+.tijeraImgen{
+    height: 2%;
+    width: 10%;
+    filter:brightness(1.1);
+    mix-blend-mode: multiply;
+    margin-left: 15rem;
+}
+.titulo{
+    display: flex ;
+    margin-top: 3rem;
+   margin-bottom: 2rem;
+}
+
+body{
+    background-color:rgb(83, 77, 77);
+    justify-content:space-around;
+}
+h1{
+    color:brown;
+    font-size: 80px;
+}
+h3{
+    color:white
+}
