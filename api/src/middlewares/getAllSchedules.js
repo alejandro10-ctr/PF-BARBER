@@ -18,7 +18,7 @@ const dbUpdateSchedule = async ({ state }, service) => {
             }
         })
         if (response) {
-            return `updated schedule id:${service.scheduleId}`
+            return `schedule id:${service.scheduleId} updated successfully`
         } else {
             throw new Error('schedule not found')
         }
@@ -26,15 +26,16 @@ const dbUpdateSchedule = async ({ state }, service) => {
         throw new Error('missing params')
     }
 }
-const dbDeleteSchedule = async (service) => {
-    if (service.scheduleId) {
+const dbDeleteSchedule = async (id) => {
+    if (id) {
         await Schedule.destroy({
-            where: { id: service.scheduleId },
+            where: { id },
             include: {
                 model: Day,
                 include: Hour
             }
         })
+        return `schedule id:${id} deleted successfully`
     } else {
         throw new Error('schedule not found')
     }
