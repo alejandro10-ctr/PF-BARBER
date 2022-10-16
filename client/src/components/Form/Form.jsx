@@ -122,11 +122,14 @@ export default function Form() {
                                 type="number"
                                 id='phone'
                                 name='phone'
-                                placeholder='3413307791....'
+                                placeholder='543413307791....'
                             // value={values.phone}
                             // onChange={handleChange}
                             // onBlur={handleBlur}
                             />
+                            <ErrorMessage name='phone' component={() => (
+                                <div>{errors.phone}</div>
+                            )} />
                             {/* {errors.phone && <div>{errors.phone}</div>} */}
                         </div>
 
@@ -144,7 +147,7 @@ export default function Form() {
                                 type="number"
                                 id='password'
                                 name='password'
-                                placeholder='3413307791....'
+                                placeholder='******'
                             />
                             {/* {errors.phone && <div>{errors.phone}</div>} */}
                         </div>

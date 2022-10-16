@@ -22,7 +22,7 @@ function App() {
         <AboutUs />
       </Route>
 
-      <Route exact path="/products/:id"
+      <Route exact path="/product/:id"
         render={({match}) => {
           return <DetailProduct match={match} />
         }}>

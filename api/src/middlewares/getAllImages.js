@@ -1,7 +1,7 @@
 const { Product, Image } = require("../db.js");
 
-const getAllImage = async info => {
-    return await Image.findAll();
+const getAllImage = async where => {
+    return await Image.findAll(where);
 }
 
 const dbCreateImage = async ({ urlImage }, product) => {
