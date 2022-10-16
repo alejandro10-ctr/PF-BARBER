@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getDBServices, getDBServiceByPk, getDBServiceCreate, dbUpdateService, dbDeleteService } = require('../middlewares/getAllServices.js')
+const { getDBServices, getDBServiceByPk, dbDBServiceCreate, dbUpdateService, dbDeleteService } = require('../middlewares/getAllServices.js')
 
 const { dbDeleteSchedule } = require('../middlewares/getAllSchedules.js')
 const router = Router();
@@ -24,7 +24,7 @@ router.get('/:serviceId', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const serviceCreated = await getDBServiceCreate(req.body)
+        const serviceCreated = await dbDBServiceCreate(req.body)
         res.status(200).json(serviceCreated)
     } catch (error) {
         res.status(404).send(error.message)
