@@ -140,7 +140,7 @@ const[categorySelected, setCategory] = useState('all')
         <Paginado  pag={pag}
                       setCurrentPage={setCurrentPage} 
                       max={max}/>
-        {/* score sort */}
+        {/* score sort sol*/}
         {/* <div>
         <label>Score</label>
         <select onChange={score => handleScore(score)}>
