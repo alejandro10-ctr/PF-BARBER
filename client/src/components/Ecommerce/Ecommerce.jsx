@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 import React, { useState } from "react";
-import styles from '../Ecommerce/Ecommerce.module.css';
+import s from './Ecommerce.module.css'
+
 import Paginado from "../Paginado/Paginado.jsx";
 import {
   getProducts,
@@ -73,7 +74,7 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
         {/* price sort */}
         <div>
           <label>Price </label>
-          <select onChange={sort => handleSort(sort)}>
+          <select className={s.select} onChange={sort => handleSort(sort)}>
             <option hidden value=''>⇅</option>
             <option value='high'>+</option>
             <option value='lower'>-</option>
@@ -96,7 +97,7 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
 
 
 
-
+        
         <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
 
 
@@ -113,7 +114,7 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
         {/* filter anidado */}
         <div>
           <label>Category</label>
-          <select onChange={shop => handleShop(shop)}>
+          <select className='s.select' onChange={shop => handleShop(shop)}>
             <option hidden value="all">Shop</option>
             <option value="all">All</option>
             <option value="after shave">After Shave</option>
@@ -133,35 +134,40 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
 
 
         {/* card */}
-        <div className={styles.cardHome}>
-        {products.length > 0 ?   products.map((e) => {
+<div className={s.containerCard}>
+{
+products.length > 0 ?
+          products.map((e) => {
             return (
-              <div key={e.id}>
-                <img src={e.image} alt="img"></img>
-                <h2>{e.name}</h2>
-                <h3>Price: ${e.price}</h3>
-                <h3>Stock: {e.stock}</h3>
-                <h3>Score: {e.score}</h3>
-                <h3>Quality: {e.quality}</h3>
-                <Link to={`/product/${e.id}`}>Detail Product</Link>
+              
+              <div className={s.products} key={e.id}>
+                <img className={s.img} src={e.image} alt="img" ></img>
+                <div className={s.productInfo}>
+                <h2 className={s.productInfo}>{e.name}</h2>
+                <h2>___</h2>
+                <h3 className={s.productPrice}> ${e.price}</h3>
+                <h3 className={s.productQuality}>Quality: {e.quality}</h3>
+                </div>
+                <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
               </div>
+              
 
             );
           }) : allProducts.map((e) => {
             return (
-              <div key={e.id}>
-                <img src={e.image} alt="img"></img>
-                <h2>{e.name}</h2>
-                <h3>Price: ${e.price}</h3>
-                <h3>Stock: {e.stock}</h3>
-                <h3>Score: {e.score}</h3>
+              <div className={s.products} key={e.id}>
+                <img className={s.img} src={e.image} alt="img"></img>
+                <div className={s.productInfo}>
+                <h2 className={s.productInfo}>{e.name}</h2>
+                <h3 className={s.productPrice}> ${e.price}</h3>
                 <h3>Quality: {e.quality}</h3>
-                <Link to={`/product/${e.id}`}>Detail Product</Link>
+               </div>
+                <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
               </div>);
           })
-        }
-      </div>
 
+        }
+</div>
       </div>
     </div>
   );

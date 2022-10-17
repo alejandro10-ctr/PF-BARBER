@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductsDetail } from "../../redux/actions";
-// import styles fromm '../DetailProducts/DetailProducts.module.css';
+// import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
 
@@ -36,6 +36,8 @@ function DetailProduct({ match }) {
     <div>
       {/* <Link to="/">Back</Link> */}
       <Link to="/MercadoPago">Want to Buy🛒</Link>
+      <hr />
+      <Link to="/shop"> Volver atras </Link>
 
 
       {/* Card */}
