@@ -177,7 +177,7 @@ export function clearDetail() {
 export function searchProducts(name) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/products?name=${name}`);//chequeada con yei-barbi
+      const response = await axios.get(`/products?name=${name}`);//chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
       throw alert('Not Found!')
