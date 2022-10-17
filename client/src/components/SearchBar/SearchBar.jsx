@@ -5,6 +5,7 @@ import { searchProducts } from '../../redux/actions';
 //import {Link} from 'react-router-dom';
 //import { getProducts } from '.././redux/actions'; // => hay un error aca!!!!
 import styles from './SearchBar.module.css';
+import Swal from "sweetalert2";
 
 export default function SearchBar({setCurrentPage}) {
 
@@ -23,11 +24,21 @@ export default function SearchBar({setCurrentPage}) {
 
 
     function handleInputSubmit(submit){
-        submit.preventDefault(); 
-        dispatch(searchProducts(name));      
-        setCurrentPage(1);
-               setName('');
-    }
+        submit.preventDefault();
+        if(name) {
+            dispatch(searchProducts(name)); 
+            setName('')
+        setCurrentPage(1)
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: "Error...",
+                text: "Please search a product",
+                
+            })
+            //return alert("Please search a product")
+        }
+}
     return (
         <div >
             <input 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const SET_LOADING = "SET_LOADING";
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -179,7 +180,12 @@ export function searchProducts(name) {
       const response = await axios.get(`/products?name=${name}`); //chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      alert("Product not exists");
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "We don't found the product ☹!",
+      });
+      //return alert("Please search a product")
     }
   };
 }

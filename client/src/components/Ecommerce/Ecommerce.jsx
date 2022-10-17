@@ -94,7 +94,7 @@ console.log(products)
         <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
         <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
 
-        <SearchBar setCurrentPage={setCurrentPage}/>
+        {/* <SearchBar setCurrentPage={setCurrentPage}/> */}
 
         
         {/* price sort */}
@@ -134,19 +134,19 @@ console.log(products)
 
 
 
-        <Paginado pag={pag}
+        {/* <Paginado pag={pag}
           setCurrentPage={setCurrentPage}
           max={max} />
-        {/* score sort */}
+        score sort */}
 
         
-        <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
+        {/* <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
 
 
         <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
 
 
-        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
+        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button> */}
 
 
 
@@ -154,7 +154,7 @@ console.log(products)
 
 
         {/* filter anidado */}
-        <div>
+        {/* <div>
           <label>Category</label>
           <select className={s.select} onChange={shop => handleShop(shop)}>
             <option hidden value="all">Shop</option>
@@ -162,7 +162,7 @@ console.log(products)
             <option value="after shave">After Shave</option>
             <option value="razor">Razors</option>
           </select>
-        </div>
+        </div> */}
         <Paginado  pag={pag}
                       setCurrentPage={setCurrentPage} 
                       max={max}/>
@@ -232,5 +232,3 @@ export const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Productos);
-
-//awsfldiuhauofhas8ofhoasfhoaisufhioasf
