@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductsDetail } from "../../redux/actions";
-// import styles from '../DetailProducts/DetailProducts.module.css';
+// import styles fromm '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
 
