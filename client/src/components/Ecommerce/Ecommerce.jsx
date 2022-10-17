@@ -133,7 +133,7 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
       </div> */}
 
 
-        {/* card */}
+        {/* soy cards */}
 <div className={s.containerCard}>
 {
 products.length > 0 ?
