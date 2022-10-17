@@ -88,7 +88,7 @@ export default function reducer(state = initialState, { type, payload }) {
     // }
     //--------------------------PRICE
     case PRICE_HIGH:
-      let stateProd = state.allProducts
+      let stateProd = state.products
       return {
         ...state,
         products: stateProd.slice().sort((a, b) => {
@@ -97,7 +97,7 @@ export default function reducer(state = initialState, { type, payload }) {
         }).reverse()
       }
     case PRICE_LOWER:
-      let statePr = state.allProducts
+      let statePr = state.products
       return {
         ...state,
         products: statePr.slice().sort((a, b) => {

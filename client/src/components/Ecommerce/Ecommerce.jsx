@@ -32,6 +32,19 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
   }, [state]);
 
 
+const[categorySelected, setCategory] = useState('all')
+
+
+
+//paginado
+  const[pag, setCurrentPage]= useState(1)// inicializacion
+  const[productsPerPage, setPerPage] = useState(6) //cant x pag 
+  const max = Math.ceil(products.length / productsPerPage); //max pag posible REDONDE HACIA ARRIBA 
+
+  const sliceProduct = products.slice((pag - 1)* productsPerPage,
+  ((pag - 1) * productsPerPage) + productsPerPage )// corte de elementos x pag
+
+
   //-----sort
   function handleSort(sort) {
     sort.preventDefault();
@@ -49,12 +62,15 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
   //-----filter
   function handleQuality(quality) {
     quality.preventDefault();
-    dispatch(filterQuality(quality.target.value))
+    dispatch(filterQuality(quality.target.value)) //all-basic-premium
+    dispatch(filterShop(categorySelected))// (categorys context )
+
   }
   //----filter anidado
   function handleShop(shop) {
     shop.preventDefault()
     dispatch(filterShop(shop.target.value))
+    setCategory(shop.target.value)
   }
 
   return (
@@ -70,7 +86,7 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
 
         {/* Searchbar */}
         <SearchBar />
-
+        
         {/* price sort */}
         <div>
           <label>Price </label>
@@ -121,7 +137,9 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
             <option value="razor">Razors</option>
           </select>
         </div>
-
+        <Paginado  pag={pag}
+                      setCurrentPage={setCurrentPage} 
+                      max={max}/>
         {/* score sort */}
         {/* <div>
         <label>Score</label>
@@ -136,8 +154,8 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
         {/* card */}
 <div className={s.containerCard}>
 {
-products.length > 0 ?
-          products.map((e) => {
+sliceProduct.length > 0 ?
+sliceProduct.map((e) => {
             return (
               
               <div className={s.products} key={e.id}>
