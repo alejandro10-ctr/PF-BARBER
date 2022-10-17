@@ -130,7 +130,7 @@ const[categorySelected, setCategory] = useState('all')
         {/* filter anidado */}
         <div>
           <label>Category</label>
-          <select className='s.select' onChange={shop => handleShop(shop)}>
+          <select className={s.select} onChange={shop => handleShop(shop)}>
             <option hidden value="all">Shop</option>
             <option value="all">All</option>
             <option value="after shave">After Shave</option>
