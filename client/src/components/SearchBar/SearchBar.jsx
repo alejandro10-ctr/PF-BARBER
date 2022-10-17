@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getProducts, searchProducts } from '../../redux/actions';
+import { searchProducts } from '../../redux/actions';
 //import {Link} from 'react-router-dom';
 //import { getProducts } from '.././redux/actions'; // => hay un error aca!!!!
-
+import styles from './SearchBar.module.css';
 
 export default function SearchBar({setCurrentPage}) {
 
@@ -18,20 +18,20 @@ export default function SearchBar({setCurrentPage}) {
         e.preventDefault();
         setName(e.target.value)
         console.log(e.target.value)
-        setCurrentPage(1)
+
     }
 
 
     function handleInputSubmit(submit){
-        submit.preventDefault();
-        dispatch(searchProducts(name)); 
-        setName('')
-        setCurrentPage(1)
-       
+        submit.preventDefault(); 
+        dispatch(searchProducts(name));      
+        setCurrentPage(1);
+               setName('');
     }
     return (
         <div >
-            <input
+            <input 
+                className={styles.search} 
                 value={name}
                 id="input"
                 type="search"
@@ -40,14 +40,9 @@ export default function SearchBar({setCurrentPage}) {
                 onChange={(e) => handleInputChange(e)}
                 // onKeyPress={(input) => handleSearch(input)}
             />
-            <button type='text' onClick={(submit) => { handleInputSubmit(submit) }}>🔍</button>
+            <button type='text' onClick={(submit) => { handleInputSubmit(submit) }}  className={styles.buttonStyle}>🔍</button>
 
 
         </div>
     )
 }
-
-
-
-
-
