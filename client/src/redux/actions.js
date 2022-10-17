@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const SET_LOADING = "SET_LOADING";
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -14,17 +15,16 @@ export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const PRICE_LOWER = "PRICE_LOWER";
 export const PRICE_HIGH = "PRICE_HIGH";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
-export const FILTER_QUALITY= "FILTER_QUALITY";
-export const FILTER_SHOP="FILTER_SHOP";
+export const FILTER_QUALITY = "FILTER_QUALITY";
+export const FILTER_SHOP = "FILTER_SHOP";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
 export const TYPES = {
-  ADD_TO_CART : "ADD_TO_CART",
-  REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
-  REMOVE_ALL_FROM_CART : "REMOVE_ALL_FROM_CART",
-  CLEAR_CART : "CLEAR_CART",
-
+  ADD_TO_CART: "ADD_TO_CART",
+  REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
+  REMOVE_ALL_FROM_CART: "REMOVE_ALL_FROM_CART",
+  CLEAR_CART: "CLEAR_CART",
 };
 
 export function setLoading(value) {
@@ -38,7 +38,7 @@ export function getProducts(errorCallback) {
     try {
       const response = await axios.get(`/products`); //chequeada con yei-barbi
       if (response?.data) {
-        dispatch({ type: GET_PRODUCTS, payload: response.data});
+        dispatch({ type: GET_PRODUCTS, payload: response.data });
       }
     } catch (error) {
       errorCallback && errorCallback(error);
@@ -144,7 +144,7 @@ export function deleteUsers(users, errorCallback) {
 export function updateUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/users/${users.id}`, users);//falta, se agregara..volver a revisar
+      const response = await axios.put(`/users/${users.id}`, users); //falta, se agregara..volver a revisar
       if (response?.data) {
         return dispatch({
           type: UPDATE_USERS,
@@ -177,15 +177,15 @@ export function clearDetail() {
 export function searchProducts(name) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products?name=${name}`);//chequeada con yei-barbi
+      const response = await axios.get(`/products?name=${name}`); //chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      return dispatch({
-        type: "FAILURE",
-        payload: error.response.data.msg
-      })
-      //throw console.log('Not Found!')
-      
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "We don't found the product ☹!",
+      });
+      //return alert("Please search a product")
     }
   };
 }
@@ -203,18 +203,18 @@ export function priceHigh(payload) {
   };
 }
 
-export function filterQuality(payload){
-  return{
-      type: FILTER_QUALITY,
-     payload
-  }
-}   
+export function filterQuality(payload) {
+  return {
+    type: FILTER_QUALITY,
+    payload,
+  };
+}
 
-export function filterShop(payload){
-    return{
-      type: FILTER_SHOP,
-      payload
-    }
+export function filterShop(payload) {
+  return {
+    type: FILTER_SHOP,
+    payload,
+  };
 }
 
 // export function scoreLower(payload) {
@@ -230,7 +230,6 @@ export function filterShop(payload){
 //     payload,
 //   };
 // }
-
 
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes

@@ -9,7 +9,6 @@ for(let i= 1; i <= max; i++){
     arreglito.push(i)
 
 }
-console.log(arreglito)
 
     const nextPage = () => {
         if (pag !== max ) return setCurrentPage(pag + 1);
@@ -27,8 +26,8 @@ console.log(arreglito)
 
             <div >
                 <button  onClick={prevPage}>&#8249;</button>
-                  {arreglito? arreglito.map(m=> (<button value={m} onClick={(click)=>handleClick(click)}>{m}</button>)) : 'not array'}
-                {/* <span> {pag}  - {max}</span> */}
+                  {arreglito? arreglito.map(m=> (<button key={m} value={m} onClick={(click)=>handleClick(click)}>{m}</button>)) : 'not array'}
+                {/* <span> {pag}  - {max}</span> sol*/}
 
                 <button onClick={nextPage}>&#8250;</button>
             </div>
