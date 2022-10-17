@@ -1,11 +1,11 @@
 .containerCard {
   margin: auto;
   margin-top: 50px;
-  width: 1200px;
+  width: 1400px;
   padding: 30px;
 
   background-color: #6363638e;
-  border-radius: 25px;
+  border-radius: 30px;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -54,22 +54,42 @@
   padding: 20px;
 }
 
-select {
+select::-ms-expand {
+  display: none;
+}
+
+/* .select {
   /* styling */
-  background-color: white;
+/* background-color: white;
   border: thin solid blue;
   border-radius: 4px;
   display: inline-block;
   font: inherit;
   line-height: 1.5em;
-  padding: 0.5em 3.5em 0.5em 1em;
+  padding: 0.5em 3.5em 0.5em 1em; */
 
-  /* reset */
-
+/* reset */
+/* 
   margin: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: border-box; 
+}*/
+
+.select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  border: thin solid blue;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
 
 .btn {
