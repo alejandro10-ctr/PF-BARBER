@@ -14,6 +14,7 @@ import {
   sortScore,
   filterQuality,
   filterShop,
+  
 
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
@@ -32,18 +33,18 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
   }, [state]);
 
 
-const[categorySelected, setCategory] = useState('all')
+  const [categorySelected, setCategory] = useState('all')
 
 
 
-//paginado
-  const[pag, setCurrentPage]= useState(1)// inicializacion
-  const[productsPerPage, setPerPage] = useState(6) //cant x pag 
+  //paginado
+  const [pag, setCurrentPage] = useState(1)// inicializacion
+  const [productsPerPage, setPerPage] = useState(6) //cant x pag 
   const max = Math.ceil(products.length / productsPerPage); //max pag posible REDONDE HACIA ARRIBA 
-
-  const sliceProduct = products.slice((pag - 1)* productsPerPage,
-  ((pag - 1) * productsPerPage) + productsPerPage )// corte de elementos x pag
-
+console.log(products)
+  const sliceProduct = products.slice((pag - 1) * productsPerPage,
+    ((pag - 1) * productsPerPage) + productsPerPage)// corte de elementos x pag
+    console.log(sliceProduct)
 
   //-----sort
   function handleSort(sort) {
@@ -85,16 +86,35 @@ const[categorySelected, setCategory] = useState('all')
         {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
         {/* Searchbar */}
+
+        <SearchBar setCurrentPage={setCurrentPage} />
+
+        {/* buttons filter Quality */}
+        <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
+        <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
+        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
+
         <SearchBar setCurrentPage={setCurrentPage}/>
+
         
         {/* price sort */}
-        <div>
+        <div className={s.selectFilterSort}>
           <label>Price </label>
           <select className={s.select} onChange={sort => handleSort(sort)}>
-            <option hidden value=''>⇅</option>
+            <option  hidden value=''>⇅</option>
             <option value='high'>+</option>
             <option value='lower'>-</option>
           </select>
+
+          {/* filter anidado */}
+            <label>Category</label>
+            <select className={s.select} onChange={shop => handleShop(shop)}>
+              <option hidden value="all">Shop</option>
+              <option value="all">All</option>
+              <option value="after shave">After Shave</option>
+              <option value="razor">Razors</option>
+            </select>
+          
         </div><br />
 
 
@@ -112,6 +132,12 @@ const[categorySelected, setCategory] = useState('all')
         </div> */}
 
 
+
+
+        <Paginado pag={pag}
+          setCurrentPage={setCurrentPage}
+          max={max} />
+        {/* score sort */}
 
         
         <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
@@ -141,6 +167,7 @@ const[categorySelected, setCategory] = useState('all')
                       setCurrentPage={setCurrentPage} 
                       max={max}/>
         {/* score sort sol*/}
+
         {/* <div>
         <label>Score</label>
         <select onChange={score => handleScore(score)}>
@@ -152,40 +179,42 @@ const[categorySelected, setCategory] = useState('all')
 
 
         {/* card */}
-<div className={s.containerCard}>
-{
-sliceProduct.length > 0 ?
-sliceProduct.map((e) => {
-            return (
-              
-              <div className={s.products} key={e.id}>
-                <img className={s.img} src={e.image} alt="img" ></img>
-                <div className={s.productInfo}>
-                <h2 className={s.productInfo}>{e.name}</h2>
-                <h2>___</h2>
-                <h3 className={s.productPrice}> ${e.price}</h3>
-                <h3 className={s.productQuality}>Quality: {e.quality}</h3>
-                </div>
-                <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
-              </div>
-              
+        <div className={s.containerCard}>
+          {
+            sliceProduct.length > 0 ?
+              sliceProduct.map((e) => {
+                return (
 
-            );
-          }) : allProducts.map((e) => {
-            return (
-              <div className={s.products} key={e.id}>
-                <img className={s.img} src={e.image} alt="img"></img>
-                <div className={s.productInfo}>
-                <h2 className={s.productInfo}>{e.name}</h2>
-                <h3 className={s.productPrice}> ${e.price}</h3>
-                <h3>Quality: {e.quality}</h3>
-               </div>
-                <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
-              </div>);
-          })
+                  <div className={s.products} key={e.id}>
+                    <img className={s.img} src={e.image} alt="img" ></img>
+                    <div className={s.productInfo}>
+                      <h2 className={s.productInfo}>{e.name}</h2>
+                      <h2>___</h2>
+                      <h3 className={s.productPrice}> ${e.price}</h3>
+                      <h3 className={s.productQuality}>Quality: {e.quality}</h3>
+                    </div>
+                    <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
+                  </div>
 
-        }
-</div>
+
+                );
+              }) :
+              
+              allProducts.map((e) => {
+                return (
+                  <div className={s.products} key={e.id}>
+                    <img className={s.img} src={e.image} alt="img"></img>
+                    <div className={s.productInfo}>
+                      <h2 className={s.productInfo}>{e.name}</h2>
+                      <h3 className={s.productPrice}> ${e.price}</h3>
+                      <h3>Quality: {e.quality}</h3>
+                    </div>
+                    <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
+                  </div>);
+              })
+
+          }
+        </div>
       </div>
     </div>
   );
