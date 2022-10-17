@@ -1,6 +1,6 @@
 .containerCard {
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
   width: 1400px;
   padding: 30px;
 
@@ -34,23 +34,36 @@
   color: black;
 }
 
+.products:hover {
+  transform: translateY(-10px);
+  box-shadow: 5px 5px 7px 2px rgb(33, 34, 33);
+  transition: 1000ms;
+}
+
 .productInfo {
+  font-family: Montserrat;
+  font-weight: 540;
   text-align: center;
-  line-height: 1;
-  font-size: 30px;
+  line-height: 1.5;
+  font-size: 28px;
   padding: 10px;
 }
 
 .productPrice {
+  font-weight: 800;
+  font-family: "Open Sans", sans-serif;
   text-align: center;
-  line-height: 1;
-  font-size: 25px;
+  line-height: 1.42857143;
+  background-color: transparent;
+  font-size: 32px;
+  width: 100%;
 }
 
 .productQuality {
+  font-family: "Times New Roman", Times, serif;
   text-align: center;
   line-height: 1;
-  font-size: 30px;
+  font-size: 20px;
   padding: 20px;
 }
 
@@ -71,6 +84,12 @@ select::-ms-expand {
   font-weight: 700;
   border-radius: 8px;
   border: none;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: aqua;
+  transition: 500ms;
 }
 
 /* .select {
