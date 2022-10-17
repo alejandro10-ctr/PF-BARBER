@@ -11,11 +11,14 @@ export const DELETE_USERS = "DELETE_USERS";
 export const UPDATE_USERS = "UPDATE_USERS";
 export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
-export const SORT_LOWER = "SORT_LOWER";
-export const SORT_HIGH = "SORT_HIGH";
-export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT"
-export const SCORE_LOWER = "SCORE_LOWER"
-export const SCORE_HIGH = "SCORE_HIGH"
+export const PRICE_LOWER = "PRICE_LOWER";
+export const PRICE_HIGH = "PRICE_HIGH";
+export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
+export const FILTER_QUALITY= "FILTER_QUALITY";
+export const FILTER_SHOP="FILTER_SHOP";
+// export const SORT_SCORE ="SORT_SCORE";
+// export const SCORE_LOWER = "SCORE_LOWER"
+// export const SCORE_HIGH = "SCORE_HIGH"
 export const TYPES = {
   ADD_TO_CART : "ADD_TO_CART",
   REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
@@ -23,10 +26,6 @@ export const TYPES = {
   CLEAR_CART : "CLEAR_CART",
 
 };
-
-
-
-
 
 export function setLoading(value) {
   return (dispatch) => {
@@ -175,43 +174,63 @@ export function clearDetail() {
     type: CLEAR_PRODUCTS_DETAILS,
   };
 }
-export function searchProducts(name, errorCallback) {
+export function searchProducts(name) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products/?name=${name}`);//chequeada con yei-barbi
+      const response = await axios.get(`/products?name=${name}`);//chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      dispatch({ type: SEARCH_PRODUCTS, payload: [] });
-      throw alert("Product not found");
+      return dispatch({
+        type: "FAILURE",
+        payload: error.response.data.msg
+      })
+      //throw console.log('Not Found!')
+      
     }
   };
 }
-export function sortLower(payload) {
+export function priceLower(payload) {
   return {
-    type: SORT_LOWER,
+    type: PRICE_LOWER,
     payload,
   };
 }
 
-export function sortHigh(payload) {
+export function priceHigh(payload) {
   return {
-    type: SORT_HIGH,
+    type: PRICE_HIGH,
     payload,
   };
 }
 
-export function scoreLower(payload) {
-  return {
-    type: SCORE_LOWER,
-    payload,
-  };
+export function filterQuality(payload){
+  return{
+      type: FILTER_QUALITY,
+     payload
+  }
+}   
+
+export function filterShop(payload){
+    return{
+      type: FILTER_SHOP,
+      payload
+    }
 }
 
-export function scoreHigh(payload) {
-  return {
-    type: SCORE_HIGH,
-    payload,
-  };
-}
+// export function scoreLower(payload) {
+//   return {
+//     type: SCORE_LOWER,
+//     payload,
+//   };
+// }
+
+// export function sortScore(payload) {
+//   return {
+//     type: SORT_SCORE,
+//     payload,
+//   };
+// }
+
+
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes

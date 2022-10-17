@@ -6,6 +6,7 @@ import Home from "./components/Home/Home.jsx";
 import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
+
 import "./App.css";
 //holi
 
@@ -13,12 +14,12 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/">
-        <Ecommerce />
-      </Route>
-      <Route exact path="/Home">
         <Home />
       </Route>
-      <Route exact path="/AboutUs">
+      <Route exact path="/shop">
+        <Ecommerce />
+      </Route>
+      <Route exact path="/aboutus">
         <AboutUs />
       </Route>
 
