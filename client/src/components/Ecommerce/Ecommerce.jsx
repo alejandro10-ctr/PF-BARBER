@@ -85,7 +85,7 @@ const[categorySelected, setCategory] = useState('all')
         {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
         {/* Searchbar */}
-        <SearchBar />
+        <SearchBar setCurrentPage={setCurrentPage}/>
         
         {/* price sort */}
         <div>

@@ -27,7 +27,7 @@ console.log(arreglito)
 
             <div >
                 <button  onClick={prevPage}>&#8249;</button>
-                  {arreglito? arreglito.map(m=> (<button value={m} onClick={(click)=>handleClick(click)}>{m}</button>)) : 'not array'}
+                  {arreglito? arreglito.map(m=> (<button key={m} value={m} onClick={(click)=>handleClick(click)}>{m}</button>)) : 'not array'}
                 {/* <span> {pag}  - {max}</span> */}
 
                 <button onClick={nextPage}>&#8250;</button>
