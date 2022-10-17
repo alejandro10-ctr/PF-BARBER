@@ -76,7 +76,7 @@ select::-ms-expand {
   box-sizing: border-box; 
 }*/
 
-.select {
+/* .select {
   width: 100%;
   min-width: 15ch;
   max-width: 30ch;
@@ -90,9 +90,9 @@ select::-ms-expand {
   line-height: 1.1;
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-}
+} */
 
-.btn {
+/* .btn {
   margin: 10px 5px;
   height: 30px;
 
@@ -125,4 +125,13 @@ select::-ms-expand {
   font-weight: 700;
   border-radius: 8px;
   border: none;
+} */
+
+.selectFilterSort {
+  margin-top: 15px;
+  justify-content: space-around;
+}
+
+.select {
+  width: 7%;
 }
