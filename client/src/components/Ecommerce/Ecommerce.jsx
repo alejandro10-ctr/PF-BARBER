@@ -189,12 +189,11 @@ console.log(products)
                 return (
 
                   <div className={s.products} key={e.id}>
-                    <img className={s.img} src={e.image} alt="img" ></img>
-                    <div className={s.productInfo}>
                       <h2 className={s.productInfo}>{e.name}</h2>
-                      <h2>___</h2>
-                      <h3 className={s.productPrice}> ${e.price}</h3>
-                      <h3 className={s.productQuality}>Quality: {e.quality}</h3>
+                    <img className={s.img} src={e.image} alt="img" ></img>
+                      <h3 className={s.productQuality}>{e.quality.toUpperCase()}</h3>
+                    <div className={s.productInfo}>
+                      <h2 className={s.productPrice}> ${e.price}</h2>
                     </div>
                     <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
                   </div>
