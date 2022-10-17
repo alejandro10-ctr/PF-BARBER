@@ -6,6 +6,7 @@ import Home from "./components/Home/Home.jsx";
 import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
+
 import "./App.css";
 //holi
 

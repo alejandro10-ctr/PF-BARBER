@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 import React, { useState } from "react";
-
+import styles from '../Ecommerce/Ecommerce.module.css';
 import Paginado from "../Paginado/Paginado.jsx";
 import {
   getProducts,
@@ -133,8 +133,8 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
 
 
         {/* card */}
-        {products.length > 0 ?
-          products.map((e) => {
+        <div className={styles.cardHome}>
+        {products.length > 0 ?   products.map((e) => {
             return (
               <div key={e.id}>
                 <img src={e.image} alt="img"></img>
@@ -159,8 +159,9 @@ const Productos = ({ products, getProducts, allProducts, filterstate }) => {
                 <Link to={`/product/${e.id}`}>Detail Product</Link>
               </div>);
           })
-
         }
+      </div>
+
       </div>
     </div>
   );

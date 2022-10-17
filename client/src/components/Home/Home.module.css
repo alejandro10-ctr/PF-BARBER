@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap');
+
+
+.background{
+    background-color: rgba(32, 30, 29, 0.747);
+}
+
+
+.title{
+   padding: 2%;
+    font-family: 'Anton', sans-serif;
+    font-size: 10%;
+    color: rgba(240, 248, 255, 0.781);
+}
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+    margin: 3px;
+    width: 170px;
+ 
+   
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
+
+
+
+
+/* .btn{
+    background-color:black;
+    color:white;
+    margin-right: 2rem;
+
+}
+.tijeraImgen{
+    height: 2%;
+    width: 10%;
+    filter:brightness(1.1);
+    mix-blend-mode: multiply;
+    margin-left: 15rem;
+}
+.titulo{
+    display: flex ;
+    margin-top: 3rem;
+   margin-bottom: 2rem;
+}
+
+body{
+    background-color:rgb(83, 77, 77);
+    justify-content:space-around;
+}
+h1{
+    color:brown;
+    font-size: 80px;
+}
+h3{
+    color:white
+} */

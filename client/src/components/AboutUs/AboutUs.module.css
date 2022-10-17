@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
+
+.background{
+    background-color: rgba(32, 30, 29, 0.747);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    margin: 0% 0%;
+    text-align: center;
+    background-position-x: center;
+    width: 100%;
+    height: 100%;
+
+
+}
+.title{
+    margin-top: 20px;
+    font-size: 40px;
+    color: whitesmoke;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+
+}
+
+.git{
+    margin-top: 20px;
+    font-size: 25px;
+    color: whitesmoke;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+ 
+}
+.card {
+    margin-top: 3%;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	background-color: #f0f0f067;
+	height:33em;
+	width: 500px;
+	display:-webkit-box;
+	display:-ms-flexbox;
+    position:relative;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	-ms-flex-direction:column;
+	flex-direction:column;
+
+	-webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	border-radius:65px;
+
+}
+
+.fontText{
+    margin-top: 20px;
+    font-size: 20px;
+    color: whitesmoke;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* .TITLE{
+    margin-top: 20px;
+    font-size: 50px;
+
+}
+.TarGitHub{
+    float: right;
+    margin-right: 30px;
+    padding: 20px;
+    border-radius: 25px;
+    background-color:black;
+
+
+}
+.texto{
+    font-size: 20px;
+    margin-top: 30px;
+    margin-right: right;
+    text-align:justify;
+}
+.Target{
+    font-size:20px;
+    text-decoration: none;
+    color:white;
+}
+h3{
+    color:brown;
+} */
