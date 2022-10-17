@@ -9,7 +9,6 @@ for(let i= 1; i <= max; i++){
     arreglito.push(i)
 
 }
-console.log(arreglito)
 
     const nextPage = () => {
         if (pag !== max ) return setCurrentPage(pag + 1);
