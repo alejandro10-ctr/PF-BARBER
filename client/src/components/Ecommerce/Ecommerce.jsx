@@ -78,10 +78,13 @@ console.log(products)
     <div>
       <br />
       <div>
-        <button onClick={e => {
+        {/* <button onClick={e => {
           e.preventDefault()
           setState(true)
-        }}>add</button><br /><br />
+        }}>add</button><br /><br /> */}
+
+        <Link to='/'><button className={s.button}>Home</button></Link>
+
         {/* {products.length}
         {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
