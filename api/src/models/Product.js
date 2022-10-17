@@ -41,17 +41,10 @@ module.exports = (sequelize) => {
           "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
       },
       score: {
-
         type: DataTypes.INTEGER,
         defaultValue: 1,
-        validate: { min: 1, max: 5 }
-      }
-
-        type: DataTypes.ENUM(["0", "1", "2", "3", "4", "5"]),
-        allowNull: false,
-        defaultValue: "0",
+        validate: { min: 1, max: 5 },
       },
-
     },
     {
       timestamp: false,
