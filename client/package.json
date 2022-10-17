@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
