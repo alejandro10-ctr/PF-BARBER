@@ -6,7 +6,7 @@ import { getProducts, searchProducts } from '../../redux/actions';
 //import { getProducts } from '.././redux/actions'; // => hay un error aca!!!!
 
 
-export default function SearchBar() {
+export default function SearchBar({setCurrentPage}) {
 
     const dispatch = useDispatch()
 
@@ -18,6 +18,7 @@ export default function SearchBar() {
         e.preventDefault();
         setName(e.target.value)
         console.log(e.target.value)
+        setCurrentPage(1)
     }
 
 
@@ -25,6 +26,7 @@ export default function SearchBar() {
         submit.preventDefault();
         dispatch(searchProducts(name)); 
         setName('')
+        setCurrentPage(1)
        
     }
     return (

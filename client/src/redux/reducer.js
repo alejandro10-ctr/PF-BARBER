@@ -27,7 +27,8 @@ const initialState = {
   allProducts: [],
   cart: [],
   localStorage: [],
-  filterstate: []
+  filterstate: [],
+  error: '',
 };
 
 
@@ -193,6 +194,13 @@ export default function reducer(state = initialState, { type, payload }) {
       //       filterstate: logicFilter
       //     };
       //   }
+      //-------------error
+      case "FAILURE":
+        return{
+          ...state,
+          error: payload
+        }
+
     default:
       return state;
   }

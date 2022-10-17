@@ -180,7 +180,12 @@ export function searchProducts(name) {
       const response = await axios.get(`http://localhost:3001/products?name=${name}`);//chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      throw alert('Not Found!')
+      return dispatch({
+        type: "FAILURE",
+        payload: error.response.data.msg
+      })
+      //throw console.log('Not Found!')
+      
     }
   };
 }
