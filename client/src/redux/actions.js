@@ -17,15 +17,14 @@ export const PRICE_HIGH = "PRICE_HIGH";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
+export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
-export const TYPES = {
-  ADD_TO_CART: "ADD_TO_CART",
-  REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
-  REMOVE_ALL_FROM_CART: "REMOVE_ALL_FROM_CART",
-  CLEAR_CART: "CLEAR_CART",
-};
+
 
 export function setLoading(value) {
   return (dispatch) => {
@@ -233,3 +232,25 @@ export function filterShop(payload) {
 
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
+
+export function addToCart(id){
+  return {
+    type: ADD_TO_CART, 
+    payload:id
+  }
+}
+
+export function delFromCart(id, all=false){
+  if(all===true){
+    return{type: REMOVE_ALL_FROM_CART, payload:id};
+}else{
+    return{type: REMOVE_ONE_FROM_CART, payload:id};
+  }
+};
+
+export function clearCart(){
+  return{
+    type: CLEAR_CART,
+
+  }
+}

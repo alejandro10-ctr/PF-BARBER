@@ -1,20 +1,25 @@
-import {useReducer} from 'react'
-import { TYPES } from '../../redux/actions';
+//import {useReducer} from 'react'
+//import { TYPES } from '../../redux/actions';
 // import { initialState, reducer } from '../../redux/reducer';
+import {useSelector} from "react-redux"
 import CartItem from './CartItem';
 import ProductItem from './ProductsItem';
 import './ShoppingCart.css'
+import { addToCart, delFromCart, clearCart } from '../../redux/actions';
 
 const ShoppingCart = () => {
+
+    const products = useSelector((state)=> state.products)
+    const cart = useSelector((state)=> state.cart)
 //    const [state, dispatch] = useReducer(
 //     initialState, 
 //     reducer
 //     );
-    const [state, dispatch] = useReducer();
+   // const [state, dispatch] = useReducer();
    
    
-    const {products, cart, localStorage} = state;
-
+   // const {products, cart, localStorage} = state;
+/* 
     const addToCart = (id) => {
        // console.log(id)
         dispatch({type: TYPES.ADD_TO_CART, payload:id})
@@ -34,7 +39,7 @@ const ShoppingCart = () => {
     const clearCart = () => {
         dispatch({type: TYPES.CLEAR_CART});
         cleanLs();
-    };
+    }; */
 
 
     //******* LOCAL STORAGE ******/

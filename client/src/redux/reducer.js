@@ -13,10 +13,15 @@ import {
   SEARCH_PRODUCTS,
   PRICE_LOWER,
   PRICE_HIGH,
-  TYPES,
-  SORT_SCORE,
+  //SORT_SCORE,
   FILTER_QUALITY,
-  FILTER_SHOP
+  FILTER_SHOP,
+  //TYPES,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  CLEAR_CART
+
 } from "./actions";
 
 const initialState = {
@@ -107,7 +112,7 @@ export default function reducer(state = initialState, { type, payload }) {
 
       }
 
-    case TYPES.ADD_TO_CART: {
+    case ADD_TO_CART: {
       let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
       // console.log(newItem)
       let itemInCart = state.cart.find(item => item.id === newItem.id)
@@ -126,7 +131,7 @@ export default function reducer(state = initialState, { type, payload }) {
         }
 
     }
-    case TYPES.REMOVE_ONE_FROM_CART: {
+    case REMOVE_ONE_FROM_CART: {
       let itemToDelete = state.cart.find(item => item.id === payload);
 
       return itemToDelete.quantity > 1 ? {
@@ -139,13 +144,13 @@ export default function reducer(state = initialState, { type, payload }) {
           cart: state.cart.filter(item => item.id !== payload)
         };
     }
-    case TYPES.REMOVE_ALL_FROM_CART: {
+    case REMOVE_ALL_FROM_CART: {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== payload),
       }
     }
-    case TYPES.CLEAR_CART:
+    case CLEAR_CART:
       return 'shoppingInitialState';
 
     // case FILTER_QUALITY:    
