@@ -13,7 +13,15 @@ module.exports = (sequelize) => {
         validate: {
             isDate: true,
         }
-    }
+    },
+    shipping: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    total: {
+        type: DataTypes.INTEGER,
+        allowNull:false
+    },
   }, {
     timestamp: false,
     createdAt: false,
