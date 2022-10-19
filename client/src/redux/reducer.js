@@ -30,7 +30,18 @@ const initialState = {
   users: [],
   detail: [],
   allProducts: [],
-  cart: [],
+  cart: [
+    {
+      id: 1,
+      quantity: 2,
+      iva: 20,
+      description: "",
+      state: 2,
+      descriptionState: "",
+      productId: 1,
+      saleId: null,
+    }
+  ],
   localStorage: [],
   filterstate: [],
   error: '',
@@ -123,7 +134,7 @@ export default function reducer(state = initialState, { type, payload }) {
           ...item,
           quantity: item.quantity + 1
         } : item),
-      
+
       }
         :
         {
@@ -163,11 +174,11 @@ export default function reducer(state = initialState, { type, payload }) {
     // };
     case FILTER_QUALITY:
       const all = state.allProducts;
-      const filter = payload === 'default' ? all: all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+      const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
       return {
         ...state,
-      products: filter,
-      filterstate: filter
+        products: filter,
+        filterstate: filter
       };
     case FILTER_SHOP:
       const allAccesory = state.filterstate;
@@ -181,31 +192,31 @@ export default function reducer(state = initialState, { type, payload }) {
       };
 
 
-      // case FILTER_SHOP:
-      //   const allAccesory = state.products;
-        
-      //   if (allAccesory) {
-  
-      //     const logicFilter = payload === 'all' ? allAccesory
-      //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
-      //     return {
-      //       ...state,
-      //       allProducts: logicFilter
-      //     };
-      //   } else if (!allAccesory) {
-      //     const logicFilter = payload === 'all' ? allAccesory
-      //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
-      //     return {
-      //       ...state,
-      //       filterstate: logicFilter
-      //     };
-      //   }
-      //-------------error
-      case "FAILURE":
-        return{
-          ...state,
-          error: payload
-        }
+    // case FILTER_SHOP:
+    //   const allAccesory = state.products;
+
+    //   if (allAccesory) {
+
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       allProducts: logicFilter
+    //     };
+    //   } else if (!allAccesory) {
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       filterstate: logicFilter
+    //     };
+    //   }
+    //-------------error
+    case "FAILURE":
+      return {
+        ...state,
+        error: payload
+      }
 
     default:
       return state;
