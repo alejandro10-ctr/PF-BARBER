@@ -49,6 +49,16 @@
   padding: 10px;
 }
 
+.divStyle {
+  border: 3px solid black;
+  margin-top: 1rem;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  border-radius: 20px;
+  background-color: cornsilk;
+}
+
 .productPrice {
   font-weight: 800;
   font-family: "Open Sans", sans-serif;
