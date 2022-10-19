@@ -1,10 +1,11 @@
-const {Router} = require('express')
-const {User} = require('../db.js')
-const {singUp, singIn} = require('../middlewares/auth')
+const { Router } = require("express");
+const { User } = require("../db.js");
+const authController = require("../middlewares/auth");
 
 const router = Router();
 
-router.post('/register', singUp)
-router.post('/login', singIn)
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.get("/logout", authController.logout);
 
 module.exports = router;

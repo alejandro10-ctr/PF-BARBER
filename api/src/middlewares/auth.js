@@ -1,75 +1,130 @@
-const { User } = require("../db.js");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authConfig = require("../../configs/auth");
+const bcryptjs = require("bcryptjs");
+const { User } = require("../db");
+const { promisify } = require("util");
+const Swal = require("sweetalert2");
 
-const singIn = (req, res) => {
-  let { email, password } = req.body;
-  User.findOne({
-    where: {
-      email: email,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).json({ msg: "User doesnt exists" });
-      } else {
-        if (bcrypt.compareSync(password, user.password)) {
-          let token = jwt.sign({ user: user }, authConfig.secret, {
-            expiresIn: authConfig.expires,
-          });
-
-          res.json({
-            user: user,
-            token: token,
-          });
-        } else {
-          res.status(401).send({ msg: "contraseña incorrecta" });
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const singUp = async (req, res) => {
-  //encriptamos la password
-  // if(req.body.password > 6) {
-  //  let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
-  // }else {
-  //     return res.status(404).send('la pass debe tener minimo 6 caracteres')
-  // }
-  let password = bcrypt.hashSync(
-    req.body.password,
-    Number.parseInt(authConfig.rounds)
-  );
-
-  // crea un usuario
+//procedimiento para registrarnos
+exports.register = async (req, res) => {
   try {
+    let passHash = await bcryptjs.hash(req.body.password, 8);
+
     const userCreated = await User.create({
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: password,
+      password: passHash,
       phone: req.body.phone,
       birthday: req.body.birthday,
     });
 
-    let token = jwt.sign({ user: userCreated }, authConfig.secret, {
-      expiresIn: authConfig.expires,
-    });
+    if (userCreated) {
+      res.redirect("/login");
+    }
 
-    res.json({
-      user: userCreated,
-      token: token,
-    });
+    //   console.log(passHash);
+    // conexion.query(
+    //   "INSERT INTO USERS SET ?",
+    //   {
+    //     name: name,
+    //     pass: passHash,
+    //     user: user,
+    //   },
+    //   (error, results) => {
+    //     if (error) {
+    //       console.log(error);
+    //     }
+    //     res.redirect("/login");
+    //   }
+    // );
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = {
-  singUp,
-  singIn,
+// exports.login = (req, res) => {
+//   res.send("holi");
+// };
+
+exports.login = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const userFinded = await User.findOne({
+      email,
+    });
+
+    if (!userFinded) {
+      return res.status(403);
+    } else {
+      if (
+        userFinded.length === 0 ||
+        !(await bcryptjs.compare(password, userFinded.password))
+      ) {
+        res.render("login", {
+          alert: true,
+          alertTitle: "Error",
+          alertMessage: "Usuario y/o Password incorrectas",
+          alertIcon: "error",
+          showConfirmButton: true,
+          timer: false,
+          ruta: "login",
+        });
+      } else {
+        const id = userFinded.id;
+        const token = jwt.sign({ id: id }, "secretKey");
+        console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
+        const cookiesOptions = {
+          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+          httpOnly: true,
+        };
+        res.cookie("jwt", token, cookiesOptions);
+        res.render("login", {
+          alert: true,
+          alertTitle: "Conexión exitosa",
+          alertMessage: "¡LOGIN CORRECTO!",
+          alertIcon: "success",
+          showConfirmButton: false,
+          timer: 800,
+          ruta: "",
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.isAuthenticated = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    /* VERIFICA EL TOKEN DE LA COOKIE CON EL DEL USUARIO DE LA BASE DE DATOS*/
+    try {
+      const decodificada = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        "secretKey"
+      );
+      const compareUser = await User.findAll({
+        where: {
+          id: [decodificada.id],
+        },
+      });
+      if (!compareUser) {
+        return next();
+      }
+      req.user = compareUser[0];
+      next();
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  } else {
+    res.redirect("/login");
+    next();
+  }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie("jwt");
+  return res.redirect("/");
 };
