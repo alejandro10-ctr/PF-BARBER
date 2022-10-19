@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 import React, { useState } from "react";
 import s from './Ecommerce.module.css'
-
+import { addToCart } from "../../redux/actions";
 import Paginado from "../Paginado/Paginado.jsx";
 import {
   getProducts,
@@ -187,8 +187,8 @@ console.log(products)
             sliceProduct.length > 0 ?
               sliceProduct.map((e) => {
                 return (
-
                   <div className={s.products} key={e.id}>
+                    <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link>
                       <h2 className={s.productInfo}>{e.name}</h2>
                     <img className={s.img} src={e.image} alt="img" ></img>
                       <h3 className={s.productQuality}>{e.quality.toUpperCase()}</h3>
@@ -205,6 +205,7 @@ console.log(products)
               allProducts.map((e) => {
                 return (
                   <div className={s.products} key={e.id}>
+                    <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link>
                     <img className={s.img} src={e.image} alt="img"></img>
                     <div className={s.productInfo}>
                       <h2 className={s.productInfo}>{e.name}</h2>

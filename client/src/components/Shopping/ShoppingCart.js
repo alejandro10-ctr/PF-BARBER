@@ -3,7 +3,7 @@
 // import { initialState, reducer } from '../../redux/reducer';
 import {useSelector} from "react-redux"
 import CartItem from './CartItem';
-import ProductItem from './ProductsItem';
+//import ProductItem from './ProductsItem';
 import './ShoppingCart.css'
 import { addToCart, delFromCart, clearCart } from '../../redux/actions';
 import DetailProduct from "../DetailProducts/DetailProducts";
@@ -13,6 +13,7 @@ const ShoppingCart = () => {
     const products = useSelector((state)=> state.products)
     const cart = useSelector((state)=> state.cart)
     const localStorage = useSelector((state)=> state.localStorage)
+    const detail = useSelector((state) => state.detail)
 //    const [state, dispatch] = useReducer(
 //     initialState, 
 //     reducer
@@ -97,14 +98,14 @@ return (
         <h3>Products</h3>
         <article className="box grid-responsive">
         {
-            products.map((products)=> <DetailProduct key={products.id} data={products} addToCart={addToCart} />)
+           /*  products && products?.map((products)=> */ <CartItem key={ products.id}  data={products}  addToCart={addToCart} />/*  ) */
         }    
         </article>
         <h3>Buy!!</h3>
         <article className='box'>
             <button onClick={clearCart}>Clean🛒</button>
             {
-                cart.map((item, index)=> <CartItem key={index} data={item} delFromCart={delFromCart}/>)
+             cart && cart?.map((item, index)=> <CartItem key={index} data={item} delFromCart={delFromCart}/>)
             }
         </article>
     </div>

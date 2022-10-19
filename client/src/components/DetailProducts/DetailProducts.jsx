@@ -23,8 +23,8 @@ function DetailProduct({ match }) {
 
   console.log(id) //entra 
 
-  const filter = allProducts.filter(f => f.description)
-  console.log(filter)
+  //const filter = allProducts.filter(f => f.description)
+ // console.log(filter)
 
   useEffect(() => {
     dispatch(getProductsDetail(id))// accedo al id del detalle
@@ -35,7 +35,7 @@ function DetailProduct({ match }) {
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
-      <Link to="/yourCart/:id" onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
+      <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
       <hr />
       <Link to="/shop"> Volver atras </Link>
 
