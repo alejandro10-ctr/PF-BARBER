@@ -8,6 +8,7 @@ import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
 import "./App.css";
+import CartItem from "./components/Shopping/CartItem";
 //holi
 
 function App() {
@@ -28,6 +29,11 @@ function App() {
           return <DetailProduct match={match} />
         }}>
 
+      </Route>
+      <Route exact path="/yourCart/:id"
+        render={({match}) => {
+          return <ShoppingCart match={match} />
+        }}>
       </Route>
     </div>
   );

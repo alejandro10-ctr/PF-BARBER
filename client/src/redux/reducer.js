@@ -122,7 +122,8 @@ export default function reducer(state = initialState, { type, payload }) {
         cart: state.cart.map(item => item.id === newItem.id ? {
           ...item,
           quantity: item.quantity + 1
-        } : item)
+        } : item),
+      
       }
         :
         {

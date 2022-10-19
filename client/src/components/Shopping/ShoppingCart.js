@@ -6,11 +6,13 @@ import CartItem from './CartItem';
 import ProductItem from './ProductsItem';
 import './ShoppingCart.css'
 import { addToCart, delFromCart, clearCart } from '../../redux/actions';
+import DetailProduct from "../DetailProducts/DetailProducts";
 
 const ShoppingCart = () => {
 
     const products = useSelector((state)=> state.products)
     const cart = useSelector((state)=> state.cart)
+    const localStorage = useSelector((state)=> state.localStorage)
 //    const [state, dispatch] = useReducer(
 //     initialState, 
 //     reducer
@@ -79,7 +81,7 @@ const ShoppingCart = () => {
         const cardLs= productsLs.forEach((product)=> {
           return(
             <div>
-                <img>{product.image}</img>
+                <img alt="not found">{product.image}</img>
                 <h3>{product.name}</h3>
                 <h4>${product.price}</h4>
             </div>
@@ -95,7 +97,7 @@ return (
         <h3>Products</h3>
         <article className="box grid-responsive">
         {
-            products.map((products)=> <ProductItem key={products.id} data={products} addToCart={addToCart} />)
+            products.map((products)=> <DetailProduct key={products.id} data={products} addToCart={addToCart} />)
         }    
         </article>
         <h3>Buy!!</h3>

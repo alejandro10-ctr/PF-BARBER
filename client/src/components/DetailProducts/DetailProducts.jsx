@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail } from "../../redux/actions";
+import { getProductsDetail, addToCart } from "../../redux/actions";
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
@@ -35,7 +35,7 @@ function DetailProduct({ match }) {
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
-      <Link to="/MercadoPago">Want to Buy🛒</Link>
+      <Link to="/yourCart/:id" onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
       <hr />
       <Link to="/shop"> Volver atras </Link>
 
@@ -46,6 +46,7 @@ function DetailProduct({ match }) {
         <img src={detailOfProducts.image} alt={detailOfProducts.image} />
         <h3>Price: ${detailOfProducts.price}</h3>
         <h3>{detailOfProducts.quality}</h3>
+        
 
       </div>
 
