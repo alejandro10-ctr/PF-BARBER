@@ -123,7 +123,7 @@ exports.isAuthenticated = async (req, res, next) => {
     next();
   }
 };
-
+//asdasdas
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/");
