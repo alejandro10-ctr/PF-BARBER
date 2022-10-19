@@ -98,7 +98,7 @@ exports.login = async (req, res) => {
 
 exports.isAuthenticated = async (req, res, next) => {
   if (req.cookies.jwt) {
-    /* VERIFICA EL TOKEN DE LA COOKIE CON EL DEL USUARIO DE LA BASE DE DATOS*/
+    /* VERIFICA EL TOKEN DE LA COOKIE CON EL DEL USUARIO DE LA BASE DE DATOS**/
     try {
       const decodificada = await promisify(jwt.verify)(
         req.cookies.jwt,
