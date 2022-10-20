@@ -3,19 +3,37 @@ const axios = require("axios");
 class PaymentService {
   async createPayment() {
     const url = "https://api.mercadopago.com/checkout/preferences";
-
+    const products = [
+      {
+        title: "Afeitadora",
+        description: "Esta es una afeitadora premium",
+        picture_url: "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
+        category_id: "Premium",
+        quantity: 1,
+        unit_price: 101
+      },
+      {
+        title: "Crema para el pelo",
+        description: "Esta es una Crema para el pelo basic",
+        picture_url: "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
+        category_id: "Basic",
+        quantity: 1,
+        unit_price: 101
+      },
+      {
+        title: "Crema para la barba",
+        description: "Esta es una Crema para la barba premium",
+        picture_url: "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
+        category_id: "Premium",
+        quantity: 1,
+        unit_price: 103
+      }
+    ]
     const body = {
-      payer_email: "TETE5428764",
-      items: [
-        {
-          title: "Afeitadora",
-          description: "Esta es una afeitadora premium",
-          picture_url: "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
-          category_id: "Premium",
-          quantity: 1,
-          unit_price: 5400
-        }
-      ],
+      payer_email: "",
+
+      items : products,
+
       back_urls: {
         failure: "http://localhost:3000/shop",
         pending: "http://localhost:3001/pending",
