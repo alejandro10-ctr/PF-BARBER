@@ -10,13 +10,24 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true
       },
+    user: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isAlpha: {
+            msg: "The user must not contain spaces"
+        },
+        len: {
+            args: [2,255],
+            msg: "The user must only contain at least two letters"
+        }
+      }
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: {
-            msg: "The name must contain only letters"
-        },
         len: {
             args: [2,255],
             msg: "The name must only contain at least two letters"

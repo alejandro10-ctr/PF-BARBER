@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
             isDate: true,
         }
     },
+    state: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
     shipping: {
         type: DataTypes.INTEGER,
         allowNull: false
