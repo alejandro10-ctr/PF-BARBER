@@ -42,13 +42,14 @@ exports.login = async (req, res) => {
           email,
         },
       });
-      console.log("USUARIO ENCONTRADO:", userFinded.id);
+      console.log("USUARIO ENCONTRADO:", userFinded);
       if (
         !userFinded ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
         res.status(404).send("Email o contraseña incorrecta");
       } else {
+        console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
         const token = jwt.sign({ id: id }, "secretKey");
         console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
