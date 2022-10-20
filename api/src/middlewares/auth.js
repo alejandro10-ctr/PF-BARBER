@@ -3,75 +3,53 @@ const bcryptjs = require("bcryptjs");
 const { User } = require("../db");
 const { promisify } = require("util");
 const Swal = require("sweetalert2");
+const { getDBUsers } = require("../middlewares/getAllUsers");
 
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
   try {
     let passHash = await bcryptjs.hash(req.body.password, 8);
 
-    const userCreated = await User.create({
+    await User.create({
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
       password: passHash,
       phone: req.body.phone,
-      birthday: req.body.birthday,
+    }).then((user) => {
+      console.log(user);
+      if (!user) {
+        return res.status(404);
+      } else {
+        res.send("Cuenta registrada con exito");
+        // res.redirect("/");
+      }
     });
-
-    if (userCreated) {
-      res.redirect("/login");
-    }
-
-    //   console.log(passHash);
-    // conexion.query(
-    //   "INSERT INTO USERS SET ?",
-    //   {
-    //     name: name,
-    //     pass: passHash,
-    //     user: user,
-    //   },
-    //   (error, results) => {
-    //     if (error) {
-    //       console.log(error);
-    //     }
-    //     res.redirect("/login");
-    //   }
-    // );
   } catch (error) {
     console.log(error);
+    res.status(404);
   }
 };
 
-// exports.login = (req, res) => {
-//   res.send("holi");
-// };
-
 exports.login = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    const userFinded = await User.findOne({
-      email,
-    });
-
-    if (!userFinded) {
-      return res.status(403);
+    if (!email || !password) {
+      return res.status(404).send("debes ingresar algo");
     } else {
+      const userFinded = await User.findOne({
+        where: {
+          email,
+        },
+      });
+      console.log("USUARIO ENCONTRADO:", userFinded);
       if (
-        userFinded.length === 0 ||
+        !userFinded ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
-        res.render("login", {
-          alert: true,
-          alertTitle: "Error",
-          alertMessage: "Usuario y/o Password incorrectas",
-          alertIcon: "error",
-          showConfirmButton: true,
-          timer: false,
-          ruta: "login",
-        });
+        res.status(404).send("Email o contraseña incorrecta");
       } else {
+        console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
         const token = jwt.sign({ id: id }, "secretKey");
         console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
@@ -80,15 +58,7 @@ exports.login = async (req, res) => {
           httpOnly: true,
         };
         res.cookie("jwt", token, cookiesOptions);
-        res.render("login", {
-          alert: true,
-          alertTitle: "Conexión exitosa",
-          alertMessage: "¡LOGIN CORRECTO!",
-          alertIcon: "success",
-          showConfirmButton: false,
-          timer: 800,
-          ruta: "",
-        });
+        res.send("Usuario logeado");
       }
     }
   } catch (error) {
@@ -104,6 +74,7 @@ exports.isAuthenticated = async (req, res, next) => {
         req.cookies.jwt,
         "secretKey"
       );
+      console.log(decodificada);
       const compareUser = await User.findAll({
         where: {
           id: [decodificada.id],
