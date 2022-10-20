@@ -76,6 +76,9 @@ Sale.belongsTo(User);
 Sale.hasOne(Addresssale)
 Addresssale.belongsTo(Sale)
 
+User.hasMany(Detailsale);
+Detailsale.belongsTo(User);
+
 Sale.hasMany(Detailsale)
 Detailsale.belongsTo(Sale)
 

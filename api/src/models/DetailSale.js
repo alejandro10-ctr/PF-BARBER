@@ -4,17 +4,32 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("detailsale", {
-    cantidad: {
+    quantity: {
       type: DataTypes.INTEGER,
-      valueDefault: 1
+      defaultValue: 1,
+      validate: {
+        min:1
+      }
     },
     iva: {
       type: DataTypes.INTEGER,
-      valueDefault: 0
+      defaultValue: 0
     },
     description: {
       type: DataTypes.STRING(50),
-      valueDefault: ""
+      defaultValue: ""
+    },
+    state: {
+      type: DataTypes.INTEGER,
+      defaultValue: 2,
+      validate: {
+        min: 0,
+        max: 2
+      }
+    },
+    descriptionState: {
+      type: DataTypes.STRING(50),
+      defaultValue: ""
     },
   }, {
     timestamp: false,
