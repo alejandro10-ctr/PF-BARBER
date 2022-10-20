@@ -30,18 +30,7 @@ const initialState = {
   users: [],
   detail: [],
   allProducts: [],
-  cart: [
-    {
-      id: 1,
-      quantity: 2,
-      iva: 20,
-      description: "",
-      state: 2,
-      descriptionState: "",
-      productId: 1,
-      saleId: null,
-    }
-  ],
+  cart: [],
   localStorage: [],
   filterstate: [],
   error: '',
@@ -126,11 +115,11 @@ export default function reducer(state = initialState, { type, payload }) {
     case ADD_TO_CART: {
       let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
       // console.log(newItem)
-      let itemInCart = state.cart.find(item => item.id === newItem.id)
-
+      let itemInCart = state.cart.find(item => item.product.id === payload)
+      // console.log(itemInCart)
       return itemInCart ? {
         ...state,
-        cart: state.cart.map(item => item.id === newItem.id ? {
+        cart: state.cart.map(item => item.product.id === payload ? {
           ...item,
           quantity: item.quantity + 1
         } : item),
@@ -139,9 +128,20 @@ export default function reducer(state = initialState, { type, payload }) {
         :
         {
           ...state,
-          cart: [...state.cart, { ...newItem, quantity: 1 }],
+          cart: [...state.cart,
+            {
+              id: state.cart.length,
+              quantity: 1,
+              iva: 0,
+              description: "",
+              state: 2,
+              descriptionState: "",
+              productId: payload,
+              saleId: null,
+              userId: null,
+              product: newItem
+            }],
         }
-
     }
     case REMOVE_ONE_FROM_CART: {
       let itemToDelete = state.cart.find(item => item.id === payload);
