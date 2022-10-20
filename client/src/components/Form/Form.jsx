@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'fornik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import axios from 'axios'
 
 
 
-export default function Form() {
+export default function Formu() {
     const [sendForm, setSendForm] = useState(false);
     return (
         <>
@@ -17,48 +18,49 @@ export default function Form() {
                     phone: '', // quizas un array??? ver
                 }}
 
-                validate={(valuesForm) => {
-                    let errorsCheck = {}
+                // validate={(valuesForm) => {
+                //     let errorsCheck = {}
 
-                    //validate name:
-                    if (!valuesForm.name) {
-                        errorsCheck.name = 'Pls Write Your Name...'
-                    } else if (/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valuesForm.name)) {
-                        errorsCheck.name = 'We need your name without numbers... '
-                    }
-                    //validate lastname
-                    if (!valuesForm.lastname) {
-                        errorsCheck.lastname = 'Pls Write Your Lastname...'
-                    } else if (/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valuesForm.lastname)) {
-                        errorsCheck.lastname = 'Write your lastname without numbers... '
-                    }
+                //     //validate name:
+                //     if (!valuesForm.name) {
+                //         errorsCheck.name = 'Pls Write Your Name...'
+                //     } else if (/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valuesForm.name)) {
+                //         errorsCheck.name = 'We need your name without numbers... '
+                //     }
+                //     //validate lastname
+                //     if (!valuesForm.lastname) {
+                //         errorsCheck.lastname = 'Pls Write Your Lastname...'
+                //     } else if (/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valuesForm.lastname)) {
+                //         errorsCheck.lastname = 'Write your lastname without numbers... 
+                //     }
 
-                    //validate email:
-                    if (!valuesForm.email) {
-                        errorsCheck.email = 'A email is required...'
-                    } else if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valuesForm.email)) {
-                        errorsCheck.email = 'We need a email... '
-                    }
-                    //validate password
-                    if (!valuesForm.password) {
-                        errorsCheck.password = 'Your password is required...'
-                    } else if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/.test(valuesForm.password)) {
-                        errorsCheck.password = 'Minimum six characters & maximum 16 characters. At least one special character, At least one number & Special characters are optional... '
-                    }
-                    //validate phone
-                    if (!valuesForm.phone) {
-                        errorsCheck.phone = 'Your phone number is required...'
-                    } else if (/^((+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/.test(valuesForm.phone)) {
-                        errorsCheck.phone = 'Type your phone with the code area...'
-                    }
-                    return errorsCheck
-                }}
+                //     //validate email:
+                //     if (!valuesForm.email) {
+                //         errorsCheck.email = 'A email is required...'
+                //     } else if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valuesForm.email)) {
+                //         errorsCheck.email = 'We need a email... '
+                //     }
+                //     //validate password
+                //     if (!valuesForm.password) {
+                //         errorsCheck.password = 'Your password is required...'
+                //     } else if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/.test(valuesForm.password)) {
+                //         errorsCheck.password = 'Minimum six characters & maximum 16 characters. At least one special character, At least one number & Special characters are optional... '
+                //     }
+                //     //validate phone
+                //     if (!valuesForm.phone) {
+                //         errorsCheck.phone = 'Your phone number is required...'
+                //     } else if (/^((+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/.test(valuesForm.phone)) {
+                //         errorsCheck.phone = 'Type your phone with the code area...'
+                //     }
+                //     return errorsCheck
+                // }}
                 //funcion que se ejecuta en el submit cuando enviamos el form
                 onSubmit={(valuesForm, { resetForm }) => {
                     resetForm(); // limpio form
                     setSendForm(true);
                     setTimeout(() => setSendForm(false), 5000);
                     // alert('Formulario enviado');
+                    axios.post('http://localhost:3001/auth/register', valuesForm)
                     console.log(valuesForm);
                 }}
             >
@@ -119,7 +121,7 @@ export default function Form() {
                         <div>
                             <label htmlFor="phone">Phone</label>
                             <Field
-                                type="number"
+                                type="text"
                                 id='phone'
                                 name='phone'
                                 placeholder='543413307791....'
@@ -134,11 +136,11 @@ export default function Form() {
                         </div>
 
                         {/*genre*/}
-                        <div>
+                        {/* <div>
                             <label><Field type='radio' name='genre' value='man' />Men</label>
                             <label><Field type='radio' name='genre' value='woman' />Woman</label>
                             <label><Field type='radio' name='genre' value='binarie' />Non-binary</label>
-                        </div>
+                        </div> */}
 
                         {/*password*/}
                         <div>

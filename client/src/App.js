@@ -6,6 +6,7 @@ import Home from "./components/Home/Home.jsx";
 import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
+import Formu from "./components/Form/Form.jsx";
 
 import "./App.css";
 //holi
@@ -22,13 +23,17 @@ function App() {
       <Route exact path="/aboutus">
         <AboutUs />
       </Route>
-
-      <Route exact path="/product/:id"
-        render={({match}) => {
-          return <DetailProduct match={match} />
-        }}>
-
+      <Route exact path="/register">
+        <Formu />
       </Route>
+
+      <Route
+        exact
+        path="/product/:id"
+        render={({ match }) => {
+          return <DetailProduct match={match} />;
+        }}
+      ></Route>
     </div>
   );
 }
