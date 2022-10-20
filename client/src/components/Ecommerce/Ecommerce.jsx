@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import { addToCart } from "../../redux/actions";
 import Paginado from "../Paginado/Paginado.jsx";
+import ProductItem from "../Shopping/ProductsItem";
 import {
   getProducts,
   createProducts,
@@ -19,10 +20,11 @@ import {
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
+import { CartContext } from "../Shopping/ShoppingCart";
 
 const Productos = ({ products, getProducts, allProducts, filterstate }) => {
   const dispatch = useDispatch();
-
+  const {addItemToCart, deleteItemToCart} = useContext(CartContext) 
   const [state, setState] = useState(true)
   useEffect(() => {
     if (state) {
@@ -188,7 +190,17 @@ console.log(products)
               sliceProduct.map((e) => {
                 return (
                   <div className={s.products} key={e.id}>
-                    <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link>
+                      <button onClick={() => addItemToCart(e) }> +🛒 </button>
+                      <button onClick={() => deleteItemToCart(e) }> -🛒 </button>
+                {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
+               {/*  <label>🛒</label>
+                  {
+                    <ProductItem
+                    id={e.id}
+                    stock={e.stock}
+                    quantity={e.quantity}
+                    />
+                  } */}
                       <h2 className={s.productInfo}>{e.name}</h2>
                     <img className={s.img} src={e.image} alt="img" ></img>
                       <h3 className={s.productQuality}>{e.quality.toUpperCase()}</h3>
@@ -205,7 +217,15 @@ console.log(products)
               allProducts.map((e) => {
                 return (
                   <div className={s.products} key={e.id}>
-                    <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link>
+                  {/*   <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
+                  <button onClick={() => addItemToCart(e) }>🛒</button>
+                 {/*  {
+                    <ProductItem
+                    id={e.id}
+                    stock={e.stock}
+                     quantity={e.quantity} 
+                    />
+                  } */}
                     <img className={s.img} src={e.image} alt="img"></img>
                     <div className={s.productInfo}>
                       <h2 className={s.productInfo}>{e.name}</h2>

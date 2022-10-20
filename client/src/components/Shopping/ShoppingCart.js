@@ -1,116 +1,85 @@
-//import {useReducer} from 'react'
-//import { TYPES } from '../../redux/actions';
-// import { initialState, reducer } from '../../redux/reducer';
-import {useSelector} from "react-redux"
-import CartItem from './CartItem';
-//import ProductItem from './ProductsItem';
+import { createContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import './ShoppingCart.css'
-import { addToCart, delFromCart, clearCart } from '../../redux/actions';
-import DetailProduct from "../DetailProducts/DetailProducts";
 
-const ShoppingCart = () => {
 
-    const products = useSelector((state)=> state.products)
-    const cart = useSelector((state)=> state.cart)
-    const localStorage = useSelector((state)=> state.localStorage)
-    const detail = useSelector((state) => state.detail)
-//    const [state, dispatch] = useReducer(
-//     initialState, 
-//     reducer
-//     );
-   // const [state, dispatch] = useReducer();
-   
-   
-   // const {products, cart, localStorage} = state;
-/* 
-    const addToCart = (id) => {
-       // console.log(id)
-        dispatch({type: TYPES.ADD_TO_CART, payload:id})
-        addToLocalStorage(id)
-    };
 
-    const delFromCart = (id, all=false) => {
-       // console.log(id, all);
-        if(all===true){
-            dispatch({type: TYPES.REMOVE_ALL_FROM_CART, payload:id});
-        }else{
-            dispatch({type: TYPES.REMOVE_ONE_FROM_CART, payload:id});
+export const CartContext = createContext();
+
+
+export const CartProvider = ({ children }) => {
+    const [cartItems, setCartItems] = useState(()=> {
+        try {
+            const productosenLocalStorage = localStorage.getItem("prducts");
+            return productosenLocalStorage ? JSON.parse(productosenLocalStorage) : [];
+        }catch(error){
+            return []
         }
-        deleteProductLs(id);
-    };
+    });
 
-    const clearCart = () => {
-        dispatch({type: TYPES.CLEAR_CART});
-        cleanLs();
-    }; */
+    useEffect(() => {
+        localStorage.setItem("products", JSON.stringify(cartItems));
+        console.log(cartItems)
+    }, [cartItems]);
 
 
-    //******* LOCAL STORAGE ******/
+    const addItemToCart = (product) => {
+        const inCart = cartItems.find(
+            (productInCart) => productInCart.id === product.id
+        );
 
-    function addToLocalStorage(product){
-     let productos = getProductsLs();
-     productos.push(product);
-     localStorage.setItem('products',  JSON.stringify(productos))  // => 'products' o 'productos' ?
-    };
-
-    function getProductsLs(){
-        if(localStorage.getItem('products') === null){
-            localStorage = []   // let productsLs = []
-        }else{
-            localStorage = JSON.parse(localStorage.getItem('products'))
+        if(inCart){
+            setCartItems(
+                cartItems.map((productInCart) => {
+                    if(productInCart.id === product.id) {
+                        return { ...inCart, quantity: inCart.quantity + 1 }
+                    }else return productInCart;
+                })
+            );
+        }else {
+            setCartItems([...cartItems, {...product, quantity: 1}])
         }
-        return localStorage;  // return productsLs;
-    };
-
-    function deleteProductLs (id){
-      let productsLs = getProductsLs();
-      productsLs.forEach((productsLs, index)=> {
-        if(productsLs.id === id){
-            productsLs.splice(index, 1)
-        }
-      });
-      localStorage.getItem('products', JSON.stringify(productsLs))
-    };
-
-    function cleanLs (){
-      localStorage.clear();   
     }
 
-
-    function readLocalStorage(){
-        let productsLs = getProductsLs();
-        const cardLs= productsLs.forEach((product)=> {
-          return(
-            <div>
-                <img alt="not found">{product.image}</img>
-                <h3>{product.name}</h3>
-                <h4>${product.price}</h4>
-            </div>
-          )
-        })
-        return cardLs
-    }
-
-
-return (
-    <div>
-        <h2>Barber Shop🛒</h2>
-        <h3>Products</h3>
-        <article className="box grid-responsive">
-        {
-           /*  products && products?.map((products)=> */ <CartItem key={ products.id}  data={products}  addToCart={addToCart} />/*  ) */
-        }    
-        </article>
-        <h3>Buy!!</h3>
-        <article className='box'>
-            <button onClick={clearCart}>Clean🛒</button>
-            {
-             cart && cart?.map((item, index)=> <CartItem key={index} data={item} delFromCart={delFromCart}/>)
-            }
-        </article>
-    </div>
- )
-}
+    
+       const deleteItemToCart = (product) => {
+        const inCart = cartItems.find(
+            (productInCart) => productInCart.id === product.id
+        ); 
+       
+        if(product.quantity === 1) {   // inCart.quantity
+            setCartItems(
+                cartItems.filter((productsInCart) => productsInCart.id !== product.id)
+            );
+        } else {
+            setCartItems(
+               cartItems.map((productsInCart) => {
+                if(productsInCart.id === product.id) {
+                    return { ...inCart, quantity: inCart.quantity > 0 ? inCart.quantity - 1 :  (inCart.quantity= 0) && Swal.fire({
+                        title: "Sorry...",
+                        text: "You can't buy less than 0",
+                        icon: "warning",
+                        button: "Accept"
+                    }) };
+                } else return productsInCart;
+            }));
+        }
+  
+    };
+    
+    
+    return (
+        <CartContext.Provider value= {{cartItems, addItemToCart, deleteItemToCart}}>
+            {children}
+        </CartContext.Provider>
+    )
 
 
-export default ShoppingCart;
+
+    };
+
+
+
+
+
+
