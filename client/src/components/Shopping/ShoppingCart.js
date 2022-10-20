@@ -10,7 +10,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState(()=> {
         try {
-            const productosenLocalStorage = localStorage.getItem("prducts");
+            const productosenLocalStorage = localStorage.getItem("products");
             return productosenLocalStorage ? JSON.parse(productosenLocalStorage) : [];
         }catch(error){
             return []
@@ -39,6 +39,18 @@ export const CartProvider = ({ children }) => {
         }else {
             setCartItems([...cartItems, {...product, quantity: 1}])
         }
+
+
+        if(cartItems && cartItems[0].stock <= cartItems[0].quantity){
+            Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "Not in stock"
+                 
+            })
+        }
+
+
     }
 
     
@@ -46,8 +58,9 @@ export const CartProvider = ({ children }) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.id === product.id
         ); 
+        console.log(inCart)
        
-        if(product.quantity === 1) {   // inCart.quantity
+        if(inCart && inCart?.quantity === 1) {   // inCart.quantity
             setCartItems(
                 cartItems.filter((productsInCart) => productsInCart.id !== product.id)
             );
@@ -55,17 +68,39 @@ export const CartProvider = ({ children }) => {
             setCartItems(
                cartItems.map((productsInCart) => {
                 if(productsInCart.id === product.id) {
-                    return { ...inCart, quantity: inCart.quantity > 0 ? inCart.quantity - 1 :  (inCart.quantity= 0) && Swal.fire({
-                        title: "Sorry...",
-                        text: "You can't buy less than 0",
-                        icon: "warning",
-                        button: "Accept"
-                    }) };
+                    return { ...inCart, quantity: inCart.quantity > 0 ? inCart.quantity - 1 :  (inCart.quantity= 0)  };
                 } else return productsInCart;
             }));
         }
   
+        if( cartItems.length === 0){
+            localStorage.clear()
+        }
+
+        if(inCart && inCart.quantity === 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Not negative numbers please"
+            })
+        }
+
     };
+    
+
+
+    console.log( localStorage  )
+
+
+
+
+    console.log("cart:",cartItems)
+
+
+
+    /* if(localStorage.getItem(el => JSON.stringify(el.quantity) === "0") ){
+        localStorage.removeItem()
+      } */
     
     
     return (
