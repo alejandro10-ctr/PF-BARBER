@@ -14,11 +14,11 @@ module.exports = (sequelize) => {
     },
     address: {
       type: DataTypes.STRING(50),
-      valueDefault: ""
+      defaultValue: ""
     },
     description: {
       type: DataTypes.STRING(50),
-      valueDefault: ""
+      defaultValue: ""
     },
   }, {
     timestamp: false,
