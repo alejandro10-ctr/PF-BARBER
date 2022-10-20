@@ -1,6 +1,5 @@
-const { QueryTypes, Sequelize } = require("sequelize");
+const { QueryTypes, Sequelize, Op } = require("sequelize");
 const { User, Detailsale, Product, Image, conn } = require("../db.js");
-const { Op } = require("sequelize");
 
 const getDBDetailSales = async (id) => {
     let detailSales = await Detailsale.findAll({
@@ -13,9 +12,6 @@ const getDBDetailSales = async (id) => {
             include: Image
         }
     });
-    // if (!detailSales.length) {
-    //     detailSales = await Detailsale.bulkCreate(OBJUsers, { validate: true });
-    // }
     return detailSales;
 };
 const dbCreateDetailSale = async (info, model) => {
@@ -35,7 +31,7 @@ const dbCreateDetailSale = async (info, model) => {
             model.addDetailsale(detailsale)
             return "detail sale created successfully"
         }
-        return "detail sale already exists"
+        throw new Error('detail sale already exists')
     } else {
         throw new Error('missing param')
     }
@@ -69,7 +65,6 @@ const dbDeleteDetailSale = async id => {
             saleId: null
         },
     });
-    console.log(response)
     return `detail sale id:${id} deleted successfully`
 
 }

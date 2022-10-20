@@ -9,12 +9,18 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     phoneUser: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+          is: {
+              args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+              msg: "Enter a valid phone"
+          }
+      },
     },
     address: {
       type: DataTypes.STRING(50),
-      defaultValue: ""
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING(50),

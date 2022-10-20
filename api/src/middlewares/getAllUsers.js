@@ -23,7 +23,8 @@ const getDBUsers = async () => {
 };
 const getDBUserByPk = async (id) => {
   const user = await User.findOne({
-    where: { id }
+    where: { id },
+    include: 'addresses'
   });
   if (!user) {
     throw new Error("user not found");

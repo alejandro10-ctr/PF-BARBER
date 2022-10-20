@@ -2,7 +2,8 @@ const { Router, json } = require('express');
 // import all routers;
 //--------------> Users
 const authController = require('../controllers/auth')
-const userController = require('../controllers/users');
+const userController = require('../controllers/users')
+const addressController = require('../controllers/addresses.js')
 //--------------> Sales
 const saleController = require('../controllers/sale')
 const detailSaleController = require('../controllers/DetatilSale')
@@ -20,6 +21,7 @@ router.use(json())
 
 router.use('/auth', authController)
 router.use('/users', userController);
+router.use('/addresses', addressController);
 
 router.use('/sales', saleController)
 router.use('/detailsales', detailSaleController);

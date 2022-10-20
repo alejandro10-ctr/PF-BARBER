@@ -19,8 +19,8 @@ module.exports = (sequelize) => {
             msg: "The user must not contain spaces"
         },
         len: {
-            args: [2,255],
-            msg: "The user must only contain at least two letters"
+            args: [6,255],
+            msg: "The user must only contain at least six letters"
         }
       }
     },
@@ -74,21 +74,12 @@ module.exports = (sequelize) => {
     phone: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: {
-            args: true,
-            msg: "This phone number is already register"
-        },
         validate: {
             is: {
                 args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
                 msg: "Enter a valid phone"
             }
         }
-    },
-    image: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-        defaultValue: "https://spng.pngfind.com/pngs/s/676-6764065_default-profile-picture-transparent-hd-png-download.png"
     },
     isAdmin: {
         type: DataTypes.BOOLEAN,

@@ -48,11 +48,13 @@ const singUp = async (req, res) => {
   // crea un usuario
   try {
     const userCreated = await User.create({
+      user: req.body.user,
+      password: password,
+      email: req.body.email,
       name: req.body.name,
       lastname: req.body.lastname,
-      email: req.body.email,
-      password: password,
       phone: req.body.phone,
+      genre: req.body.genre,
       birthday: req.body.birthday,
     });
 
