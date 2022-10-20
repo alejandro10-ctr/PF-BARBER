@@ -4,7 +4,7 @@ const { User } = require("../db");
 const { promisify } = require("util");
 const Swal = require("sweetalert2");
 const { getDBUsers } = require("../middlewares/getAllUsers");
-
+const { transporter } = require("../../configs/mailer");
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
   try {
@@ -21,6 +21,7 @@ exports.register = async (req, res) => {
       if (!user) {
         return res.status(404);
       } else {
+        sendEmail(req.body.email);
         res.send("Cuenta registrada con exito");
         // res.redirect("/");
       }
@@ -98,4 +99,15 @@ exports.isAuthenticated = async (req, res, next) => {
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/");
+};
+
+//
+const sendEmail = async (email) => {
+  await transporter.sendMail({
+    from: '"HENRY BARBER" <foo@example.com>', // sender address
+    to: email, // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
 };
