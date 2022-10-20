@@ -6,8 +6,8 @@ import Home from "./components/Home/Home.jsx";
 import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
-import Form from "./components/Form/Form.jsx";
-
+import Register from "./components/Register/Register.jsx";
+import FormUser from './components/LoginUser/LoginUser.jsx';
 import "./App.css";
 //holi
 
@@ -18,8 +18,13 @@ function App() {
         <Home />
       </Route>
       <Route exact path="/register">
-        <Form />
+        <Register />
       </Route>
+
+      <Route exact path="/login">
+        <Register />
+      </Route>
+
       <Route exact path="/shop">
         <Ecommerce />
       </Route>
