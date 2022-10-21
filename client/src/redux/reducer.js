@@ -16,7 +16,8 @@ import {
   TYPES,
   SORT_SCORE,
   FILTER_QUALITY,
-  FILTER_SHOP
+  FILTER_SHOP,
+  GET_PAYMENTS
 } from "./actions";
 
 const initialState = {
@@ -29,12 +30,15 @@ const initialState = {
   localStorage: [],
   filterstate: [],
   error: '',
+  payMercadoPago: {}
 };
 
 
 
 export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_PAYMENTS:
+      return{ ...state, payMercadoPago: {...payload}}
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:

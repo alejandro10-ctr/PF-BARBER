@@ -17,6 +17,7 @@ export const PRICE_HIGH = "PRICE_HIGH";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
+export const GET_PAYMENTS = "GET_PAYMENTS";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
@@ -231,5 +232,19 @@ export function filterShop(payload) {
 //   };
 // }
 
-//actions for delete & add ----> IMAGES
-// falta ruta delete y post de imagenes
+
+
+  
+
+  export function getPaymentLink() {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(`/payments/pay`); 
+        if (response?.data) {
+          dispatch({ type: GET_PAYMENTS, payload: response.data });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
