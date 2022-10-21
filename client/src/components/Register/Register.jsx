@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useFormik, yupToFormErrors } from 'formik';
 import { useHistory } from 'react-router-dom';
 import * as Yup from "yup"
+import styles from '../Register/Register.module.css';
 
 export default function Register() {
     const history = useHistory();
@@ -65,11 +66,12 @@ export default function Register() {
 console.log(formik)
     return (
         <>
+        <div className={styles.conteiner}>
             <h1>Create Account</h1>
             <form onSubmit={formik.handleSubmit}>
 
                 <div>
-                    <input id="user" name="user" type="text" placeholder='user'
+                    <input id="user" name="user" type="text" placeholder='Nickname'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.user}
@@ -98,7 +100,7 @@ console.log(formik)
                 </div>
 
                 <div>
-                    <input id="email" name="email" type="text" placeholder='brb@gmail.com'
+                    <input id="email" name="email" type="text" placeholder='jb@gmail.com'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.email} />
@@ -122,7 +124,7 @@ console.log(formik)
                     {formik.touched.phone && formik.errors.phone ? <p>{formik.errors.phone}</p> : null}
                 </div>
 
-                <div>
+                <div><br />
                 
 
 
@@ -142,12 +144,12 @@ console.log(formik)
                         onBlur={formik.handleBlur}
                         value={formik.values.genre} />
                     {formik.touched.genre && formik.errors.genre ? <p>{formik.errors.genre}</p> : null} */}
-                </div>
+                </div><br />
 
-                <button type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
+                <button type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur} class="btn btn-primary btn-lg btn-block"> Submit</button>
             </form>
 
-
+            </div>
         </>
 
         // john
