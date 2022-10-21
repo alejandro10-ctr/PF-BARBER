@@ -7,6 +7,8 @@ const { getDBUsers } = require("../middlewares/getAllUsers");
 const { transporter } = require("../../configs/mailer");
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
+  const { name, lastname, email, phone } = req.body;
+
   try {
     let passHash = await bcryptjs.hash(req.body.password, 8);
 
@@ -45,7 +47,7 @@ exports.login = async (req, res) => {
       });
       console.log("USUARIO ENCONTRADO:", userFinded);
       if (
-        !userFinded ||
+        userFinded == null ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
         res.status(404).send("Email o contraseña incorrecta");
