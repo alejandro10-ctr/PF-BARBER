@@ -7,28 +7,38 @@ const { getDBUsers } = require("../middlewares/getAllUsers");
 const { transporter } = require("../../configs/mailer");
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
-  const { name, lastname, email, phone, user } = req.body;
+  const { name, lastname, email, phone, user, password } = req.body;
 
   try {
-    let passHash = await bcryptjs.hash(req.body.password, 8);
-
-    await User.create({
-      user: req.body.user,
-      name: req.body.name,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: passHash,
-      phone: req.body.phone,
-    }).then((user) => {
-      console.log(user);
-      if (!user) {
-        return res.status(404);
-      } else {
-        sendEmail(req.body.email);
-        res.send("Cuenta registrada con exito");
-        // res.redirect("/");
-      }
-    });
+    if (!name || !lastname || !email || !phone || !user || !password) {
+      return res.status(404).send("Must complete all fields");
+    } else {
+      let passHash = await bcryptjs.hash(req.body.password, 8);
+      await User.create({
+        user: req.body.user,
+        name: req.body.name,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: passHash,
+        phone: req.body.phone,
+      })
+        .then((user) => {
+          console.log(user);
+          if (!user) {
+            return res.status(404);
+          } else {
+            sendEmail(req.body.email);
+            res.send(
+              "Congratulations, your account has been succesfully created!"
+            );
+            // res.redirect("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(404).send(`Username or Email is already register`);
+        });
+    }
   } catch (error) {
     console.log(error);
     res.status(404);
@@ -39,7 +49,7 @@ exports.login = async (req, res) => {
   const { user, password } = req.body;
   try {
     if (!user || !password) {
-      return res.status(404).send("debes ingresar algo");
+      return res.status(404).send("Must complete all fields");
     } else {
       const userFinded = await User.findOne({
         where: {
@@ -51,7 +61,7 @@ exports.login = async (req, res) => {
         userFinded == null ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
-        res.status(404).send("Usuario o contraseña incorrecta");
+        res.status(404).send("Incorrect username or password");
       } else {
         console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
@@ -62,7 +72,7 @@ exports.login = async (req, res) => {
           httpOnly: true,
         };
         res.cookie("jwt", token, cookiesOptions);
-        res.send("Usuario logeado");
+        res.send("User successfully logged in");
       }
     }
   } catch (error) {
@@ -98,7 +108,7 @@ exports.isAuthenticated = async (req, res, next) => {
     next();
   }
 };
-//asdasdas
+
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/");

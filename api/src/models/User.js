@@ -6,6 +6,12 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+      },
       user: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -20,21 +26,12 @@ module.exports = (sequelize) => {
           },
         },
       },
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true,
-      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlpha: {
-            msg: "The name must contain only letters",
-          },
           len: {
-            args: [2, 255],
+            args: [2, 50],
             msg: "The name must only contain at least two letters",
           },
         },
@@ -75,28 +72,18 @@ module.exports = (sequelize) => {
       phone: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: {
-          args: true,
-          msg: "This phone number is already register",
+        validate: {
+          is: {
+            args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+            msg: "Enter a valid phone",
+          },
         },
-        // validate: {
-        //   is: {
-        //     args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
-        //     msg: "Enter a valid phone",
-        //   },
-        // },
-      },
-      image: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-        defaultValue:
-          "https://spng.pngfind.com/pngs/s/676-6764065_default-profile-picture-transparent-hd-png-download.png",
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      state: {
+      available: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
