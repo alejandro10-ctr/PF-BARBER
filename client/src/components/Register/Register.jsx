@@ -74,91 +74,94 @@ export default function Register() {
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit} className={styles.background}> <h1 className={styles.font}>Create Account</h1>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm"> <div className={styles.font}>
-                            <input id="user" name="user" type="text" placeholder='Nickname'
-                                class="form-control form-control-lg"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.user}
-                            /> <span>{formik.touched.user && formik.errors.user ? <label>{formik.errors.user} </label> : null}<br /></span></div>
-
-
-                            <div className={styles.font}>
-
-                                <input id="name" name="name" type="text" placeholder='Name'
+            <div className={styles.background}>
+                <form onSubmit={formik.handleSubmit} className={styles.box}> 
+                <h1 className={styles.title}>Create Account</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm"> <div className={styles.font}>
+                                <input id="user" name="user" type="text" placeholder='Nickname'
                                     class="form-control form-control-lg"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    value={formik.values.name}
-                                />  <span>{formik.touched.name && formik.errors.name ? <label>{formik.errors.name}</label> : null}<br /></span></div>
+                                    value={formik.values.user}
+                                /> <span>{formik.touched.user && formik.errors.user ? <label className={styles.errors}>{formik.errors.user} </label> : null}<br /></span></div>
 
 
-                            <div className={styles.font}>
-                                <input id="lastname" name="lastname" type="text" placeholder='Lastname'
-                                    class="form-control form-control-lg"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.lastname} />
-                                <span> {formik.touched.lastname && formik.errors.lastname ? <label>{formik.errors.lastname}</label> : null}<br /> </span> </div>
+                                <div className={styles.font}>
+
+                                    <input id="name" name="name" type="text" placeholder='Name'
+                                        class="form-control form-control-lg"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.name}
+                                    />  <span>{formik.touched.name && formik.errors.name ? <label className={styles.errors}>{formik.errors.name}</label> : null}<br /></span></div>
 
 
-
-
-
-                        </div>
-                        <div class="col-sm">
-                            <div className={styles.font}>
-                                <input id="email" name="email" type="text" placeholder='sakura@gmail.com'
-                                    class="form-control form-control-lg"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.email} />
-                                <span>{formik.touched.email && formik.errors.email ? <label>{formik.errors.email}</label> : null}<br /></span>    </div>
-
-
-                            <div className={styles.font}>
-                                <input id="password" name="password" type="text" placeholder='*******'
-                                    class="form-control form-control-lg"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.password} />
-                                <span>{formik.touched.password && formik.errors.password ? <label>{formik.errors.password}</label> : null}<br /></span> </div>
+                                <div className={styles.font}>
+                                    <input id="lastname" name="lastname" type="text" placeholder='Lastname'
+                                        class="form-control form-control-lg"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.lastname} />
+                                    <span> {formik.touched.lastname && formik.errors.lastname ? <label className={styles.errors}>{formik.errors.lastname}</label> : null}<br /> </span> </div>
 
 
 
-                            <div className={styles.font}>
-                                <input id="phone" name="phone" type="text" placeholder='54 341 3746374'
-                                    class="form-control form-control-lg"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.phone} />
 
-                                    <span>{formik.touched.phone && formik.errors.phone ? <label>{formik.errors.phone}</label> : null}<br /></span> </div>
-                                
-                           
-                            <div>
+
                             </div>
+                            <div class="col-sm">
+                                <div className={styles.font}>
+                                    <input id="email" name="email" type="text" placeholder='sakura@gmail.com'
+                                        class="form-control form-control-lg"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.email} />
+                                    <span>{formik.touched.email && formik.errors.email ? <label className={styles.errors}>{formik.errors.email}</label> : null}<br /></span>    </div>
 
-                        </div>
-                    </div><br />
-                    {/* <select id="genre" name='genre' onChange={formik.handleChange}
+
+                                <div className={styles.font}>
+                                    <input id="password" name="password" type="text" placeholder='*******'
+                                        class="form-control form-control-lg"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.password} />
+                                    <span>{formik.touched.password && formik.errors.password ? <label className={styles.errors}>{formik.errors.password}</label> : null}<br /></span> </div>
+
+
+
+                                <div className={styles.font}>
+                                    <input id="phone" name="phone" type="text" placeholder='54 341 3746374'
+                                        class="form-control form-control-lg"
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.phone} />
+
+                                    <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> </div>
+
+
+                                <div>
+                                </div>
+
+                            </div>
+                        </div><br />
+                        {/* <select id="genre" name='genre' onChange={formik.handleChange}
                         onBlur={formik.handleBlur}  value={formik.values.genre}>
                         <option type="string" id="genre" name='genre'  value='man'>Men</option>
                         <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
                         <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
                     </select> */}
-                    <Select options={options} class="form-control form-control-lg" />
-                     </div><br />
-                
-                <div className={styles.buttons}><button type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur} class="btn btn-dark"> Submit</button>
-                    <Link to='/'><button class="btn btn-dark">Home</button></Link></div>
+                        <Select options={options} class="form-control form-control-lg" />
+                    </div><br />
+                    <div>
+                        <div><Link to='/'><button className={styles.buttonblue}>Home</button></Link>
+                            <button className={styles.buttonred} type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
+                            </div>
+                    </div>
+                </form>
 
-            </form>
-
-
+            </div>
         </>
 
 
