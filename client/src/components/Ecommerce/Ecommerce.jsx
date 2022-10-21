@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
 import ProductItem from "../Shopping/ProductsItem";
@@ -14,14 +13,13 @@ import {
   filterShop,
   addToCart,
   delFromCart,
-  addLocalStorage,
-  delLocalStorage,
+  getLocalStorage,
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
-const Productos = ({ products, filterstate, allProducts, cart,
+const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
   getProducts,
   createProducts,
   priceLower,
@@ -30,8 +28,6 @@ const Productos = ({ products, filterstate, allProducts, cart,
   filterShop,
   addToCart,
   delFromCart,
-  addLocalStorage,
-  delLocalStorage,
 }) => {
   const { addItemToCart, deleteItemToCart } = useContext(CartContext)
   const [state, setState] = useState(true)
@@ -39,13 +35,14 @@ const Productos = ({ products, filterstate, allProducts, cart,
     if (state) {
       setState(false)
       getProducts()
+      getLocalStorage()
     }
-  }, [state,cart]);
+  }, [state]);
 
-  
+
   const [categorySelected, setCategory] = useState('all')
 
-  
+
 
   //paginado
   const [pag, setCurrentPage] = useState(1)// inicializacion
@@ -81,25 +78,6 @@ const Productos = ({ products, filterstate, allProducts, cart,
     filterShop(shop.target.value)
     setCategory(shop.target.value)
   }
-
-  //-----Agregar al carrito y a LocalStorage
-  function handleAddCart(e){
-    addToCart(e);
-    addLocalStorage(e)
-    /* const prodLS = cart.product.id === id
-    localStorage.setItem("product" ,JSON.stringify(prodLS)) */
-    console.log(localStorage)
-  }
-
-  //------Borrar del carrito
-  function handleDelCart(e){
-    delFromCart(e);
-    delLocalStorage(e)
-   // localStorage.removeItem("product")
-    console.log(localStorage)
-  }
-  
-
 
   return (
     <div>
@@ -171,11 +149,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
 
 
         {/* <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
-
-
         <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
-
-
         <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button> */}
 
 
@@ -198,7 +172,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
           max={max} />
 
 
-
+       {/*  {console.log(cart)} */}
         <h2>{cart.length}</h2>
         {/* score sort sol*/}
 
@@ -221,13 +195,14 @@ const Productos = ({ products, filterstate, allProducts, cart,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await handleAddCart(product.id)
+                      addItemToCart(product)
+
                     }}> +🛒 </button>
-                    <button onClick={async (e) => {
+                    <button onClick={async(e) => {
                       e.preventDefault()
-                      await handleDelCart(product.id)
-                    }}> -🛒 </button>
-                    {/* <button onClick={() => deleteItemToCart(product)}> -🛒 </button> */}
+                     // console.log(await deleteItemToCart(product))
+                       deleteItemToCart(product) } }> -🛒 </button>
+                    
                     {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
                     {/*  <label>🛒</label>
                   {
@@ -254,14 +229,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
                 return (
                   <div className={s.products} key={e.id}>
                     {/*   <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
-                    <button onClick={async (add) => {
-                      add.preventDefault()
-                      await handleAddCart(e.id)
-                    }}> +🛒 </button>
-                     <button onClick={async (del) => {
-                      del.preventDefault()
-                      await handleDelCart(e.id)
-                    }}> -🛒 </button>
+                    <button onClick={() => addItemToCart(e)}>🛒</button>
                     {/*  {
                     <ProductItem
                     id={e.id}
@@ -286,7 +254,6 @@ const Productos = ({ products, filterstate, allProducts, cart,
   );
 }
 
-//djsilahdljksal
 export const mapStateToProps = ({ products, allProducts, filterstate, cart }) => {
   return {
     products,
@@ -305,8 +272,7 @@ export const mapDispatchToProps = (dispatch) => {
     filterShop,
     addToCart,
     delFromCart,
-    addLocalStorage,
-    delLocalStorage,
+    getLocalStorage,
   }, dispatch)
 }
 

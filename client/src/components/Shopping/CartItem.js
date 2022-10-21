@@ -150,7 +150,6 @@ export default Cart
       {cartItems && cartOpen && (
         <div>
           <h2>Your Cart 🛒</h2>
-
           {cartItems.length === 0 ? 
           (<p>Your Cart is Empty</p>) :
            (<div> 
@@ -228,5 +227,4 @@ import { delFromCart, addToCart , getProducts  } from "../../redux/actions"; */
     </div>
  );    
 };
-
 export default CartItem; */
