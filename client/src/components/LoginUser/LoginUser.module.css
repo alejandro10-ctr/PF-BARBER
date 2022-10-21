@@ -1,0 +1,28 @@
+
+
+.conteiner{
+   margin-left: 0%;
+   padding: 2%;
+   margin-top: 5%;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	background-color: #f0f0f067;
+	height:23em;
+	width: 500px;
+	display:-webkit-box;
+	display:-ms-flexbox;
+    position:relative;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	-ms-flex-direction:column;
+	flex-direction:column;
+  
+	-webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	border-radius:65px;
+
+
+}
+
