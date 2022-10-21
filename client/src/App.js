@@ -7,7 +7,7 @@ import { createProducts, getProducts } from "./store/actions";
 import ShoppingCart from "./components/Shopping/ShoppingCart";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import Register from "./components/Register/Register.jsx";
-import FormUser from './components/LoginUser/LoginUser.jsx';
+import LoginUser from "./components/LoginUser/LoginUser";
 import "./App.css";
 //holi
 
@@ -22,7 +22,7 @@ function App() {
       </Route>
 
       <Route exact path="/login">
-        <Register />
+        <LoginUser />
       </Route>
 
       <Route exact path="/shop">
