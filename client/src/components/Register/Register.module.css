@@ -1,25 +1,52 @@
-.conteiner{
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
+
+
+
+
+.background{
+
+
+     
+    padding-top: 20px;
+    margin-top: 30px;
+    float: none;
     margin-left: 0%;
     padding: 2%;
-    margin-top: 5%;
+    margin-top: 3%;
      text-align: center;
      display: inline-block;
      vertical-align: top;
      background-color: #f0f0f067;
-     height:27em;
-     width: 500px;
+     height:30em;
+     width: 610px;
      display:-webkit-box;
-     display:-ms-flexbox;
-     position:relative;
+     display:-ms-flexbox; 
+      position:relative;
      -webkit-box-orient:vertical;
      -webkit-box-direction:normal;
      -ms-flex-direction:column;
-     flex-direction:column;
+     flex-direction:column; 
    
-     -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+      -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
      -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
      transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-     border-radius:65px;
+     border-radius:10px;
+     box-shadow: 5px 5px 5px 0px rgba(231, 226, 226, 0.75); 
+    
+
  
- 
+   
+    
+   
+   
+  }
+
+
+
+ .font{
+  
+    font-size: 22px;
+    color: rgb(61, 60, 60);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
  }

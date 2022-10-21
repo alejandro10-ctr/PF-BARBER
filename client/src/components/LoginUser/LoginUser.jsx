@@ -28,17 +28,12 @@ export default function LoginUser() {
                 .min(8, 'Password is too short - should be 8 chars minimum.')
                 .max(15, "Must be between 8 and 15 character"),
 
-
-
-
-
         }),
 
         onSubmit: async (values) => {
 
             console.log(values)
             await axios.post('http://localhost:3001/auth/login', values)
-
             history.push('/')
         }
     })
@@ -47,7 +42,6 @@ export default function LoginUser() {
         <>
 
             <div className={styles.conteiner}>
-
 
                 <form onSubmit={formik.handleSubmit}>
 
