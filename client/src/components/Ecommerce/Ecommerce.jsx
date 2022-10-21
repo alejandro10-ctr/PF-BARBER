@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
 import ProductItem from "../Shopping/ProductsItem";
@@ -13,12 +12,14 @@ import {
   filterQuality,
   filterShop,
   addToCart,
+  delFromCart,
+  getLocalStorage,
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
-const Productos = ({ products, filterstate, allProducts, cart,
+const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
   getProducts,
   createProducts,
   priceLower,
@@ -26,6 +27,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
   filterQuality,
   filterShop,
   addToCart,
+  delFromCart,
 }) => {
   const { addItemToCart, deleteItemToCart } = useContext(CartContext)
   const [state, setState] = useState(true)
@@ -33,8 +35,9 @@ const Productos = ({ products, filterstate, allProducts, cart,
     if (state) {
       setState(false)
       getProducts()
+      getLocalStorage()
     }
-  }, [state,cart]);
+  }, [state]);
 
 
   const [categorySelected, setCategory] = useState('all')
@@ -173,7 +176,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
           max={max} />
 
 
-
+        {console.log(cart)}
         <h2>{cart.length}</h2>
         {/* score sort sol*/}
 
@@ -196,9 +199,10 @@ const Productos = ({ products, filterstate, allProducts, cart,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await addToCart(product.id)
+                      console.log("return addToCart", await addToCart(product.id))
+                      addItemToCart(product)
                     }}> +🛒 </button>
-                    <button onClick={() => deleteItemToCart(product)}> -🛒 </button>
+                    <button onClick={() => delFromCart(product.id)}> -🛒 </button>
                     {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
                     {/*  <label>🛒</label>
                   {
@@ -267,6 +271,8 @@ export const mapDispatchToProps = (dispatch) => {
     filterQuality,
     filterShop,
     addToCart,
+    delFromCart,
+    getLocalStorage,
   }, dispatch)
 }
 

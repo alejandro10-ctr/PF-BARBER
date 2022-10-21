@@ -20,7 +20,8 @@ import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART
+  CLEAR_CART,
+  GET_LOCALSTORAGE
 
 } from "./actions";
 
@@ -129,41 +130,47 @@ export default function reducer(state = initialState, { type, payload }) {
         {
           ...state,
           cart: [...state.cart,
-            {
-              id: state.cart.length,
-              quantity: 1,
-              iva: 0,
-              description: "",
-              state: 2,
-              descriptionState: "",
-              productId: payload,
-              saleId: null,
-              userId: null,
-              product: newItem
-            }],
+          {
+            id: state.cart.length + 1,
+            quantity: 1,
+            iva: 0,
+            description: "",
+            state: 2,
+            descriptionState: "",
+            productId: payload,
+            saleId: null,
+            userId: null,
+            product: newItem
+          }],
         }
     }
     case REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.id === payload);
+      let itemToDelete = state.cart.find(item => item.product.id === payload);
 
-      return itemToDelete.quantity > 1 ? {
+      return itemToDelete?.quantity > 1 ? {
         ...state,
-        cart: state.cart.map(item => item.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
+        cart: state.cart.map(item => item.product.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
       }
         :
         {
-          ...state,
-          cart: state.cart.filter(item => item.id !== payload)
-        };
+          ...state
+        }
     }
     case REMOVE_ALL_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== payload),
+        cart: state.cart.filter((item) => item.product.id !== payload),
       }
     }
     case CLEAR_CART:
       return 'shoppingInitialState';
+    case GET_LOCALSTORAGE:
+      const storage = localStorage.getItem("products")
+      console.log('storage restaurado', storage)
+      return {
+        ...state,
+        cart: storage?JSON.parse(storage):[]
+      }
 
     // case FILTER_QUALITY:    
     // const all = state.products;
