@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
             msg: "The user must not contain spaces"
         },
         len: {
-            args: [6,255],
+            args: [6,50],
             msg: "The user must only contain at least six letters"
         }
       }
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         len: {
-            args: [2,255],
+            args: [2,50],
             msg: "The name must only contain at least two letters"
         }
       }

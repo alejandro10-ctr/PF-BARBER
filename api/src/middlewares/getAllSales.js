@@ -18,6 +18,16 @@ const getDBSales = async (id) => {
     });
     return sales;
 };
+const getDBSaleByPk = async (id) => {
+  const sale = await Sale.findOne({
+    where: { id },
+    include: 'addresssale'
+  });
+  if (!sale) {
+    throw new Error("sale not found");
+  }
+  return sale;
+};
 const dbCreateSale = async (info, user, detailSales) => {
     
     const sale = await Sale.create(info)
@@ -28,5 +38,6 @@ const dbCreateSale = async (info, user, detailSales) => {
 
 module.exports = {
     getDBSales,
+    getDBSaleByPk,
     dbCreateSale,
 };
