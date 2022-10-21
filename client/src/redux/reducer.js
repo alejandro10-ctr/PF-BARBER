@@ -1,3 +1,4 @@
+
 import {
   SET_LOADING,
   GET_PRODUCTS,
@@ -18,8 +19,8 @@ import {
   FILTER_SHOP,
   //TYPES,
   ADD_TO_CART,
-  REMOVE_ONE_FROM_CART,
-  REMOVE_ALL_FROM_CART,
+  SUBTRACT_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
   CLEAR_CART,
   GET_LOCALSTORAGE,
   ADD_LOCALSTORAGE
@@ -41,6 +42,7 @@ const initialState = {
 
 
 export default function reducer(state = initialState, { type, payload }) {
+  
   switch (type) {
     case SET_LOADING:
       return { ...state, ...payload };
@@ -115,77 +117,77 @@ export default function reducer(state = initialState, { type, payload }) {
       }
 
     case ADD_TO_CART: {
-      let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
-       console.log(newItem)
-       let itemInCart =  state.cart.find(item => item.product.id === payload)  
-       console.log(localStorage)
-       console.log(state.cart)
-       return itemInCart ? {
-         ...state,
-         cart: state.cart.map(item => item.product?.id === payload ? {
-           ...item,
-           quantity: item.quantity + 1
-          } : item),
-          
-        }
+      let itemInCart = state.cart.find(item => item.productId === payload.id)
+      return itemInCart ? {
+        ...state,
+        cart: state.cart.map(item => item.productId === payload.id && item.quantity+1 <= payload.stock ? {
+          ...item,
+          quantity: item.quantity + 1
+        } : item),
+
+      }
         :
         {
           ...state,
           cart: [...state.cart,
-            {
-              id: state.cart.length + 1,
-              quantity: 1,
-              iva: 0,
-              description: "",
-              state: 2,
-              descriptionState: "",
-              productId: payload,
-              saleId: null,
-              userId: null,
-              product: newItem
-            }],
-          }
+          {
+            id: state.cart.length + 1,
+            quantity: 1,
+            iva: 0,
+            description: "",
+            state: 2,
+            descriptionState: "",
+            productId: payload.id,
+            saleId: null,
+            userId: null,
+            product: payload
+          }],
         }
-        case REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.product.id === payload);
+    }
+    case SUBTRACT_FROM_CART: {
+      let itemToDelete = state.cart.find(item => item.productId === payload.id);
+      console.log("productCar", itemToDelete)
 
       return itemToDelete?.quantity > 1 ? {
         ...state,
-        cart: state.cart.map(item => item.product.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
+        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity} : item)
       }
         :
         {
           ...state
         }
     }
-    case REMOVE_ALL_FROM_CART: {
+    case REMOVE_ITEM_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item.product.id !== payload),
+        cart: state.cart.filter((item) => item.productId !== payload.id),
       };
     }
-   
+
     case CLEAR_CART:
-      return 'shoppingInitialState';
-   
-      
-    case GET_LOCALSTORAGE:
-      const storage = localStorage.getItem("products")
-     // console.log('storage restaurado', storage)
       return {
         ...state,
-        cart: storage?JSON.parse(storage):[]
+        cart: [],
+      };
+
+
+    case GET_LOCALSTORAGE:
+      const storage = localStorage.getItem("products")
+      console.log('storage restaurado', storage)
+      return {
+        ...state,
+        cart: storage ? JSON.parse(storage) : []
       };
 
     case ADD_LOCALSTORAGE:
       const prod = state.products.find(item => item.id === payload)
-      // console.log('addStorage restaurado', prod)
+      console.log('localStorage', prod)
       return {
         ...state,
-        cart: localStorage.setItem('products', JSON.stringify(prod)) 
+        cart: localStorage.setItem('products', JSON.stringify(prod))
       };
 
-      
+
 
 
 

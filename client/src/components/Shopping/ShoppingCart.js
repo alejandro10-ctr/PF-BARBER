@@ -19,7 +19,6 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("products", JSON.stringify(cartItems));
-        console.log("cartItems", cartItems)
     }, [cartItems]);
 
 
@@ -27,19 +26,13 @@ export const CartProvider = ({ children }) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.product.id === detailProduct.id
         );
-        console.log(inCart) 
 
 
         let isShowDialog = false
         if (inCart) {
-            if(inCart.quantity+1 <=  inCart.product.stock){
-                setCartItems(
-                    cartItems.map((productInCart) => {
-                        if (productInCart.product.id === detailProduct.id) {
-                            return { ...inCart, quantity: inCart.quantity + 1 }
-                        } else return productInCart;
-                    })
-                );
+            if (inCart.quantity + 1 <= inCart.product.stock) {
+                inCart.quantity++
+                setCartItems([...cartItems])
                 return
             }
             isShowDialog = true
@@ -70,58 +63,44 @@ export const CartProvider = ({ children }) => {
                 text: "Not in stock"
 
             })
-        } 
+        }
 
 
     }
 
 
-    const deleteItemToCart = (detailProduct) => {
+    const subtractItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
-            (productInCart) => productInCart.id === detailProduct.id
+            (productInCart) => productInCart.productId === detailProduct.id
         );
-        
-        
-        if (inCart && inCart?.quantity === 1) {   // inCart.quantity
-            setCartItems(
-                cartItems.filter((productsInCart) => productsInCart.id !== detailProduct.id)
-                );
-            } else {
-                setCartItems(
-                    cartItems.map((productsInCart) => {
-                        if (productsInCart.id === detailProduct.id) {
-                            return { ...inCart, quantity: inCart.quantity > 0 ? inCart.quantity - 1 : inCart.quantity = 0 };
-                        } else return productsInCart;
-                    }));
-                }
-                
-                console.log(inCart)
-        
-        
 
-        if (inCart && inCart.quantity === 0) {
+        if (inCart.quantity > 1) {
+            inCart.quantity--
+            setCartItems([...cartItems])
+        }
+        if (inCart.quantity - 1 === 0) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Not negative numbers please"
+                text: "You can buy from 1"
             })
         }
-
-        if (cartItems.length === 0) {
-            localStorage.clear()
-        }
-
     };
+    const deleteItemToCart = (detailProduct) => {
+        const inCart = cartItems.find(
+            (productInCart) => productInCart.productId === detailProduct.id
+        );
+        cartItems.splice(cartItems.indexOf(inCart),1)
+        setCartItems([...cartItems]);
 
-
-
-    console.log("localStorage:" ,localStorage)
-
-
-
-
-    console.log("cart:", cartItems)
-
+        if (inCart.quantity - 1 === 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Successfully deleted",
+                text: `Product ${inCart.product.name} delete from cart`
+            })
+        }
+    }
 
 
     /* if(localStorage.getItem(el => JSON.stringify(el.quantity) === "0") ){
@@ -130,7 +109,7 @@ export const CartProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cartItems, addItemToCart, deleteItemToCart }}>
+        <CartContext.Provider value={{ cartItems, addItemToCart, subtractItemToCart, deleteItemToCart }}>
             {children}
         </CartContext.Provider>
     )

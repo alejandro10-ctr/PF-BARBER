@@ -18,9 +18,9 @@ export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
 export const ADD_TO_CART = 'ADD_TO_CART';
-export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
-export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
-export const CLEAR_CART = "CLEAR_CART"; 
+export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
+export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
 export const GET_LOCALSTORAGE = "GET_LOCALSTORAGE";
 export const ADD_LOCALSTORAGE = "ADD_LOCALSTORAGE"
 // export const SORT_SCORE ="SORT_SCORE";
@@ -235,34 +235,34 @@ export function filterShop(payload) {
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
 
-export function addToCart(id){
+export function addToCart(product) {
   return {
-    type: ADD_TO_CART, 
-    payload:id
+    type: ADD_TO_CART,
+    payload: product
   }
 }
 
-export function delFromCart(id, all=false){
-  if(all===true){
-    return{type: REMOVE_ALL_FROM_CART, payload:id};
-}else{
-    return{type: REMOVE_ONE_FROM_CART, payload:id};
+export function delFromCart(product, all = false) {
+  if (all === true) {
+    return { type: REMOVE_ITEM_FROM_CART, payload: product };
+  } else {
+    return { type: SUBTRACT_FROM_CART, payload: product };
   }
 };
 
-export function clearCart(){
-  return{
+export function clearCart() {
+  return {
     type: CLEAR_CART,
 
   }
 }
-export function getLocalStorage(){
+export function getLocalStorage() {
   return {
     type: GET_LOCALSTORAGE,
   }
 }
 
-export function addLocalStorage(id){
+export function addLocalStorage(id) {
   return {
     type: ADD_LOCALSTORAGE,
     payload: id

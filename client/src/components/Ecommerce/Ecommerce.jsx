@@ -29,7 +29,7 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
   addToCart,
   delFromCart,
 }) => {
-  const { addItemToCart, deleteItemToCart } = useContext(CartContext)
+  const { addItemToCart, subtractItemToCart, deleteItemToCart } = useContext(CartContext)
   const [state, setState] = useState(true)
   useEffect(() => {
     if (state) {
@@ -172,7 +172,7 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
           max={max} />
 
 
-       {/*  {console.log(cart)} */}
+        {/*  {console.log(cart)} */}
         <h2>{cart.length}</h2>
         {/* score sort sol*/}
 
@@ -195,14 +195,21 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      addItemToCart(product)
-
+                      await addToCart(product)
+                      await addItemToCart(product)
                     }}> +🛒 </button>
-                    <button onClick={async(e) => {
+                    <button onClick={async (e) => {
                       e.preventDefault()
-                     // console.log(await deleteItemToCart(product))
-                       deleteItemToCart(product) } }> -🛒 </button>
+                      await delFromCart(product)
+                      await subtractItemToCart(product)
+                    }}> -🛒 </button>
                     
+                    <button onClick={async (e) => {
+                      e.preventDefault()
+                      await delFromCart(product, true)
+                      await deleteItemToCart(product)
+                    }}> X🛒 </button>
+
                     {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
                     {/*  <label>🛒</label>
                   {
