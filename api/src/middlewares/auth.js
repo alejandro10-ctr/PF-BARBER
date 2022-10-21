@@ -81,8 +81,8 @@ exports.login = async (req, res) => {
           httpOnly: true,
         };
         res.cookie("jwt", token, cookiesOptions);
-        //res.send("User successfully logged in");
-        res.status(200).json({success:true, redirectUrl: '/'})
+        res.send("User successfully logged in");
+        // res.status(200).json({success:true, redirectUrl: '/'})
       }
     }
   } catch (error) {
