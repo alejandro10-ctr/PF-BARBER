@@ -7,8 +7,8 @@ import * as Yup from "yup"
 export default function Register() {
     const history = useHistory();
     const phoneRegex = RegExp(
-        /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/, 
-      );
+        /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+    );
 
 
     const formik = useFormik({
@@ -20,10 +20,10 @@ export default function Register() {
             phone: "",
             user: "",
             genre: "",
-          
+
         },
 
-       
+
 
         validationSchema: Yup.object({
 
@@ -44,9 +44,10 @@ export default function Register() {
                 .required('No password provided.')
                 .min(8, 'Password is too short - should be 8 chars minimum.')
                 .max(15, "Must be between 8 and 15 character"),
-           
+
             phone: Yup.string().matches(phoneRegex, "Invalid phone").required("Phone is required")
 
+            
 
 
         }),
@@ -57,9 +58,11 @@ export default function Register() {
             console.log(values)
             console.log(await axios.post('http://localhost:3001/auth/register', values))
             history.push('/login')
-        }
-    })
 
+        }
+
+    })
+console.log(formik)
     return (
         <>
             <h1>Create Account</h1>
@@ -120,9 +123,25 @@ export default function Register() {
                 </div>
 
                 <div>
-                    <label><input type='radio' name='genre' value='man' />Men</label>
-                    <label><input type='radio' name='genre' value='woman' />Woman</label>
-                    <label><input type='radio' name='genre' value='binarie' />Non-binary</label>
+                
+
+
+                    {/* <label><input type='radio' id="genre" name='genre' value='man'/>Men</label> 
+                   <label><input type='radio' id="genre" name='genre' value='woman'/>Woman</label>
+                    <label><input type='radio' id="genre" name='genre' value='binarie' />Non-binary</label>  */}
+
+                    <select id="genre" name='genre' onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}  value={formik.values.genre}>
+                        <option type="string" id="genre" name='genre'  value='man'>Men</option>
+                        <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
+                        <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
+                    </select>
+
+                    {/* <input id="genre" name="genre" type="string" placeholder='genre'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.genre} />
+                    {formik.touched.genre && formik.errors.genre ? <p>{formik.errors.genre}</p> : null} */}
                 </div>
 
                 <button type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
@@ -131,6 +150,6 @@ export default function Register() {
 
         </>
 
-// john
+        // john
     )
 }
