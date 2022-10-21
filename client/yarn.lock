@@ -9550,10 +9550,10 @@
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
 
-"sweetalert2@^11.5.2":
-  "integrity" "sha512-gVS4tSvYxY83RdgL7OQijDRP/othOA/v3JRjiWctGSRYY1NkX6sBirYLtgoRFprQ24HAQdbsWZiFg1k3uLoZZw=="
-  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.5.2.tgz"
-  "version" "11.5.2"
+"sweetalert2@^11.6.0":
+  "integrity" "sha512-OX0KKF5n1pNV8KH2T74WBM7735Rn+6YU0jEvEto4B0C7nu9keV7YgBxQ+nClUibyFKYr1Y2HkLtmBaXm/s8esg=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.6.0.tgz"
+  "version" "11.6.0"
 
 "symbol-observable@^1.2.0":
   "integrity" "sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ=="
