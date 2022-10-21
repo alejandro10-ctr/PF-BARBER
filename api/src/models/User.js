@@ -6,6 +6,20 @@ module.exports = (sequelize) => {
   sequelize.define(
     "user",
     {
+      user: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isAlpha: {
+            msg: "The user must not contain spaces",
+          },
+          len: {
+            args: [6, 50],
+            msg: "The user must only contain at least six letters",
+          },
+        },
+      },
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

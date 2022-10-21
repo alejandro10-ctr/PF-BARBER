@@ -7,12 +7,13 @@ const { getDBUsers } = require("../middlewares/getAllUsers");
 const { transporter } = require("../../configs/mailer");
 //procedimiento para registrarnos
 exports.register = async (req, res) => {
-  const { name, lastname, email, phone } = req.body;
+  const { name, lastname, email, phone, user } = req.body;
 
   try {
     let passHash = await bcryptjs.hash(req.body.password, 8);
 
     await User.create({
+      user: req.body.user,
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
@@ -35,14 +36,14 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { user, password } = req.body;
   try {
-    if (!email || !password) {
+    if (!user || !password) {
       return res.status(404).send("debes ingresar algo");
     } else {
       const userFinded = await User.findOne({
         where: {
-          email,
+          user,
         },
       });
       console.log("USUARIO ENCONTRADO:", userFinded);
@@ -50,7 +51,7 @@ exports.login = async (req, res) => {
         userFinded == null ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
-        res.status(404).send("Email o contraseña incorrecta");
+        res.status(404).send("Usuario o contraseña incorrecta");
       } else {
         console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
@@ -65,7 +66,7 @@ exports.login = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    res.send(error.message);
   }
 };
 
