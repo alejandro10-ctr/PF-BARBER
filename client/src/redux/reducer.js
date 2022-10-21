@@ -30,7 +30,7 @@ const initialState = {
   localStorage: [],
   filterstate: [],
   error: '',
-  payMercadoPago: {}
+  payMercadoPago: ""
 };
 
 

@@ -5,29 +5,36 @@ import { Link } from "react-router-dom";
 import { getPaymentLink } from '../../redux/actions';
 
 
-export default function MercadoPago(){
-const dispatch = useDispatch()
+export default function MercadoPago() {
+    const dispatch = useDispatch()
 
 
-    useEffect(()=>{  
-         dispatch(getPaymentLink())
-       
-    },[dispatch]) 
+    useEffect(() => {
+        dispatch(getPaymentLink())
+
+    }, [dispatch])
 
 
-const pay = useSelector((state)=> state.payMercadoPago)
+    const pay = useSelector((state) => state.payMercadoPago)
 
 
-console.log(pay.init_point)
+    console.log(pay)
 
-// const url = pay.init_point
-// const slice = url.slice(31, url.length)
+    // const url = pay.init_point
+    // const slice = url.slice(31, url.length)
 
-    return(
+    return (
         <div>
+            <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
 
-<button><Link target="_blank" to={pay.init_point}>Mercado Pago</Link></button>
-           
+
+
+
+
+
+
+
+
         </div>
     )
 }
