@@ -8,7 +8,7 @@ export default function Home() {
       <div className={styles.title}>
         {/* <img
           src="https://w7.pngwing.com/pngs/139/83/png-transparent-scissors-angle-technic-scissors.png"
-          className="tijeraImgen"
+          className="tijeraImgen" //barber
         ></img> */}
         <h1>BARBER 'S APP</h1>
       </div>
@@ -22,9 +22,9 @@ export default function Home() {
 
         <button className={styles.myButton}><Link to="/shop"> Shop </Link></button>
 
-        <button className={styles.myButton} ><Link to=""> Sign Up!</Link></button>
+        <button className={styles.myButton} ><Link to="/register"> Create an Account!</Link></button>
 
-        <button className={styles.myButton}><Link to=""> Create Account </Link></button>
+        <button className={styles.myButton}><Link to="/login">Sign in!</Link></button>
       </div>
 
 

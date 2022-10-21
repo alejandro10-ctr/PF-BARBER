@@ -1,5 +1,6 @@
-const { Router, json } = require('express');
+const { Router, json } = require("express");
 // import all routers;
+
 const userController = require('../controllers/users');
 const serviceController = require('../controllers/service');
 const scheduleController = require('../controllers/schedules');
@@ -18,5 +19,6 @@ router.use('/products', productController)
 router.use('/images', imageController)
 router.use('/auth', authController)
 router.use('/payments', mercadoIndex)
+
 
 module.exports = router;
