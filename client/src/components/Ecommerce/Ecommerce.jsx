@@ -286,6 +286,7 @@ const Productos = ({ products, filterstate, allProducts, cart,
   );
 }
 
+//djsilahdljksal
 export const mapStateToProps = ({ products, allProducts, filterstate, cart }) => {
   return {
     products,
