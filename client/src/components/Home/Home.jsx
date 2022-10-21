@@ -8,7 +8,7 @@ export default function Home() {
       <div className={styles.title}>
         {/* <img
           src="https://w7.pngwing.com/pngs/139/83/png-transparent-scissors-angle-technic-scissors.png"
-          className="tijeraImgen"
+          className="tijeraImgen" //barber
         ></img> */}
         <h1>BARBER 'S APP</h1>
       </div>
