@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
         console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
         const token = jwt.sign({ id: id }, "secretKey");
-        console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
+        // console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
         const cookiesOptions = {
           expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
           httpOnly: true,
