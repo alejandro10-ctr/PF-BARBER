@@ -24,6 +24,7 @@ import {
   ADD_LOCALSTORAGE,
   DELETE_LOCALSTORAGE,
   CLEAR_LOCALSTORAGE,
+  GET_LOCALSTORAGE
 
 } from "./actions";
 
@@ -215,6 +216,12 @@ export default function reducer(state = initialState, { type, payload }) {
     case CLEAR_LOCALSTORAGE:
       return {
         localStorage: localStorage.clear()
+      };
+      
+    case GET_LOCALSTORAGE:
+      return {
+        ...state,
+        localStorage: localStorage.getItem("products")
       }  
 
     // case FILTER_SHOP:
