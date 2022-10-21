@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail } from "../../redux/actions";
+import { getProductsDetail, getPaymentLink } from "../../redux/actions";
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
@@ -31,13 +31,19 @@ function DetailProduct({ match }) {
   }, [dispatch]) // muestra recien cuando el componente se monta
 
   // if (!detailOfProducts) return null;
+  useEffect(() => {
+    dispatch(getPaymentLink())
 
+}, [dispatch])
+
+
+const pay = useSelector((state) => state.payMercadoPago)
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
-      <Link to="/MercadoPago">Want to Buy🛒</Link>
+      <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
       <hr />
-      <Link to="/shop"> Volver atras </Link>
+      <Link to="/shop"> See more products! </Link>
 
 
       {/* Card */}
