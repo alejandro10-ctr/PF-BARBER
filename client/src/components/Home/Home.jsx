@@ -22,9 +22,9 @@ export default function Home() {
 
         <button className={styles.myButton}><Link to="/shop"> Shop </Link></button>
 
-        <button className={styles.myButton} ><Link to=""> Sign Up!</Link></button>
+        <button className={styles.myButton} ><Link to="/register"> Create an Account!</Link></button>
 
-        <button className={styles.myButton}><Link to=""> Create Account </Link></button>
+        <button className={styles.myButton}><Link to="/login">Sign in!</Link></button>
       </div>
 
 
