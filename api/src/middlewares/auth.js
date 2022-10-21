@@ -10,7 +10,15 @@ exports.register = async (req, res) => {
   const { name, lastname, email, phone, user, password } = req.body;
 
   try {
-    if (!name || !lastname || !email || !phone || !user || !password) {
+    if (
+      !name ||
+      !lastname ||
+      !email ||
+      !phone ||
+      !user ||
+      !password ||
+      !genre
+    ) {
       return res.status(404).send("Must complete all fields");
     } else {
       let passHash = await bcryptjs.hash(req.body.password, 8);
@@ -21,6 +29,7 @@ exports.register = async (req, res) => {
         email: req.body.email,
         password: passHash,
         phone: req.body.phone,
+        genre: req.body.genre,
       })
         .then((user) => {
           console.log(user);
