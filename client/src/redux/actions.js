@@ -21,6 +21,9 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
+export const ADD_LOCALSTORAGE = "ADD_LOCALSTORAGE";
+export const DELETE_LOCALSTORAGE = "DELETE_LOCALSTORAGE";
+export const CLEAR_LOCALSTORAGE = "CLEAR_LOCALSTORAGE"
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
@@ -251,6 +254,27 @@ export function delFromCart(id, all=false){
 export function clearCart(){
   return{
     type: CLEAR_CART,
+    cart: []
+  }
+};
 
+export function addLocalStorage(id){
+  return {
+    type: ADD_LOCALSTORAGE,
+    payload: id
+  }
+};
+
+export function delLocalStorage(id){
+  return {
+    type: DELETE_LOCALSTORAGE,
+    payload: id
+  }
+};
+
+export function clearLocalStorage(){
+  return {
+    type: CLEAR_LOCALSTORAGE,
+    paylaod: []
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from 'redux'
 import React, { useState, useContext } from "react";
 import s from './Ecommerce.module.css'
@@ -13,6 +13,9 @@ import {
   filterQuality,
   filterShop,
   addToCart,
+  delFromCart,
+  addLocalStorage,
+  delLocalStorage,
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
@@ -26,6 +29,9 @@ const Productos = ({ products, filterstate, allProducts, cart,
   filterQuality,
   filterShop,
   addToCart,
+  delFromCart,
+  addLocalStorage,
+  delLocalStorage,
 }) => {
   const { addItemToCart, deleteItemToCart } = useContext(CartContext)
   const [state, setState] = useState(true)
@@ -36,10 +42,10 @@ const Productos = ({ products, filterstate, allProducts, cart,
     }
   }, [state,cart]);
 
-
+  
   const [categorySelected, setCategory] = useState('all')
 
-
+  
 
   //paginado
   const [pag, setCurrentPage] = useState(1)// inicializacion
@@ -75,6 +81,25 @@ const Productos = ({ products, filterstate, allProducts, cart,
     filterShop(shop.target.value)
     setCategory(shop.target.value)
   }
+
+  //-----Agregar al carrito y a LocalStorage
+  function handleAddCart(e){
+    addToCart(e);
+    addLocalStorage(e)
+    /* const prodLS = cart.product.id === id
+    localStorage.setItem("product" ,JSON.stringify(prodLS)) */
+    console.log(localStorage)
+  }
+
+  //------Borrar del carrito
+  function handleDelCart(e){
+    delFromCart(e);
+    delLocalStorage(e)
+   // localStorage.removeItem("product")
+    console.log(localStorage)
+  }
+  
+
 
   return (
     <div>
@@ -196,9 +221,13 @@ const Productos = ({ products, filterstate, allProducts, cart,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await addToCart(product.id)
+                      await handleAddCart(product.id)
                     }}> +🛒 </button>
-                    <button onClick={() => deleteItemToCart(product)}> -🛒 </button>
+                    <button onClick={async (e) => {
+                      e.preventDefault()
+                      await handleDelCart(product.id)
+                    }}> -🛒 </button>
+                    {/* <button onClick={() => deleteItemToCart(product)}> -🛒 </button> */}
                     {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
                     {/*  <label>🛒</label>
                   {
@@ -225,7 +254,14 @@ const Productos = ({ products, filterstate, allProducts, cart,
                 return (
                   <div className={s.products} key={e.id}>
                     {/*   <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
-                    <button onClick={() => addItemToCart(e)}>🛒</button>
+                    <button onClick={async (add) => {
+                      add.preventDefault()
+                      await handleAddCart(e.id)
+                    }}> +🛒 </button>
+                     <button onClick={async (del) => {
+                      del.preventDefault()
+                      await handleDelCart(e.id)
+                    }}> -🛒 </button>
                     {/*  {
                     <ProductItem
                     id={e.id}
@@ -267,6 +303,9 @@ export const mapDispatchToProps = (dispatch) => {
     filterQuality,
     filterShop,
     addToCart,
+    delFromCart,
+    addLocalStorage,
+    delLocalStorage,
   }, dispatch)
 }
 

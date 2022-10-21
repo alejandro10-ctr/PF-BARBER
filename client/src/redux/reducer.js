@@ -20,7 +20,10 @@ import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART
+  CLEAR_CART,
+  ADD_LOCALSTORAGE,
+  DELETE_LOCALSTORAGE,
+  CLEAR_LOCALSTORAGE,
 
 } from "./actions";
 
@@ -113,18 +116,18 @@ export default function reducer(state = initialState, { type, payload }) {
       }
 
     case ADD_TO_CART: {
-      let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
+      let newItem = state.products.find(product => product.id === payload); 
       // console.log(newItem)
       let itemInCart = state.cart.find(item => item.product.id === payload)
-      // console.log(itemInCart)
-      return itemInCart ? {
-        ...state,
-        cart: state.cart.map(item => item.product.id === payload ? {
-          ...item,
-          quantity: item.quantity + 1
-        } : item),
-
-      }
+       console.log(itemInCart)
+       return itemInCart ? {
+         ...state,
+         cart: state.cart.map(item => item.product.id === payload ? {
+           ...item,
+           quantity: item.quantity + 1
+          } : item),
+          
+        }
         :
         {
           ...state,
@@ -141,19 +144,20 @@ export default function reducer(state = initialState, { type, payload }) {
               userId: null,
               product: newItem
             }],
+          }
+          
         }
-    }
     case REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.id === payload);
-
+      let itemToDelete = state.cart.find(item => item.product.id === payload);
+      console.log(itemToDelete)
       return itemToDelete.quantity > 1 ? {
         ...state,
-        cart: state.cart.map(item => item.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
+        cart: state.cart.map(item => item.product.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
       }
         :
         {
-          ...state,
-          cart: state.cart.filter(item => item.id !== payload)
+          ...state
+          
         };
     }
     case REMOVE_ALL_FROM_CART: {
@@ -191,6 +195,27 @@ export default function reducer(state = initialState, { type, payload }) {
         products: logicFilter
       };
 
+    case ADD_LOCALSTORAGE: 
+       const prodLS = state.allProducts.find(product => product.id === payload)
+    
+        return {
+        ...state,
+        localStorage: localStorage.setItem("products" ,JSON.stringify(prodLS))
+       };
+
+
+    case DELETE_LOCALSTORAGE:
+      let itemToDelete = state.allProducts.find(item => item.id === payload);
+
+      return {
+        ...state,
+       localStorage: localStorage.removeItem("products" , JSON.stringify(itemToDelete))
+      };
+
+    case CLEAR_LOCALSTORAGE:
+      return {
+        localStorage: localStorage.clear()
+      }  
 
     // case FILTER_SHOP:
     //   const allAccesory = state.products;

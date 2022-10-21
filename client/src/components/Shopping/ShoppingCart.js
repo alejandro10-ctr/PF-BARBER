@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("products", JSON.stringify(cartItems));
-        console.log(cartItems)
+        //console.log(cartItems)
     }, [cartItems]);
 
 
@@ -58,7 +58,7 @@ export const CartProvider = ({ children }) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.id === product.id
         ); 
-        console.log(inCart)
+        //console.log(inCart)
        
         if(inCart && inCart?.quantity === 1) {   // inCart.quantity
             setCartItems(
@@ -89,12 +89,12 @@ export const CartProvider = ({ children }) => {
     
 
 
-    console.log( localStorage  )
+    //console.log( localStorage  )
 
 
 
 
-    console.log("cart:",cartItems)
+    //console.log("cart:",cartItems)
 
 
 
