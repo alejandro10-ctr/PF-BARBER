@@ -19,7 +19,7 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
-const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
+const Ecommerce = ({ products, filterstate, allProducts, cart, getLocalStorage,
   getProducts,
   createProducts,
   priceLower,
@@ -143,8 +143,9 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
         <div className={s.containerCard}>
           {
             sliceProduct.length > 0 ?
-              sliceProduct.map((product) => {
-                return (
+            sliceProduct.map((product) => {
+              const findProductCar = cart.find(productInCar => productInCar.productId === product.id);
+              return (
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
@@ -162,6 +163,7 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                       await delFromCart(product, true)
                       await deleteItemToCart(product)
                     }}> X🛒 </button>
+                    <h3>{findProductCar?.quantity}</h3>
 
                     
                     <h2 className={s.productInfo}>{product.name}</h2>
@@ -228,4 +230,4 @@ export const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Productos);
+export default connect(mapStateToProps, mapDispatchToProps)(Ecommerce);
