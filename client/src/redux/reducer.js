@@ -127,7 +127,7 @@ export default function reducer(state = initialState, { type, payload }) {
     case "REGISTER_USER": {
       let newUser = state;
     }
-
+// ---------------------> Carrito
     case ADD_TO_CART: {
       let itemInCart = state.cart.find(item => item.productId === payload.id)
       return itemInCart ? {
@@ -167,45 +167,6 @@ export default function reducer(state = initialState, { type, payload }) {
         {
           ...state
         }
-      }
-    case ADD_TO_CART: {
-      let newItem = state.products.find((product) => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
-      // console.log(newItem)
-      let itemInCart = state.cart.find((item) => item.id === newItem.id);
-
-      return itemInCart
-        ? {
-            ...state,
-            cart: state.cart.map((item) =>
-              item.id === newItem.id
-                ? {
-                    ...item,
-                    quantity: item.quantity + 1,
-                  }
-                : item
-            ),
-          }
-        : {
-            ...state,
-            cart: [...state.cart, { ...newItem, quantity: 1 }],
-          };
-    }
-    case REMOVE_ITEM_FROM_CART: {
-      let itemToDelete = state.cart.find((item) => item.id === payload);
-
-      return itemToDelete.quantity > 1
-        ? {
-            ...state,
-            cart: state.cart.map((item) =>
-              item.id === payload
-                ? { ...item, quantity: item.quantity - 1 }
-                : item
-            ),
-          }
-        : {
-            ...state,
-            cart: state.cart.filter((item) => item.id !== payload),
-          };
     }
     case REMOVE_ITEM_FROM_CART: {
       return {
@@ -235,6 +196,9 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         cart: localStorage.setItem('products', JSON.stringify(prod))
       };
+// <------------------------
+
+
         // cart: state.cart.filter((item) => item.id !== payload),
       
   
