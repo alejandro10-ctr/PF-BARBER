@@ -5,20 +5,21 @@ const { getDBSaleByPk } = require("../middlewares/getAllSales.js");
 
 const router = Router()
 
-router.get('/sale/:userId', async (req, res) => {
+router.get('/sale/:saleId', async (req, res) => {
     try {
-        const addresses = await getDBAddresses(Addresssale, req.params.userId)
+        const addresses = await getDBAddresses(Addresssale, "saleId", req.params.saleId)
         res.status(200).json(addresses)
     } catch (error) {
         res.status(404).send(error.message)
     }
 })
 
-router.post('/sale/:userId', async (req, res) => {
+router.post('/sale/:saleId', async (req, res) => {
     try {
-        const sale = await getDBSaleByPk(req.params.userId);
-        const createdAddress = await dbCreateAddress(Addresssale, req.body, sale)
-        res.status(200).send(createdAddress);
+        const sale = await getDBSaleByPk(req.params.saleId)
+        console.log(sale.addAddresssale)
+        const createdAddress = await dbCreateAddress(Addresssale, req.body, "saleId", sale.addAddresssale)
+        res.status(200).send(sale);
     } catch (error) {
         res.status(404).send(error.message);
     }

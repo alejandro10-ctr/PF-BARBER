@@ -7,7 +7,7 @@ const router = Router()
 
 router.get('/user/:userId', async (req, res) => {
     try {
-        const addresses = await getDBAddresses(Address, req.params.userId)
+        const addresses = await getDBAddresses(Address, "userId", req.params.userId)
         res.status(200).json(addresses)
     } catch (error) {
         res.status(404).send(error.message)
@@ -17,7 +17,7 @@ router.get('/user/:userId', async (req, res) => {
 router.post('/user/:userId', async (req, res) => {
     try {
         const user = await getDBUserByPk(req.params.userId);
-        const createdAddress = await dbCreateAddress(Address, req.body, user)
+        const createdAddress = await dbCreateAddress(Address, req.body, "userId", user.addAddress)
         res.status(200).send(createdAddress);
     } catch (error) {
         res.status(404).send(error.message);

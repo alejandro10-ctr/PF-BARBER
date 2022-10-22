@@ -1,13 +1,13 @@
 const { QueryTypes, Sequelize, Op } = require("sequelize");
 const { Address, conn } = require("../db.js");
 
-const getDBAddresses = async (modelAddress,userId) => {
+const getDBAddresses = async (modelAddress, nameAttribute, modelId) => {
     let addresses = await modelAddress.findAll({
-        where: { userId }
+        where: { [nameAttribute]: modelId}
     })
     return addresses
 }
-const dbCreateAddress = async (modelAddress, info, model) => {
+const dbCreateAddress = async (modelAddress, info, nameAttribute, metodoAdd) => {
 
     if (info.nameUser && info.phoneUser && info.address) {
         const [address, createdAddress] = await modelAddress.findOrCreate({
@@ -16,8 +16,9 @@ const dbCreateAddress = async (modelAddress, info, model) => {
             },
             defaults: info
         })
-        if (createdAddress) {
-            model.addAddress(address)
+        console.log(metodoAdd)
+        if (createdAddress || !address[nameAttribute]) {
+            metodoAdd(address)
             return `address ${info.address} created successfully`
         }
         throw new Error('address already exists')
