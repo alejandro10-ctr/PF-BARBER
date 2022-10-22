@@ -2,43 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
+import { Button } from "reactstrap";
 export default function Home() {
   return (
     <div className={styles.background}>
-      <div className={styles.title}>
-        {/* <img
-          src="https://w7.pngwing.com/pngs/139/83/png-transparent-scissors-angle-technic-scissors.png"
-          className="tijeraImgen" //barber
-        ></img> */}
-        <h1>BARBER 'S APP</h1>
-      </div>
-      <Carrusel />
-      <br />
+      <div className={styles.title}><h1>BARBER 'S APP</h1>
+    
+      <Carrusel /><br /></div>
+  
+      <div className={styles.buttonLinks}>
 
-      <div className={styles.buttons}>
-        <button className={styles.myButton}><Link to="/AboutUs"> Developers</Link></button>
-
-        <button className={styles.myButton}><Link to=""> Services </Link></button>
-
-        <button className={styles.myButton}><Link to="/shop"> Shop </Link></button>
-
-        <button className={styles.myButton} ><Link to="/register"> Create an Account!</Link></button>
-
-        <button className={styles.myButton}><Link to="/login">Sign in!</Link></button>
-      </div>
+        <Button color="dark"><Link className={styles.button} to=""> {" "} Services{" "}  </Link></Button>
+        <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  Developers </Link> </Button>
+        <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
+        <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button>
+        <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button>
 
 
-      <br /> 
+      </div><br />
 
-      <h3>Pay with MercadoPago</h3>
-      <img
+      <h3>You could Pay with MercadoPago</h3>
+      {/* <img
         src="http://d3ugyf2ht6aenh.cloudfront.net/stores/001/718/448/products/d_738371-mla49316492518_032022-f1-ed4272fc0b58b093aa16519683623243-640-0.jpg"
         width="100"
         height="100"
         alt="Mercado de Pago"
-      ></img>
-      <br />
-      <br />
+      ></img> */}
+     
     </div>
   );
 }
