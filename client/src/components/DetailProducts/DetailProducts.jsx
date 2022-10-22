@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import { getProductsDetail, addToCart } from "../../redux/actions";
+
 import { getProductsDetail, getPaymentLink } from "../../redux/actions";
+
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
@@ -23,8 +27,8 @@ function DetailProduct({ match }) {
 
   console.log(id) //entra 
 
-  const filter = allProducts.filter(f => f.description)
-  console.log(filter)
+  //const filter = allProducts.filter(f => f.description)
+ // console.log(filter)
 
   useEffect(() => {
     dispatch(getProductsDetail(id))// accedo al id del detalle
@@ -41,7 +45,11 @@ const pay = useSelector((state) => state.payMercadoPago)
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
+
+      <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
+
       <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
+
       <hr />
       <Link to="/shop"> See more products! </Link>
 
@@ -52,6 +60,7 @@ const pay = useSelector((state) => state.payMercadoPago)
         <img src={detailOfProducts.image} alt={detailOfProducts.image} />
         <h3>Price: ${detailOfProducts.price}</h3>
         <h3>{detailOfProducts.quality}</h3>
+        
 
       </div>
 

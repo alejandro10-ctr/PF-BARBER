@@ -1,3 +1,4 @@
+
 import {
   SET_LOADING,
   GET_PRODUCTS,
@@ -13,10 +14,16 @@ import {
   SEARCH_PRODUCTS,
   PRICE_LOWER,
   PRICE_HIGH,
-  TYPES,
-  SORT_SCORE,
+  //SORT_SCORE,
   FILTER_QUALITY,
   FILTER_SHOP,
+  //TYPES,
+  ADD_TO_CART,
+  SUBTRACT_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
+  CLEAR_CART,
+  GET_LOCALSTORAGE,
+  ADD_LOCALSTORAGE
   GET_PAYMENTS
 
 } from "./actions";
@@ -36,6 +43,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, { type, payload }) {
+  
   switch (type) {
     case GET_PAYMENTS:
       return{ ...state, payMercadoPago: {...payload}}
@@ -120,6 +128,45 @@ export default function reducer(state = initialState, { type, payload }) {
       let newUser = state;
     }
 
+    case ADD_TO_CART: {
+      let itemInCart = state.cart.find(item => item.productId === payload.id)
+      return itemInCart ? {
+        ...state,
+        cart: state.cart.map(item => item.productId === payload.id && item.quantity+1 <= payload.stock ? {
+          ...item,
+          quantity: item.quantity + 1
+        } : item),
+
+      }
+        :
+        {
+          ...state,
+          cart: [...state.cart,
+          {
+            id: state.cart.length + 1,
+            quantity: 1,
+            iva: 0,
+            description: "",
+            state: 2,
+            descriptionState: "",
+            productId: payload.id,
+            saleId: null,
+            userId: null,
+            product: payload
+          }],
+        }
+    }
+    case SUBTRACT_FROM_CART: {
+      let itemToDelete = state.cart.find(item => item.productId === payload.id);
+
+      return itemToDelete?.quantity > 1 ? {
+        ...state,
+        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity} : item)
+      }
+        :
+        {
+          ...state
+        }
     case TYPES.ADD_TO_CART: {
       let newItem = state.products.find((product) => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
       // console.log(newItem)
@@ -159,9 +206,39 @@ export default function reducer(state = initialState, { type, payload }) {
             cart: state.cart.filter((item) => item.id !== payload),
           };
     }
-    case TYPES.REMOVE_ALL_FROM_CART: {
+    case REMOVE_ITEM_FROM_CART: {
       return {
         ...state,
+        cart: state.cart.filter((item) => item.productId !== payload.id),
+      };
+    }
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
+
+
+    case GET_LOCALSTORAGE:
+      const storage = localStorage.getItem("products")
+      return {
+        ...state,
+        cart: storage ? JSON.parse(storage) : []
+      };
+
+    case ADD_LOCALSTORAGE:
+      const prod = state.products.find(item => item.id === payload)
+      console.log('localStorage', prod)
+      return {
+        ...state,
+        cart: localStorage.setItem('products', JSON.stringify(prod))
+      };
+
+
+
+
+
         cart: state.cart.filter((item) => item.id !== payload),
       };
     }
@@ -177,6 +254,11 @@ export default function reducer(state = initialState, { type, payload }) {
     // };
     case FILTER_QUALITY:
       const all = state.allProducts;
+      const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+      return {
+        ...state,
+        products: filter,
+        filterstate: filter
       const filter =
         payload === "default"
           ? all
@@ -226,10 +308,13 @@ export default function reducer(state = initialState, { type, payload }) {
     case "FAILURE":
       return {
         ...state,
+        error: payload
+      }
         error: payload,
       };
 
     default:
       return state;
   }
+};
 }
