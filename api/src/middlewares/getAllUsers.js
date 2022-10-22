@@ -8,6 +8,15 @@ const getDBUsers = async () => {
   let db = await User.findAll();
   return db;
 };
+
+const getDBUsers2 = async (email) => {
+  let db = await User.findAll({
+    where: {
+      email,
+    },
+  });
+  return db;
+};
 getUserByName = async (name) => {
   let db = await User.findAll({
     where: {
