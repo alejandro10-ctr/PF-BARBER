@@ -83,15 +83,10 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
     <div>
       <br />
       <div>
-        {/* <button onClick={e => {
-          e.preventDefault()
-          setState(true)
-        }}>add</button><br /><br /> */}
+       
 
         <Link to='/'><button className={s.button}>Home</button></Link>
 
-        {/* {products.length}
-        {products.length === 0 && <h1>We dont Have that product!</h1>}       */}
 
         {/* Searchbar */}
 
@@ -127,46 +122,11 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
 
 
 
-        {/* quality sort */}
-        {/* <div>
-          <label>Quality </label>
-          <select defaultValue={'Options'} onChange={quality => handleQuality(quality)}>
-            {/* <option hidden value="Options">Options</option>
-            <option value="default">All</option>
-            <option value="Premium">Premium</option>
-            <option value="Basic">Basic</option> 
-            
-          </select>
-        </div> */}
 
 
 
 
-        {/* <Paginado pag={pag}
-          setCurrentPage={setCurrentPage}
-          max={max} />
-        score sort */}
-
-
-        {/* <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
-        <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
-        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button> */}
-
-
-
-
-
-
-        {/* filter anidado */}
-        {/* <div>
-          <label>Category</label>
-          <select className={s.select} onChange={shop => handleShop(shop)}>
-            <option hidden value="all">Shop</option>
-            <option value="all">All</option>
-            <option value="after shave">After Shave</option>
-            <option value="razor">Razors</option>
-          </select>
-        </div> */}
+        
         <Paginado pag={pag}
           setCurrentPage={setCurrentPage}
           max={max} />
@@ -176,14 +136,7 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
         <h2>{cart.length}</h2>
         {/* score sort sol*/}
 
-        {/* <div>
-        <label>Score</label>
-        <select onChange={score => handleScore(score)}>
-          <option hidden value=''>⇅</option>
-          <option value='top'>+</option>
-          <option value='bottom'>-</option>
-        </select>
-      </div> */}
+        
 
 
         {/* card */}
@@ -191,8 +144,6 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
           {
             sliceProduct.length > 0 ?
               sliceProduct.map((product) => {
-
-                const findProductCar = cart.find(productInCar => productInCar.productId === product.id);
                 return (
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
@@ -205,23 +156,14 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                       await delFromCart(product)
                       await subtractItemToCart(product)
                     }}> -🛒 </button>
-
+                    
                     <button onClick={async (e) => {
                       e.preventDefault()
                       await delFromCart(product, true)
                       await deleteItemToCart(product)
                     }}> X🛒 </button>
-                    <h3>{findProductCar?.quantity}</h3>
 
-                    {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
-                    {/*  <label>🛒</label>
-                  {
-                    <ProductItem
-                    id={e.id}
-                    stock={e.stock}
-                    quantity={e.quantity}
-                    />
-                  } */}
+                    
                     <h2 className={s.productInfo}>{product.name}</h2>
                     <img className={s.img} src={product.image} alt="img" ></img>
                     <h3 className={s.productQuality}>{product.quality.toUpperCase()}</h3>
@@ -229,20 +171,6 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                       <h2 className={s.productPrice}> ${product.price}</h2>
                     </div>
                     <Link to={`/product/${product.id}`} className={s.button}>BUY</Link>
-
-                  <div className={s.products} key={e.id}>
-                      <h2 className={s.productInfo}>{e.name}</h2>
-                    <img className={s.img} src={e.image} alt="img" ></img>
-                    <br />
-                     <div>
-                      <hr />
-                    <h3 className={s.productQuality}>{e.quality.toUpperCase()}</h3>
-                    <div className={s.productInfo}>
-                    <h2 className={s.productPrice}> ${e.price}</h2>
-                    <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
-                     </div>
-                    </div>
-
                   </div>
 
 
@@ -262,7 +190,6 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                     />
                   } */}
                     <img className={s.img} src={e.image} alt="img"></img>
-                    <hr />
                     <div className={s.productInfo}>
                       <h2 className={s.productInfo}>{e.name}</h2>
                       <h3 className={s.productPrice}> ${e.price}</h3>

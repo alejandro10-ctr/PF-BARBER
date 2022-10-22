@@ -23,7 +23,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART,
   GET_LOCALSTORAGE,
-  ADD_LOCALSTORAGE
+  ADD_LOCALSTORAGE,
   GET_PAYMENTS
 
 } from "./actions";
@@ -167,7 +167,8 @@ export default function reducer(state = initialState, { type, payload }) {
         {
           ...state
         }
-    case TYPES.ADD_TO_CART: {
+      }
+    case ADD_TO_CART: {
       let newItem = state.products.find((product) => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
       // console.log(newItem)
       let itemInCart = state.cart.find((item) => item.id === newItem.id);
@@ -189,7 +190,7 @@ export default function reducer(state = initialState, { type, payload }) {
             cart: [...state.cart, { ...newItem, quantity: 1 }],
           };
     }
-    case TYPES.REMOVE_ONE_FROM_CART: {
+    case REMOVE_ITEM_FROM_CART: {
       let itemToDelete = state.cart.find((item) => item.id === payload);
 
       return itemToDelete.quantity > 1
@@ -234,17 +235,9 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         cart: localStorage.setItem('products', JSON.stringify(prod))
       };
-
-
-
-
-
-        cart: state.cart.filter((item) => item.id !== payload),
-      };
-    }
-    case TYPES.CLEAR_CART:
-      return "shoppingInitialState";
-
+        // cart: state.cart.filter((item) => item.id !== payload),
+      
+  
     // case FILTER_QUALITY:
     // const all = state.products;
     // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
@@ -252,6 +245,25 @@ export default function reducer(state = initialState, { type, payload }) {
     //     ...state,
     //     allProducts: filter //lista que recortamos lo que necesitemos
     // };
+    // case FILTER_QUALITY: FABRI CAMBIOS ?? 
+    //   const all = state.allProducts;
+    //   const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter
+    //   const filter =
+    //     payload === "default"
+    //       ? all
+    //       : all.filter(
+    //           (r) => r.quality.toLowerCase() === payload.toLowerCase()
+    //         );
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter,
+    //   };
+
     case FILTER_QUALITY:
       const all = state.allProducts;
       const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
@@ -259,17 +271,7 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         products: filter,
         filterstate: filter
-      const filter =
-        payload === "default"
-          ? all
-          : all.filter(
-              (r) => r.quality.toLowerCase() === payload.toLowerCase()
-            );
-      return {
-        ...state,
-        products: filter,
-        filterstate: filter,
-      };
+      };  
     case FILTER_SHOP:
       const allAccesory = state.filterstate;
 
@@ -310,11 +312,11 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         error: payload
       }
-        error: payload,
-      };
+       // error: payload,
+  //}
 
     default:
       return state;
   }
 };
-}
+//}

@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getProductsDetail, addToCart, getPaymentLink  } from "../../redux/actions";
 
-import { getProductsDetail, addToCart } from "../../redux/actions";
-
-import { getProductsDetail, getPaymentLink } from "../../redux/actions";
 
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
