@@ -4,6 +4,15 @@ import DetailProduct from "./components/DetailProducts/DetailProducts";
 import Ecommerce from "./components/Ecommerce/Ecommerce";
 import Home from "./components/Home/Home.jsx";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
+
+
+
+import MercadoPago from "./components/MercadoPago/MercadoPago";
+
+import Register from "./components/Register/Register.jsx";
+import LoginUser from "./components/LoginUser/LoginUser";
+
+
 import "./App.css";
 
 import { CartProvider } from "./components/Shopping/ShoppingCart"
@@ -22,6 +31,14 @@ function App() {
       <Route exact path="/">
         <Home />
       </Route>
+      <Route exact path="/register">
+        <Register />
+      </Route>
+
+      <Route exact path="/login">
+        <LoginUser />
+      </Route>
+
       <Route exact path="/shop">
         <Ecommerce />
       </Route>
@@ -29,11 +46,17 @@ function App() {
         <AboutUs />
       </Route>
 
+
+      <Route exact path="/payments/pay">
+        <MercadoPago />
+      </Route>
+
       <Route exact path="/product/:id"
         render={({match}) => {
           return <DetailProduct match={match} />
         }}>
       </Route>
+
 {/* <ProvideAuth>
  */} {/*      <Route exact path="/yourCart/:id"
         render={({match}) => {
@@ -46,6 +69,16 @@ function App() {
         <ProductItem />
       </Route> */}
 {/*    </ProvideAuth> */}
+
+
+      <Route
+        exact
+        path="/product/:id"
+        render={({ match }) => {
+          return <DetailProduct match={match} />;
+        }}
+      ></Route>
+
 
     </div>
     </CartProvider>

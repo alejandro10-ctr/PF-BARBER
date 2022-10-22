@@ -24,6 +24,7 @@ import {
   CLEAR_CART,
   GET_LOCALSTORAGE,
   ADD_LOCALSTORAGE
+  GET_PAYMENTS
 
 } from "./actions";
 
@@ -37,17 +38,24 @@ const initialState = {
   localStorage: [],
   filterstate: [],
   error: '',
+  payMercadoPago: ""
+
 };
-
-
 
 export default function reducer(state = initialState, { type, payload }) {
   
   switch (type) {
+    case GET_PAYMENTS:
+      return{ ...state, payMercadoPago: {...payload}}
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
-      return { ...state, allProducts: [...payload], products: [...payload], filterstate: [...payload] };
+      return {
+        ...state,
+        allProducts: [...payload],
+        products: [...payload],
+        filterstate: [...payload],
+      };
     // case CREATE_PRODUCTS:
     //   return { ...state, products: payload };
     case UPDATE_PRODUCTS:
@@ -98,23 +106,27 @@ export default function reducer(state = initialState, { type, payload }) {
     // }
     //--------------------------PRICE
     case PRICE_HIGH:
-      let stateProd = state.products
+      let stateProd = state.products;
       return {
         ...state,
-        products: stateProd.slice().sort((a, b) => {
-
-          return a.price - b.price
-        }).reverse()
-      }
+        products: stateProd
+          .slice()
+          .sort((a, b) => {
+            return a.price - b.price;
+          })
+          .reverse(),
+      };
     case PRICE_LOWER:
-      let statePr = state.products
+      let statePr = state.products;
       return {
         ...state,
         products: statePr.slice().sort((a, b) => {
-          return a.price - b.price
-        })
-
-      }
+          return a.price - b.price;
+        }),
+      };
+    case "REGISTER_USER": {
+      let newUser = state;
+    }
 
     case ADD_TO_CART: {
       let itemInCart = state.cart.find(item => item.productId === payload.id)
@@ -155,6 +167,44 @@ export default function reducer(state = initialState, { type, payload }) {
         {
           ...state
         }
+    case TYPES.ADD_TO_CART: {
+      let newItem = state.products.find((product) => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
+      // console.log(newItem)
+      let itemInCart = state.cart.find((item) => item.id === newItem.id);
+
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === newItem.id
+                ? {
+                    ...item,
+                    quantity: item.quantity + 1,
+                  }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newItem, quantity: 1 }],
+          };
+    }
+    case TYPES.REMOVE_ONE_FROM_CART: {
+      let itemToDelete = state.cart.find((item) => item.id === payload);
+
+      return itemToDelete.quantity > 1
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === payload
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: state.cart.filter((item) => item.id !== payload),
+          };
     }
     case REMOVE_ITEM_FROM_CART: {
       return {
@@ -189,9 +239,13 @@ export default function reducer(state = initialState, { type, payload }) {
 
 
 
+        cart: state.cart.filter((item) => item.id !== payload),
+      };
+    }
+    case TYPES.CLEAR_CART:
+      return "shoppingInitialState";
 
-
-    // case FILTER_QUALITY:    
+    // case FILTER_QUALITY:
     // const all = state.products;
     // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
     // return {
@@ -205,18 +259,31 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         products: filter,
         filterstate: filter
+      const filter =
+        payload === "default"
+          ? all
+          : all.filter(
+              (r) => r.quality.toLowerCase() === payload.toLowerCase()
+            );
+      return {
+        ...state,
+        products: filter,
+        filterstate: filter,
       };
     case FILTER_SHOP:
       const allAccesory = state.filterstate;
 
-      const logicFilter = payload === 'all' ? allAccesory
-        : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+      const logicFilter =
+        payload === "all"
+          ? allAccesory
+          : allAccesory.filter((r) =>
+              r.name.toLowerCase().includes(payload.toLowerCase())
+            );
 
       return {
         ...state,
-        products: logicFilter
+        products: logicFilter,
       };
-
 
     // case FILTER_SHOP:
     //   const allAccesory = state.products;
@@ -243,8 +310,11 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         error: payload
       }
+        error: payload,
+      };
 
     default:
       return state;
   }
 };
+}

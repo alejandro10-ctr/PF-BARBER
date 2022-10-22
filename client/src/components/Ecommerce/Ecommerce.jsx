@@ -229,6 +229,20 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                       <h2 className={s.productPrice}> ${product.price}</h2>
                     </div>
                     <Link to={`/product/${product.id}`} className={s.button}>BUY</Link>
+
+                  <div className={s.products} key={e.id}>
+                      <h2 className={s.productInfo}>{e.name}</h2>
+                    <img className={s.img} src={e.image} alt="img" ></img>
+                    <br />
+                     <div>
+                      <hr />
+                    <h3 className={s.productQuality}>{e.quality.toUpperCase()}</h3>
+                    <div className={s.productInfo}>
+                    <h2 className={s.productPrice}> ${e.price}</h2>
+                    <Link to={`/product/${e.id}`} className={s.button}>BUY</Link>
+                     </div>
+                    </div>
+
                   </div>
 
 
@@ -248,6 +262,7 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                     />
                   } */}
                     <img className={s.img} src={e.image} alt="img"></img>
+                    <hr />
                     <div className={s.productInfo}>
                       <h2 className={s.productInfo}>{e.name}</h2>
                       <h3 className={s.productPrice}> ${e.price}</h3>
