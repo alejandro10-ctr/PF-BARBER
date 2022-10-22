@@ -146,7 +146,6 @@ export default function reducer(state = initialState, { type, payload }) {
     }
     case SUBTRACT_FROM_CART: {
       let itemToDelete = state.cart.find(item => item.productId === payload.id);
-      console.log("productCar", itemToDelete)
 
       return itemToDelete?.quantity > 1 ? {
         ...state,
@@ -173,7 +172,6 @@ export default function reducer(state = initialState, { type, payload }) {
 
     case GET_LOCALSTORAGE:
       const storage = localStorage.getItem("products")
-      console.log('storage restaurado', storage)
       return {
         ...state,
         cart: storage ? JSON.parse(storage) : []

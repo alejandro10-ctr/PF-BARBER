@@ -22,20 +22,20 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
 
-    const addItemToCart = (detailProduct) => {
+    const addItemToCart = async (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.product.id === detailProduct.id
         );
 
 
-        let isShowDialog = false
+        let isShowDialog = { show: false, icon: "warning", title: "Oops...", text: "Not in stock" }
         if (inCart) {
             if (inCart.quantity + 1 <= inCart.product.stock) {
                 inCart.quantity++
                 setCartItems([...cartItems])
-                return
+            } else {
+                isShowDialog.show = true
             }
-            isShowDialog = true
         } else {
 
             if (1 <= detailProduct.stock) {
@@ -52,17 +52,17 @@ export const CartProvider = ({ children }) => {
                     product: detailProduct
                 }
                 ])
-                return
+                isShowDialog.show = true
+                isShowDialog.icon = "success"
+                isShowDialog.title = "Successfully added"
+                isShowDialog.text = `Product ${detailProduct.name} added from cart`
+            } else {
+                isShowDialog.show = true
             }
-            isShowDialog = true
         }
-        if (isShowDialog) {
-            Swal.fire({
-                icon: "warning",
-                title: "Oops...",
-                text: "Not in stock"
-
-            })
+        if (isShowDialog.show) {
+            delete isShowDialog.show
+            await Swal.fire(isShowDialog)
         }
 
 
@@ -73,33 +73,35 @@ export const CartProvider = ({ children }) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
-
-        if (inCart.quantity > 1) {
-            inCart.quantity--
-            setCartItems([...cartItems])
-        }
-        if (inCart.quantity - 1 === 0) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "You can buy from 1"
-            })
+        if (inCart) {
+            if (inCart.quantity > 1) {
+                inCart.quantity--
+                setCartItems([...cartItems])
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You can buy from 1"
+                })
+            }
         }
     };
     const deleteItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
-        cartItems.splice(cartItems.indexOf(inCart),1)
-        setCartItems([...cartItems]);
-
-        if (inCart.quantity - 1 === 0) {
+        const index = cartItems.indexOf(inCart)
+        if (inCart) {
+            cartItems.splice(index, 1)
+            setCartItems([...cartItems]);
             Swal.fire({
-                icon: "error",
+                icon: "success",
                 title: "Successfully deleted",
-                text: `Product ${inCart.product.name} delete from cart`
+                text: `Product ${inCart.product.name} deleted from cart`
             })
+            console.log("Successfully deleted")
         }
+
     }
 
 

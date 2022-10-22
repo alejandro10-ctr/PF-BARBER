@@ -191,6 +191,8 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
           {
             sliceProduct.length > 0 ?
               sliceProduct.map((product) => {
+
+                const findProductCar = cart.find(productInCar => productInCar.productId === product.id);
                 return (
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
@@ -203,12 +205,13 @@ const Productos = ({ products, filterstate, allProducts, cart, getLocalStorage,
                       await delFromCart(product)
                       await subtractItemToCart(product)
                     }}> -🛒 </button>
-                    
+
                     <button onClick={async (e) => {
                       e.preventDefault()
                       await delFromCart(product, true)
                       await deleteItemToCart(product)
                     }}> X🛒 </button>
+                    <h3>{findProductCar?.quantity}</h3>
 
                     {/*     <Link to={`/yourCart/${e.id}`} onClick={(id)=> addToCart(id)}>🛒</Link> */}
                     {/*  <label>🛒</label>
