@@ -99,7 +99,6 @@ export const CartProvider = ({ children }) => {
                 title: "Successfully deleted",
                 text: `Product ${inCart.product.name} deleted from cart`
             })
-            console.log("Successfully deleted")
         }
 
     }

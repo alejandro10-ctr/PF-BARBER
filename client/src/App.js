@@ -7,15 +7,15 @@ import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
 
 
-import MercadoPago from "./components/MercadoPago/MercadoPago";
+// import MercadoPago from "./components/MercadoPago/MercadoPago";
 
 import Register from "./components/Register/Register.jsx";
 import LoginUser from "./components/LoginUser/LoginUser";
+import { CartProvider } from "./components/Shopping/ShoppingCart"
 
 
 import "./App.css";
 
-import { CartProvider } from "./components/Shopping/ShoppingCart"
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
 //import ProductItem from "./components/Shopping/ProductsItem";
@@ -47,30 +47,15 @@ function App() {
       </Route>
 
 
-      <Route exact path="/payments/pay">
+      {/* <Route exact path="/payments/pay">
         <MercadoPago />
-      </Route>
+      </Route> */}
 
       <Route exact path="/product/:id"
         render={({match}) => {
           return <DetailProduct match={match} />
         }}>
       </Route>
-
-{/* <ProvideAuth>
- */} {/*      <Route exact path="/yourCart/:id"
-        render={({match}) => {
-          return <ShoppingCart match={match} />
-        }}>
-      </Route>
- */}
-
-    {/*   <Route exact path="/prodItem">
-        <ProductItem />
-      </Route> */}
-{/*    </ProvideAuth> */}
-
-
       <Route
         exact
         path="/product/:id"
