@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail, getLocalStorage, updateDBCart, getPaymentLink,} from "../../redux/actions";
+import { getProductsDetail, getLocalStorage, getDBCart, updateDBCart, getPaymentLink,} from "../../redux/actions";
 import { CartContext } from "../Shopping/ShoppingCart";
 
 
@@ -11,13 +11,12 @@ import { CartContext } from "../Shopping/ShoppingCart";
 
 function DetailProduct({ match }) {
   
-  const { addItemToCart, subtractItemToCart, deleteItemToCart } = useContext(CartContext)
+  const { isLogueado,addItemToCart, subtractItemToCart, deleteItemToCart } = useContext(CartContext)
   const [update, setUpdate] = useState(true)
   const dispatch = useDispatch();
   const id = match.params.id;
   const product = useSelector((state) => state.detail)
   const cart = useSelector((state) => state.cart)
-  const updateDB = useSelector((state) => state.updateDB)
   const pay = useSelector((state) => state.payMercadoPago)
   
   // useEffect(() => {
@@ -34,7 +33,9 @@ function DetailProduct({ match }) {
     if (update) {
       Swal.showLoading()
       dispatch(getProductsDetail(id))// accedo al id del detalle
-      dispatch(getLocalStorage())
+      
+      if(isLogueado) dispatch(getDBCart(1) )
+      else dispatch(getLocalStorage())
       setUpdate(false)
     }
   }, [update]) // muestra recien cuando el componente se monta
@@ -44,41 +45,28 @@ function DetailProduct({ match }) {
   //   }
 
   // }, [product])
-  useEffect(async () => {
+  useEffect( () => {
     if(cart){
       let inCar = cart.find((e) => e.productId === Math.round(id))
       console.log("cart",inCar)
       
       if (inCar) {
-        dispatch(await updateDBCart(inCar))
+        dispatch(updateDBCart(inCar))
+        setTimeout(()=>dispatch(getPaymentLink(id)),2000)
       }
     }
   }, [cart])
-  
-  useEffect(async () => {
-    // console("updateDB",updateDB)
-    if(updateDB){
-      dispatch(await getPaymentLink(id));
-      Swal.hideLoading()
-    }
-  }, [updateDB])
+
 
 
 
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
-      <button onClick={async (e) => {
-        e.preventDefault()
-        Swal.showLoading()
-
-
-
-      }}>ShowAlert</button>
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
       {console.log("pay", pay.init_point)}
       <a target="_blank" rel="noopener" href={pay.init_point + ""} onClick={() => {
-      }}>  Mercado Pago</a>
+      }}> {pay?"Pagar ahora":"cargando..."} </a>
 
       <hr />
       <Link to="/shop"> See more products! </Link>

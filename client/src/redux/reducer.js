@@ -24,7 +24,6 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART,
   GET_LOCALSTORAGE,
-  ADD_LOCALSTORAGE,
   GET_PAYMENTS
 
 } from "./actions";
@@ -36,7 +35,6 @@ const initialState = {
   detail: {},
   allProducts: [],
   cart: [],
-  updateDB: false,
   localStorage: [],
   filterstate: [],
   error: '',
@@ -131,6 +129,7 @@ export default function reducer(state = initialState, { type, payload ,quantity 
     }
 // ---------------------> Carrito
     case UPDATE_CART: {
+      console.log(payload)
       return{
         ...state,
         cart: payload
@@ -198,15 +197,6 @@ export default function reducer(state = initialState, { type, payload ,quantity 
       return {
         ...state,
         cart: storage ? JSON.parse(storage) : [],
-        updateDB: true
-      };
-
-    case ADD_LOCALSTORAGE:
-      const prod = state.products.find(item => item.id === payload)
-      console.log('localStorage', prod)
-      return {
-        ...state,
-        cart: localStorage.setItem('products', JSON.stringify(prod))
       };
 // <------------------------
 

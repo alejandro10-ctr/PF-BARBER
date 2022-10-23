@@ -24,7 +24,6 @@ export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
 export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const GET_LOCALSTORAGE = "GET_LOCALSTORAGE";
-export const ADD_LOCALSTORAGE = "ADD_LOCALSTORAGE"
 
 export const GET_PAYMENTS = "GET_PAYMENTS";
 
@@ -231,7 +230,7 @@ export function filterShop(payload) {
 // }
 
 // export function sortScore(payload) {
-//   return {
+  //   return {
 //     type: SORT_SCORE,
 //     payload,
 //   };
@@ -241,22 +240,48 @@ export function filterShop(payload) {
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
 
+export function getDBCart(userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/detailsales/user/${userId}`)
+      if (response?.data) {
+        dispatch({ type: UPDATE_CART, payload: response.data });
+      }
+    } catch (error) {
+      return error
+    }
+  }
+}
 
-export function updateDBCart(cart) {
+export function createDBCart(cart, userId) {
   return async () => {
     try {
-      console.log("updateDB",cart)
-      return await axios.post(`/detailsales/user/${1}`, cart)
+      console.log("createDB", cart)
+      return await axios.post(`/detailsales/user/${userId}`, cart)
 
     } catch (error) {
       return error
     }
   }
-
-} export function deleteDBCart(id) {
+}
+export function updateDBCart(productInCart) {
   return async () => {
     try {
-      return await axios.delete(`/detailsales/${id}`)
+      console.log("updateDB", productInCart)
+      return await axios.put(`/detailsales/${productInCart.id}`, productInCart)
+      
+    } catch (error) {
+      return error
+    }
+  }
+}
+
+
+export function deleteDBCart(productInCartId) {
+  return async () => {
+    try {
+      console.log("deleteDB", productInCartId)
+      return await axios.delete(`/detailsales/${productInCartId}`)
 
     } catch (error) {
       return error
@@ -298,12 +323,7 @@ export function getLocalStorage() {
   }
 }
 
-export function addLocalStorage(id) {
-  return {
-    type: ADD_LOCALSTORAGE,
-    payload: id
-  }
-}
+
 
 
 

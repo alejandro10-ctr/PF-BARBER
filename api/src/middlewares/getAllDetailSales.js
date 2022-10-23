@@ -22,27 +22,25 @@ const dbCreateDetailSale = async (info, model) => {
             delete e.product
             delete e.id
 
-            const detailsale = await Detailsale.findAll({
+            const [detailsale, isCreatedDetailSale] = await Detailsale.findOrCreate({
                 where: {
                     productId: e.productId,
                     userId: model.id,
                     saleId: null,
                 },
+                defaults: e
             })
-            if(!detailsale){
-                await Detailsale.update(
-                e,
-                {
-                    where: {
-                        id: detailsale.id,
-                    },
-                }
-            )
-            }else{
-                const detailsale = await Detailsale.create(e)
-                detailsale.userId = model.id
-                detailsale.save()
-            }
+            //aqui no se actualiza xxxxxxxxxxxxxxxxxxx
+            // if(!isCreatedDetailSale){
+            //     await Detailsale.update(
+            //     e,
+            //     {
+            //         where: {
+            //             id: detailsale.id,
+            //         },
+            //     }
+            // )
+            // }
         })
 
         return "bulk upload detailed sales created successfully"
@@ -60,17 +58,17 @@ const dbCreateDetailSale = async (info, model) => {
                 },
                 defaults: info
             })
-            // model.addDetailsale(detailsale)
-            if(!isDetailsale){
-                await Detailsale.update(
-                info,
-                {
-                    where: {
-                        id: detailsale.id,
-                    },
-                }
-            );
-            }
+            //no se actualiza
+            // if (!isDetailsale) {
+            //     await Detailsale.update(
+            //         info,
+            //         {
+            //             where: {
+            //                 id: detailsale.id,
+            //             },
+            //         }
+            //     );
+            // }
             return "detail sale created successfully"
         } else {
             throw new Error('missing param')
