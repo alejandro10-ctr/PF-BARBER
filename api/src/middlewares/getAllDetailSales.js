@@ -19,7 +19,7 @@ const dbCreateDetailSale = async (info, model) => {
         await info.map(async (e) => {
             delete e.saleId
             delete e.userId
-            
+
             const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
                 where: {
                     productId: e.productId,
@@ -30,7 +30,7 @@ const dbCreateDetailSale = async (info, model) => {
             })
             return detailsale
         })
-        
+
         return "bulk upload detailed sales created successfully"
     } else {
         if (info.productId && info.quantity) {
@@ -44,11 +44,8 @@ const dbCreateDetailSale = async (info, model) => {
                 },
                 defaults: info
             })
-            if (isDetailsale) {
-                model.addDetailsale(detailsale)
-                return "detail sale created successfully"
-            }
-            throw new Error('detail sale already exists')
+            model.addDetailsale(detailsale)
+            return "detail sale created successfully"
         } else {
             throw new Error('missing param')
         }

@@ -16,8 +16,6 @@ const productController = require('../controllers/product')
 const imageController = require('../controllers/image')
 
 
-
-const authController = require('../controllers/auth')
 const mercadoIndex = require("../controllers/mercadoIndex")
 
 

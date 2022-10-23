@@ -241,9 +241,21 @@ export function filterShop(payload) {
 // falta ruta delete y post de imagenes
 
 export function addToCart(product) {
-  return {
-    type: ADD_TO_CART,
-    payload: product
+  return async (dispatch)=>{
+  
+    try {
+      const response = await axios.post(`/detailsales/user/${1}`,{
+        quantity: 4,
+        productId: product.id
+    }); 
+      if (response?.data) {
+        dispatch({
+          type: ADD_TO_CART,
+          payload: product});
+      }
+    } catch (error) {
+      
+    }
   }
 }
 
@@ -278,10 +290,10 @@ export function addLocalStorage(id) {
 
   
 
-  export function getPaymentLink(id) {
+  export function getPaymentLink(productId, userId) {
     return async (dispatch) => {
       try {
-        const response = await axios.get(`/payments/pay?productId=${id}`,id); 
+        const response = await axios.get(`/payments/pay?productId=${productId}&userId=${1}`); 
         if (response?.data) {
           dispatch({ type: GET_PAYMENTS, payload: response.data });
         }

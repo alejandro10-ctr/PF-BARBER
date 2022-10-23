@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail, addToCart, getPaymentLink  } from "../../redux/actions";
+import { getProductsDetail, addToCart, getPaymentLink } from "../../redux/actions";
 
 
 // import styles from '../DetailProducts/DetailProducts.module.css';
@@ -15,17 +15,16 @@ function DetailProduct({ match }) {
   const detailOfProducts = useSelector((state) => state.detail)
   console.log(detailOfProducts)
 
-  const allProducts = useSelector((state) => state.products)
+  const product = useSelector((state) => state.detail)
+  const cart = useSelector((state) => state.cart)
 
-  console.log(allProducts)
   // useEffect(() => {
   //   dispatch(getProductsDetail(id));
   // }, [id]);
 
-  console.log(id) //entra 
 
   //const filter = allProducts.filter(f => f.description)
- // console.log(filter)
+  // console.log(filter)
 
   useEffect(() => {
     dispatch(getProductsDetail(id))// accedo al id del detalle
@@ -33,21 +32,28 @@ function DetailProduct({ match }) {
 
   // if (!detailOfProducts) return null;
   useEffect(() => {
-    dispatch(getPaymentLink(id))
+    if (Object.keys(product).length) {
+      dispatch(addToCart(product))
+    }
+    
+  }, [product])
+  useEffect(() => {
+    let inCar = cart.find((e) => e.productId === Math.round(id))
+    console.log('incar', inCar)
+    if (inCar) {
+      dispatch(getPaymentLink(id))
+    }
+  }, [cart])
 
-}, [dispatch])
-
-const pay = useSelector((state) => state.payMercadoPago)
+  const pay = useSelector((state) => state.payMercadoPago)
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
 
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
-      {console.log("pay",pay.init_point)}
-      <a target="_blank" rel="noopener" href={pay.init_point+""} onClick={()=> {
-        const product = allProducts.find((product)=> product.id === id)
-        dispatch(addToCart(product))
-        }}>  Mercado Pago</a>
+      {console.log("pay", pay.init_point)}
+      <a target="_blank" rel="noopener" href={pay.init_point + ""} onClick={() => {
+      }}>  Mercado Pago</a>
 
       <hr />
       <Link to="/shop"> See more products! </Link>
@@ -59,7 +65,7 @@ const pay = useSelector((state) => state.payMercadoPago)
         <img src={detailOfProducts.image} alt={detailOfProducts.image} />
         <h3>Price: ${detailOfProducts.price}</h3>
         <h3>{detailOfProducts.quality}</h3>
-        
+
 
       </div>
 

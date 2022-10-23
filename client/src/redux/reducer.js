@@ -32,7 +32,7 @@ const initialState = {
   loading: false,
   products: [],
   users: [],
-  detail: [],
+  detail: {},
   allProducts: [],
   cart: [],
   localStorage: [],

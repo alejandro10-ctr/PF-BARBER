@@ -1,32 +1,30 @@
 const axios = require("axios");
 const {
-  getProductByPk,
-  getAllProducts,
-} = require("../middlewares/getAllProducts.js");
+  getDBDetailSales
+} = require("../middlewares/getAllDetailSales.js");
 
 // const {
 //   id,
 // } = require("../../../client/src/components/DetailProducts/DetailProducts.jsx");
 
 class PaymentService {
-  async createPayment(productId) {
+  async createPayment(productId, userId) {
     const url = "https://api.mercadopago.com/checkout/preferences";
 
     // const idFront = axios.get
 
     // const products = await getAllProducts();
 
-    const product = await getProductByPk(productId)
-
+    const car = await getDBDetailSales(userId)
+    const productDetail = await car.find((productDetail) => productDetail.productId === Math.round(productId))
     const products = [
       {
-        title: product,
-        description: "Esta es una Crema para la barba premium",
-        picture_url:
-          "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
-        category_id: "Premium",
-        quantity: 1,
-        unit_price: 500,
+        title: productDetail.product.name,
+        description: productDetail.product.description,
+        picture_url: productDetail.product.image,
+        category_id: productDetail.product.quality,
+        quantity: productDetail.quantity,
+        unit_price: productDetail.product.price,
       },
     ];
 
