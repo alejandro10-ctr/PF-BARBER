@@ -21,14 +21,20 @@ const getDBSales = async (id) => {
 const getDBSaleByPk = async (id) => {
   const sale = await Sale.findOne({
     where: { id },
-    include: 'addresssale'
+    include: {
+        model: Detailsale,
+        include: {
+            model: Product,
+            include: Image
+        }
+    }
   });
   if (!sale) {
     throw new Error("sale not found");
   }
   return sale;
 };
-const dbCreateSale = async (info, user, detailSales) => {
+const dbCreateSale = async (info, user, detailSales, addressSale) => {
     
     const sale = await Sale.create(info)
     await user.addSale(sale)

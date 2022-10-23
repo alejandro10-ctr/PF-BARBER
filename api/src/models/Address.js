@@ -4,11 +4,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("address", {
-    nameUser: {
+    personReceives: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    phoneUser: {
+    phoneReceives: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    description: {
+    descriptionPlace: {
       type: DataTypes.STRING(50),
       defaultValue: ""
     },

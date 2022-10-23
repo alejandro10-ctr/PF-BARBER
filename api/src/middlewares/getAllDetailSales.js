@@ -15,25 +15,43 @@ const getDBDetailSales = async (id) => {
     return detailSales;
 };
 const dbCreateDetailSale = async (info, model) => {
-
-    if (info.productId && info.quantity) {
-        delete info.saleId
-        delete info.userId
-        const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
-            where: {
-                productId: info.productId,
-                userId: model.id,
-                saleId: null,
-            },
-            defaults: info
+    if (Array.isArray(info)) {
+        await info.map(async (e) => {
+            delete e.saleId
+            delete e.userId
+            
+            const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
+                where: {
+                    productId: e.productId,
+                    userId: model.id,
+                    saleId: null,
+                },
+                defaults: e
+            })
+            return detailsale
         })
-        if (isDetailsale) {
-            model.addDetailsale(detailsale)
-            return "detail sale created successfully"
-        }
-        throw new Error('detail sale already exists')
+        
+        return "bulk upload detailed sales created successfully"
     } else {
-        throw new Error('missing param')
+        if (info.productId && info.quantity) {
+            delete info.saleId
+            delete info.userId
+            const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
+                where: {
+                    productId: info.productId,
+                    userId: model.id,
+                    saleId: null,
+                },
+                defaults: info
+            })
+            if (isDetailsale) {
+                model.addDetailsale(detailsale)
+                return "detail sale created successfully"
+            }
+            throw new Error('detail sale already exists')
+        } else {
+            throw new Error('missing param')
+        }
     }
 }
 const dbUpdateDetailSale = async (info, id) => {

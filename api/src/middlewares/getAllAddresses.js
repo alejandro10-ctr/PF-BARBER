@@ -1,38 +1,34 @@
 const { QueryTypes, Sequelize, Op } = require("sequelize");
 const { Address, conn } = require("../db.js");
 
-const getDBAddresses = async (modelAddress, nameAttribute, modelId) => {
-    let addresses = await modelAddress.findAll({
-        where: { [nameAttribute]: modelId}
+const getDBAddresses = async (userId) => {
+    let addresses = await Address.findAll({
+        where: { userId }
     })
     return addresses
 }
-const dbCreateAddress = async (modelAddress, info, nameAttribute, metodoAdd) => {
+const dbCreateAddress = async (info) => {
+    if (info.personReceives && info.phoneReceives && info.address) {
 
-    if (info.nameUser && info.phoneUser && info.address) {
-        const [address, createdAddress] = await modelAddress.findOrCreate({
-            where: {
-                address: info.address,
-            },
+        return await Address.findOrCreate({
+            where: { address: info.address },
             defaults: info
         })
-        console.log(metodoAdd)
-        if (createdAddress || !address[nameAttribute]) {
-            metodoAdd(address)
-            return `address ${info.address} created successfully`
-        }
-        throw new Error('address already exists')
+
+
     } else {
         throw new Error('missing param')
     }
 }
-const dbUpdateAddress = async (modelAddress, info, id) => {
-    if (info.nameUser && info.phoneUser && info.address) {
-        const address = await modelAddress.findOne({
+const dbUpdateAddress = async (info, id) => {
+    if (info.personReceives && info.phoneReceives && info.address) {
+        delete info.userId
+        const address = await Address.findOne({
             where: { address: info.address }
         })
-        if (!address) {
-            const [response] = await modelAddress.update(
+
+        if (address ? address.id === Math.round(id) : true) {
+            const [response] = await Address.update(
                 info,
                 {
                     where: {
@@ -41,7 +37,7 @@ const dbUpdateAddress = async (modelAddress, info, id) => {
                 }
             );
             if (response) {
-                return `address id:${info.address} updated successfully`;
+                return `address ${info.address} updated successfully`;
             }
             throw new Error('address not found');
         } else {
@@ -51,8 +47,8 @@ const dbUpdateAddress = async (modelAddress, info, id) => {
         throw new Error('missing param')
     }
 }
-const dbDeleteAddress = async (modelAddress, id) => {
-    const response = await modelAddress.destroy({
+const dbDeleteAddress = async (id) => {
+    const response = await Address.destroy({
         where: {
             id,
         },

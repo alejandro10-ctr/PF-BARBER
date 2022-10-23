@@ -6,7 +6,6 @@ const OBJUsers = [
   {
     name: "yeiber",
     lastname: "reyes",
-    birthday: "1998-05-22",
     email: "yeiberey@gmail.com",
     user: "yeiberey",
     password: "123456",
@@ -24,7 +23,16 @@ const getDBUsers = async () => {
 const getDBUserByPk = async (id) => {
   const user = await User.findOne({
     where: { id },
-    include: ['addresses','sales']
+    include: ["addresses",{
+      model: Sale,
+      include: {
+        model: Detailsale,
+        include: {
+          model: Product,
+          include: Image
+        }
+      }
+    }]
   });
   if (!user) {
     throw new Error("user not found");

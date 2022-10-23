@@ -38,10 +38,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    birthday: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
     genre:{
         type: DataTypes.ENUM(["man", "woman","binarie"]),
         allowNull: false,

@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const addressController = require('./addresses')
 const {
   getDBUsers,
   getDBUserByPk,
@@ -51,5 +52,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.use('/', addressController);
 
 module.exports = router;
