@@ -1,5 +1,6 @@
-const { Router, json } = require('express');
+const { Router, json } = require("express");
 // import all routers;
+
 //--------------> Users
 const authController = require('../controllers/auth')
 const userController = require('../controllers/users')
@@ -13,6 +14,11 @@ const scheduleController = require('../controllers/schedules');
 //--------------> Products
 const productController = require('../controllers/product')
 const imageController = require('../controllers/image')
+
+
+
+const authController = require('../controllers/auth')
+const mercadoIndex = require("../controllers/mercadoIndex")
 
 
 
@@ -31,5 +37,11 @@ router.use('/schedules',scheduleController)
 
 router.use('/products', productController)
 router.use('/images', imageController)
+
+
+router.use('/auth', authController)
+router.use('/payments', mercadoIndex)
+
+
 
 module.exports = router;

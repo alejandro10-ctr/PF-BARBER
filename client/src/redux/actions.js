@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const SET_LOADING = "SET_LOADING";
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -11,21 +12,24 @@ export const DELETE_USERS = "DELETE_USERS";
 export const UPDATE_USERS = "UPDATE_USERS";
 export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
-export const SORT_LOWER = "SORT_LOWER";
-export const SORT_HIGH = "SORT_HIGH";
-export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT"
-export const SCORE_LOWER = "SCORE_LOWER"
-export const SCORE_HIGH = "SCORE_HIGH"
-export const TYPES = {
-  ADD_TO_CART : "ADD_TO_CART",
-  REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
-  REMOVE_ALL_FROM_CART : "REMOVE_ALL_FROM_CART",
-  CLEAR_CART : "CLEAR_CART",
+export const PRICE_LOWER = "PRICE_LOWER";
+export const PRICE_HIGH = "PRICE_HIGH";
+export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
+export const FILTER_QUALITY = "FILTER_QUALITY";
+export const FILTER_SHOP = "FILTER_SHOP";
 
-};
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
+export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
+export const GET_LOCALSTORAGE = "GET_LOCALSTORAGE";
+export const ADD_LOCALSTORAGE = "ADD_LOCALSTORAGE"
 
+export const GET_PAYMENTS = "GET_PAYMENTS";
 
-
+// export const SORT_SCORE ="SORT_SCORE";
+// export const SCORE_LOWER = "SCORE_LOWER"
+// export const SCORE_HIGH = "SCORE_HIGH"
 
 
 export function setLoading(value) {
@@ -39,7 +43,7 @@ export function getProducts(errorCallback) {
     try {
       const response = await axios.get(`/products`); //chequeada con yei-barbi
       if (response?.data) {
-        dispatch({ type: GET_PRODUCTS, payload: response.data});
+        dispatch({ type: GET_PRODUCTS, payload: response.data });
       }
     } catch (error) {
       errorCallback && errorCallback(error);
@@ -145,7 +149,7 @@ export function deleteUsers(users, errorCallback) {
 export function updateUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/users/${users.id}`, users);//falta, se agregara..volver a revisar
+      const response = await axios.put(`/users/${users.id}`, users); //falta, se agregara..volver a revisar
       if (response?.data) {
         return dispatch({
           type: UPDATE_USERS,
@@ -175,43 +179,115 @@ export function clearDetail() {
     type: CLEAR_PRODUCTS_DETAILS,
   };
 }
-export function searchProducts(name, errorCallback) {
+export function searchProducts(name) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/products/?name=${name}`);//chequeada con yei-barbi
+      const response = await axios.get(`/products?name=${name}`); //chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
     } catch (error) {
-      dispatch({ type: SEARCH_PRODUCTS, payload: [] });
-      throw alert("Product not found");
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "We don't found the product ☹!",
+      });
+      //return alert("Please search a product")
     }
   };
 }
-export function sortLower(payload) {
+export function priceLower(payload) {
   return {
-    type: SORT_LOWER,
+    type: PRICE_LOWER,
     payload,
   };
 }
 
-export function sortHigh(payload) {
+export function priceHigh(payload) {
   return {
-    type: SORT_HIGH,
+    type: PRICE_HIGH,
     payload,
   };
 }
 
-export function scoreLower(payload) {
+export function filterQuality(payload) {
   return {
-    type: SCORE_LOWER,
+    type: FILTER_QUALITY,
     payload,
   };
 }
 
-export function scoreHigh(payload) {
+export function filterShop(payload) {
   return {
-    type: SCORE_HIGH,
+    type: FILTER_SHOP,
     payload,
   };
 }
+
+// export function scoreLower(payload) {
+//   return {
+//     type: SCORE_LOWER,
+//     payload,
+//   };
+// }
+
+// export function sortScore(payload) {
+//   return {
+//     type: SORT_SCORE,
+//     payload,
+//   };
+// }
+
+
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
+
+export function addToCart(product) {
+  return {
+    type: ADD_TO_CART,
+    payload: product
+  }
+}
+
+export function delFromCart(product, all = false) {
+  if (all === true) {
+    return { type: REMOVE_ITEM_FROM_CART, payload: product };
+  } else {
+    return { type: SUBTRACT_FROM_CART, payload: product };
+  }
+};
+
+export function clearCart() {
+  return {
+    type: CLEAR_CART,
+
+  }
+}
+export function getLocalStorage() {
+  return {
+    type: GET_LOCALSTORAGE,
+  }
+}
+
+export function addLocalStorage(id) {
+  return {
+    type: ADD_LOCALSTORAGE,
+    payload: id
+  }
+}
+
+
+
+  
+
+  export function getPaymentLink(id) {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(`/payments/pay?productId=${id}`,id); 
+        if (response?.data) {
+          dispatch({ type: GET_PAYMENTS, payload: response.data });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+

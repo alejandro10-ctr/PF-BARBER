@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
+
+.search {
+  width: 40%;
+  border-radius: 26px;
+  border: 1px solid #ada9a9;
+  padding: 1% 8%;
+  font-family: "Quicksand", sans-serif;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  outline: 0;
+  background-position: 12px;
+  background-size: 30px;
+  text-align: center;
+
+  font-size: 25px;
+}
+
+.buttonStyle {
+  width: 6%;
+  border-radius: 22px;
+  border: 1px solid #ada9a9;
+  padding: 1% 2%;
+  margin: 1% 1%;
+  outline: 0;
+  background-position: 5px;
+  background-size: 1px;
+  text-align: center;
+  background-color: rgb(253, 252, 252);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: rgba(72, 72, 73, 0.658);
+  font-size: 25px;
+
+  -webkit-box-shadow: #ebe4e094 0px 0px 40px 0px;
+  -moz-box-shadow: #ebe1d95e 0px 0px 40px 0px;
+  box-shadow: #e7dbd293 0px 0px 40px 0px;
+  text-shadow: #f7eee9 1px 1px 1px;
+}
+
+.buttonStyle:hover {
+  border: 1px solid #f3efed77;
+  background: #867a7277;
+  background-image: radial-gradient(
+    circle,
+    #21191d,
+    #2d272c,
+    #3b373c,
+    #48474b,
+    #57575b,
+    #67686c,
+    #77797e,
+    #878b90,
+    #9ca3a8,
+    #b1bbbf,
+    #c8d5d6,
+    #e0eeed
+  );
+  color: #ffc09977;
+  text-decoration: none;
+}

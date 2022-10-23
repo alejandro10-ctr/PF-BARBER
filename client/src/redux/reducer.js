@@ -1,3 +1,4 @@
+
 import {
   SET_LOADING,
   GET_PRODUCTS,
@@ -11,162 +12,50 @@ import {
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
   SEARCH_PRODUCTS,
-  SORT_LOWER,
-  SORT_HIGH,
-  TYPES,
-  SCORE_HIGH,
-  SCORE_LOWER,
+  PRICE_LOWER,
+  PRICE_HIGH,
+  //SORT_SCORE,
+  FILTER_QUALITY,
+  FILTER_SHOP,
+  //TYPES,
+  ADD_TO_CART,
+  SUBTRACT_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
+  CLEAR_CART,
+  GET_LOCALSTORAGE,
+  ADD_LOCALSTORAGE,
+  GET_PAYMENTS
+
 } from "./actions";
 
 const initialState = {
   loading: false,
-  products: [{
-    score: 20,
-    id: 1,
-    name: "Beard Balm",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp"
-  }, {
-    score: 50,
-    id: 3,
-    name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
-    price: 5400,
-    quantity: "Basic",
-    stock: 52,
-    code: "144",
-    image: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg"
-  },
-  {
-    score: 5,
-    id: 5,
-    name: "Edwin Jagger Marfil",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg"
-  },
-  {
-    score: 5230,
-    id: 87435634,
-    name: "Brosh Super Hard Gel 200gr",
-    price: 200,
-    quantity: "Basic",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg"
-  },
-  {
-    score: 530,
-    id: 4,
-    name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg"
-  },
-  {
-    score: 1230,
-    id: 6,
-    name: "Fatip Chrome Slant Double Edge Safety Razor",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg"
-  },
-  {
-    score: 533330,
-    id: 7,
-    name: "Omega Garnet Shaving Bowl",
-    price: 200,
-    quantity: "Basic",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg"
-  },
-  {
-    score: 12333,
-    id: 8,
-    name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
-    price: 200,
-    quantity: "Basic",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg"
-  },
-  {
-    score: 543256,
-    id: 9,
-    name: "Baxter of California Shave Tonic",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg"
-  },
-  {
-    score: 99,
-    id: 1256,
-    name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
-    price: 300,
-    quantity: "Basic",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg"
-  },
-  {
-    score: 583566,
-    id: 1743,
-    name: "Hey Joe Pre Shave Oil 50ml",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg"
-  },
-  {
-    score: 86,
-    id: 654,
-    name: "After Shave BeardLovers",
-    price: 200,
-    quantity: "Basic",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg"
-  },
-  {
-    score: 210,
-    id: 213,
-    name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
-    price: 200,
-    quantity: "Premium",
-    stock: 5,
-    code: "123",
-    image: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg"
-  }
-  ],
-
-
-
+  products: [],
   users: [],
   detail: [],
   allProducts: [],
   cart: [],
   localStorage: [],
+  filterstate: [],
+  error: '',
+  payMercadoPago: ""
+
 };
 
-
 export default function reducer(state = initialState, { type, payload }) {
+  
   switch (type) {
+    case GET_PAYMENTS:
+      return{ ...state, payMercadoPago: {...payload}}
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
-      return { ...state, products: [...payload] };
+      return {
+        ...state,
+        allProducts: [...payload],
+        products: [...payload],
+        filterstate: [...payload],
+      };
     // case CREATE_PRODUCTS:
     //   return { ...state, products: payload };
     case UPDATE_PRODUCTS:
@@ -189,116 +78,209 @@ export default function reducer(state = initialState, { type, payload }) {
         detail: [],
       };
     case SEARCH_PRODUCTS:
-      return { ...state, allProducts: payload };
+      return { ...state, products: payload };
 
-    // case SORT_PRICE:
-    //   const sortPrice = state.products;
-    //   const sortPriceMetod = payload === "lower" ? sortPrice.sort(function (a, b) {
-    //           if (a.price > b.price) {
-    //             return -1;
-    //           }
-    //           if (b.price > a.price) {
-    //             return 1;
-    //           }
-    //           return 0;
-    //         })
-    //       : sortPrice.sort(function (a, b) {
-    //           if (a.price > b.price) {
-    //             return 1;
-    //           }
-    //           if (b.price > a.price) {
-    //             return -1;
-    //           }
-    //           return 0;
-    //         });
-    //   return {
-    //     ...state,
-    //     products: sortPriceMetod,
-    //   };
     //--------------------------SCORE
-    case SCORE_HIGH:
-      let stateScoreLower = state.products
-      return {
-        ...state,
-        products: stateScoreLower.slice().sort((a, b) => {
-
-          return a.score - b.score
-        }).reverse()
-      }
-    case SCORE_LOWER:
-      let stateScoreHigh = state.products
-      return {
-        ...state,
-        products: stateScoreHigh.slice().sort((a, b) => {
-          return a.score - b.score
-        })
-
-      }
+    // case SORT_SCORE:
+    // const sortScore = state.products
+    // const sortByScore = payload === 'bottom' ? sortScore.sort(function (a, b) {
+    //   if (a.score > b.score) {
+    //     return -1;
+    //   }
+    //   if (b.score > a.score) {
+    //     return 1;
+    //   }
+    //   return 0
+    // }) : sortScore.sort(function (a, b) {
+    //   if (a.score > b.score) {
+    //     return 1;
+    //   }
+    //   if (b.score > a.score) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // })
+    // return {
+    //   ...state,
+    //   products: sortByScore
+    // }
     //--------------------------PRICE
-    case SORT_HIGH:
-      let stateProd = state.products
+    case PRICE_HIGH:
+      let stateProd = state.products;
       return {
         ...state,
-        products: stateProd.slice().sort((a, b) => {
-
-          return a.price - b.price
-        }).reverse()
-      }
-    case SORT_LOWER:
-      let statePr = state.products
+        products: stateProd
+          .slice()
+          .sort((a, b) => {
+            return a.price - b.price;
+          })
+          .reverse(),
+      };
+    case PRICE_LOWER:
+      let statePr = state.products;
       return {
         ...state,
         products: statePr.slice().sort((a, b) => {
-          return a.price - b.price
-        })
-
-      }
-
-    case TYPES.ADD_TO_CART: {
-      let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
-      // console.log(newItem)
-      let itemInCart = state.cart.find(item => item.id === newItem.id)
-
+          return a.price - b.price;
+        }),
+      };
+    case "REGISTER_USER": {
+      let newUser = state;
+    }
+// ---------------------> Carrito
+    case ADD_TO_CART: {
+      let itemInCart = state.cart.find(item => item.productId === payload.id)
       return itemInCart ? {
         ...state,
-        cart: state.cart.map(item => item.id === newItem.id ? {
+        cart: state.cart.map(item => item.productId === payload.id && item.quantity+1 <= payload.stock ? {
           ...item,
           quantity: item.quantity + 1
-        } : item)
+        } : item),
+
       }
         :
         {
           ...state,
-          cart: [...state.cart, { ...newItem, quantity: 1 }],
+          cart: [...state.cart,
+          {
+            id: state.cart.length + 1,
+            quantity: 1,
+            iva: 0,
+            description: "",
+            state: 2,
+            descriptionState: "",
+            productId: payload.id,
+            saleId: null,
+            userId: null,
+            product: payload
+          }],
         }
-
     }
-    case TYPES.REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.id === payload);
+    case SUBTRACT_FROM_CART: {
+      let itemToDelete = state.cart.find(item => item.productId === payload.id);
 
-      return itemToDelete.quantity > 1 ? {
+      return itemToDelete?.quantity > 1 ? {
         ...state,
-        cart: state.cart.map(item => item.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
+        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity} : item)
       }
         :
         {
-          ...state,
-          cart: state.cart.filter(item => item.id !== payload)
-        };
+          ...state
+        }
     }
-    case TYPES.REMOVE_ALL_FROM_CART: {
+    case REMOVE_ITEM_FROM_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== payload),
-      }
+        cart: state.cart.filter((item) => item.productId !== payload.id),
+      };
     }
-    case TYPES.CLEAR_CART:
-      return 'shoppingInitialState';
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
 
 
+    case GET_LOCALSTORAGE:
+      const storage = localStorage.getItem("products")
+      return {
+        ...state,
+        cart: storage ? JSON.parse(storage) : []
+      };
 
+    case ADD_LOCALSTORAGE:
+      const prod = state.products.find(item => item.id === payload)
+      console.log('localStorage', prod)
+      return {
+        ...state,
+        cart: localStorage.setItem('products', JSON.stringify(prod))
+      };
+// <------------------------
+
+
+        // cart: state.cart.filter((item) => item.id !== payload),
+      
+  
+    // case FILTER_QUALITY:
+    // const all = state.products;
+    // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
+    // return {
+    //     ...state,
+    //     allProducts: filter //lista que recortamos lo que necesitemos
+    // };
+    // case FILTER_QUALITY: FABRI CAMBIOS ?? 
+    //   const all = state.allProducts;
+    //   const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter
+    //   const filter =
+    //     payload === "default"
+    //       ? all
+    //       : all.filter(
+    //           (r) => r.quality.toLowerCase() === payload.toLowerCase()
+    //         );
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter,
+    //   };
+
+    case FILTER_QUALITY:
+      const all = state.allProducts;
+      const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+      return {
+        ...state,
+        products: filter,
+        filterstate: filter
+      };  
+    case FILTER_SHOP:
+      const allAccesory = state.filterstate;
+
+      const logicFilter =
+        payload === "all"
+          ? allAccesory
+          : allAccesory.filter((r) =>
+              r.name.toLowerCase().includes(payload.toLowerCase())
+            );
+
+      return {
+        ...state,
+        products: logicFilter,
+      };
+
+    // case FILTER_SHOP:
+    //   const allAccesory = state.products;
+
+    //   if (allAccesory) {
+
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       allProducts: logicFilter
+    //     };
+    //   } else if (!allAccesory) {
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       filterstate: logicFilter
+    //     };
+    //   }
+    //-------------error
+    case "FAILURE":
+      return {
+        ...state,
+        error: payload
+      }
+       // error: payload,
+  //}
 
     default:
       return state;
   }
 };
+//}

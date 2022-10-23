@@ -125,6 +125,10 @@ const getProductByName = async (name) => {
       },
     },
   });
+  if (!product.length) {
+    throw new Error("product not found");
+  }
+
   return product;
 };
 const dbCreateProduct = async (info) => {

@@ -1,77 +1,128 @@
-const { User } = require("../db.js");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authConfig = require("../../configs/auth");
+const bcryptjs = require("bcryptjs");
+const { User } = require("../db");
+const { promisify } = require("util");
+const Swal = require("sweetalert2");
+const { getDBUsers } = require("../middlewares/getAllUsers");
+const { transporter } = require("../../configs/mailer");
+//procedimiento para registrarnos
+exports.register = async (req, res) => {
+  const { name, lastname, email, phone, user, password } = req.body;
 
-const singIn = (req, res) => {
-  let { email, password } = req.body;
-  User.findOne({
-    where: {
-      email: email,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).json({ msg: "User doesnt exists" });
-      } else {
-        if (bcrypt.compareSync(password, user.password)) {
-          let token = jwt.sign({ user: user }, authConfig.secret, {
-            expiresIn: authConfig.expires,
-          });
-
-          res.json({
-            user: user,
-            token: token,
-          });
-        } else {
-          res.status(401).send({ msg: "contraseña incorrecta" });
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const singUp = async (req, res) => {
-  //encriptamos la password
-  // if(req.body.password > 6) {
-  //  let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
-  // }else {
-  //     return res.status(404).send('la pass debe tener minimo 6 caracteres')
-  // }
-  let password = bcrypt.hashSync(
-    req.body.password,
-    Number.parseInt(authConfig.rounds)
-  );
-
-  // crea un usuario
   try {
-    const userCreated = await User.create({
-      user: req.body.user,
-      password: password,
-      email: req.body.email,
-      name: req.body.name,
-      lastname: req.body.lastname,
-      phone: req.body.phone,
-      genre: req.body.genre,
-      birthday: req.body.birthday,
-    });
-
-    let token = jwt.sign({ user: userCreated }, authConfig.secret, {
-      expiresIn: authConfig.expires,
-    });
-
-    res.json({
-      user: userCreated,
-      token: token,
-    });
+    if (!name || !lastname || !email || !phone || !user || !password) {
+      return res.status(404).send("Must complete all fields");
+    } else {
+      let passHash = await bcryptjs.hash(req.body.password, 8);
+      await User.create({
+        user: req.body.user,
+        name: req.body.name,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: passHash,
+        phone: req.body.phone,
+        genre: req.body.genre,
+      })
+        .then((user) => {
+          console.log(user);
+          if (!user) {
+            return res.status(404);
+          } else {
+            sendEmail(req.body.email);
+            res.send(
+              "Congratulations, your account has been succesfully created!"
+            );
+            // res.redirect("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(404).send(`Username or Email is already register`);
+        });
+    }
   } catch (error) {
     console.log(error);
+    res.status(404);
   }
 };
 
-module.exports = {
-  singUp,
-  singIn,
+exports.login = async (req, res) => {
+  const { user, password } = req.body;
+  try {
+    if (!user || !password) {
+      return res.status(404).send("Must complete all fields");
+    } else {
+      const userFinded = await User.findOne({
+        where: {
+          user,
+        },
+      });
+      console.log("USUARIO ENCONTRADO:", userFinded);
+      if (
+        userFinded == null ||
+        !(await bcryptjs.compare(password, userFinded.password))
+      ) {
+        res.status(404).send("Incorrect username or password");
+      } else {
+        console.log("USUARIO ENCONTRADO:", userFinded);
+        const id = userFinded.id;
+        const token = jwt.sign({ id: id }, "secretKey");
+        // console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
+        const cookiesOptions = {
+          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+          httpOnly: true,
+        };
+        res.cookie("jwt", token, cookiesOptions);
+        res.send("User successfully logged in");
+        // res.status(200).json({success:true, redirectUrl: '/'})
+      }
+    }
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+exports.isAuthenticated = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    /* VERIFICA EL TOKEN DE LA COOKIE CON EL DEL USUARIO DE LA BASE DE DATOS**/
+    try {
+      const decodificada = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        "secretKey"
+      );
+      console.log(decodificada);
+      const compareUser = await User.findAll({
+        where: {
+          id: [decodificada.id],
+        },
+      });
+      if (!compareUser) {
+        return next();
+      }
+      req.user = compareUser[0];
+      next();
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  } else {
+    res.redirect("/login");
+    next();
+  }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie("jwt");
+  return res.redirect("/");
+};
+
+//
+const sendEmail = async (email) => {
+  await transporter.sendMail({
+    from: '"HENRY BARBER" <foo@example.com>', // sender address
+    to: email, // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
 };
