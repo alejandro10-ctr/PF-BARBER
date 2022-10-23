@@ -2,17 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import { useFormik, yupToFormErrors } from 'formik';
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import * as Yup from "yup";
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
+import PhoneInput from 'react-phone-number-input';
+import MaskedInput from 'react-text-mask';
+import 'react-phone-number-input/style.css';
 import styles from '../Register/Register.module.css';
 
 export default function Register() {
+
     const history = useHistory();
     const phoneRegex = RegExp(
         /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
     );
 
+    const [valuePhone, setPhone] = useState()
 
     const formik = useFormik({
         initialValues: {
@@ -22,6 +28,7 @@ export default function Register() {
             password: "",
             phone: "",
             user: "",
+            genre: "",
 
         },
 
@@ -49,7 +56,7 @@ export default function Register() {
                 .min(8, 'At least 8 chars')
                 .max(15, "Must be between 8 and 15 character"),
 
-            phone: Yup.string().matches(phoneRegex, "Invalid phone").required("Phone is required"),
+            phone: Yup.string().required("Phone is required"),
 
         }),
 
@@ -65,17 +72,23 @@ export default function Register() {
     })
     console.log(formik)
 
-    // const options = [
-    //     { value: 'woman', label: 'Woman' },
-    //     { value: 'man', label: 'Men' },
-    //     { value: 'binarie', label: 'Non-Binarie' }
-    // ]
+    const options = [
+        { value: 'woman', label: 'Woman' },
+        { value: 'man', label: 'Men' },
+        { value: 'binarie', label: 'Non-Binarie' }
+    ]
+
+
+
+
+
+
 
     return (
         <>
             <div className={styles.background}>
-                <form onSubmit={formik.handleSubmit} className={styles.box}> 
-                <h1 className={styles.title}>Create Account</h1>
+                <form onSubmit={formik.handleSubmit} className={styles.box}>
+                    <h1 className={styles.title}>Create Account</h1>
                     <div class="container">
                         <div class="row">
                             <div class="col-sm"> <div className={styles.font}>
@@ -121,7 +134,7 @@ export default function Register() {
 
 
                                 <div className={styles.font}>
-                                    <input id="password" name="password" type="text" placeholder='*******'
+                                    <input id="password" name="password" type="password" placeholder='Password'
                                         class="form-control form-control-lg"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -131,15 +144,45 @@ export default function Register() {
 
 
                                 <div className={styles.font}>
-                                    <input id="phone" name="phone" type="text" placeholder='54 341 3746374'
-                                        class="form-control form-control-lg"
+                                 
+                        
+                                        
+
+
+
+
+                       
+                                       
+
+ <MaskedInput   
+  id="phone" name="phone" type="text" 
+  placeholder='Phone Number'
+ class="form-control form-control-lg"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.phone} />
+                                        value={formik.values.phone}
+                        mask={[ /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]}
+                      />
+     
+     
 
-                                    <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> </div>
+                                    {/* <PhoneInput
+                                        placeholder="Enter phone number"
+                                        value={valuePhone}
+                                        onChange={setPhone}
+                                        id="phone"
+                                        name='phone' */}
+
+                                    {/* onChange={formik.handleChange('phone')}
+                                         onBlur={formik.handleBlur('phone')}
+                                    
+
+                                    /> */}
 
 
+                                    <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span>
+
+                                </div>
                                 <div>
                                 </div>
 
@@ -151,12 +194,12 @@ export default function Register() {
                         <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
                         <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
                     </select> */}
-                        {/* <Select options={options} class="form-control form-control-lg" /> */}
+                        <Select options={options} class="form-control form-control-lg" />
                     </div><br />
                     <div>
                         <div><Link to='/'><button className={styles.buttonblue}>Home</button></Link>
                             <button className={styles.buttonred} type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
-                            </div>
+                        </div>
                     </div>
                 </form>
 
