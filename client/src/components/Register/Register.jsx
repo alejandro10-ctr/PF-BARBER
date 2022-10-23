@@ -31,8 +31,6 @@ export default function Register() {
             password: "",
             phone: "",
             user: "",
-            genre: "",
-
         },
 
 
@@ -163,7 +161,7 @@ export default function Register() {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.phone}
-                            mask={[ /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]}
+                            mask={[ /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
                           />
          
          
