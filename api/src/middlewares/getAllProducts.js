@@ -104,17 +104,17 @@ const getAllProducts = async () => {
 };
 
 const getProductByPk = async (id) => {
-  const product = await Product.findAll({
+  const product = await Product.findOne({
     where: {
       id
     },
     include: Image
   });
 
-  if (!product.length) {
+  if (!product) {
     throw new Error("product not found");
   }
-  return product[0];
+  return product;
 };
 
 const getProductByName = async (name) => {
@@ -133,7 +133,7 @@ const getProductByName = async (name) => {
 };
 const dbCreateProduct = async (info) => {
   await Product.create(info)
-  return `product ${info.name} created`
+  return `product ${info.name} created successfully`
 }
 const dbUpdateProduct = async (info, id) => {
   const [response] = await Product.update(

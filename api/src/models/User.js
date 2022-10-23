@@ -12,45 +12,34 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      user: {
+    user: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isAlpha: {
+            msg: "The user must not contain spaces"
+        },
+        len: {
+            args: [6,50],
+            msg: "The user must only contain at least six letters"
+        }
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+            args: [2,50],
+            msg: "The name must only contain at least two letters"
+        }
+      }
+    },
+    lastname: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-          isAlpha: {
-            msg: "The user must not contain spaces",
-          },
-          len: {
-            args: [6, 50],
-            msg: "The user must only contain at least six letters",
-          },
-        },
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [2, 50],
-            msg: "The name must only contain at least two letters",
-          },
-        },
-      },
-      lastname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      genre: {
-        type: DataTypes.ENUM(["man", "woman", "binarie"]),
-        allowNull: false,
-        validate: {
-          isIn: {
-            args: [["man", "woman", "binarie"]],
-            msg: "You must decide if man, woman or binarie only",
-          },
-        },
-        defaultValue: "binarie",
-      },
+    },
       email: {
         type: DataTypes.TEXT,
         allowNull: false,

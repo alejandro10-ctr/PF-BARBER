@@ -62,28 +62,33 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Appointment, Image, Product, Sale, Schedule, Day, Hour, Service, User } = sequelize.models;
+const { Appointment, Image, Sale, Detailsale, Product, Schedule, Day, Hour, Service, User, Address } = sequelize.models;
 console.log(sequelize.models)
 
-//-----------------------> Sale
-User.hasMany(Sale, { as: "Ventas", foreignKey: "userId" });
+//-----------------------> Address
+User.hasMany(Address)
+Address.belongsTo(User)
+
+User.hasMany(Sale);
 Sale.belongsTo(User);
 
-Sale.belongsToMany(Product, { through: "Sale_Products" })
-Product.belongsToMany(Sale, { through: "Sale_Products" })
+//-----------------------> Sale
+User.hasMany(Detailsale);
+Detailsale.belongsTo(User);
+
+Sale.hasMany(Detailsale)
+Detailsale.belongsTo(Sale)
+
+Product.hasMany(Detailsale)
+Detailsale.belongsTo(Product)
+
 //-------------------------------------> Image
 Product.belongsToMany(Image, { through: "Product_Images", })
-Image.belongsToMany(Product, { through: "Product_Images"})
+Image.belongsToMany(Product, { through: "Product_Images" })
 
 //------------------------> Apointment
-User.hasMany(Appointment, { as: "Appointments", foreignKey: "userId" });
+User.hasMany(Appointment);
 Appointment.belongsTo(User);
-
-Appointment.belongsToMany(Service, { through: "Appointment_Services" })
-Service.belongsToMany(Appointment, { through: "Appointment_Services" })
-
-Service.belongsToMany(Image, { through: "Service_Images" })
-Image.belongsToMany(Service, { through: "Service_Images" })
 
 //-----------------------> Schedule
 Schedule.hasOne(Service)
