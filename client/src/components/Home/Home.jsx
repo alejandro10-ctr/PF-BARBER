@@ -21,8 +21,8 @@ export default function Home() {
         <Button color="dark"><Link className={styles.button} to=""> {" "} Services{" "}  </Link></Button>
         <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  Developers </Link> </Button>
         <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
-        <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button>
-        <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button>
+        {/* <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button> */}
+        {/* <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button> */}
 
 
       </div><br />

@@ -10,15 +10,7 @@ exports.register = async (req, res) => {
   const { name, lastname, email, phone, user, password } = req.body;
 
   try {
-    if (
-      !name ||
-      !lastname ||
-      !email ||
-      !phone ||
-      !user ||
-      !password ||
-      !genre
-    ) {
+    if (!name || !lastname || !email || !phone || !user || !password) {
       return res.status(404).send("Must complete all fields");
     } else {
       let passHash = await bcryptjs.hash(req.body.password, 8);
@@ -29,7 +21,6 @@ exports.register = async (req, res) => {
         email: req.body.email,
         password: passHash,
         phone: req.body.phone,
-        genre: req.body.genre,
       })
         .then((user) => {
           console.log(user);
@@ -70,9 +61,9 @@ exports.login = async (req, res) => {
         userFinded == null ||
         !(await bcryptjs.compare(password, userFinded.password))
       ) {
-        res.status(404).send("Incorrect username or password");
+        return res.status(404).send("Incorrect username or password");
       } else {
-        console.log("USUARIO ENCONTRADO:", userFinded);
+        // console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
         const token = jwt.sign({ id: id }, "secretKey");
         // console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
@@ -81,7 +72,9 @@ exports.login = async (req, res) => {
           httpOnly: true,
         };
         res.cookie("jwt", token, cookiesOptions);
-        res.send("User successfully logged in");
+        // localStorage.setItem("jwt", JSON.stringify(token));
+        console.log(token);
+        return res.json({ msg: "User successfully logged in", data: token });
         // res.status(200).json({success:true, redirectUrl: '/'})
       }
     }
@@ -132,5 +125,22 @@ const sendEmail = async (email) => {
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: "<b>Hello world?</b>", // html body
+  });
+};
+
+exports.isAuth = async (req, res) => {
+  const token = req.headers["authorization"];
+
+  jwt.verify(token, "secretKey", (err, user) => {
+    if (err) {
+      // console.log("SOY EL TOKEM", token);
+      return res
+        .status(403)
+        .json({ msg: "no autorizado", holaaaa: `soy yo ${token}` });
+    } else {
+      console.log("subiendo archivos");
+
+      res.status(200).json({ msg: "exito" });
+    }
   });
 };
