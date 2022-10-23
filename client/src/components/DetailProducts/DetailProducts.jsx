@@ -11,7 +11,7 @@ function DetailProduct({ match }) {
 
   const dispatch = useDispatch();
   const id = match.params.id;
-  console.log(id)
+  console.log('SOY ID',id)
 
   const detailOfProducts = useSelector((state) => state.detail)
   console.log(detailOfProducts)
@@ -44,9 +44,10 @@ const pay = useSelector((state) => state.payMercadoPago)
     <div>
       {/* <Link to="/">Back</Link> */}
 
-      <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
+      {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
 
-      <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
+      {/* <></ target="_blank" rel="noopener" href={pay.init_point} onClick={()=> addToCart(id)> Mercado Pago</a> */}
+      <a target="_blank" rel="noopener" href={pay.init_point} onClick={()=> addToCart(id)}>  Mercado Pago</a>
 
       <hr />
       <Link to="/shop"> See more products! </Link>

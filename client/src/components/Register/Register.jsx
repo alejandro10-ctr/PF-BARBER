@@ -22,7 +22,6 @@ export default function Register() {
             password: "",
             phone: "",
             user: "",
-            genre: "",
 
         },
 
@@ -66,11 +65,11 @@ export default function Register() {
     })
     console.log(formik)
 
-    const options = [
-        { value: 'woman', label: 'Woman' },
-        { value: 'man', label: 'Men' },
-        { value: 'binarie', label: 'Non-Binarie' }
-    ]
+    // const options = [
+    //     { value: 'woman', label: 'Woman' },
+    //     { value: 'man', label: 'Men' },
+    //     { value: 'binarie', label: 'Non-Binarie' }
+    // ]
 
     return (
         <>
@@ -152,7 +151,7 @@ export default function Register() {
                         <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
                         <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
                     </select> */}
-                        <Select options={options} class="form-control form-control-lg" />
+                        {/* <Select options={options} class="form-control form-control-lg" /> */}
                     </div><br />
                     <div>
                         <div><Link to='/'><button className={styles.buttonblue}>Home</button></Link>
