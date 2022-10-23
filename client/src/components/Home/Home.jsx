@@ -2,43 +2,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
+import { Button } from "reactstrap";
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
+
+
+
 export default function Home() {
   return (
     <div className={styles.background}>
-      <div className={styles.title}>
-        {/* <img
-          src="https://w7.pngwing.com/pngs/139/83/png-transparent-scissors-angle-technic-scissors.png"
-          className="tijeraImgen"
-        ></img> */}
-        <h1>BARBER 'S APP</h1>
-      </div>
-      <Carrusel />
-      <br />
 
-      <div className={styles.buttons}>
-        <button className={styles.myButton}><Link to="/AboutUs"> Developers</Link></button>
+      <HomeNavBar/>
+      <div className={styles.title}><h1>BARBER 'S APP</h1>
+    
+      <Carrusel /><br /></div>
+  
+      <div className={styles.buttonLinks}>
 
-        <button className={styles.myButton}><Link to=""> Services </Link></button>
-
-        <button className={styles.myButton}><Link to="/shop"> Shop </Link></button>
-
-        <button className={styles.myButton} ><Link to=""> Sign Up!</Link></button>
-
-        <button className={styles.myButton}><Link to=""> Create Account </Link></button>
-      </div>
+        <Button color="dark"><Link className={styles.button} to=""> {" "} Services{" "}  </Link></Button>
+        <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  Developers </Link> </Button>
+        <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
+        {/* <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button> */}
+        {/* <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button> */}
 
 
-      <br /> 
-
-      <h3>Pay with MercadoPago</h3>
-      <img
-        src="http://d3ugyf2ht6aenh.cloudfront.net/stores/001/718/448/products/d_738371-mla49316492518_032022-f1-ed4272fc0b58b093aa16519683623243-640-0.jpg"
-        width="100"
-        height="100"
-        alt="Mercado de Pago"
-      ></img>
-      <br />
-      <br />
+      </div><br />
+    
+      <h3>  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="white" class="bi bi-credit-card" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+  <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+</svg> You could Pay with MercadoPago <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="white" class="bi bi-credit-card" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+  <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+</svg></h3>
+    
+     
     </div>
   );
 }
