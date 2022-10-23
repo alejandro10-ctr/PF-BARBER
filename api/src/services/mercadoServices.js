@@ -9,18 +9,18 @@ const {
 // } = require("../../../client/src/components/DetailProducts/DetailProducts.jsx");
 
 class PaymentService {
-  async createPayment() {
+  async createPayment(productId) {
     const url = "https://api.mercadopago.com/checkout/preferences";
 
     // const idFront = axios.get
 
     // const products = await getAllProducts();
 
-    // const {name,price,quantiyy} = productoDe
+    const product = await getProductByPk(productId)
 
     const products = [
       {
-        title: "Crema para la barba",
+        title: product,
         description: "Esta es una Crema para la barba premium",
         picture_url:
           "https://images.philips.com/is/image/philipsconsumer/e2c57450f26a40fa8accae7700c13b18?$jpglarge$&wid=960",
