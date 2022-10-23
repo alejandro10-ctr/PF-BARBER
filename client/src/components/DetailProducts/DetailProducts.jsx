@@ -1,55 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail, addToCart, getPaymentLink } from "../../redux/actions";
+import { getProductsDetail, getLocalStorage, updateDBCart, getPaymentLink,} from "../../redux/actions";
+import { CartContext } from "../Shopping/ShoppingCart";
 
 
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
-
+  
+  const { addItemToCart, subtractItemToCart, deleteItemToCart } = useContext(CartContext)
+  const [update, setUpdate] = useState(true)
   const dispatch = useDispatch();
   const id = match.params.id;
-
-  const detailOfProducts = useSelector((state) => state.detail)
-  console.log(detailOfProducts)
-
   const product = useSelector((state) => state.detail)
   const cart = useSelector((state) => state.cart)
-
+  const updateDB = useSelector((state) => state.updateDB)
+  const pay = useSelector((state) => state.payMercadoPago)
+  
   // useEffect(() => {
-  //   dispatch(getProductsDetail(id));
-  // }, [id]);
-
-
+    //   dispatch(getProductsDetail(id));
+    // }, [id]);
+    
+    
   //const filter = allProducts.filter(f => f.description)
   // console.log(filter)
 
-  useEffect(() => {
-    dispatch(getProductsDetail(id))// accedo al id del detalle
-  }, [dispatch]) // muestra recien cuando el componente se monta
 
   // if (!detailOfProducts) return null;
   useEffect(() => {
-    if (Object.keys(product).length) {
-      dispatch(addToCart(product))
+    if (update) {
+      Swal.showLoading()
+      dispatch(getProductsDetail(id))// accedo al id del detalle
+      dispatch(getLocalStorage())
+      setUpdate(false)
     }
-    
-  }, [product])
-  useEffect(() => {
-    let inCar = cart.find((e) => e.productId === Math.round(id))
-    console.log('incar', inCar)
-    if (inCar) {
-      dispatch(getPaymentLink(id))
+  }, [update]) // muestra recien cuando el componente se monta
+  // useEffect(() => {
+  //   if (Object.keys(product).length) {
+  //     addItemToCart(product,1)
+  //   }
+
+  // }, [product])
+  useEffect(async () => {
+    if(cart){
+      let inCar = cart.find((e) => e.productId === Math.round(id))
+      console.log("cart",inCar)
+      
+      if (inCar) {
+        dispatch(await updateDBCart(inCar))
+      }
     }
   }, [cart])
+  
+  useEffect(async () => {
+    // console("updateDB",updateDB)
+    if(updateDB){
+      dispatch(await getPaymentLink(id));
+      Swal.hideLoading()
+    }
+  }, [updateDB])
 
-  const pay = useSelector((state) => state.payMercadoPago)
+
+
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
+      <button onClick={async (e) => {
+        e.preventDefault()
+        Swal.showLoading()
 
+
+
+      }}>ShowAlert</button>
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
       {console.log("pay", pay.init_point)}
       <a target="_blank" rel="noopener" href={pay.init_point + ""} onClick={() => {
@@ -61,10 +86,10 @@ function DetailProduct({ match }) {
 
       {/* Card */}
       <div>
-        <h3>{detailOfProducts.name}</h3>
-        <img src={detailOfProducts.image} alt={detailOfProducts.image} />
-        <h3>Price: ${detailOfProducts.price}</h3>
-        <h3>{detailOfProducts.quality}</h3>
+        <h3>{product.name}</h3>
+        <img src={product.image} alt={product.image} />
+        <h3>Price: ${product.price}</h3>
+        <h3>{product.quality}</h3>
 
 
       </div>

@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import {updateToCart, addToCart, delFromCart, deleteDBCart, updateDBCart } from "../../redux/actions";
 import './ShoppingCart.css'
 
 
@@ -8,6 +11,8 @@ export const CartContext = createContext();
 
 
 export const CartProvider = ({ children }) => {
+    const dispatch = useDispatch();
+
     const [cartItems, setCartItems] = useState(() => {
         try {
             const productosenLocalStorage = localStorage.getItem("products");
@@ -19,10 +24,11 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("products", JSON.stringify(cartItems));
+
     }, [cartItems]);
 
 
-    const addItemToCart = (detailProduct) => {
+    const addItemToCart = (detailProduct, quantity) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.product.id === detailProduct.id
         );
@@ -30,18 +36,21 @@ export const CartProvider = ({ children }) => {
 
         let isShowDialog = false
         if (inCart) {
-            if (inCart.quantity + 1 <= inCart.product.stock) {
-                inCart.quantity++
+            if (quantity ? quantity : inCart.quantity + 1 <= inCart.product.stock) {
+                inCart.quantity = quantity ? quantity : inCart.quantity + 1
                 setCartItems([...cartItems])
+
+                dispatch(updateToCart(cartItems))
+                // dispatch(updateDBCart(inCart))
                 return
             }
             isShowDialog = true
         } else {
 
-            if (1 <= detailProduct.stock) {
-                setCartItems([...cartItems, {
+            if (quantity ? quantity : 1 <= detailProduct.stock) {
+                const detailSale = {
                     id: cartItems.length + 1,
-                    quantity: 1,
+                    quantity: quantity ? quantity : 1,
                     iva: 0,
                     description: "",
                     state: 2,
@@ -51,7 +60,10 @@ export const CartProvider = ({ children }) => {
                     userId: null,
                     product: detailProduct
                 }
-                ])
+                cartItems.push(detailSale)
+                setCartItems([...cartItems])
+                dispatch(updateToCart(cartItems))
+                // dispatch(updateDBCart(detailSale))
                 return
             }
             isShowDialog = true
@@ -67,34 +79,39 @@ export const CartProvider = ({ children }) => {
 
 
     }
-    console.log(cartItems)
 
 
     const subtractItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
+        if (inCart) {
+            if (inCart.quantity > 1) {
+                inCart.quantity--
+                setCartItems([...cartItems])
 
-        if (inCart.quantity > 1) {
-            inCart.quantity--
-            setCartItems([...cartItems])
-        }
-        if (inCart.quantity - 1 === 0) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "You can buy from 1"
-            })
+                dispatch(updateToCart(cartItems))
+                // dispatch(updateDBCart(inCart))
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You can buy from 1"
+                })
+
+            }
         }
     };
     const deleteItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
-        cartItems.splice(cartItems.indexOf(inCart),1)
-        setCartItems([...cartItems]);
+        if (inCart) {
+            // dispatch(deleteDBCart(inCart.id))
+            cartItems.splice(cartItems.indexOf(inCart), 1)
+            setCartItems([...cartItems]);
+            dispatch(updateToCart(cartItems))
 
-        if (inCart.quantity - 1 === 0) {
             Swal.fire({
                 icon: "error",
                 title: "Successfully deleted",

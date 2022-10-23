@@ -149,18 +149,15 @@ const Ecommerce = ({ products, filterstate, allProducts, cart, getLocalStorage,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await addToCart(product)
                       await addItemToCart(product)
                     }}> +🛒 </button>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await delFromCart(product)
                       await subtractItemToCart(product)
                     }}> -🛒 </button>
                     
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await delFromCart(product, true)
                       await deleteItemToCart(product)
                     }}> X🛒 </button>
                     <h3>{findProductCar?.quantity}</h3>

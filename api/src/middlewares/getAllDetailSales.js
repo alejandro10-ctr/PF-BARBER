@@ -19,16 +19,30 @@ const dbCreateDetailSale = async (info, model) => {
         await info.map(async (e) => {
             delete e.saleId
             delete e.userId
+            delete e.product
+            delete e.id
 
-            const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
+            const detailsale = await Detailsale.findAll({
                 where: {
                     productId: e.productId,
                     userId: model.id,
                     saleId: null,
                 },
-                defaults: e
             })
-            return detailsale
+            if(!detailsale){
+                await Detailsale.update(
+                e,
+                {
+                    where: {
+                        id: detailsale.id,
+                    },
+                }
+            )
+            }else{
+                const detailsale = await Detailsale.create(e)
+                detailsale.userId = model.id
+                detailsale.save()
+            }
         })
 
         return "bulk upload detailed sales created successfully"
@@ -36,6 +50,8 @@ const dbCreateDetailSale = async (info, model) => {
         if (info.productId && info.quantity) {
             delete info.saleId
             delete info.userId
+            delete info.product
+            delete info.id
             const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
                 where: {
                     productId: info.productId,
@@ -44,7 +60,17 @@ const dbCreateDetailSale = async (info, model) => {
                 },
                 defaults: info
             })
-            model.addDetailsale(detailsale)
+            // model.addDetailsale(detailsale)
+            if(!isDetailsale){
+                await Detailsale.update(
+                info,
+                {
+                    where: {
+                        id: detailsale.id,
+                    },
+                }
+            );
+            }
             return "detail sale created successfully"
         } else {
             throw new Error('missing param')
@@ -73,11 +99,11 @@ const dbUpdateDetailSale = async (info, id) => {
         throw new Error('missing param')
     }
 }
-const dbDeleteDetailSale = async id => {
-    const response = await Detailsale.destroy({
+const dbDeleteDetailSale = async (id) => {
+    await Detailsale.destroy({
         where: {
             id,
-            saleId: null
+            saleId: null,
         },
     });
     return `detail sale id:${id} deleted successfully`

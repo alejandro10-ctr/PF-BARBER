@@ -18,6 +18,7 @@ import {
   FILTER_QUALITY,
   FILTER_SHOP,
   //TYPES,
+  UPDATE_CART,
   ADD_TO_CART,
   SUBTRACT_FROM_CART,
   REMOVE_ITEM_FROM_CART,
@@ -35,6 +36,7 @@ const initialState = {
   detail: {},
   allProducts: [],
   cart: [],
+  updateDB: false,
   localStorage: [],
   filterstate: [],
   error: '',
@@ -42,7 +44,7 @@ const initialState = {
 
 };
 
-export default function reducer(state = initialState, { type, payload }) {
+export default function reducer(state = initialState, { type, payload ,quantity }) {
   
   switch (type) {
     case GET_PAYMENTS:
@@ -128,11 +130,17 @@ export default function reducer(state = initialState, { type, payload }) {
       let newUser = state;
     }
 // ---------------------> Carrito
+    case UPDATE_CART: {
+      return{
+        ...state,
+        cart: payload
+      }
+    }
     case ADD_TO_CART: {
       let itemInCart = state.cart.find(item => item.productId === payload.id)
       return itemInCart ? {
         ...state,
-        cart: state.cart.map(item => item.productId === payload.id && item.quantity+1 <= payload.stock ? {
+        cart: state.cart.map(item => item.productId === payload.id && quantity?quantity:item.quantity+1 <= payload.stock ? {
           ...item,
           quantity: item.quantity + 1
         } : item),
@@ -141,10 +149,11 @@ export default function reducer(state = initialState, { type, payload }) {
         :
         {
           ...state,
-          cart: [...state.cart,
+          cart: quantity?quantity:1 <= payload.stock?
+          [...state.cart,
           {
             id: state.cart.length + 1,
-            quantity: 1,
+            quantity: quantity?quantity:1,
             iva: 0,
             description: "",
             state: 2,
@@ -153,7 +162,9 @@ export default function reducer(state = initialState, { type, payload }) {
             saleId: null,
             userId: null,
             product: payload
-          }],
+          }]
+          :
+          [...state.cart],
         }
     }
     case SUBTRACT_FROM_CART: {
@@ -186,7 +197,8 @@ export default function reducer(state = initialState, { type, payload }) {
       const storage = localStorage.getItem("products")
       return {
         ...state,
-        cart: storage ? JSON.parse(storage) : []
+        cart: storage ? JSON.parse(storage) : [],
+        updateDB: true
       };
 
     case ADD_LOCALSTORAGE:

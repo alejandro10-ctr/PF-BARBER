@@ -18,6 +18,7 @@ export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
 
+export const UPDATE_CART = 'UPDATE_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
 export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
@@ -240,27 +241,45 @@ export function filterShop(payload) {
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
 
-export function addToCart(product) {
-  return async (dispatch)=>{
-  
+
+export function updateDBCart(cart) {
+  return async () => {
     try {
-      const response = await axios.post(`/detailsales/user/${1}`,{
-        quantity: 4,
-        productId: product.id
-    }); 
-      if (response?.data) {
-        dispatch({
-          type: ADD_TO_CART,
-          payload: product});
-      }
+      console.log("updateDB",cart)
+      return await axios.post(`/detailsales/user/${1}`, cart)
+
     } catch (error) {
-      
+      return error
+    }
+  }
+
+} export function deleteDBCart(id) {
+  return async () => {
+    try {
+      return await axios.delete(`/detailsales/${id}`)
+
+    } catch (error) {
+      return error
     }
   }
 }
+export function updateToCart(cart) {
+  return {
+    type: UPDATE_CART,
+    payload: cart,
+  }
+}
+export function addToCart(product, quantity) {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+    quantity
+  }
+}
+
 
 export function delFromCart(product, all = false) {
-  if (all === true) {
+  if (all) {
     return { type: REMOVE_ITEM_FROM_CART, payload: product };
   } else {
     return { type: SUBTRACT_FROM_CART, payload: product };
@@ -288,18 +307,18 @@ export function addLocalStorage(id) {
 
 
 
-  
 
-  export function getPaymentLink(productId, userId) {
-    return async (dispatch) => {
-      try {
-        const response = await axios.get(`/payments/pay?productId=${productId}&userId=${1}`); 
-        if (response?.data) {
-          dispatch({ type: GET_PAYMENTS, payload: response.data });
-        }
-      } catch (error) {
-        console.log(error);
+
+export function getPaymentLink(productId, userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/payments/pay?productId=${productId}&userId=${1}`);
+      if (response?.data) {
+        dispatch({ type: GET_PAYMENTS, payload: response.data });
       }
-    };
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
