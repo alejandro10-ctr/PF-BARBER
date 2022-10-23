@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
 import { Button } from "reactstrap";
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
+
+
+
 export default function Home() {
   return (
     <div className={styles.background}>
+
+      <HomeNavBar/>
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>
