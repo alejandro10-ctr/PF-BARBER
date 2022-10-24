@@ -2,14 +2,8 @@
 import {
   SET_LOADING,
   GET_PRODUCTS,
-  CREATE_PRODUCTS,
-  UPDATE_PRODUCTS,
-  DELETE_PRODUCTS,
   GET_USER,
-  CREATE_USERS,
   GET_USERS,
-  UPDATE_USERS,
-  DELETE_USERS,
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
   SEARCH_PRODUCTS,
@@ -58,22 +52,10 @@ export default function reducer(state = initialState, { type, payload, quantity 
         products: [...payload],
         filterstate: [...payload],
       };
-    // case CREATE_PRODUCTS:
-    //   return { ...state, products: payload };
-    case UPDATE_PRODUCTS:
-      return { ...state, products: payload };
-    case DELETE_PRODUCTS:
-      return { ...state, products: payload };
     case GET_USER:
       return { ...state, user: payload };
-    case CREATE_USERS:
-      return { ...state, users: payload };
     case GET_USERS:
       return { ...state, users: payload };
-    case UPDATE_USERS:
-      return { ...state, users: payload };
-    case DELETE_USERS:
-      return { ...state };
     case GET_DETAILPRODUCT:
       return { ...state, detail: payload };
     case CLEAR_PRODUCTS_DETAILS:
@@ -128,12 +110,8 @@ export default function reducer(state = initialState, { type, payload, quantity 
           return a.price - b.price;
         }),
       };
-    case "REGISTER_USER": {
-      let newUser = state;
-    }
     // ---------------------> Carrito
     case UPDATE_CART: {
-      console.log("cartReducer",payload)
       return {
         ...state,
         cart: payload,

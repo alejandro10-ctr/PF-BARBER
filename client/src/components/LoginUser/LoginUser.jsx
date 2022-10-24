@@ -61,16 +61,16 @@ export default function LoginUser() {
                         <div>
                         <h1 className={styles.title}>Sign in!</h1>
                             <input id="user" name="user" type="text" placeholder='Nickname'
-                                class="form-control form-control-lg"
+                                className="form-control form-control-lg"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.user}
                             />  <span>{formik.touched.user && formik.errors.user ? <label className={styles.errors}>{formik.errors.user}</label> : null}<br /></span> </div>
     
                         {/*  Password input  */}
-                        <div class="form-outline mb-4">
+                        <div className="form-outline mb-4">
                             <input id="password" name="password" type="password" placeholder='Password'
-                                class="form-control form-control-lg"
+                                className="form-control form-control-lg"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.password} />

@@ -41,7 +41,6 @@ class PaymentService {
         };
       });
     }
-    console.log(products)
 
     const body = {
       payer_email: "",

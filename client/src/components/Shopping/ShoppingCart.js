@@ -41,12 +41,6 @@ export const CartProvider = ({ children }) => {
     }
     const [userId, setUserId] = useState(verificar());
 
-
-
-
-    console.log("soy el id ShoppingCart", userId);
-
-
     const [isSaveDB, setSaveDB] = useState(() => {
         try {
             const SaveDBLocalStorage = localStorage.getItem("isSaveDB");
@@ -68,9 +62,9 @@ export const CartProvider = ({ children }) => {
         if (!isSaveDB && userId) {
             setSaveDB(true);
             //crear en db el carrito 1 sola vez
-            console.log("guardado el carrito ----> DB");
+           //"guardado el carrito ----> DB"
             dispatch(createDBCart(cartItems, userId));
-            console.log("obteniendo carrito ----> DB");
+            //"obteniendo carrito ----> DB"
             Swal.showLoading();
             setTimeout(() => dispatch(getDBCart(userId)), 1000);
         }
@@ -79,7 +73,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         if (userId) {
             setCartItems([...cart]);
-            console.log("finalCartDB", cart);
+            //"finalCartDB"
             Swal.hideLoading("Listo");
         }
     }, [cart]);
@@ -130,7 +124,7 @@ export const CartProvider = ({ children }) => {
                 setCartItems([...cartItems]);
                 if (userId) {
                     dispatch(createDBCart(detailSale, userId));
-                    console.log("obteniendo carrito ----> DB");
+                    //"obteniendo carrito ----> DB"
                     Swal.showLoading();
                     setTimeout(() => dispatch(getDBCart(userId)), 1000);
                 } else dispatch(updateToCart(cartItems));

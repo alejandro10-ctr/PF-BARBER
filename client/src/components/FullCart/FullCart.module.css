@@ -94,3 +94,23 @@ h5{
 
 
 }
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 0;
+    background-color: #026773;
+    text-align: center;
+    color: white;
+    width: 240px;
+    height: auto;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    text-decoration: none;
+  }
+  
+  .button:hover {
+    background-color: #08a1b1;
+    transition: 500ms;
+  }

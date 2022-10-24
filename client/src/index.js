@@ -5,6 +5,7 @@ import App from "./App";
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "./redux/index.js";
+import { CartProvider } from "./components/Shopping/ShoppingCart";
 import "./index.css";
 // import * as dotenv from "dotenv";
 // dotenv.config();
@@ -17,7 +18,9 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </Switch>
       </BrowserRouter>
     </Provider>
