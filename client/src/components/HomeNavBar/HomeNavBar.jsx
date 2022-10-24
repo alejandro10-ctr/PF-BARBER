@@ -23,7 +23,7 @@ export default function HomeNavBar(user) {
 
                     <ul class="navbar-nav d-flex flex-row">
                         <li class="nav-item me-3 me-lg-0">
-                            <span>{userId?user?.user?.name+" Welcome":"Welcome to Barber"}</span>
+                            <span>{userId?" Welcome "+user?.user?.name+" 👋" :"Welcome to Barber"}</span>
                         </li>
                     </ul>
 
@@ -70,6 +70,8 @@ export default function HomeNavBar(user) {
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
+
+                        
                         <ul class="navbar-nav d-flex flex-row">
                             {/*--------- logout---------- */}
                             {/* <li class="nav-item me-3 me-lg-0">

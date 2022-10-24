@@ -1,21 +1,48 @@
-import React, { useContext } from "react"
+import React, {useContext, useEffect} from "react"
 import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
 import { Button } from "reactstrap";
 import HomeNavBar from "../HomeNavBar/HomeNavBar";
 import { CartContext } from "../Shopping/ShoppingCart";
+import {
+  getDBUser,
+  getDBCart,
+} from "../../redux/actions";
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
 export default function Home() {
 
   const { userId } = useContext(CartContext)
+  const dispatch = useDispatch()
+  const user = useSelector((state)=> state.user)
 
+  console.log('soy user antes', user)
+
+
+
+    useEffect(() => {
+      if (userId) {
+        dispatch(getDBUser(userId))
+        dispatch(getDBCart(userId))
+        }
+    }, []);
+  
+
+  // if(userId) {
+  //   // getDBCart(userId)
+  //   // getDBUser(userId)
+  //   dispatch(getDBUser(userId))
+  //   dispatch(getDBCart(userId))
+  // }
+
+  
   return (
     <div className={styles.background}>
-      {console.log('SOY USER IDDDDD', userId)}
-      <HomeNavBar />
+      {/* user={{name: 'holi'}} */}
+      <HomeNavBar user={user}/>
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>
@@ -38,7 +65,6 @@ export default function Home() {
   <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
   <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
 </svg></h3>
-
     
      
     </div>
