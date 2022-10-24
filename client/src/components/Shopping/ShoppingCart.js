@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
         Swal.hideLoading("Listo");
     }, [cart]);
     //-----------------> Login
-    const logIn = () => {
+    const verificar = () => {
         setUserId(() => {
             try {
                 const cookies = new Cookies();
@@ -94,9 +94,14 @@ export const CartProvider = ({ children }) => {
                 return 0;
             }
         })
+
+    }
+    const logIn = () => {
+        verificar()
         setSaveDB(false);
     };
     const SignOff = () => {
+        verificar()
         setCartItems([]);
         dispatch(updateToCart([]));
     };
