@@ -3,9 +3,9 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail, getLocalStorage, getDBCart, updateDBCart, getPaymentLink,} from "../../redux/actions";
+import { getProductsDetail, getLocalStorage, getDBCart, updateDBCart, getPaymentLink, getDBUser} from "../../redux/actions";
 import { CartContext } from "../Shopping/ShoppingCart";
-
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
 
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
@@ -57,11 +57,25 @@ function DetailProduct({ match }) {
     }
   }, [cart])
 
+  const { userId } = useContext(CartContext)
 
+  const user = useSelector((state)=> state.user)
+
+  console.log('soy user antes', user)
+
+
+
+    useEffect(() => {
+      if (userId) {
+        dispatch(getDBUser(userId))
+        dispatch(getDBCart(userId))
+        }
+    }, []);
 
 
   return (
     <div>
+      <HomeNavBar user={user}/>
       {/* <Link to="/">Back</Link> */}
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
       {console.log("pay", pay.init_point)}

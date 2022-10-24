@@ -43,20 +43,8 @@
   border: 1px solid #f3efed77;
   background: #867a7277;
   background-image: radial-gradient(
-    circle,
-    #21191d,
-    #2d272c,
-    #3b373c,
-    #48474b,
-    #57575b,
-    #67686c,
-    #77797e,
-    #878b90,
-    #9ca3a8,
-    #b1bbbf,
-    #c8d5d6,
-    #e0eeed
+ 
   );
-  color: #ffc09977;
+  color: #3a393877;
   text-decoration: none;
 }

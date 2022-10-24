@@ -4,14 +4,13 @@ import DetailProduct from "./components/DetailProducts/DetailProducts";
 import Ecommerce from "./components/Ecommerce/Ecommerce";
 import Home from "./components/Home/Home.jsx";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
-
 import MercadoPago from "./components/MercadoPago/MercadoPago";
-
 import Register from "./components/Register/Register.jsx";
 import LoginUser from "./components/LoginUser/LoginUser";
 import { CartProvider } from "./components/Shopping/ShoppingCart";
 
 import "./App.css";
+import ItemCart from "./components/FullCart/FullCart";
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -20,6 +19,9 @@ import "./App.css";
 // Top level App component
 //import { ProvideAuth } from "./use-auth.js";
 //holi
+
+
+
 
 function App() {
   return (
@@ -46,6 +48,13 @@ function App() {
         <Route exact path="/payments/pay">
           <MercadoPago />
         </Route>
+
+        <Route exact path="/cart">
+          <ItemCart />
+        </Route>
+
+     
+
 
         <Route
           exact
