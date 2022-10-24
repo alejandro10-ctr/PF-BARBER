@@ -14,21 +14,12 @@ class PaymentService {
     // const products = await getAllProducts();
 
     const car = await getDBDetailSales(userId);
-    const carr = car.map((e) => {
-      return {
-        title: e.product.name,
-        description: e.product.description,
-        picture_url: e.product.image,
-        category_id: e.product.quality,
-        quantity: e.quantity,
-        unit_price: e.product.price,
-      };
-    });
-    const productDetail = await car.find(
-      (productDetail) => productDetail.productId === Math.round(productId)
-    );
-    if (productId) {
-      const products = [
+    let products
+    if (Math.round(productId)) {
+      const productDetail = await car.find(
+        (productDetail) => productDetail.productId === Math.round(productId)
+      );
+      products = [
         {
           title: productDetail.product.name,
           description: productDetail.product.description,
@@ -39,8 +30,18 @@ class PaymentService {
         },
       ];
     } else {
-      const products = carr;
+      products = car.map((e) => {
+        return {
+          title: e.product.name,
+          description: e.product.description,
+          picture_url: e.product.image,
+          category_id: e.product.quality,
+          quantity: e.quantity,
+          unit_price: e.product.price,
+        };
+      });
     }
+    console.log(products)
 
     const body = {
       payer_email: "",
