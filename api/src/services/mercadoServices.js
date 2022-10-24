@@ -1,7 +1,5 @@
 const axios = require("axios");
-const {
-  getDBDetailSales
-} = require("../middlewares/getAllDetailSales.js");
+const { getDBDetailSales } = require("../middlewares/getAllDetailSales.js");
 
 // const {
 //   id,
@@ -15,18 +13,34 @@ class PaymentService {
 
     // const products = await getAllProducts();
 
-    const car = await getDBDetailSales(userId)
-    const productDetail = await car.find((productDetail) => productDetail.productId === Math.round(productId))
-    const products = [
-      {
-        title: productDetail.product.name,
-        description: productDetail.product.description,
-        picture_url: productDetail.product.image,
-        category_id: productDetail.product.quality,
-        quantity: productDetail.quantity,
-        unit_price: productDetail.product.price,
-      },
-    ];
+    const car = await getDBDetailSales(userId);
+    const carr = car.map((e) => {
+      return {
+        title: e.product.name,
+        description: e.product.description,
+        picture_url: e.product.image,
+        category_id: e.product.quality,
+        quantity: e.quantity,
+        unit_price: e.product.price,
+      };
+    });
+    const productDetail = await car.find(
+      (productDetail) => productDetail.productId === Math.round(productId)
+    );
+    if (productId) {
+      const products = [
+        {
+          title: productDetail.product.name,
+          description: productDetail.product.description,
+          picture_url: productDetail.product.image,
+          category_id: productDetail.product.quality,
+          quantity: productDetail.quantity,
+          unit_price: productDetail.product.price,
+        },
+      ];
+    } else {
+      const products = carr;
+    }
 
     const body = {
       payer_email: "",
