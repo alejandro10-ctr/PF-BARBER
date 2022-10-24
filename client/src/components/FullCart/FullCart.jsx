@@ -120,6 +120,8 @@ export default function ItemCart ()  {
            <div>
             <h3>Total to pay ${total}</h3>
             <h3><a href="/payments/pay/">Pay</a></h3>
+            <button><Link to='/'>Home</Link></button>
+
            </div>
     </div>
 
