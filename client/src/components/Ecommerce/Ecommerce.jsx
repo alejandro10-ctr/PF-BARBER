@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import React, { useEffect, useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
+import HomeNavBar from "../HomeNavBar/HomeNavBar"
 import ProductItem from "../Shopping/ProductsItem";
 import {
   getProducts,
@@ -69,6 +70,7 @@ const Ecommerce = ({ products, filterstate, allProducts, user, cart,
   const max = Math.ceil(products.length / productsPerPage); //max pag posible REDONDE HACIA ARRIBA 
   const sliceProduct = products.slice((pag - 1) * productsPerPage,
     ((pag - 1) * productsPerPage) + productsPerPage)// corte de elementos x pag
+    
 
   //-----sort
   function handleSort(sort) {
@@ -98,16 +100,18 @@ const Ecommerce = ({ products, filterstate, allProducts, user, cart,
     setCategory(shop.target.value)
   }
 
+
   return (
     <div>
+      <HomeNavBar user={user}/>
       <br />
       <div>
         {console.log('soy el id de Ecommerce', userId)}
 
         {/* <h1>token decode {tokenDecode}</h1> */}
        
-
-        <h2>{userId?user?.name+" Welcome":"Welcome to Barber"}</h2>
+      {console.log('soy userId', userId)}
+        {/* <h2>{userId?user?.name+" Welcome":"Welcome to Barber"}</h2> */}
         <Link to='/'><button className={s.button}>Home</button></Link>
 
 

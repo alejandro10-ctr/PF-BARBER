@@ -1,17 +1,21 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
 import { Button } from "reactstrap";
 import HomeNavBar from "../HomeNavBar/HomeNavBar";
+import { CartContext } from "../Shopping/ShoppingCart";
 
 
 
 export default function Home() {
+
+  const { userId } = useContext(CartContext)
+
   return (
     <div className={styles.background}>
-
-      <HomeNavBar/>
+      {console.log('SOY USER IDDDDD', userId)}
+      <HomeNavBar />
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>
@@ -34,6 +38,7 @@ export default function Home() {
   <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
   <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
 </svg></h3>
+
     
      
     </div>

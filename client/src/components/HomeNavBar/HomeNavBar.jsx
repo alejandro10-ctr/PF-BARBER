@@ -5,20 +5,33 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
 
-export default function HomeNavBar() {
+export default function HomeNavBar(user) {
     const { SignOff} = useContext(CartContext)
+    const { userId } = useContext(CartContext)
+    const userName = user
 
     const cookies = new Cookies()
 
     if (cookies.get('token')) {
 
         return (
-            <div>
+            <div >
+                {console.log('soy user', userName)}
+                {/* <h2>{userId?user?.user.name+" Welcome":"Welcome to Barber"}</h2> */}
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
+
+                    <ul class="navbar-nav d-flex flex-row">
+                        <li class="nav-item me-3 me-lg-0">
+                            <span>{userId?user?.user?.name+" Welcome":"Welcome to Barber"}</span>
+                        </li>
+                    </ul>
+
                         <ul class="navbar-nav d-flex flex-row">
 
                             <li class="nav-item me-3 me-lg-0">
+
+                            {/* <h2>{userId?user?.name+" Welcome":"Welcome to Barber"}</h2> */}
 
                                 <a onClick={()=>{
                                     cookies.remove('token')
