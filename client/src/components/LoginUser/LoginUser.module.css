@@ -1,0 +1,146 @@
+
+
+.conteiner{
+   margin-left: 0%;
+   padding: 2%;
+   margin-top: 5%;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	background-color: #f0f0f067;
+	height:23em;
+	width: 400px;
+	display:-webkit-box;
+	display:-ms-flexbox;
+    position:relative;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	-ms-flex-direction:column;
+	flex-direction:column;
+  
+	-webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+	border-radius:65px;
+
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
+
+
+.background{
+    background-image: url('design.jfif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    margin: 0% 0%;
+    text-align: center;
+    background-position-x: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.title{
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px #8a9bff; 
+}
+
+ .font{
+  
+    font-size: 22px;
+    color: rgb(61, 60, 60);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+   
+ }
+
+.errors{
+  
+    color: rgb(209, 15, 15);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+ .buttonred {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 0px solid #1a0b0ba2;
+    box-shadow: 5px 5px 5px 0px rgba(8, 7, 7, 0.897); 
+    border-radius: 12px;
+    background: #a12432f1;
+    font-family: 'Quicksand', sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    margin:4%
+}
+.buttonred:hover,
+.buttonred:focus {
+    border: 0px solid #bc1727;
+    background: #c77481;
+    color: #ffffff;
+    text-decoration: none;
+}
+.buttonred:active {
+    background: #a01421;
+
+}
+.buttonred:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: -1px;
+    left: -4px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABRUlEQVRIie3Vvy4EURQG8J+lENkoZOuNUs0LrAcgIjriCcQjSFTiKYQXEEF0ZCuFeADV2qi2kSgQxRjF3okxuZndNVR8ySTnzz3fd+6fnOEfQ6CD9Je+zlgwMpzhpmLDC1jOB1Kco4tXbKP2DeIatvCMh8CZZgI7mMFx8E/RGIG8gZNQexL83aJAsYsuWkOQt8R3vxMTyDCPO7yFTiYixLVQ9xbWzhfypQJQxwEStNHM5Zq4CrlDTEfqo0cUwwae0MOK/gvphdhmSd3AHeQxh9vQcRLsuQE1s8IdDiMAk9jDfrBjTUzFCocVKMOa/mW3Re6jqkBGno2Htv4D+RGBVZ+dp7jO+XW+NxLyeMElloJ/gXU84j1bVPWIsiaLE+GrUQHvOXu8GMtGwGJIJoXFSa4owRHuS8SSWHCUH06rhPwnnvtfxAfB3n/1XSa1RAAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
+ .buttonred{
+    margin:4%
+ }
+
+ 
+/* //blue */
+
+.buttonblue {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 0px solid #1a0b0ba2;
+    box-shadow: 5px 5px 5px 0px rgba(8, 7, 7, 0.897); 
+    border-radius: 12px;
+    background: #102e81f1;
+    font-family: 'Quicksand', sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    margin:4%;
+    width: 126.71px;
+}
+.buttonblue:hover,
+.buttonblue:focus {
+    border: 0px solid #171abc;
+    background: #7487c7;
+    color: #ffffff;
+    text-decoration: none;
+}
+.buttonblue:active {
+    background: #1422a0;
+
+}
+
+
+ .buttonblue{
+    margin:4%
+ }

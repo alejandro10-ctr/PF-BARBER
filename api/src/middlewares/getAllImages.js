@@ -4,7 +4,7 @@ const getAllImage = async where => {
     return await Image.findAll(where);
 }
 
-const dbCreateImage = async ({ urlImage }, product) => {
+const dbCreateImage = async ({ urlImage }, model) => {
     if (urlImage) {
         const [image, isCreated] = await Image.findOrCreate({
             where: {
@@ -12,7 +12,7 @@ const dbCreateImage = async ({ urlImage }, product) => {
             }
         })
         if (isCreated) {
-            product.addImage(image)
+            model.addImage(image)
             return "image created"
         }
         return "image already exists"

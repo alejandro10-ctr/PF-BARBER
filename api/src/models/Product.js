@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       },
       quality: {
         type: DataTypes.ENUM(["basic", "premium"]),
-        allowNull: false,
+        defaultValue: "basic",
         validate: {
           isIn: {
             args: [["basic", "premium"]],
@@ -36,7 +36,6 @@ module.exports = (sequelize) => {
 
       image: {
         type: DataTypes.TEXT,
-        allowNull: false,
         defaultValue:
           "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
       },
