@@ -25,26 +25,28 @@ export const CartProvider = ({ children }) => {
             return [];
         }
     });
-    const [userId, setUserId] = useState(() => {
-        try {
-            const cookies = new Cookies();
-            const token = cookies.get("token");
-            if(token){
-                const tokenDecode = jwt_decode(token);
-                return tokenDecode.id
+    const verificar = () => {
+            try {
+                const cookies = new Cookies();
+                const token = cookies.get("token");
+                if (token) {
+                    const tokenDecode = jwt_decode(token);
+                    return tokenDecode.id
+                }
+                return 0;
+            } catch (error) {
+                return 0;
             }
-            return 0;
-        } catch (error) {
-            return 0;
-        }
-    });
+
+    }
+    const [userId, setUserId] = useState(verificar());
 
 
 
 
-  console.log("soy el id ShoppingCart", userId);
+    console.log("soy el id ShoppingCart", userId);
 
-    
+
     const [isSaveDB, setSaveDB] = useState(() => {
         try {
             const SaveDBLocalStorage = localStorage.getItem("isSaveDB");
@@ -59,7 +61,7 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
     useEffect(() => {
-        
+
     }, [userId]);
     useEffect(() => {
         localStorage.setItem("isSaveDB", isSaveDB);
@@ -75,33 +77,19 @@ export const CartProvider = ({ children }) => {
     }, [isSaveDB]);
 
     useEffect(() => {
-        setCartItems([...cart]);
-        console.log("final");
-        Swal.hideLoading("Listo");
+        if (userId) {
+            setCartItems([...cart]);
+            console.log("final", cart);
+            Swal.hideLoading("Listo");
+        }
     }, [cart]);
     //-----------------> Login
-    const verificar = () => {
-        setUserId(() => {
-            try {
-                const cookies = new Cookies();
-                const token = cookies.get("token");
-                if(token){
-                    const tokenDecode = jwt_decode(token);
-                    return tokenDecode.id
-                }
-                return 0;
-            } catch (error) {
-                return 0;
-            }
-        })
-
-    }
     const logIn = () => {
-        verificar()
+        setUserId(verificar())
         setSaveDB(false);
     };
     const SignOff = () => {
-        verificar()
+        setUserId(verificar())
         setCartItems([]);
         dispatch(updateToCart([]));
     };

@@ -7,6 +7,7 @@ import ProductItem from "../Shopping/ProductsItem";
 import {
   getProducts,
   createProducts,
+  getDBUser,
   priceLower,
   priceHigh,
   filterQuality,
@@ -20,9 +21,10 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
-const Ecommerce = ({ products, filterstate, allProducts, cart, 
+const Ecommerce = ({ products, filterstate, allProducts, user, cart, 
   getProducts,
   createProducts,
+  getDBUser,
   priceLower,
   priceHigh,
   filterQuality,
@@ -43,10 +45,18 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
     if (state) {
       setState(false)
       getProducts()
-      if(userId) getDBCart(userId) 
+      if(userId) {
+        getDBCart(userId)
+        getDBUser(userId)
+      }
       else getLocalStorage()
     }
   }, [state]);
+  useEffect(() => {
+    if (Object.keys(user).length) {
+
+    }
+  }, [user]);
 
 
   const [categorySelected, setCategory] = useState('all')
@@ -97,8 +107,8 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
         {/* <h1>token decode {tokenDecode}</h1> */}
        
 
+        <h2>{userId?user?.name+" Welcome":"Welcome to Barber"}</h2>
         <Link to='/'><button className={s.button}>Home</button></Link>
-        <button className={s.button}>{userId?"Cerrar sesión":"Iniciar sesión"}</button>
 
 
         {/* Searchbar */}
@@ -221,10 +231,11 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
   );
 }
 
-export const mapStateToProps = ({ products, allProducts, filterstate, cart }) => {
+export const mapStateToProps = ({ products, allProducts, user, filterstate, cart }) => {
   return {
     products,
     allProducts,
+    user,
     filterstate,
     cart
   }
@@ -233,6 +244,7 @@ export const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getProducts,
     createProducts,
+    getDBUser,
     priceLower,
     priceHigh,
     filterQuality,

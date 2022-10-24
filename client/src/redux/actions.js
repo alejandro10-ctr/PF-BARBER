@@ -6,6 +6,7 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const CREATE_PRODUCTS = "CREATE_PRODUCTS";
 export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
 export const DELETE_PRODUCTS = "DELETE_PRODUCTS";
+export const GET_USER = "GET_USER";
 export const CREATE_USERS = "CREATE_USERS";
 export const GET_USERS = "GET_USERS";
 export const DELETE_USERS = "DELETE_USERS";
@@ -96,6 +97,21 @@ export function deleteProducts(product, errorCallback) {
       }
     } catch (error) {
       errorCallback && errorCallback(error);
+    }
+  };
+}
+export function getDBUser(userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/${userId}`); //chequeada con yei-barbi
+      if (response?.data) {
+        return dispatch({
+          type: GET_USER,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      return error
     }
   };
 }
@@ -241,10 +257,8 @@ export function filterShop(payload) {
 export function getDBCart(userId) {
   return async (dispatch) => {
     try {
-      console.log("userId",userId)
       const response = await axios.get(`/detailsales/user/${userId}`);
       if (response?.data) {
-        console.log("responseBDCar", response)
         dispatch({ type: UPDATE_CART, payload: response.data });
       }
     } catch (error) {

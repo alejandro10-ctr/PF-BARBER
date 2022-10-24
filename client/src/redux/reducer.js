@@ -5,6 +5,7 @@ import {
   CREATE_PRODUCTS,
   UPDATE_PRODUCTS,
   DELETE_PRODUCTS,
+  GET_USER,
   CREATE_USERS,
   GET_USERS,
   UPDATE_USERS,
@@ -31,6 +32,7 @@ import {
 const initialState = {
   loading: false,
   products: [],
+  user: {},
   users: [],
   detail: {},
   allProducts: [],
@@ -42,11 +44,11 @@ const initialState = {
 
 };
 
-export default function reducer(state = initialState, { type, payload ,quantity }) {
-  
+export default function reducer(state = initialState, { type, payload, quantity }) {
+
   switch (type) {
     case GET_PAYMENTS:
-      return{ ...state, payMercadoPago: {...payload}}
+      return { ...state, payMercadoPago: { ...payload } }
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
@@ -62,6 +64,8 @@ export default function reducer(state = initialState, { type, payload ,quantity 
       return { ...state, products: payload };
     case DELETE_PRODUCTS:
       return { ...state, products: payload };
+    case GET_USER:
+      return { ...state, user: payload };
     case CREATE_USERS:
       return { ...state, users: payload };
     case GET_USERS:
@@ -127,10 +131,10 @@ export default function reducer(state = initialState, { type, payload ,quantity 
     case "REGISTER_USER": {
       let newUser = state;
     }
-// ---------------------> Carrito
+    // ---------------------> Carrito
     case UPDATE_CART: {
       console.log(payload)
-      return{
+      return {
         ...state,
         cart: payload
       }
@@ -139,7 +143,7 @@ export default function reducer(state = initialState, { type, payload ,quantity 
       let itemInCart = state.cart.find(item => item.productId === payload.id)
       return itemInCart ? {
         ...state,
-        cart: state.cart.map(item => item.productId === payload.id && quantity?quantity:item.quantity+1 <= payload.stock ? {
+        cart: state.cart.map(item => item.productId === payload.id && quantity ? quantity : item.quantity + 1 <= payload.stock ? {
           ...item,
           quantity: item.quantity + 1
         } : item),
@@ -148,22 +152,22 @@ export default function reducer(state = initialState, { type, payload ,quantity 
         :
         {
           ...state,
-          cart: quantity?quantity:1 <= payload.stock?
-          [...state.cart,
-          {
-            id: state.cart.length + 1,
-            quantity: quantity?quantity:1,
-            iva: 0,
-            description: "",
-            state: 2,
-            descriptionState: "",
-            productId: payload.id,
-            saleId: null,
-            userId: null,
-            product: payload
-          }]
-          :
-          [...state.cart],
+          cart: quantity ? quantity : 1 <= payload.stock ?
+            [...state.cart,
+            {
+              id: state.cart.length + 1,
+              quantity: quantity ? quantity : 1,
+              iva: 0,
+              description: "",
+              state: 2,
+              descriptionState: "",
+              productId: payload.id,
+              saleId: null,
+              userId: null,
+              product: payload
+            }]
+            :
+            [...state.cart],
         }
     }
     case SUBTRACT_FROM_CART: {
@@ -171,7 +175,7 @@ export default function reducer(state = initialState, { type, payload ,quantity 
 
       return itemToDelete?.quantity > 1 ? {
         ...state,
-        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity} : item)
+        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity } : item)
       }
         :
         {
@@ -198,12 +202,12 @@ export default function reducer(state = initialState, { type, payload ,quantity 
         ...state,
         cart: storage ? JSON.parse(storage) : [],
       };
-// <------------------------
+    // <------------------------
 
 
-        // cart: state.cart.filter((item) => item.id !== payload),
-      
-  
+    // cart: state.cart.filter((item) => item.id !== payload),
+
+
     // case FILTER_QUALITY:
     // const all = state.products;
     // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
@@ -237,7 +241,7 @@ export default function reducer(state = initialState, { type, payload ,quantity 
         ...state,
         products: filter,
         filterstate: filter
-      };  
+      };
     case FILTER_SHOP:
       const allAccesory = state.filterstate;
 
@@ -245,8 +249,8 @@ export default function reducer(state = initialState, { type, payload ,quantity 
         payload === "all"
           ? allAccesory
           : allAccesory.filter((r) =>
-              r.name.toLowerCase().includes(payload.toLowerCase())
-            );
+            r.name.toLowerCase().includes(payload.toLowerCase())
+          );
 
       return {
         ...state,
@@ -278,8 +282,8 @@ export default function reducer(state = initialState, { type, payload ,quantity 
         ...state,
         error: payload
       }
-       // error: payload,
-  //}
+    // error: payload,
+    //}
 
     default:
       return state;
