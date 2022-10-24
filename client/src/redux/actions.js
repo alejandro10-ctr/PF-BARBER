@@ -331,11 +331,11 @@ export function getLocalStorage() {
   };
 }
 
-export function getPaymentLink(productId, userId, id) {
+export function getPaymentLink(productId, userId) {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `/payments/pay?productId=${productId}&userId=${1}`
+        `/payments/pay?productId=${productId}&userId=${userId}`
       );
       if (response?.data) {
         dispatch({ type: GET_PAYMENTS, payload: response.data });

@@ -109,8 +109,6 @@ const Ecommerce = ({ products, filterstate, allProducts, user, cart,
         {console.log('soy el id de Ecommerce', userId)}
 
         {/* <h1>token decode {tokenDecode}</h1> */}
-       
-      {console.log('soy userId', userId)}
         {/* <h2>{userId?user?.name+" Welcome":"Welcome to Barber"}</h2> */}
         {/* <Link to='/'><button className={s.button}>Home</button></Link> */}
 
