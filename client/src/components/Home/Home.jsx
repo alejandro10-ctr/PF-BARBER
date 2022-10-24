@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
 import { Button } from "reactstrap";
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
+
+
+
 export default function Home() {
   return (
     <div className={styles.background}>
+
+      <HomeNavBar/>
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>
@@ -15,8 +21,8 @@ export default function Home() {
         <Button color="dark"><Link className={styles.button} to=""> {" "} Services{" "}  </Link></Button>
         <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  Developers </Link> </Button>
         <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
-        <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button>
-        <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button>
+        {/* <Button color="dark"><Link className={styles.button} to="/register"> Create an Account!</Link></Button> */}
+        {/* <Button color="dark"><Link className={styles.button} to="/login">Sign in!</Link> </Button> */}
 
 
       </div><br />
