@@ -41,7 +41,11 @@ export default function Register() {
             // .max(15, "Must be 15 character or less")
             // .required('Required'),
             user: Yup.string()
+<<<<<<< HEAD
             .min(6, "At Least 6 chars.")
+=======
+                .min(6, "At least 6 chars")
+>>>>>>> 3bd726a0650670180453efdc88eb0c4cb236cd62
                 .max(15, "Must be 15 character or less")
                 .required('Nickname required'),
             name: Yup.string()
