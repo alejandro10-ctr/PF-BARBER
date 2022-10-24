@@ -69,7 +69,7 @@ export default function LoginUser() {
     
                         {/*  Password input  */}
                         <div class="form-outline mb-4">
-                            <input id="password" name="password" type="text" placeholder='*******'
+                            <input id="password" name="password" type="password" placeholder='Password'
                                 class="form-control form-control-lg"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
