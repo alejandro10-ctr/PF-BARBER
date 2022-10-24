@@ -18,9 +18,6 @@ const imageController = require("../controllers/image");
 
 const mercadoIndex = require("../controllers/mercadoIndex");
 
-// const authController = require('../controllers/auth')
-// const mercadoIndex = require("../controllers/mercadoIndex");
-
 const router = Router();
 router.use(json());
 

@@ -4,8 +4,6 @@ import React, { useEffect, useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
 import ProductItem from "../Shopping/ProductsItem";
-import jwt_decode from "jwt-decode";
-import axios from 'axios'
 import {
   getProducts,
   createProducts,
@@ -21,7 +19,6 @@ import {
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
-import Cookies from 'universal-cookie';
 
 const Ecommerce = ({ products, filterstate, allProducts, cart, 
   getProducts,
@@ -35,28 +32,18 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
   getDBCart,
 }) => {
 
-  const cookies = new Cookies()
-
-  const cookie = cookies.get('token')
-
-  const tokenDecode = jwt_decode(cookie)
-
-  let id = tokenDecode.id
-
-  console.log('soy el id', id)
 
 
 
 
 
-
-  const { addItemToCart, subtractItemToCart, deleteItemToCart, isLogueado,logIn,SignOff } = useContext(CartContext)
+  const { userId, addItemToCart, subtractItemToCart, deleteItemToCart, logIn,SignOff } = useContext(CartContext)
   const [state, setState] = useState(true)
   useEffect(() => {
     if (state) {
       setState(false)
       getProducts()
-      if(isLogueado) getDBCart(id) 
+      if(userId) getDBCart(1) 
       else getLocalStorage()
     }
   }, [state]);
@@ -105,20 +92,13 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
     <div>
       <br />
       <div>
-        {console.log('soy la cookie', cookie)}
+        {console.log('soy el id de Ecommerce', userId)}
 
         {/* <h1>token decode {tokenDecode}</h1> */}
        
 
         <Link to='/'><button className={s.button}>Home</button></Link>
-        <button className={s.button} onClick={async(e) => {
-          e.preventDefault()
-          if(isLogueado){
-            SignOff()
-          }else{
-            logIn()
-          }
-        }}>{isLogueado?"Cerrar sesión":"Iniciar sesión"}</button>
+        <button className={s.button}>{userId?"Cerrar sesión":"Iniciar sesión"}</button>
 
 
         {/* Searchbar */}
