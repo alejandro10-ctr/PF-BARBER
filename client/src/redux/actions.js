@@ -278,10 +278,10 @@ export function addLocalStorage(id) {
 
   
 
-  export function getPaymentLink() {
+  export function getPaymentLink(id) {
     return async (dispatch) => {
       try {
-        const response = await axios.get(`/payments/pay`); 
+        const response = await axios.get(`/payments/pay?productId=${id}`,id); 
         if (response?.data) {
           dispatch({ type: GET_PAYMENTS, payload: response.data });
         }

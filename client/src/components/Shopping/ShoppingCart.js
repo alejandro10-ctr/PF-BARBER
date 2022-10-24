@@ -22,20 +22,20 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
 
-    const addItemToCart = async (detailProduct) => {
+    const addItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.product.id === detailProduct.id
         );
 
 
-        let isShowDialog = { show: false, icon: "warning", title: "Oops...", text: "Not in stock" }
+        let isShowDialog = false
         if (inCart) {
             if (inCart.quantity + 1 <= inCart.product.stock) {
                 inCart.quantity++
                 setCartItems([...cartItems])
-            } else {
-                isShowDialog.show = true
+                return
             }
+            isShowDialog = true
         } else {
 
             if (1 <= detailProduct.stock) {
@@ -52,55 +52,55 @@ export const CartProvider = ({ children }) => {
                     product: detailProduct
                 }
                 ])
-                isShowDialog.show = true
-                isShowDialog.icon = "success"
-                isShowDialog.title = "Successfully added"
-                isShowDialog.text = `Product ${detailProduct.name} added from cart`
-            } else {
-                isShowDialog.show = true
+                return
             }
+            isShowDialog = true
         }
-        if (isShowDialog.show) {
-            delete isShowDialog.show
-            await Swal.fire(isShowDialog)
+        if (isShowDialog) {
+            Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "Not in stock"
+
+            })
         }
 
 
     }
+    console.log(cartItems)
 
 
     const subtractItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
-        if (inCart) {
-            if (inCart.quantity > 1) {
-                inCart.quantity--
-                setCartItems([...cartItems])
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "You can buy from 1"
-                })
-            }
+
+        if (inCart.quantity > 1) {
+            inCart.quantity--
+            setCartItems([...cartItems])
+        }
+        if (inCart.quantity - 1 === 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "You can buy from 1"
+            })
         }
     };
     const deleteItemToCart = (detailProduct) => {
         const inCart = cartItems.find(
             (productInCart) => productInCart.productId === detailProduct.id
         );
-        const index = cartItems.indexOf(inCart)
-        if (inCart) {
-            cartItems.splice(index, 1)
-            setCartItems([...cartItems]);
+        cartItems.splice(cartItems.indexOf(inCart),1)
+        setCartItems([...cartItems]);
+
+        if (inCart.quantity - 1 === 0) {
             Swal.fire({
-                icon: "success",
+                icon: "error",
                 title: "Successfully deleted",
-                text: `Product ${inCart.product.name} deleted from cart`
+                text: `Product ${inCart.product.name} delete from cart`
             })
         }
-
     }
 
 
@@ -118,5 +118,3 @@ export const CartProvider = ({ children }) => {
 
 
 };
-
-

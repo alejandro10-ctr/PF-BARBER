@@ -11,7 +11,6 @@ function DetailProduct({ match }) {
 
   const dispatch = useDispatch();
   const id = match.params.id;
-  console.log(id)
 
   const detailOfProducts = useSelector((state) => state.detail)
   console.log(detailOfProducts)
@@ -34,19 +33,21 @@ function DetailProduct({ match }) {
 
   // if (!detailOfProducts) return null;
   useEffect(() => {
-    dispatch(getPaymentLink())
+    dispatch(getPaymentLink(id))
 
 }, [dispatch])
-
 
 const pay = useSelector((state) => state.payMercadoPago)
   return (
     <div>
       {/* <Link to="/">Back</Link> */}
 
-      <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link>
-
-      <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
+      {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
+      {console.log("pay",pay.init_point)}
+      <a target="_blank" rel="noopener" href={pay.init_point+""} onClick={()=> {
+        const product = allProducts.find((product)=> product.id === id)
+        dispatch(addToCart(product))
+        }}>  Mercado Pago</a>
 
       <hr />
       <Link to="/shop"> See more products! </Link>

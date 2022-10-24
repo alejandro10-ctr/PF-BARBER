@@ -12,34 +12,35 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      user: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isAlpha: {
-            msg: "The user must not contain spaces",
-          },
-          len: {
-            args: [6, 50],
-            msg: "The user must only contain at least six letters",
-          },
+    user: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isAlpha: {
+            msg: "The user must not contain spaces"
         },
-      },
-      name: {
+        len: {
+            args: [6,50],
+            msg: "The user must only contain at least six letters"
+        }
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+            args: [2,50],
+            msg: "The name must only contain at least two letters"
+        }
+      }
+    },
+    lastname: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: {
-            args: [2, 50],
-            msg: "The name must only contain at least two letters",
-          },
-        },
-      },
-      lastname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+
+    },
       email: {
         type: DataTypes.TEXT,
         allowNull: false,
