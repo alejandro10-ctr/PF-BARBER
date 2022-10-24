@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
@@ -7,9 +7,13 @@ import * as Yup from "yup"
 import  { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 
+import { CartContext } from "../Shopping/ShoppingCart";
+
 import styles from '../LoginUser/LoginUser.module.css'
 
 export default function LoginUser() {
+    
+  const { logIn} = useContext(CartContext)
     const history = useHistory();
     const cookies = new Cookies()
 
@@ -39,6 +43,7 @@ export default function LoginUser() {
             console.log(values)
             await axios.post('http://localhost:3001/auth/login', values).then(cred=> document.cookie = `token=${cred.data.data}; max-age=${500*500}; path=/; samesite=strict`
             )
+            logIn()
             history.push('/')
         }
     })

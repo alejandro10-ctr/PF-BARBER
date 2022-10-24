@@ -241,8 +241,10 @@ export function filterShop(payload) {
 export function getDBCart(userId) {
   return async (dispatch) => {
     try {
+      console.log("userId",userId)
       const response = await axios.get(`/detailsales/user/${userId}`);
       if (response?.data) {
+        console.log("responseBDCar", response)
         dispatch({ type: UPDATE_CART, payload: response.data });
       }
     } catch (error) {

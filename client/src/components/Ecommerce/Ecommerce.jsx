@@ -43,7 +43,7 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
     if (state) {
       setState(false)
       getProducts()
-      if(userId) getDBCart(1) 
+      if(userId) getDBCart(userId) 
       else getLocalStorage()
     }
   }, [state]);

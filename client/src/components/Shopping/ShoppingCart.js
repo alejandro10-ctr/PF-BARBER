@@ -44,14 +44,7 @@ export const CartProvider = ({ children }) => {
 
   console.log("soy el id ShoppingCart", userId);
 
-    const [isLogueado, setLogueado] = useState(() => {
-        try {
-            const logueadoLocalStorage = localStorage.getItem("logueado");
-            return logueadoLocalStorage ? JSON.parse(logueadoLocalStorage) : false;
-        } catch (error) {
-            return false;
-        }
-    });
+    
     const [isSaveDB, setSaveDB] = useState(() => {
         try {
             const SaveDBLocalStorage = localStorage.getItem("isSaveDB");
@@ -66,7 +59,7 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
     useEffect(() => {
-        localStorage.setItem("logueado", !!userId);
+        
     }, [userId]);
     useEffect(() => {
         localStorage.setItem("isSaveDB", isSaveDB);
@@ -88,11 +81,22 @@ export const CartProvider = ({ children }) => {
     }, [cart]);
     //-----------------> Login
     const logIn = () => {
-        setLogueado(true);
+        setUserId(() => {
+            try {
+                const cookies = new Cookies();
+                const token = cookies.get("token");
+                if(token){
+                    const tokenDecode = jwt_decode(token);
+                    return tokenDecode.id
+                }
+                return 0;
+            } catch (error) {
+                return 0;
+            }
+        })
         setSaveDB(false);
     };
     const SignOff = () => {
-        setLogueado(false);
         setCartItems([]);
         dispatch(updateToCart([]));
     };
