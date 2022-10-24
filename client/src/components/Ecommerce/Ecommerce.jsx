@@ -41,7 +41,11 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
 
   const tokenDecode = jwt_decode(cookie)
 
-  const id = tokenDecode.id
+  let id = tokenDecode.id
+
+  console.log('soy el id', id)
+
+
 
 
 
@@ -102,7 +106,6 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
       <br />
       <div>
         {console.log('soy la cookie', cookie)}
-        {console.log('soy el decode', id)}
 
         {/* <h1>token decode {tokenDecode}</h1> */}
        
