@@ -32,6 +32,8 @@ export default function ItemCart ()  {
         }
       }, [update])
 
+      let total = 0
+
    
 /*       let arr =  prods.map((el) =>  el.product.price * el.quantity)
       console.log(arr)
@@ -74,7 +76,12 @@ export default function ItemCart ()  {
 
 
             {prods?
-        prods.map((e) =>{return(
+        prods.map((e) =>{
+          
+          
+          total = total + e.product.price
+          
+          return(
 
           
             <div key = {e.product.id} className={style.containerItem}>
@@ -111,6 +118,7 @@ export default function ItemCart ()  {
         <div><h1>No hay nada en el carrito</h1></div>    
     }
            <div>
+            <h3>Total to pay ${total}</h3>
             <h3><a href="/payments/pay/">Pay</a></h3>
            </div>
     </div>
