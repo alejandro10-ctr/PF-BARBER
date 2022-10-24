@@ -74,7 +74,10 @@ exports.login = async (req, res) => {
         res.cookie("jwt", token, cookiesOptions);
         // localStorage.setItem("jwt", JSON.stringify(token));
         console.log(token);
-        return res.json({ msg: "User successfully logged in", data: token });
+        return res.json({
+          msg: "User successfully logged in",
+          data: token,
+        });
         // res.status(200).json({success:true, redirectUrl: '/'})
       }
     }

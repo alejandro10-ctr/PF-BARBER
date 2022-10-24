@@ -18,8 +18,8 @@ export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
 
-export const UPDATE_CART = 'UPDATE_CART';
-export const ADD_TO_CART = 'ADD_TO_CART';
+export const UPDATE_CART = "UPDATE_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
 export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
@@ -30,7 +30,6 @@ export const GET_PAYMENTS = "GET_PAYMENTS";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
-
 
 export function setLoading(value) {
   return (dispatch) => {
@@ -230,12 +229,11 @@ export function filterShop(payload) {
 // }
 
 // export function sortScore(payload) {
-  //   return {
+//   return {
 //     type: SORT_SCORE,
 //     payload,
 //   };
 // }
-
 
 //actions for delete & add ----> IMAGES
 // falta ruta delete y post de imagenes
@@ -243,65 +241,60 @@ export function filterShop(payload) {
 export function getDBCart(userId) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/detailsales/user/${userId}`)
+      const response = await axios.get(`/detailsales/user/${userId}`);
       if (response?.data) {
         dispatch({ type: UPDATE_CART, payload: response.data });
       }
     } catch (error) {
-      return error
+      return error;
     }
-  }
+  };
 }
 
 export function createDBCart(cart, userId) {
   return async () => {
     try {
-      console.log("createDB", cart)
-      return await axios.post(`/detailsales/user/${userId}`, cart)
-
+      console.log("createDB", cart);
+      return await axios.post(`/detailsales/user/${userId}`, cart);
     } catch (error) {
-      return error
+      return error;
     }
-  }
+  };
 }
 export function updateDBCart(productInCart) {
   return async () => {
     try {
-      console.log("updateDB", productInCart)
-      return await axios.put(`/detailsales/${productInCart.id}`, productInCart)
-      
+      console.log("updateDB", productInCart);
+      return await axios.put(`/detailsales/${productInCart.id}`, productInCart);
     } catch (error) {
-      return error
+      return error;
     }
-  }
+  };
 }
-
 
 export function deleteDBCart(productInCartId) {
   return async () => {
     try {
-      console.log("deleteDB", productInCartId)
-      return await axios.delete(`/detailsales/${productInCartId}`)
-
+      console.log("deleteDB", productInCartId);
+      return await axios.delete(`/detailsales/${productInCartId}`);
     } catch (error) {
-      return error
+      return error;
     }
-  }
+  };
 }
 export function updateToCart(cart) {
   return {
     type: UPDATE_CART,
     payload: cart,
-  }
+  };
 }
 export function addToCart(product, quantity) {
   return {
     type: ADD_TO_CART,
     payload: product,
-    quantity
-  }
+    quantity,
+  };
 }
-
 
 export function delFromCart(product, all = false) {
   if (all) {
@@ -309,30 +302,25 @@ export function delFromCart(product, all = false) {
   } else {
     return { type: SUBTRACT_FROM_CART, payload: product };
   }
-};
+}
 
 export function clearCart() {
   return {
     type: CLEAR_CART,
-
-  }
+  };
 }
 export function getLocalStorage() {
   return {
     type: GET_LOCALSTORAGE,
-  }
+  };
 }
 
-
-
-
-
-
-
-export function getPaymentLink(productId, userId) {
+export function getPaymentLink(productId, userId, id) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/payments/pay?productId=${productId}&userId=${1}`);
+      const response = await axios.get(
+        `/payments/pay?productId=${productId}&userId=${1}`
+      );
       if (response?.data) {
         dispatch({ type: GET_PAYMENTS, payload: response.data });
       }
@@ -341,4 +329,3 @@ export function getPaymentLink(productId, userId) {
     }
   };
 }
-

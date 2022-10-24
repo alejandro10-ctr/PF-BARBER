@@ -4,6 +4,8 @@ import React, { useEffect, useState, useContext } from "react";
 import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
 import ProductItem from "../Shopping/ProductsItem";
+import jwt_decode from "jwt-decode";
+import axios from 'axios'
 import {
   getProducts,
   createProducts,
@@ -19,6 +21,7 @@ import {
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
+import Cookies from 'universal-cookie';
 
 const Ecommerce = ({ products, filterstate, allProducts, cart, 
   getProducts,
@@ -31,13 +34,25 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
   getLocalStorage, 
   getDBCart,
 }) => {
+
+  const cookies = new Cookies()
+
+  const cookie = cookies.get('token')
+
+  const tokenDecode = jwt_decode(cookie)
+
+  const id = tokenDecode.id
+
+
+
+
   const { addItemToCart, subtractItemToCart, deleteItemToCart, isLogueado,logIn,SignOff } = useContext(CartContext)
   const [state, setState] = useState(true)
   useEffect(() => {
     if (state) {
       setState(false)
       getProducts()
-      if(isLogueado) getDBCart(1) 
+      if(isLogueado) getDBCart(id) 
       else getLocalStorage()
     }
   }, [state]);
@@ -86,6 +101,10 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
     <div>
       <br />
       <div>
+        {console.log('soy la cookie', cookie)}
+        {console.log('soy el decode', id)}
+
+        {/* <h1>token decode {tokenDecode}</h1> */}
        
 
         <Link to='/'><button className={s.button}>Home</button></Link>
@@ -111,6 +130,8 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
         {/* <SearchBar setCurrentPage={setCurrentPage}/> */}
 
 
+
+
         {/* price sort */}
         <div className={s.selectFilterSort}>
           <label>Price </label>
@@ -130,6 +151,7 @@ const Ecommerce = ({ products, filterstate, allProducts, cart,
           </select>
 
         </div><br />
+
 
 
 
