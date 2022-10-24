@@ -3,11 +3,12 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsDetail, getLocalStorage, getDBCart, updateDBCart, getPaymentLink, } from "../../redux/actions";
+import { getProductsDetail, getDBCart, getPaymentLink, getDBUser } from "../../redux/actions";
 import { CartContext } from "../Shopping/ShoppingCart";
 
 import s from './DetailProducts.module.css'
 
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
 
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
@@ -22,6 +23,8 @@ function DetailProduct({ match }) {
   const cart = useSelector((state) => state.cart)
   let pay = useSelector((state) => state.payMercadoPago)
 
+  function updateProductInCar() { return cart.find((productInCar) => productInCar.productId = Math.round(id)) }
+  const [productInCar, setProducInCar] = useState(updateProductInCar())
   // useEffect(() => {
   //   dispatch(getProductsDetail(id));
   // }, [id]);
@@ -31,10 +34,8 @@ function DetailProduct({ match }) {
   // console.log(filter)
 
 
-  // if (!detailOfProducts) return null;
   useEffect(() => {
     if (update) {
-      // pay = {}
       dispatch(getProductsDetail(id))// accedo al id del detalle
 
       if (userId) {
@@ -47,9 +48,10 @@ function DetailProduct({ match }) {
   useEffect(() => {
 
     if (cart.length) {
-      let inCar = cart.find((e) => e.productId === Math.round(id))
+      console.log("cartDetailProduct", cart)
+      setProducInCar(updateProductInCar())
 
-      if (inCar && goPay) {
+      if (goPay) {
         Swal.showLoading()
         setTimeout(() => dispatch(getPaymentLink(id, userId)), 2000)
       }
@@ -63,10 +65,21 @@ function DetailProduct({ match }) {
   }, [pay])
 
 
+  // const user = useSelector((state) => state.user)
+
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     dispatch(getDBUser(userId))
+  //   }
+  // }, []);
+
+
 
 
   return (
     <div>
+      {/* <HomeNavBar user={user} /> */}
       {/* <Link to="/">Back</Link> */}
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
 
@@ -76,31 +89,19 @@ function DetailProduct({ match }) {
 
       {/* Card */}
       <div>
-                    <button onClick={async (e) => {
-                      e.preventDefault()
-                      await deleteItemToCart(product)
-                    }}> X🛒 </button>
+        <button onClick={async (e) => {
+          e.preventDefault()
+          await deleteItemToCart(product)
+        }}> X🛒 </button>
         <h3>{product.name}</h3>
         <img src={product.image} alt={product.image} />
         <h3>Price: ${product.price}</h3>
         <h3>{product.quality}</h3>
-        {cart.length ? cart.map((productInCar) => {
-          if (productInCar.productId === id) {
-            return <div>
-            <button onClick={async (e) => {
-              e.preventDefault()
-              await addItemToCart(product)
-            }}> +🛒 </button>
-            <button onClick={async (e) => {
-              e.preventDefault()
-              await subtractItemToCart(product)
-            }}> -🛒 </button>
-            
-              <h3>Quantity {productInCar.quantity}</h3>
-            </div>
-          }
-        }) : null
-        }
+        {console.log("productInCart", productInCar)}
+        <div>
+
+          {productInCar ? <h3>Quantity {productInCar.quantity}</h3> : null}
+        </div>
 
         {Object.keys(pay).length ? <a className={s.button} target="_blank" rel="noopener" href={pay.init_point + ""}>GO PAY</a>
           :
@@ -108,12 +109,19 @@ function DetailProduct({ match }) {
             <button className={s.button} onClick={(e) => {
               e.preventDefault()
               if (cart.length) {
-                const productInCar = cart.find((productInCar) => productInCar.productId === id)
+                // const productInCar = cart.find((productInCar) => productInCar.productId === id)
                 if (Object.keys(product).length) {
                   if (!productInCar?.quantity) Swal.showLoading()
                   setGoPay(true)
                   addItemToCart(product, productInCar?.quantity)
                 }
+              }
+              else {
+                if (Object.keys(product).length) {
+                  setGoPay(true)
+                  addItemToCart(product)
+                }
+
               }
             }}>BUY NOW</button>
             : <h3>Inicia sesión para comprar</h3>

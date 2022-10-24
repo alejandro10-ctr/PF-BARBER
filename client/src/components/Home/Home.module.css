@@ -24,6 +24,10 @@
 
 
 }
+
+.subtitle{
+    font-family: 'Anton', sans-serif;
+}
 .myButton {
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
@@ -66,4 +70,8 @@ text-decoration: none;
     
 }
 
-        
+.subtitle{
+    font-family: 'Anton', sans-serif;
+   
+    color: rgba(23, 23, 24, 0.781);
+}

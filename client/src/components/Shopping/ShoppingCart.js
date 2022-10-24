@@ -26,17 +26,17 @@ export const CartProvider = ({ children }) => {
         }
     });
     const verificar = () => {
-            try {
-                const cookies = new Cookies();
-                const token = cookies.get("token");
-                if (token) {
-                    const tokenDecode = jwt_decode(token);
-                    return tokenDecode.id
-                }
-                return 0;
-            } catch (error) {
-                return 0;
+        try {
+            const cookies = new Cookies();
+            const token = cookies.get("token");
+            if (token) {
+                const tokenDecode = jwt_decode(token);
+                return tokenDecode.id
             }
+            return 0;
+        } catch (error) {
+            return 0;
+        }
 
     }
     const [userId, setUserId] = useState(verificar());
@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         if (userId) {
             setCartItems([...cart]);
-            console.log("final", cart);
+            console.log("finalCartDB", cart);
             Swal.hideLoading("Listo");
         }
     }, [cart]);

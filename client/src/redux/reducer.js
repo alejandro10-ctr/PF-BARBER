@@ -40,7 +40,7 @@ const initialState = {
   localStorage: [],
   filterstate: [],
   error: '',
-  payMercadoPago: ""
+  payMercadoPago: {}
 
 };
 
@@ -133,10 +133,11 @@ export default function reducer(state = initialState, { type, payload, quantity 
     }
     // ---------------------> Carrito
     case UPDATE_CART: {
-      console.log(payload)
+      console.log("cartReducer",payload)
       return {
         ...state,
-        cart: payload
+        cart: payload,
+        payMercadoPago: {}
       }
     }
     case ADD_TO_CART: {
