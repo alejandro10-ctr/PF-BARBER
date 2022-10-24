@@ -36,7 +36,7 @@ exports.register = async (req, res) => {
         })
         .catch((error) => {
           console.log(error);
-          res.status(404).send(`Username or Email is already register`);
+          res.status(405).send(`Username or Email is already register`);
         });
     }
   } catch (error) {
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
           user,
         },
       });
-      console.log("USUARIO ENCONTRADO:", userFinded);
+      // console.log("USUARIO ENCONTRADO:", userFinded);
       if (
         userFinded == null ||
         !(await bcryptjs.compare(password, userFinded.password))
@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
         // console.log("USUARIO ENCONTRADO:", userFinded);
         const id = userFinded.id;
         const token = jwt.sign({ id: id }, "secretKey");
-        // console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
+        console.log("TOKEN: " + token + " para el USUARIO : " + userFinded);
         const cookiesOptions = {
           expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
           httpOnly: true,
@@ -122,9 +122,9 @@ const sendEmail = async (email) => {
   await transporter.sendMail({
     from: '"HENRY BARBER" <foo@example.com>', // sender address
     to: email, // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    subject: "¡Bienvenido a Henry Barber!", // Subject line
+    text: "¡Gracias! Estamos encantados de que formes parte de nuestra comunidad", // plain text body
+    html: "<b>Al registrarte se te enviaran descuentos =)</b>", // html body
   });
 };
 

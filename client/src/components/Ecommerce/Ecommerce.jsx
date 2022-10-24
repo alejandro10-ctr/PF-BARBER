@@ -14,28 +14,31 @@ import {
   addToCart,
   delFromCart,
   getLocalStorage,
+  getDBCart,
 } from "../../redux/actions";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { CartContext } from "../Shopping/ShoppingCart";
 
-const Ecommerce = ({ products, filterstate, allProducts, cart, getLocalStorage,
+const Ecommerce = ({ products, filterstate, allProducts, cart, 
   getProducts,
   createProducts,
   priceLower,
   priceHigh,
   filterQuality,
   filterShop,
-  addToCart,
-  delFromCart,
+
+  getLocalStorage, 
+  getDBCart,
 }) => {
-  const { addItemToCart, subtractItemToCart, deleteItemToCart } = useContext(CartContext)
+  const { addItemToCart, subtractItemToCart, deleteItemToCart, isLogueado,logIn,SignOff } = useContext(CartContext)
   const [state, setState] = useState(true)
   useEffect(() => {
     if (state) {
       setState(false)
       getProducts()
-      getLocalStorage()
+      if(isLogueado) getDBCart(1) 
+      else getLocalStorage()
     }
   }, [state]);
 
@@ -86,6 +89,14 @@ const Ecommerce = ({ products, filterstate, allProducts, cart, getLocalStorage,
        
 
         <Link to='/'><button className={s.button}>Home</button></Link>
+        <button className={s.button} onClick={async(e) => {
+          e.preventDefault()
+          if(isLogueado){
+            SignOff()
+          }else{
+            logIn()
+          }
+        }}>{isLogueado?"Cerrar sesión":"Iniciar sesión"}</button>
 
 
         {/* Searchbar */}
@@ -149,18 +160,15 @@ const Ecommerce = ({ products, filterstate, allProducts, cart, getLocalStorage,
                   <div className={s.products} key={product.id}>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await addToCart(product)
                       await addItemToCart(product)
                     }}> +🛒 </button>
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await delFromCart(product)
                       await subtractItemToCart(product)
                     }}> -🛒 </button>
                     
                     <button onClick={async (e) => {
                       e.preventDefault()
-                      await delFromCart(product, true)
                       await deleteItemToCart(product)
                     }}> X🛒 </button>
                     <h3>{findProductCar?.quantity}</h3>
@@ -227,6 +235,7 @@ export const mapDispatchToProps = (dispatch) => {
     addToCart,
     delFromCart,
     getLocalStorage,
+    getDBCart,
   }, dispatch)
 }
 

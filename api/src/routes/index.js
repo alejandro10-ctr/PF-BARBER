@@ -12,8 +12,12 @@ const detailSaleController = require("../controllers/DetatilSale");
 const serviceController = require("../controllers/service");
 const scheduleController = require("../controllers/schedules");
 //--------------> Products
-const productController = require("../controllers/product");
-const imageController = require("../controllers/image");
+
+const productController = require('../controllers/product')
+const imageController = require('../controllers/image')
+
+
+const mercadoIndex = require("../controllers/mercadoIndex")
 
 // const authController = require('../controllers/auth')
 const mercadoIndex = require("../controllers/mercadoIndex");
