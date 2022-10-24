@@ -23,16 +23,8 @@ function DetailProduct({ match }) {
   const cart = useSelector((state) => state.cart)
   let pay = useSelector((state) => state.payMercadoPago)
 
-  function updateProductInCar() { return cart.find((productInCar) => productInCar.productId = Math.round(id)) }
+  function updateProductInCar() { return cart.find((productInCar) => productInCar.productId === Math.round(id)) }
   const [productInCar, setProducInCar] = useState(updateProductInCar())
-  // useEffect(() => {
-  //   dispatch(getProductsDetail(id));
-  // }, [id]);
-
-
-  //const filter = allProducts.filter(f => f.description)
-  // console.log(filter)
-
 
   useEffect(() => {
     if (update) {
@@ -65,21 +57,21 @@ function DetailProduct({ match }) {
   }, [pay])
 
 
-  // const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user)
 
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     dispatch(getDBUser(userId))
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userId) {
+      dispatch(getDBUser(userId))
+    }
+  }, []);
 
 
 
 
   return (
     <div>
-      {/* <HomeNavBar user={user} /> */}
+      <HomeNavBar user={user} />
       {/* <Link to="/">Back</Link> */}
       {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
 
@@ -89,10 +81,14 @@ function DetailProduct({ match }) {
 
       {/* Card */}
       <div>
-        <button onClick={async (e) => {
+        {productInCar ? <button onClick={async (e) => {
           e.preventDefault()
           await deleteItemToCart(product)
-        }}> X🛒 </button>
+        }}> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="currentColor" class="bi bi-cart-x" viewBox="0 0 16 16">
+            <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
+            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+          </svg> </button> : null}
+
         <h3>{product.name}</h3>
         <img src={product.image} alt={product.image} />
         <h3>Price: ${product.price}</h3>
@@ -100,6 +96,20 @@ function DetailProduct({ match }) {
         {console.log("productInCart", productInCar)}
         <div>
 
+          {productInCar ? <button onClick={async (e) => {
+            e.preventDefault()
+            await subtractItemToCart(product)
+          }}><svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
+              <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
+              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg></button> : null}
+          {productInCar ? <button onClick={async (e) => {
+            e.preventDefault()
+            await addItemToCart(product)
+          }}> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+              <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg> </button> : null}
           {productInCar ? <h3>Quantity {productInCar.quantity}</h3> : null}
         </div>
 
@@ -110,6 +120,7 @@ function DetailProduct({ match }) {
               e.preventDefault()
               if (cart.length) {
                 // const productInCar = cart.find((productInCar) => productInCar.productId === id)
+                console.log(productInCar, cart)
                 if (Object.keys(product).length) {
                   if (!productInCar?.quantity) Swal.showLoading()
                   setGoPay(true)
