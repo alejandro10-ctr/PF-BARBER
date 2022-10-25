@@ -67,15 +67,11 @@ export default function Register() {
 
 
         onSubmit: async (values) => {
-
-            console.log(values)
-            console.log(await axios.post('http://localhost:3001/auth/register', values))
+            await axios.post('http://localhost:3001/auth/register', values)
             history.push('/login')
-
         }
 
     })
-    console.log(formik)
 
     // const options = [
     //     { value: 'woman', label: 'Woman' },
@@ -93,11 +89,11 @@ export default function Register() {
                 <div className={styles.background}>
                     <form onSubmit={formik.handleSubmit} className={styles.box}>
                         <h1 className={styles.title}>Create Account</h1>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm"> <div className={styles.font}>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-sm"> <div className={styles.font}>
                                     <input id="user" name="user" type="text" placeholder='Nickname'
-                                        class="form-control form-control-lg"
+                                        className="form-control form-control-lg"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.user}
@@ -107,7 +103,7 @@ export default function Register() {
                                     <div className={styles.font}>
     
                                         <input id="name" name="name" type="text" placeholder='Name'
-                                            class="form-control form-control-lg"
+                                            className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.name}
@@ -116,7 +112,7 @@ export default function Register() {
     
                                     <div className={styles.font}>
                                         <input id="lastname" name="lastname" type="text" placeholder='Lastname'
-                                            class="form-control form-control-lg"
+                                            className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.lastname} />
@@ -127,10 +123,10 @@ export default function Register() {
     
     
                                 </div>
-                                <div class="col-sm">
+                                <div className="col-sm">
                                     <div className={styles.font}>
                                         <input id="email" name="email" type="text" placeholder='sakura@gmail.com'
-                                            class="form-control form-control-lg"
+                                            className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.email} />
@@ -139,7 +135,7 @@ export default function Register() {
     
                                     <div className={styles.font}>
                                         <input id="password" name="password" type="password" placeholder='Password'
-                                            class="form-control form-control-lg"
+                                            className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.password} />
@@ -161,7 +157,7 @@ export default function Register() {
      <MaskedInput   
       id="phone" name="phone" type="text" 
       placeholder='Phone Number'
-     class="form-control form-control-lg"
+      className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.phone}
@@ -198,7 +194,7 @@ export default function Register() {
                             <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
                             <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
                         </select> */}
-                            {/* <Select options={options} class="form-control form-control-lg" /> */}
+                            {/* <Select options={options} className="form-control form-control-lg" /> */}
                         </div><br />
                         <div>
                             <div><Link to='/'><button className={styles.buttonblue}>Home</button></Link>

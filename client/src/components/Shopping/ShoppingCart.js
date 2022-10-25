@@ -26,26 +26,20 @@ export const CartProvider = ({ children }) => {
         }
     });
     const verificar = () => {
-            try {
-                const cookies = new Cookies();
-                const token = cookies.get("token");
-                if (token) {
-                    const tokenDecode = jwt_decode(token);
-                    return tokenDecode.id
-                }
-                return 0;
-            } catch (error) {
-                return 0;
+        try {
+            const cookies = new Cookies();
+            const token = cookies.get("token");
+            if (token) {
+                const tokenDecode = jwt_decode(token);
+                return tokenDecode.id
             }
+            return 0;
+        } catch (error) {
+            return 0;
+        }
 
     }
     const [userId, setUserId] = useState(verificar());
-
-
-
-
-    console.log("soy el id ShoppingCart", userId);
-
 
     const [isSaveDB, setSaveDB] = useState(() => {
         try {
@@ -68,9 +62,9 @@ export const CartProvider = ({ children }) => {
         if (!isSaveDB && userId) {
             setSaveDB(true);
             //crear en db el carrito 1 sola vez
-            console.log("guardado el carrito ----> DB");
+           //"guardado el carrito ----> DB"
             dispatch(createDBCart(cartItems, userId));
-            console.log("obteniendo carrito ----> DB");
+            //"obteniendo carrito ----> DB"
             Swal.showLoading();
             setTimeout(() => dispatch(getDBCart(userId)), 1000);
         }
@@ -79,7 +73,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         if (userId) {
             setCartItems([...cart]);
-            console.log("final", cart);
+            //"finalCartDB"
             Swal.hideLoading("Listo");
         }
     }, [cart]);
@@ -130,7 +124,7 @@ export const CartProvider = ({ children }) => {
                 setCartItems([...cartItems]);
                 if (userId) {
                     dispatch(createDBCart(detailSale, userId));
-                    console.log("obteniendo carrito ----> DB");
+                    //"obteniendo carrito ----> DB"
                     Swal.showLoading();
                     setTimeout(() => dispatch(getDBCart(userId)), 1000);
                 } else dispatch(updateToCart(cartItems));

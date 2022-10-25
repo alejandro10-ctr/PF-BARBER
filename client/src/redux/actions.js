@@ -3,9 +3,6 @@ import Swal from "sweetalert2";
 
 export const SET_LOADING = "SET_LOADING";
 export const GET_PRODUCTS = "GET_PRODUCTS";
-export const CREATE_PRODUCTS = "CREATE_PRODUCTS";
-export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
-export const DELETE_PRODUCTS = "DELETE_PRODUCTS";
 export const GET_USER = "GET_USER";
 export const CREATE_USERS = "CREATE_USERS";
 export const GET_USERS = "GET_USERS";
@@ -50,21 +47,14 @@ export function getProducts(errorCallback) {
     }
   };
 }
-export function createProducts(product, errorCallback) {
+export function createProducts(product) {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const response = await axios.post(`/products`, product); //chequeada con yei-barbi
-      if (response?.data) {
-        dispatch(setLoading(false));
-        return dispatch({
-          type: CREATE_PRODUCTS,
-          payload: response.data,
-        });
-        //dispatch(getProducts());
-      }
+      return response?.data
     } catch (error) {
-      errorCallback && errorCallback(error);
+      return error
     }
   };
 }
@@ -72,13 +62,7 @@ export function updateProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/products/${product.id}`, product); //chequeada con yei-barbi
-      if (response?.data) {
-        return dispatch({
-          type: UPDATE_PRODUCTS,
-          payload: response.data,
-        });
-        //dispatch(getProducts());
-      }
+      return response?.data
     } catch (error) {
       errorCallback && errorCallback(error);
     }
@@ -88,13 +72,7 @@ export function deleteProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`/products/${product.id}`); //chequeada con yei-barbi
-      if (response?.data) {
-        return dispatch({
-          type: DELETE_PRODUCTS,
-          payload: response.data,
-        });
-        // dispatch(getProducts());
-      }
+      return response?.data
     } catch (error) {
       errorCallback && errorCallback(error);
     }
@@ -331,11 +309,11 @@ export function getLocalStorage() {
   };
 }
 
-export function getPaymentLink(productId, userId, id) {
+export function getPaymentLink(productId, userId) {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `/payments/pay?productId=${productId}&userId=${1}`
+        `/payments/pay?productId=${productId}&userId=${userId}`
       );
       if (response?.data) {
         dispatch({ type: GET_PAYMENTS, payload: response.data });
