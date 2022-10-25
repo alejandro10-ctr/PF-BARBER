@@ -179,3 +179,16 @@ select::-ms-expand {
 .select {
   width: 7%;
 }
+.pag{
+  
+    display:flex;
+    justify-content: center;
+  }
+.selectors{
+  display: flex;
+  justify-content:center;
+  margin-top: 25px;
+}
+.select{
+  width:15px;
+}
