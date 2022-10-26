@@ -27,11 +27,7 @@ function HomeDash() {
           <Featured />
           <Chart/>
         </div>
-        <div className="listConteiner">
-          <div className="listTitle">Store</div>
-              <Table/>
-        </div>
-    
+
       </div>
     </div>
   )
