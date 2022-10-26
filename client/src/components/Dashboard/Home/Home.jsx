@@ -30,9 +30,16 @@ function HomeDash() {
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
      
 =======
        
+=======
+        <div className="listConteiner">
+          <div className="listTitle">Store</div>
+              <Table/>
+        </div>
+>>>>>>> 9041481 (ojala no haya conflicto)
     
 
 
