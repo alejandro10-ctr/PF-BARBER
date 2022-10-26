@@ -103,7 +103,7 @@ const Ecommerce = ({
   return (
     <div>
       <div>
-      <HomeNavBar/>
+     
 
 
         {/* ---------------Searchbar--------------- */}

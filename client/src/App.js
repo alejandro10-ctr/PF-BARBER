@@ -140,8 +140,5 @@ function App() {
     </div>
   );
 }
-function NotFound() {
-  return <>Ha llegado a una página que no existe</>;
-}
 
 export default App;

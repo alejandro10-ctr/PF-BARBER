@@ -25,7 +25,7 @@ export default function Home() {
   
   return (
     <div className={styles.background}>
-      <HomeNavBar/>
+      
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>
