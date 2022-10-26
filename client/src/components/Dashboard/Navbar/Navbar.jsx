@@ -6,6 +6,7 @@ const NavbarDash = () => {
     return (
 
         <div className='navbar'>
+            
             <div className='wrapper'>
                 <div className='search'>
                     <input type="text" placeholder='Search....' />

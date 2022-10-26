@@ -4,6 +4,7 @@ import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
 import { Button } from "reactstrap";
 import { CartContext } from "../Shopping/ShoppingCart";
+
 import {
   getDBUser,
   getDBCart,
@@ -25,7 +26,6 @@ export default function Home() {
   
   return (
     <div className={styles.background}>
-      
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
       <Carrusel /><br /></div>

@@ -5,6 +5,7 @@ import s from './Ecommerce.module.css'
 import Paginado from "../Paginado/Paginado.jsx";
 import ProductItem from "../Shopping/ProductsItem";
 import { CartContext } from "../Shopping/ShoppingCart";
+
 import {
   getProducts,
   createProducts,
@@ -108,8 +109,8 @@ const Ecommerce = ({
 
         {/* ---------------Searchbar--------------- */}
 
-        <SearchBar setCurrentPage={setCurrentPage} />
 
+        <SearchBar setCurrentPage={setCurrentPage} />
         {/* buttons filter Quality */}
         <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
         <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
