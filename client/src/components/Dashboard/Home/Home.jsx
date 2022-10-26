@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/Sidebar'
 import Widget from '../Widget/Widget'
 import Featured from '../Featured/Featured'
 import Chart from '../Chart/Chart'
-
+import Table from '../Table/Table'
 
 function HomeDash() {
   return (
@@ -28,8 +28,10 @@ function HomeDash() {
           <Chart/>
         </div>
         <div className="listConteiner">
-          <div className="listTitle">Latest Transactions</div>
+          <div className="listTitle">Store</div>
+              <Table/>
         </div>
+    
       </div>
     </div>
   )
