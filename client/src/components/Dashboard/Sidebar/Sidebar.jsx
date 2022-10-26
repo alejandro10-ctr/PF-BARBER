@@ -37,9 +37,11 @@ function Sidebar() {
                    
                 </li>
                     </Link>
+                    <Link to="/dash/products">
                 <li> <StoreIcon className='icon'></StoreIcon>
                     <span>Products</span>
                 </li>
+                    </Link>
                 <li> <CreditCardIcon className='icon'></CreditCardIcon>
                     <span>Orders</span>
                 </li>

@@ -29,7 +29,14 @@ function HomeDash() {
           <Chart/>
         </div>
 
+<<<<<<< HEAD
      
+=======
+       
+    
+
+
+>>>>>>> 0d0c47e (buenos cambios)
       </div>
     </div>
   )

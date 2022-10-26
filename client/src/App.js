@@ -13,8 +13,12 @@ import HomeNavBar from "./components/HomeNavBar/HomeNavBar.jsx";
 import List from "./components/Dashboard/List/List.jsx"
 
 import HomeNavBar from "./components/HomeNavBar/HomeNavBar"
+<<<<<<< HEAD
 >>>>>>> ddbfd63 (datatable y navbar fuera de /dash)
 
+=======
+import Products from "./components/Dashboard/Products/Products.jsx"
+>>>>>>> 0d0c47e (buenos cambios)
 import "./App.css";
 //holi
 var URLactual = window.location;
@@ -28,18 +32,27 @@ function App() {
   return (
     <div className="App">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Route exact path="/">
         <Home />
       </Route>
 =======
 {!URLactual.pathname.includes("/dash") ?     <Route path="/" render={({ location }) => {
+=======
+      {!URLactual.pathname.includes("/dash") ? <Route path="/" render={({ location }) => {
+>>>>>>> 0d0c47e (buenos cambios)
         return <HomeNavBar user={user} pathname={location.pathname} />
       }}>
 
-      </Route>: null}
+      </Route> : null}
 
       <Route exact path="/dash/users">
-      <List/>
+        <List />
+      </Route>
+      <Route exact path="/dash/products">
+
+              <Products/>
+        
       </Route>
 
       <Route exact path="/">

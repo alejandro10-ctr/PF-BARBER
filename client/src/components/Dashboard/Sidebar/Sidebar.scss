@@ -1,8 +1,8 @@
 .sidebar{
     flex: 1;
     border-right: 1px solid rgb(171, 165, 165);
-    min-height: 100vh;
-
+    height: 100vh;
+    
     background-color: rgba(255, 255, 255, 0.983);
     .top{
  
@@ -36,12 +36,12 @@
                 font-weight: bold;
                 color: #999;
                 margin-top: 15px;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
             }
             li{
                 display: flex;
                 align-items: center;
-                padding: 5px;
+                padding: 10px;
                 cursor: pointer;
 
                 &:hover{
