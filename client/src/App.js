@@ -77,6 +77,10 @@ function App() {
         <SingleProduct />
       </Route>
 
+      <Route exact path="/dash">
+        <Dashboard />
+      </Route>
+
       <Route exact path="/">
         <Home />
       </Route>
