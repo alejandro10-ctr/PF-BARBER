@@ -1,14 +1,14 @@
 import React from 'react'
 import Sidebar from "../Sidebar/Sidebar.jsx"
 import Navbar from "../Navbar/Navbar.jsx"
-import "../List/List.scss"
+import "../Products/Products.scss"
 import Table from "../Table/Table.jsx"
 
 function Products() {
   return (
-    <div className='list'>
+    <div className='products'>
     <Sidebar/>
-    <div className="listContainer">
+    <div className="listProducts">
         <Navbar/>
         <Table/>
     </div>

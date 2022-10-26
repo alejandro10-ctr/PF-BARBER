@@ -1,6 +1,7 @@
 .navbarbuttons{
     margin-right: 70%;
     margin: 20%;
+<<<<<<< HEAD
 }
 .button {
     display: inline-block;
@@ -22,3 +23,7 @@
     background-color: aqua;
     transition: 500ms;
   }
+=======
+    padding-top: 15%;
+}
+>>>>>>> 74e4232 (commit navbar home list y product padding-)

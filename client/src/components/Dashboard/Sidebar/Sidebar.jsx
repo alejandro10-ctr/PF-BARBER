@@ -16,10 +16,10 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
-    <div className='sidebar'>
+    <div className='sidebar' >
         <div className='top'><span className='logo'><img src="https://henrybarbershoplv.square.site/uploads/b/b818a310-a8a8-11eb-b79b-3f3ed2ae8a60/Henry%20barbershop-02.png" alt="logo" /></span></div>
-        <hr></hr>
-        <div className='center'>
+        <hr/>
+        <div className='center' >
             <ul>
                 <p className="title">MAIN</p>
                 <Link to="/dash">
