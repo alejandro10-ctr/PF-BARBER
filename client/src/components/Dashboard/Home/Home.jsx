@@ -7,6 +7,7 @@ import Featured from '../Featured/Featured'
 import Chart from '../Chart/Chart'
 import Table from '../Table/Table'
 
+
 function HomeDash() {
   return (
 
@@ -28,6 +29,7 @@ function HomeDash() {
           <Chart/>
         </div>
 
+     
       </div>
     </div>
   )

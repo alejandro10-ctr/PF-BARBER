@@ -10,6 +10,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import { Link } from 'react-router-dom';
 
 
 
@@ -21,15 +22,21 @@ function Sidebar() {
         <div className='center'>
             <ul>
                 <p className="title">MAIN</p>
+                <Link to="/dash">
+
                 <li>
                         <DashboardIcon className='icon'></DashboardIcon>
                     <span> 
                         Dashboard</span>
                 </li>
+                </Link>
                 <p className="title">LIST</p>
+                <Link to="/dash/users">
                 <li> <GroupIcon className='icon'></GroupIcon>
                     <span>Users</span>
+                   
                 </li>
+                    </Link>
                 <li> <StoreIcon className='icon'></StoreIcon>
                     <span>Products</span>
                 </li>

@@ -15,6 +15,7 @@ import HomeNavBar from "../HomeNavBar/HomeNavBar";
 
 export default function Home() {
 
+  
   const { userId } = useContext(CartContext)
   const dispatch = useDispatch()
     useEffect(() => {
