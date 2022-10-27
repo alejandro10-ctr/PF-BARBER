@@ -11,7 +11,7 @@ import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import HomeNavBar from "./components/HomeNavBar/HomeNavBar.jsx";
 =======
 import List from "./components/Dashboard/List/List.jsx"
-
+import Single from "./components/Dashboard/Single/Single.jsx";
 import HomeNavBar from "./components/HomeNavBar/HomeNavBar"
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -66,9 +66,8 @@ function App() {
       <Route exact path="/dash">
         <Dashboard />
       </Route>
-      <Route exact path = "/dash/products/add">
-        <New inputs ={inputs} title = "Add new product"/>
-       </Route>
+
+
 
       <Route exact path="/">
         <Home />
