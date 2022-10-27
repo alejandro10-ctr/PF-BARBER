@@ -4,12 +4,47 @@ import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { addProd } from "../../../redux/actions";
+
+
 
 const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState("")
+
+
+const [info, setInfo] = useState({
+  name: "",
+  description: "",
+  price: "",
+  stock: "",
+  score: 5,
+  image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg",
+  quality: ""
+})
+const dispatch = useDispatch()
+
+function handleSubmit(e){
+  e.preventDefault()
+  dispatch(addProd(info)) 
+
+}
+
+ //---manejo de cambios
+ function handleChange(e){ 
+
+ 
+  setInfo({ //cambio de estados
+  ...info,
+  [e.target.name]: e.target.value
+
+ 
+  })     
+
+}
 
   return (
-    <div className="new">
+    <div className="new" >
       <Sidebar />
       <div className="newContainer">
         <Navbar />
@@ -19,6 +54,7 @@ const New = ({ inputs, title }) => {
         <div className="bottom">
           <div className="left">
             <img
+            
               src={
                 file
                   ? URL.createObjectURL(file)
@@ -26,9 +62,10 @@ const New = ({ inputs, title }) => {
               }
               alt=""
             />
+           
           </div>
           <div className="right">
-            <form>
+            <form onSubmit={(e)=>handleSubmit(e)}>
               <div className="formInput">
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -44,10 +81,10 @@ const New = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <input name={input.name} type={input.type} placeholder={input.placeholder} onChange={(e)=>handleChange(e)}/>
                 </div>
               ))}
-              <button>Send</button>
+              <button type='submit'>Send</button>
             </form>
           </div>
         </div>

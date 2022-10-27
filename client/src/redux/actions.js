@@ -24,8 +24,9 @@ export const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
 export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const GET_LOCALSTORAGE = "GET_LOCALSTORAGE";
-
 export const GET_PAYMENTS = "GET_PAYMENTS";
+export const ADD_PROD= 'ADD_PROD';
+
 
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
@@ -527,3 +528,19 @@ export function getPaymentLink(productId, userId) {
     }
   };
 }
+
+export function addProd(payload) {
+  return async function(dispatch) {
+      try {
+          var response = await axios.post('/products', payload);
+          return dispatch({
+              type: ADD_PROD,
+              payload: response,
+          })
+      } catch (err) {
+          console.log(err);
+      }
+  }}
+
+
+

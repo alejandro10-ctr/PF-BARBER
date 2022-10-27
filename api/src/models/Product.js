@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
       },
       score: {
         type: DataTypes.INTEGER,
-        defaultValue: 1,
+        defaultValue: 5,
         validate: { min: 1, max: 5 }
       }
     },
