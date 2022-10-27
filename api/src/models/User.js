@@ -12,38 +12,37 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-    user: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isAlpha: {
-            msg: "The user must not contain spaces"
-        },
-        len: {
-            args: [6,50],
-            msg: "The user must only contain at least six letters"
-        }
-      }
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: {
-            args: [2,50],
-            msg: "The name must only contain at least two letters"
-        }
-      }
-    },
-    lastname: {
-        type: DataTypes.STRING,
+      user: {
+        type: DataTypes.CHAR,
         allowNull: false,
-
-    },
+        unique: true,
+        validate: {
+          // isAlpha: {
+          //   msg: "The user must not contain spaces",
+          // },
+          len: {
+            args: [6, 50],
+            msg: "The user must only contain at least six letters",
+          },
+        },
+      },
+      // name: {
+      //   type: DataTypes.STRING,
+      //   allowNull: true,
+      //   validate: {
+      //     len: {
+      //       args: [2, 50],
+      //       msg: "The name must only contain at least two letters",
+      //     },
+      //   },
+      // },
+      // lastname: {
+      //   type: DataTypes.STRING,
+      //   allowNull: true,
+      // },
       email: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         unique: true,
         validate: {
           isEmail: true,
@@ -59,36 +58,39 @@ module.exports = (sequelize) => {
           },
         },
       },
-      phone: {
+      googleId: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          is: {
-            args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
-            msg: "Enter a valid phone",
-          },
-        },
       },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      available: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
-      isBarber: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      addProduct: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      deleteProduct: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+      // phone: {
+      //   type: DataTypes.STRING,
+      //   allowNull: true,
+      //   validate: {
+      //     is: {
+      //       args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+      //       msg: "Enter a valid phone",
+      //     },
+      //   },
+      // },
+      // isAdmin: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false,
+      // },
+      // available: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: true,
+      // },
+      // isBarber: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false,
+      // },
+      // addProduct: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false,
+      // },
+      // deleteProduct: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: false,
+      // },
     },
     {
       timestamp: false,
