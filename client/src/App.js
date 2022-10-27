@@ -14,7 +14,15 @@ import List from "./components/Dashboard/List/List.jsx"
 
 import HomeNavBar from "./components/HomeNavBar/HomeNavBar"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> ddbfd63 (datatable y navbar fuera de /dash)
+=======
+import Products from "./components/Dashboard/Products/Products.jsx"
+import "./App.css";
+import ItemCart from "./components/FullCart/FullCart";
+import New from "./components/Dashboard/UploadFiles/UploadFiles";
+import { inputs } from "./components/Dashboard/UploadFiles/formSource";
+>>>>>>> fac7a69 (un buen commit)
 
 =======
 import Products from "./components/Dashboard/Products/Products.jsx"
@@ -58,8 +66,9 @@ function App() {
       <Route exact path="/dash">
         <Dashboard />
       </Route>
-
-
+      <Route exact path = "/dash/products/add">
+        <New inputs ={inputs} title = "Add new product"/>
+       </Route>
 
       <Route exact path="/">
         <Home />
