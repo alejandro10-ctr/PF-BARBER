@@ -75,10 +75,13 @@ function App() {
         <Single />
       </Route>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 80b4d37 (hola)
       
+=======
+>>>>>>> 86ed563 (commit)
       <Route exact path="/dash/product/:id">
         <SingleProduct />
       </Route>
