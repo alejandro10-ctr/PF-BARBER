@@ -4,13 +4,13 @@ const { Op } = require("sequelize");
 
 const OBJUsers = [
   {
-    name: "yeiber",
-    lastname: "reyes",
-    email: "yeiberey@gmail.com",
-    user: "yeiberey",
+    name: "sakura",
+    lastname: "kinomoto",
+    email: "kinomoto@gmail.com",
+    user: "sakurachan",
     password: "123456",
-    phone: "57-320-3301329"
-  }
+    phone: "57-777-3301329"
+  },
 ];
 
 const getDBUsers = async () => {
@@ -54,7 +54,7 @@ const dbCreateUser = async (info) => {
   return `user ${info.name} created successfully`
 }
 const dbUpdateUser = async (info, id) => {
-  const [response] = await User.update(
+  const {response} = await User.update(
     info,
     {
       where: {
