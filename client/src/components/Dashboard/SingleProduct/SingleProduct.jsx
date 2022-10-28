@@ -91,7 +91,7 @@ const SingleProduct = () => {
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Quality:</span>
-                                        <select  name="quality" >
+                                        <select defaultValue={detail.quality === "basic" ? "basic" : "premium"} name="quality" >
                                         <option value="basic">Basic</option>
                                         <option value="premium">Premium</option>
                                         </select>
