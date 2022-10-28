@@ -1,35 +1,50 @@
 import React from "react";
+import {
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  className,
+} from "reactstrap";
 
+export default function Paginado({ pag, setCurrentPage, max, className }) {
+  //le paso las props/paramentros/estados
+  const arreglito = [];
 
+  for (let i = 1; i <= max; i++) {
+    arreglito.push(i);
+  }
 
-export default function Paginado ({pag, setCurrentPage, max}){ //le paso las props/paramentros/estados
-  const arreglito = []
+  const nextPage = () => {
+    if (pag !== max) return setCurrentPage(pag + 1);
+  };
 
-for(let i= 1; i <= max; i++){
-    arreglito.push(i)
+  const prevPage = () => {
+    if (pag !== 1) return setCurrentPage(pag - 1);
+  };
 
-}
-
-    const nextPage = () => {
-        if (pag !== max ) return setCurrentPage(pag + 1);
-    }; 
-
-    const prevPage = ()=>{
-     if(pag !== 1)  return setCurrentPage(pag - 1);
-    }
-
- function handleClick(click){
+  function handleClick(click) {
     click.preventDefault();
-    setCurrentPage(Number(click.target.value))
- }
-    return(
+    setCurrentPage(Number(click.target.value));
+  }
+  return (
+    <Pagination className={className}>
+      <PaginationItem>
+        <PaginationLink onClick={prevPage} href="#" previous />
+      </PaginationItem>
+      {arreglito
+        ? arreglito.map((m) => (
+            <PaginationItem key={m}>
+              <PaginationLink value={m} onClick={handleClick}>
+                {m}
+              </PaginationLink>
+            </PaginationItem>
+          ))
+        : "not array"}
 
-            <div >
-                <button  onClick={prevPage}>&#8249;</button>
-                  {arreglito? arreglito.map(m=> (<button key={m} value={m} onClick={(click)=>handleClick(click)}>{m}</button>)) : 'not array'}
-                {/* <span> {pag}  - {max}</span> sol*/}
-
-                <button onClick={nextPage}>&#8250;</button>
-            </div>
-    )
+      <PaginationItem>
+        <PaginationLink onClick={nextPage} href="#" next />
+        {/*</PaginationLink> */}
+      </PaginationItem>
+    </Pagination>
+  );
 }
