@@ -91,8 +91,10 @@ const New = ({ inputs, title }) => {
                 <label>Quality</label>
 
                 <div>
-                <input name="quality" value="basic" id="1" type="checkbox" placeholder="Price..." onChange={(e) => handleChange(e)} />
-                <input name="quality" value="premium" id="2" type="checkbox" placeholder="Price..." onChange={(e) => handleChange(e)} />
+
+                <input for="name" name="quality" value="basic" id="1" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Basic
+
+                <input for="name" name="quality" value="premium" id="2" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Premium
                 </div>
               </div>
               <div className="formInput">
