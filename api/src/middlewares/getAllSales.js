@@ -34,41 +34,37 @@ const getDBSaleByPk = async (id) => {
     }
     return sale;
 };
-const dbCreateSale = async (info, user, detailSales) => {
-
-    const sale = await Sale.create(info)
-    await user.addSale(sale)
-    await sale.addDetailsales(detailSales)
-    return `sale created successfully`
-}
-const dbUpdateSale = async (info, id, dbUpdateProduct) => {
+const dbCreateSale = async (info, user, detailSales, dbUpdateProduct, getDBDetailSalesValidateStock) => {
     delete info.userId
     delete info.id
-    delete info.state // test <------------------------
+    info.state = false
+
+    let notStock = await getDBDetailSalesValidateStock(user.id)
+    if(notStock.length){
+        throw new Error(`not in stock`) //se cancela la compra, o sea se devuelve el dinero
+    }else{
+        let sale = await Sale.create(info)
+        await user.addSale(sale)
+        await sale.addDetailsales(detailSales)
+    
+        sale = await getDBSaleByPk(sale.id)
+            await sale.detailsales.map(async (detailSale) => {
+    
+                console.log(detailSale.product.stock, detailSale.quantity)
+                detailSale.product.stock -= detailSale.quantity
+                await dbUpdateProduct({ stock: detailSale.product.stock }, detailSale.productId)
+            })
+        return `sale created successfully`
+    }
+}
+const dbUpdateSale = async (info, id) => {
+    delete info.userId
+    delete info.id
     let sale = await getDBSaleByPk(id)
     if (sale.state) {
         throw new Error("not can update");
     } else {
 
-        if (!info.state) {
-            try {
-                await sale.detailsales.map(async (detailSale) => {
-
-                    console.log(detailSale.product.stock, detailSale.quantity)
-                    if (detailSale.product.stock < detailSale.quantity) {
-                        throw new Error("not in stock", detailSale);
-                    } else {
-                        detailSale.product.stock -= detailSale.quantity
-                        await dbUpdateProduct({ stock: detailSale.product.stock }, detailSale.productId)
-
-                    }
-                })
-
-            } catch (error) {
-
-                throw new Error(error);
-            }
-        }
         const response = await Sale.update(info, {
             where: { id }
         })
