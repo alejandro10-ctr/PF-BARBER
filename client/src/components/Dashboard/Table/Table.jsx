@@ -63,7 +63,11 @@ const List = ({ products, getProducts }) => {
                 </div>
               </TableCell>
 
-              <TableCell className='tableCell'><button value={row.id} onClick={(e)=> handleEdit(e)}>edit</button></TableCell>
+              <TableCell className='tableCell'>
+              <Link to={`/dash/products/${row.id}`}>
+                <button>Edit</button>
+              </Link>
+                </TableCell>
               <TableCell className='tableCell'>{row.price}</TableCell>
               <TableCell className='tableCell'>{row.quality}</TableCell>
               <TableCell className='tableCell'>{row.stock}</TableCell>
