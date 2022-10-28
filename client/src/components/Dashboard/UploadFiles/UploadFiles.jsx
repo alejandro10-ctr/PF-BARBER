@@ -52,7 +52,21 @@ const New = ({ inputs, title }) => {
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
+          
+          <div className="right">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="formInput">
+               
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  style={{ display: "none" }}
+                />
+                
+                <div className="left"><label htmlFor="file" align='center'>
+                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                </label>
             <img
 
               src={
@@ -61,21 +75,9 @@ const New = ({ inputs, title }) => {
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               alt=""
-            />
+            /> 
 
           </div>
-          <div className="right">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
               </div>
 
 
@@ -93,7 +95,6 @@ const New = ({ inputs, title }) => {
                 <div  class= "row">
 
                 <input class= "col" for="name" name="quality" value="basic" id="1" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Basic
-
                 <input class= "col" for="name" name="quality" value="premium" id="2" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Premium
                 </div>
               </div>
