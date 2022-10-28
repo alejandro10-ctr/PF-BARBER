@@ -40,7 +40,7 @@ const SingleProduct = () => {
                 </Link>
                 <div className='top'>
                     <div className='left'>
-                        <h1 className='title'> Information</h1>
+                        <h1 className='title'> {edit === "false"? "Information" : "Edit information"}</h1>
                         {edit === "false" ?
                             <div className='item'>
                                 <div className='editButton'>
