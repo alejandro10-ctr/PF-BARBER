@@ -61,6 +61,7 @@ const JSONUsers = [{
   stock: 4,
   image: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg",
   score: 1,
+  description: "Alum is a well-known astringent mineral which has been used as a cosmetic for more than 2000 years. Alum stone will allow you to stop blinding any small cut produce during shaving or close any open pore."
 },
 {
   name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
