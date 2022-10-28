@@ -67,6 +67,15 @@ function App() {
         <Dashboard />
       </Route>
 
+      <Route exact path = "/dash/products/add">
+        <New inputs ={inputs} title = "Add new product"/>
+       </Route>
+
+
+      <Route exact path="/dash/users/iduser">
+        <Single />
+      </Route>
+
 
 
       <Route exact path="/">

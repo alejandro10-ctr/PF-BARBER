@@ -4,8 +4,6 @@ import { userColumns} from "./datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { getUsers } from '../../../redux/actions';
 
 const Datatable = () => {
@@ -60,7 +58,7 @@ const Datatable = () => {
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
+   
       /> 
     </div>
   );
