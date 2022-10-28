@@ -87,14 +87,14 @@ const New = ({ inputs, title }) => {
                 <label>Price</label>
                 <input name="price" type="text" placeholder="Price..." onChange={(e) => handleChange(e)} />
               </div>
-              <div className="formInput">
+              <div className="formInput" >
                 <label>Quality</label>
 
-                <div>
+                <div  class= "row">
 
-                <input for="name" name="quality" value="basic" id="1" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Basic
+                <input class= "col" for="name" name="quality" value="basic" id="1" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Basic
 
-                <input for="name" name="quality" value="premium" id="2" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Premium
+                <input class= "col" for="name" name="quality" value="premium" id="2" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Premium
                 </div>
               </div>
               <div className="formInput">
