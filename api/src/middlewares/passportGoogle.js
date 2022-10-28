@@ -32,7 +32,7 @@ passport.use(
         done(null, false);
       } else {
         let newUser = User.create({
-          user: profile.displayName,
+          username: profile.displayName,
           email: profile.emails[0].value,
           //   password: profile._json.sub,
           // avatar: profile.photos[0].value

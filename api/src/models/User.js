@@ -12,19 +12,19 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      user: {
+      username: {
         type: DataTypes.CHAR,
         allowNull: false,
         unique: true,
-        validate: {
-          // isAlpha: {
-          //   msg: "The user must not contain spaces",
-          // },
-          len: {
-            args: [4, 50],
-            msg: "The user must only contain at least six letters",
-          },
-        },
+        // validate: {
+        //   // isAlpha: {
+        //   //   msg: "The user must not contain spaces",
+        //   // },
+        //   len: {
+        //     args: [4, 50],
+        //     msg: "The user must only contain at least six letters",
+        //   },
+        // },
       },
       // name: {
       //   type: DataTypes.STRING,

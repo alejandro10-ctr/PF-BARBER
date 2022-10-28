@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
   } else {
     let passHash = await bcryptjs.hash(password, 8);
     const user = User.create({
-      user: req.body.username,
+      username: username,
       password: passHash,
       email: email,
     })
@@ -25,7 +25,7 @@ exports.register = async (req, res) => {
           message: "User succesfully add",
           user: {
             id: user.id,
-            username: user.user,
+            username: user.username,
             email: user.email,
           },
         });
@@ -64,7 +64,7 @@ exports.login = async (req, res) => {
     }
 
     const payload = {
-      user: user.user,
+      user: user.username,
       id: user.id,
     };
     const token = jwt.sign(payload, "secretKey", { expiresIn: "1d" });
@@ -88,7 +88,7 @@ exports.protectedRoute = async (req, res) => {
       success: true,
       user: {
         id: req.user.id,
-        username: req.user.user,
+        user: req.user.username,
       },
     });
   } catch (error) {
@@ -113,5 +113,5 @@ const sendEmail = async (email) => {
 };
 
 exports.loginGoogle = async (req, res) => {
-  res.send(req.user);
+  res.send(req.username);
 };
