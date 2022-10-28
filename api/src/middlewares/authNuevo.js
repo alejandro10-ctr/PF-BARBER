@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
 
   User.findOne({
     where: {
-      user: username,
+      username: username,
     },
   }).then((user) => {
     // NOT FINDED USER
