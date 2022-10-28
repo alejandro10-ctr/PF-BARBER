@@ -64,7 +64,7 @@ const List = ({ products, getProducts }) => {
               </TableCell>
 
               <TableCell className='tableCell'>
-              <Link to={`/dash/products/${row.id}`}>
+              <Link to={`/dash/product/${row.id}`}>
                 <button>Edit</button>
               </Link>
                 </TableCell>

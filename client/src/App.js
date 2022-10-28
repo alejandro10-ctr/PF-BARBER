@@ -74,7 +74,9 @@ function App() {
       <Route exact path="/dash/users/iduser">
         <Single />
       </Route>
-      <Route exact path="/dash/products/:id">
+
+      
+      <Route exact path="/dash/product/:id">
         <SingleProduct />
       </Route>
 

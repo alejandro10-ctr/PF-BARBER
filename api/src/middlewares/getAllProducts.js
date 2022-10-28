@@ -16,6 +16,7 @@ const JSONUsers = [{
   stock: 6,
   image: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg",
   score: 4,
+  description: "This product has an extraordinary and modern design. It features an easy and quick system to replace blades. It can be adjusted in 6 different positions. 1 to 2 recommended for beginners. Progressively when you will fill confident adjust it at higher numbers to provide you a more aggressive and closer shave.",
 },
 {
   name: "Edwin Jagger Marfil",
@@ -24,6 +25,7 @@ const JSONUsers = [{
   stock: 9,
   image: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg",
   score: 5,
+  description: 'The safety razor with an open tooth comb has been developed specially for practised wet shavers. Due to the principle of its construction, which features a special blade angle, the new model allows a vigorous, very direct shaving technique. As on safety razors with closed combs, the curved blade is exposed and clamped in place by the curvature of the cap. '
 },
 {
   name: "Brosh Super Hard Gel 200gr",
@@ -32,6 +34,7 @@ const JSONUsers = [{
   stock: 11,
   image: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg",
   score: 3,
+  description: "This product offers a modern fresh fern aroma which has been specially formulated for Sensitive Skin. This gel will certainly help those gentlemen who have trouble with damage to the skin whilst shaving."
 },
 {
   name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
@@ -40,6 +43,7 @@ const JSONUsers = [{
   stock: 9,
   image: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg",
   score: 5,
+  description: "Exclusive limited editions of shaving brushes, 'basic' brushes with all types of hair, shaving accessories and a new line of after shaves with a markedly classic character, which renews and improves the essence of the authentic barbershop."
 },
 {
   name: "Fatip Chrome Slant Double Edge Safety Razor",
@@ -48,6 +52,7 @@ const JSONUsers = [{
   stock: 2,
   image: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg",
   score: 3,
+  description: "The cap of the razor can be released with a simple twist of the small wheel at the end of the handle. The open comb remains firmly attached to the handle. Used blades can then be removed safely and replaced with new ones. "
 },
 {
   name: "Omega Garnet Shaving Bowl",
