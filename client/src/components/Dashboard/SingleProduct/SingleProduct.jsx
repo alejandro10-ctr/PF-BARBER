@@ -1,9 +1,24 @@
 
 import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
-import '../Single/SingleProduct.scss';
+import '../SingleProduct/SingleProduct.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { getProductsDetail } from '../../../redux/actions';
+
 
 const SingleProduct = () => {
+    const {id} = useParams()
+    const dispatch = useDispatch()
+   
+
+    useEffect(() => {
+      dispatch(getProductsDetail(id))
+    }, [])
+ const detail = useSelector((state)=> state.detail)
+ console.log(detail)
+
     return (
    
         <div className='single'>
@@ -15,24 +30,29 @@ const SingleProduct = () => {
                         <div className='editButton'>Edit</div>
                         <h1 className='title'> Information</h1>
                         <div className='item'>     
-                            {/* <img src="https://media.ambito.com/p/d05bbfaac0af2843cea560108f4f5789/adjuntos/239/imagenes/040/239/0040239564/robbie-coltranewebp.png"
+                            <img src={detail.image}
                                 alt="" 
                                 className='itemImg'/>
                                 <div className='details'>
-                                    <h1 className="itemtitle">Hagrid</h1>
+                                    <h1 className="itemtitle">{detail.name}</h1>
                                     <div className="detailItem">
-                                        <span className='itemKey'>Email:</span>
-                                        <span className='itemValue'>dragons@hogwarts.com</span>
+                                        <span className='itemKey'>Price:</span>
+                                        <span className='itemValue'>{detail.price}</span>
+                                    </div>
+                                     <div className="detailItem">
+                                        <span className='itemKey'>Stock:</span>
+                                        <span className='itemValue'>{detail.stock}</span> 
                                     </div>
                                     <div className="detailItem">
-                                        <span className='itemKey'>Phone:</span>
-                                        <span className='itemValue'>+541 4344 3434</span>
+                                        <span className='itemKey'>Quality:</span>
+                                        <span className='itemValue'>{detail.quality}</span>
                                     </div>
                                     <div className="detailItem">
-                                        <span className='itemKey'>Adress:</span>
-                                        <span className='itemValue'>Hogwarts school grounds, near the Forbidden Forest</span> 
+                                        <span className='itemKey'>Description:</span>
+                                        <span className='itemValue'>{detail.description}</span>
                                     </div>
-                                </div>*/}
+                                   
+                                </div>
                         </div>
                    
                     </div>

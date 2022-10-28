@@ -8,6 +8,7 @@ const JSONUsers = [{
   stock: 7,
   image: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp",
   score: 3,
+  description:' It is a high-quality concentrated shaving cream with a high proportion of glycerin for a smooth and moisturizing shave. The cream can be applied by brush or by hand, this action produces a rich, abundant lather that softens the beard for a quick and comfortable shave. ',
 }, {
   name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
   price: 5400,

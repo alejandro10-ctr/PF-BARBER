@@ -22,7 +22,6 @@ import "./App.css";
 import ItemCart from "./components/FullCart/FullCart";
 import New from "./components/Dashboard/UploadFiles/UploadFiles";
 import { inputs } from "./components/Dashboard/UploadFiles/formSource";
->>>>>>> fac7a69 (un buen commit)
 
 =======
 import Products from "./components/Dashboard/Products/Products.jsx"
@@ -75,7 +74,9 @@ function App() {
       <Route exact path="/dash/users/iduser">
         <Single />
       </Route>
-
+      <Route exact path="/dash/products/:id">
+        <SingleProduct />
+      </Route>
 
 
       <Route exact path="/">
