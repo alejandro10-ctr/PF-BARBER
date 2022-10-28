@@ -91,6 +91,7 @@ function DetailProduct({ match }) {
         <img src={product.image} alt={product.image} />
         <h3>Price: ${product.price}</h3>
         <h3>{product.quality}</h3>
+        <h3>{product.description}</h3>
         {console.log("productInCart", productInCar)}
         <div>
 
