@@ -72,7 +72,7 @@ export default function reducer(state = initialState, { type, payload, quantity 
     case CLEAR_PRODUCTS_DETAILS:
       return {
         ...state,
-        detail: [],
+        detail: {},
       };
     case SEARCH_PRODUCTS:
       return { ...state, products: payload };

@@ -5,7 +5,7 @@ import '../SingleProduct/SingleProduct.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { getProductsDetail } from '../../../redux/actions';
+import { clearDetail, getProductsDetail } from '../../../redux/actions';
 
 
 const SingleProduct = () => {
@@ -15,6 +15,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
       dispatch(getProductsDetail(id))
+      return () => dispatch(clearDetail())
     }, [])
  const detail = useSelector((state)=> state.detail)
  console.log(detail)
