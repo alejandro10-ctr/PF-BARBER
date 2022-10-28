@@ -19,14 +19,14 @@ export default function LoginUser() {
 
     const formik = useFormik({
         initialValues: {
-            user: "",
+            username: "",
             password: "",
 
         },
 
         validationSchema: Yup.object({
 
-            user: Yup.string()
+            username: Yup.string()
                 .max(15, "Between 15 chars or less")
                 .required('Required'),
 
@@ -60,12 +60,12 @@ export default function LoginUser() {
                         {/* <!-- user input //nickname --> */}
                         <div>
                         <h1 className={styles.title}>Sign in!</h1>
-                            <input id="user" name="user" type="text" placeholder='Nickname'
+                            <input id="username" name="username" type="text" placeholder='Nickname'
                                 className="form-control form-control-lg"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.user}
-                            />  <span>{formik.touched.user && formik.errors.user ? <label className={styles.errors}>{formik.errors.user}</label> : null}<br /></span> </div>
+                                value={formik.values.username}
+                            />  <span>{formik.touched.username && formik.errors.username ? <label className={styles.errors}>{formik.errors.username}</label> : null}<br /></span> </div>
     
                         {/*  Password input  */}
                         <div className="form-outline mb-4">
