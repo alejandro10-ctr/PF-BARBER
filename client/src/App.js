@@ -74,7 +74,10 @@ function App() {
       <Route exact path="/dash/users/iduser">
         <Single />
       </Route>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 80b4d37 (hola)
       
       <Route exact path="/dash/product/:id">
         <SingleProduct />

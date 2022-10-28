@@ -69,6 +69,7 @@ const JSONUsers = [{
   stock: 8,
   image: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg",
   score: 4,
+  description: "A fully adjustable razor for any skin type and stubble length. Cast from premium high-end chromed zinc alloys with a striking White Chrome finish"
 },
 {
   name: "Baxter of California Shave Tonic",
@@ -77,6 +78,7 @@ const JSONUsers = [{
   stock: 12,
   image: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg",
   score: 2,
+  description: "The first hair lotion from Barber Mind, good for the scalp and helps to get thick and healthy hair. The fresh pines and their menthol and eucaliptus contained in the formula, give it properties for a healthier scalp. It also helps refrain hair loss."
 },
 {
   name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
@@ -85,6 +87,7 @@ const JSONUsers = [{
   stock: 8,
   image: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg",
   score: 5,
+  description: "Pre/post shave Myrsol Emulsion that prepares and protects skin before shaving. It moisturizes and toning the skin. It also, soothes and refresh after shaving."
 },
 {
   name: "Hey Joe Pre Shave Oil 50ml",
@@ -93,6 +96,7 @@ const JSONUsers = [{
   stock: 7,
   image: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg",
   score: 1,
+  description: "Since 1957, Osma offers to customer’s high quality products dedicated to wet shaving. In respect to the craft traditions, rigorous selection of our raw materials, choice of natural ingredients are the values which we always put forward in the creation of our products."
 },
 {
   name: "After Shave BeardLovers",
@@ -101,6 +105,7 @@ const JSONUsers = [{
   stock: 5,
   image: "https://www.giftsandcare.com/3022-large_default/piedra-de-alumbre-natural-osma-75-gr.jpg",
   score: 3,
+  description: "Pre/post shave Myrsol Emulsion that prepares and protects skin before shaving. It moisturizes and toning the skin. It also, soothes and refresh after shaving."
 },
 {
   name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
@@ -109,6 +114,7 @@ const JSONUsers = [{
   stock: 4,
   image: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg",
   score: 2,
+  description: "An invigorating, fresh composition with oakmoss and mint fragrances. Obtained from aloe plants in the coastal regions of Spain. Selected natural ingredients soothe and refresh the skin. Aloe Vera regenerates and moisturises. The lotion relieves any irritation and prevents dryness."
 }
 ]
 
