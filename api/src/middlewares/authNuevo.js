@@ -111,3 +111,7 @@ const sendEmail = async (email) => {
     html: "<b>Al registrarte se te enviaran descuentos =)</b>", // html body
   });
 };
+
+exports.loginGoogle = async (req, res) => {
+  res.send(req.user);
+};

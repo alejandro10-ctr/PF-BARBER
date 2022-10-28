@@ -25,12 +25,9 @@ export default function Register() {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            lastname: "",
+            user: "",
             email: "",
             password: "",
-            phone: "",
-            username: "",
         },
 
 
@@ -43,25 +40,15 @@ export default function Register() {
             user: Yup.string()
 
             .min(6, "At Least 6 chars.")
-
-
                 .max(15, "Must be 15 character or less")
                 .required('Nickname required'),
-            // name: Yup.string()
-            //     .max(15, "Must be 15 character or less")
-            //     .required('Name required'),
-            // lastname: Yup.string()
-            //     .max(20, "Must be 20 character or less")
-            //     .required('Lastname required'),
             email: Yup.string()
                 .email("Invalud email address")
                 .required('Email required'),
             password: Yup.string()
                 .required('No password provided')
                 .min(8, 'At least 8 chars')
-                .max(15, "Must be between 8 and 15 character"),
-
-            // phone: Yup.string().required("Phone is required"),
+                .max(15, "Must be between 8 and 15 character")
 
         }),
 
@@ -92,7 +79,7 @@ export default function Register() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-sm"> <div className={styles.font}>
-                                    <input id="username" name="username" type="text" placeholder='Nickname'
+                                    <input id="user" name="user" type="text" placeholder='Nickname'
                                         className="form-control form-control-lg"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -100,29 +87,27 @@ export default function Register() {
                                     /> <span>{formik.touched.user && formik.errors.user ? <label className={styles.errors}>{formik.errors.user} </label> : null}<br /></span></div>
     
     
-                                    <div className={styles.font}>
+                                    {/* <div className={styles.font}>
     
-                                        {/* <input id="name" name="name" type="text" placeholder='Name'
+                                        <input id="name" name="name" type="text" placeholder='Name'
                                             className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.name}
-                                        /> */}
-
-                                        <span>{formik.touched.name && formik.errors.name ? <label className={styles.errors}>{formik.errors.name}</label> : null}<br /></span></div>
+                                        />  <span>{formik.touched.name && formik.errors.name ? <label className={styles.errors}>{formik.errors.name}</label> : null}<br /></span></div>
     
     
-                                    {/* <div className={styles.font}>
+                                    <div className={styles.font}>
                                         <input id="lastname" name="lastname" type="text" placeholder='Lastname'
                                             className="form-control form-control-lg"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.lastname} />
-                                        <span> {formik.touched.lastname && formik.errors.lastname ? <label className={styles.errors}>{formik.errors.lastname}</label> : null}<br /> </span> </div> */}
+                                        <span> {formik.touched.lastname && formik.errors.lastname ? <label className={styles.errors}>{formik.errors.lastname}</label> : null}<br /> </span> </div>
     
     
     
-    
+     */}
     
                                 </div>
                                 <div className="col-sm">
@@ -182,10 +167,10 @@ export default function Register() {
                                         /> */}
     
     
-                                        <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span>
+                                        {/* <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> */}
     
-                                    </div>
-                                    <div>
+                                    {/* </div> */}
+                                    {/* <div> */}
                                     </div>
     
                                 </div>

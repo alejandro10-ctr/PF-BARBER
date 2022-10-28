@@ -76,6 +76,10 @@ export default function LoginUser() {
                                 value={formik.values.password} />
                                 <span>{formik.touched.password && formik.errors.password ? <label className={styles.errors}>{formik.errors.password}</label> : null}<br /></span>
                         </div>
+
+                        <div>
+            <a className="enlace" href="http://localhost:3001/auth/google/signup">Iniciar con Google</a>
+        </div>
     
                         {/*  submit - home  */}
                         <div>

@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 
 require("./middlewares/passport");
+require("./middlewares/passportGoogle");
 
 require("./db.js");
 

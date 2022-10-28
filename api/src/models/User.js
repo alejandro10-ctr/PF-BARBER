@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
           //   msg: "The user must not contain spaces",
           // },
           len: {
-            args: [6, 50],
+            args: [4, 50],
             msg: "The user must only contain at least six letters",
           },
         },
@@ -50,17 +50,17 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: {
-            args: [6, 255],
+            args: [4, 255],
             msg: "The password length should be between 6 and 255 characters.",
           },
         },
       },
-      googleId: {
-        type: DataTypes.STRING,
-      },
+      // googleId: {
+      //   type: DataTypes.STRING,
+      // },
       // phone: {
       //   type: DataTypes.STRING,
       //   allowNull: true,
