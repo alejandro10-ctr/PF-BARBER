@@ -19,7 +19,10 @@ const List = ({ products, getProducts }) => {
   useEffect(() => {
     getProducts()
   },[])
-
+  
+  let handleEdit = (e) =>{
+    console.log(e.target.value)
+  }
 
   return (
 
@@ -37,6 +40,7 @@ const List = ({ products, getProducts }) => {
           <TableRow>
             <TableCell className='tableCell'>Traking ID</TableCell>
             <TableCell className='tableCell'>Product</TableCell>
+            <TableCell className='tableCell'>Edit</TableCell>
             <TableCell className='tableCell'>Price</TableCell>
             <TableCell className='tableCell'>Quality</TableCell>
             <TableCell className='tableCell'>Stock</TableCell>
@@ -59,6 +63,7 @@ const List = ({ products, getProducts }) => {
                 </div>
               </TableCell>
 
+              <TableCell className='tableCell'><button value={row.id} onClick={(e)=> handleEdit(e)}>edit</button></TableCell>
               <TableCell className='tableCell'>{row.price}</TableCell>
               <TableCell className='tableCell'>{row.quality}</TableCell>
               <TableCell className='tableCell'>{row.stock}</TableCell>
