@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 import '../SingleProduct/SingleProduct.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { clearDetail, getProductsDetail } from '../../../redux/actions';
 
@@ -34,6 +34,10 @@ const SingleProduct = () => {
             <Sidebar />
             <div className='singleContainer'>
                 <Navbar />
+                <Link to="/dash/products">
+
+                <button>Back</button>
+                </Link>
                 <div className='top'>
                     <div className='left'>
                         <h1 className='title'> Information</h1>
