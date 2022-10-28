@@ -14,6 +14,20 @@ const getDBDetailSales = async (id) => {
     });
     return detailSales;
 };
+const getDBDetailSalesByPk = async (id, userId) => {
+    let detailSales = await Detailsale.findAll({
+        where: {
+            id,
+            userId,
+            saleId: null,
+        },
+        include: {
+            model: Product,
+            include: Image
+        }
+    });
+    return detailSales;
+};
 const dbCreateDetailSale = async (info, model) => {
     if (Array.isArray(info)) {
         await info.map(async (e) => {
@@ -109,6 +123,7 @@ const dbDeleteDetailSale = async (id) => {
 }
 module.exports = {
     getDBDetailSales,
+    getDBDetailSalesByPk,
     dbCreateDetailSale,
     dbUpdateDetailSale,
     dbDeleteDetailSale,

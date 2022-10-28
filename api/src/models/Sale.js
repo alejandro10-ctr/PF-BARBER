@@ -11,10 +11,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-          is: {
-              args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
-              msg: "Enter a valid phone"
-          }
+        is: {
+          args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+          msg: "Enter a valid phone"
+        }
       },
     },
     address: {
@@ -27,25 +27,26 @@ module.exports = (sequelize) => {
     },
     descriptionPackage: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      defaultValue: ""
     },
     date: {
-        type: DataTypes.DATE,
-        validate: {
-            isDate: true,
-        }
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      }
     },
     state: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     shipping: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     total: {
-        type: DataTypes.INTEGER,
-        allowNull:false
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
   }, {
     timestamp: false,
