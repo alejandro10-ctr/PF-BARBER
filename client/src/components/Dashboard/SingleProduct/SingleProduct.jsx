@@ -11,6 +11,13 @@ import { clearDetail, getProductsDetail } from '../../../redux/actions';
 const SingleProduct = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
+    const [input, setInput] = useState({
+        name: "",
+        price: "",
+        stock: "",
+        quality: "",
+        description: "",
+    })
 
     const [edit, setEdit] = useState('false')
     useEffect(() => {
@@ -25,7 +32,13 @@ const SingleProduct = () => {
     }
     const editFalseHandle = (e) => {
         setEdit("false")
-
+        setInput({
+            price: e.target.value,
+            stock: e.target.value,
+            quality: e.target.value,
+            description: e.target.value,
+    })
+    console.log(setInput)
     }
 
     return (
@@ -73,7 +86,7 @@ const SingleProduct = () => {
                             : <div className='item'>
                                 <div className='editButton'>
 
-                                    <button onClick={() => editFalseHandle()}>Save</button>
+                                    <button onClick={(e) => editFalseHandle(e)}>Save</button>
                                 </div>
                                 <img src={detail.image}
                                     alt=""
@@ -83,26 +96,27 @@ const SingleProduct = () => {
                                    
                                     <div className="detailItem">
                                         <span className='itemKey'>Price:</span>
-                                        <span className='itemValue'><input type="text"></input></span>
+                                        <span className='itemValue'><input value={input.price} name={"price"} type="text"></input></span>
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Stock:</span>
-                                        <span className='itemValue'><input type="text"></input></span>
+                                        <span className='itemValue'><input value={input.stock} name={"stock"} type="text"></input></span>
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Quality:</span>
                                         <select defaultValue={detail.quality === "basic" ? "basic" : "premium"} name="quality" >
-                                        <option value="basic">Basic</option>
-                                        <option value="premium">Premium</option>
+                                        <option  name={"quality"} value="basic">Basic</option>
+                                        <option   name={"quality"} value="premium">Premium</option>
                                         </select>
                                        
 
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Description:</span>
-                                        <span className='itemValue'><input type="text"></input></span>
+                                        <span className='itemValue'><input value={input.description} name={"description"} type="text"></input></span>
                                     </div>
                                 </div>
+                                
                             </div>
 
                         }
