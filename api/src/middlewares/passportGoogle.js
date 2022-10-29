@@ -68,9 +68,9 @@ passport.use(
           email: profile.emails[0].value,
           id: profile.id,
           autByGoogle: true,
+          avatar: profile.photos[0].value,
 
           //   password: profile._json.sub,
-          // avatar: profile.photos[0].value
         });
         done(null, profile);
       }

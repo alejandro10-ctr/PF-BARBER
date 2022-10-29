@@ -62,6 +62,9 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      avatar: {
+        type: DataTypes.TEXT,
+      },
       // googleId: {
       //   type: DataTypes.STRING,
       // },
