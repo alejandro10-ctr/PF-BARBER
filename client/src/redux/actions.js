@@ -7,7 +7,6 @@ export const GET_USER = "GET_USER";
 export const CREATE_USERS = "CREATE_USERS";
 export const GET_USERS = "GET_USERS";
 export const DELETE_USERS = "DELETE_USERS";
-export const UPDATE_USERS = "UPDATE_USERS";
 export const CLEAR_PRODUCTS_DETAILS = "CLEAR_PRODUCTS_DETAILS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const PRICE_LOWER = "PRICE_LOWER";
@@ -143,16 +142,10 @@ export function deleteUsers(users, errorCallback) {
 export function updateUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/users/${users.id}`, users); //falta, se agregara..volver a revisar
-      if (response?.data) {
-        return dispatch({
-          type: UPDATE_USERS,
-          payload: response.data,
-        });
-        //dispatch(getProducts());
-      }
+      const response = await axios.put(`/users/${users.id}`, users); //LISTO, NO MODIFICAR 
+        return response.data
     } catch (error) {
-      errorCallback && errorCallback(error);
+      
     }
   };
 }
