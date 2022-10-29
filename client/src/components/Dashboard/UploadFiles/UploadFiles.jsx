@@ -48,9 +48,7 @@ const New = ({ inputs, title }) => {
       <Sidebar />
       <div className="newContainer">
         <Navbar />
-        <div className="top">
-          <h1>{title}</h1>
-        </div>
+        
         <div className="bottom">
           
           <div className="right">
@@ -82,29 +80,29 @@ const New = ({ inputs, title }) => {
 <div class="container">
               <div className="formInput" >
              
-                <label>Name</label>
-                <input name="name" type="text" placeholder="Name product..." onChange={(e) => handleChange(e)} />
+               
+                <input name="name" type="text" placeholder="Product Name" onChange={(e) => handleChange(e)} />
               </div>
-              <div className="formInput" >
-                <label>Price</label>
-                <input name="price" type="text" placeholder="Price..." onChange={(e) => handleChange(e)} />
+              <div className="formInput" ><br />
+          
+                <input name="price" type="text" placeholder="Price" onChange={(e) => handleChange(e)} />
               </div><br />
               <div className="formInput">
                 <label>Quality:</label><br />
                 <input  for="name" name="quality" value="basic" id="1" type="radio"  onChange={(e) => handleChange(e)} /> Basic 
-                <input  for="name" name="quality" value="premium" id="2" type="radio" onChange={(e) => handleChange(e)} /> Premium
+             <input  for="name" name="quality" value="premium" id="2" type="radio" onChange={(e) => handleChange(e)} /> Premium
               
               </div>
              
               <div className="formInput">
-                <label>Stock</label>
-                <input name="stock" type="text" placeholder="Add stock..." onChange={(e) => handleChange(e)} />
-              </div>
+              
+                <input name="stock" type="text" placeholder="Stock" onChange={(e) => handleChange(e)} />
+              </div><br />
 
               <div className="formInput">
-                <label>Description</label>
-                <input name="stock" type="text" placeholder="Add text..." onChange={(e) => handleChange(e)} />
-                <br />
+              
+                <input name="stock" type="text" placeholder="Description" onChange={(e) => handleChange(e)} />  <br /><br />
+              
                  <div><button type='submit' >Send</button></div>
               </div>
 
