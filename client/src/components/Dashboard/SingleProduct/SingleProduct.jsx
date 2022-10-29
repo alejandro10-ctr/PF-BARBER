@@ -5,30 +5,37 @@ import '../SingleProduct/SingleProduct.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { clearDetail, getProductsDetail } from '../../../redux/actions';
+import { clearDetail, getProducts, getProductsDetail, updateProducts } from '../../../redux/actions';
 
 
 const SingleProduct = () => {
+    const detail = useSelector((state) => state.detail)
+    const products = useSelector((state) => state.products)
+
+
     const { id } = useParams()
     const dispatch = useDispatch()
     const [input, setInput] = useState({
-        name: "",
         price: "",
         stock: "",
-        quality: "",
+        quality: detail.quality,
         description: "",
     })
 
+
+
     const [edit, setEdit] = useState('false')
-    useEffect(() => {
-        dispatch(getProductsDetail(id))
-        return () => dispatch(clearDetail())
-    }, [])
-    const detail = useSelector((state) => state.detail)
+    useEffect(()=>{
+        dispatch(getProductsDetail(id))// accedo al id del detalle
+        dispatch(getProducts())
+        return()=>{dispatch(clearDetail([])); // despacha la accion de clean y retorna un array vacio
+        } 
+        },[])
+
+
     console.log(detail)
     const editTrueHandle = (e) => {
         setEdit("true")
-        console.log(edit)
     }
     const editFalseHandle = (e) => {
         setEdit("false")
@@ -38,8 +45,24 @@ const SingleProduct = () => {
             quality: e.target.value,
             description: e.target.value,
     })
-    console.log(setInput)
+    
+    // dispatch(updateProducts(id, input))
+    // dispatch(getProducts())
+
+
     }
+    function handleChange(e){ 
+        e.preventDefault()
+        dispatch(updateProducts(id, input))
+        dispatch(getProducts())
+        setInput(({
+        ...input,
+        [e.target.name]: e.target.value
+
+        }));
+    
+    
+     }
 
     return (
 
@@ -96,27 +119,27 @@ const SingleProduct = () => {
                                    
                                     <div className="detailItem">
                                         <span className='itemKey'>Price:</span>
-                                        <span className='itemValue'><input value={input.price} name={"price"} type="text"></input></span>
+                                        <span className='itemValue'><input value={input.price} name={"price"} type="text" onChange={(e) => handleChange(e)}></input></span>
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Stock:</span>
-                                        <span className='itemValue'><input value={input.stock} name={"stock"} type="text"></input></span>
+                                        <span className='itemValue'><input value={input.stock} name={"stock"} type="text" onChange={(e) => handleChange(e)}></input></span>
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Quality:</span>
-                                        <select defaultValue={detail.quality === "basic" ? "basic" : "premium"} name="quality" >
-                                        <option  name={"quality"} value="basic">Basic</option>
-                                        <option   name={"quality"} value="premium">Premium</option>
+                                        <select defaultValue={"disable"} name="quality" onClick={(e) => handleChange(e)}>
+                                        <option  name="disable" value="disable" disabled hidden>Select</option>
+                                        <option  name="quality" value="basic" >Basic</option>
+                                        <option   name="quality" value="premium">Premium</option>
                                         </select>
                                        
 
                                     </div>
                                     <div className="detailItem">
                                         <span className='itemKey'>Description:</span>
-                                        <span className='itemValue'><input value={input.description} name={"description"} type="text"></input></span>
+                                        <span className='itemValue'><input value={input.description} name={"description"} type="text" onChange={(e) => handleChange(e)}></input></span>
                                     </div>
                                 </div>
-                                
                             </div>
 
                         }
