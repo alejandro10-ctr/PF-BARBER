@@ -17,6 +17,7 @@ exports.register = async (req, res) => {
       username: username,
       password: passHash,
       email: email,
+      id: Math.random() * passHash.length,
     })
       .then((user) => {
         sendEmail(email);
@@ -72,7 +73,7 @@ exports.login = async (req, res) => {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
     };
-    console.log("Holi soy token", token);
+    // console.log("Holi soy token", token);
     res.cookie("jwt", token, cookiesOptions);
 
     return res.status(200).json({
@@ -116,5 +117,15 @@ const sendEmail = async (email) => {
 };
 
 exports.loginGoogle = async (req, res) => {
-  res.send(req.username);
+  if (req.user) {
+    console.log(req.user.id);
+    const token = jwt.sign({ id: req.user.id }, "secretKey", {
+      expiresIn: 60 * 60 * 24, // equivalente a 24 horas
+    });
+    // console.log("token");
+    res.cookie("token", token);
+    res.redirect("http://localhost:3000/");
+  } else {
+    res.redirect("http://localhost:3000/login");
+  }
 };
