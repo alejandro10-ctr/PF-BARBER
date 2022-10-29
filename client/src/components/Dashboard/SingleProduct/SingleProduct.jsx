@@ -9,12 +9,14 @@ import { clearDetail, getProducts, getProductsDetail, updateProducts } from '../
 
 
 const SingleProduct = () => {
+    const dispatch = useDispatch()
+    const { id } = useParams()
+
     const detail = useSelector((state) => state.detail)
+    const [edit, setEdit] = useState('false')
     const products = useSelector((state) => state.products)
 
 
-    const { id } = useParams()
-    const dispatch = useDispatch()
     const [input, setInput] = useState({
         price: "",
         stock: "",
@@ -22,22 +24,34 @@ const SingleProduct = () => {
         description: "",
     })
 
-
-
-    const [edit, setEdit] = useState('false')
-    useEffect(()=>{
-        dispatch(getProductsDetail(id))// accedo al id del detalle
+    
+    
+    useEffect(()=>{ 
         dispatch(getProducts())
-        return()=>{dispatch(clearDetail([])); // despacha la accion de clean y retorna un array vacio
-        } 
-        },[])
-
-
-    console.log(detail)
+        dispatch(getProductsDetail(id))
+        return()=>{dispatch(clearDetail([]))} 
+    },[])
+    
+    
+    function handleChange(e){ 
+        e.preventDefault()
+        setInput(({
+            ...input,
+            [e.target.name]: e.target.value
+            
+        }));
+        
+        
+    }
+    dispatch(updateProducts(id, input))
+  
     const editTrueHandle = (e) => {
         setEdit("true")
+
+        
     }
     const editFalseHandle = (e) => {
+        
         setEdit("false")
         setInput({
             price: e.target.value,
@@ -46,23 +60,8 @@ const SingleProduct = () => {
             description: e.target.value,
     })
     
-    // dispatch(updateProducts(id, input))
-    // dispatch(getProducts())
-
 
     }
-    function handleChange(e){ 
-        e.preventDefault()
-        dispatch(updateProducts(id, input))
-        dispatch(getProducts())
-        setInput(({
-        ...input,
-        [e.target.name]: e.target.value
-
-        }));
-    
-    
-     }
 
     return (
 
