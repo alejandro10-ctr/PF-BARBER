@@ -37,17 +37,17 @@ router.get("/logout", authController.logout);
 
 //ruta para Registrarse
 
-router.get(
-  "/google/callback",
-  passport.authenticate("sign-in-google", {
-    scope: ["profile", "email"],
-    session: false,
-  }),
-  function (req, res) {
-    // res.send("je");
-    res.redirect("http://localhost:3000/login");
-  }
-);
+// router.get(
+//   "/google/callback",
+//   passport.authenticate("sign-in-google", {
+//     scope: ["profile", "email"],
+//     session: false,
+//   }),
+//   function (req, res) {
+//     // res.send("je");
+//     res.redirect("http://localhost:3000/login");
+//   }
+// );
 
 //rutas para Iniciar Sesion
 router.get(

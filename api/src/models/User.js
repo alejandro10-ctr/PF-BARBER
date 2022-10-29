@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       username: {
         type: DataTypes.CHAR,
         allowNull: false,
-        unique: true,
+        unique: false,
         // validate: {
         //   // isAlpha: {
         //   //   msg: "The user must not contain spaces",

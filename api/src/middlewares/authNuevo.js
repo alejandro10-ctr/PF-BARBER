@@ -80,6 +80,7 @@ exports.login = async (req, res) => {
       message: "Logged in successfully",
       // token: "Bearer " + token,
       token: token,
+      name: user.username,
     });
   });
 };

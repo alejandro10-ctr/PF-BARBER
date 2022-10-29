@@ -167,7 +167,7 @@ export default function Register() {
                                         /> */}
     
     <div>
-            <a className="enlace" href="http://localhost:3001/auth/google/callback">Registrase con Google</a>
+            {/* <a className="enlace" href="http://localhost:3001/auth/google/callback">Registrase con Google</a> */}
         </div>
     
                                         {/* <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> */}

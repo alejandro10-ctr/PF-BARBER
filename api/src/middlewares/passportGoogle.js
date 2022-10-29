@@ -29,7 +29,7 @@ passport.use(
       }); // si el usuario no existe
       //lo creamos
       if (user) {
-        done(null, false);
+        done(null, user);
       } else {
         let newUser = User.create({
           username: profile.displayName,
@@ -62,7 +62,13 @@ passport.use(
       if (user) {
         done(null, user);
       } else {
-        done(null, false);
+        let newUser = User.create({
+          username: profile.displayName,
+          email: profile.emails[0].value,
+          //   password: profile._json.sub,
+          // avatar: profile.photos[0].value
+        });
+        done(null, profile);
       }
     }
   )
