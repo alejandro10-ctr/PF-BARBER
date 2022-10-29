@@ -99,7 +99,7 @@ exports.protectedRoute = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie("jwt");
+  res.clearCookie("token");
   console.log("success logout");
   return res.redirect("/");
 };
