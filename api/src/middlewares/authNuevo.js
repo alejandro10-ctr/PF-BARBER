@@ -72,12 +72,14 @@ exports.login = async (req, res) => {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
     };
+    console.log("Holi soy token", token);
     res.cookie("jwt", token, cookiesOptions);
 
-    return res.status(200).send({
+    return res.status(200).json({
       success: true,
       message: "Logged in successfully",
-      token: "Bearer " + token,
+      // token: "Bearer " + token,
+      token: token,
     });
   });
 };

@@ -41,7 +41,7 @@ export default function LoginUser() {
         onSubmit: async (values) => {
 
             console.log(values)
-            await axios.post('http://localhost:3001/auth/login', values).then(cred=> document.cookie = `token=${cred.data.data}; max-age=${500*500}; path=/; samesite=strict`
+            await axios.post('http://localhost:3001/auth/login', values).then(cred=> document.cookie = `token=${cred.data.token}; max-age=${500*500}; path=/; samesite=strict`
             )
             logIn()
             history.push('/')
