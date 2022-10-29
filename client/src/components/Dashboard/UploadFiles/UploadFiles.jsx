@@ -64,11 +64,10 @@ const New = ({ inputs, title }) => {
                   style={{ display: "none" }}
                 />
                 
-                <div className="left"><label htmlFor="file" align='center'>
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
+                <div className="left"><label htmlFor="file" align='center'>   Image: <DriveFolderUploadOutlinedIcon className="icon" /></label>
+               
+                
             <img
-
               src={
                 file
                   ? URL.createObjectURL(file)
@@ -80,34 +79,39 @@ const New = ({ inputs, title }) => {
           </div>
               </div>
 
-
-              <div className="formInput">
+<div class="container">
+              <div className="formInput" >
+             
                 <label>Name</label>
                 <input name="name" type="text" placeholder="Name product..." onChange={(e) => handleChange(e)} />
               </div>
-              <div className="formInput">
+              <div className="formInput" >
                 <label>Price</label>
                 <input name="price" type="text" placeholder="Price..." onChange={(e) => handleChange(e)} />
+              </div><br />
+              <div className="formInput">
+                <label>Quality:</label><br />
+                <input  for="name" name="quality" value="basic" id="1" type="radio"  onChange={(e) => handleChange(e)} /> Basic 
+                <input  for="name" name="quality" value="premium" id="2" type="radio" onChange={(e) => handleChange(e)} /> Premium
+              
               </div>
-              <div className="formInput" >
-                <label>Quality</label>
-
-                <div  class= "row">
-
-                <input class= "col" for="name" name="quality" value="basic" id="1" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Basic
-                <input class= "col" for="name" name="quality" value="premium" id="2" type="radio" placeholder="Price..." onChange={(e) => handleChange(e)} />Premium
-                </div>
-              </div>
+             
               <div className="formInput">
                 <label>Stock</label>
                 <input name="stock" type="text" placeholder="Add stock..." onChange={(e) => handleChange(e)} />
               </div>
+
               <div className="formInput">
                 <label>Description</label>
                 <input name="stock" type="text" placeholder="Add text..." onChange={(e) => handleChange(e)} />
+                <br />
+                 <div><button type='submit' >Send</button></div>
               </div>
-              <button type='submit'>Send</button>
+
+             
+               </div>
             </form>
+          
           </div>
         </div>
       </div>

@@ -27,7 +27,13 @@
             cursor: pointer;
           }
     }
-
+    .viewButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: darkblue;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+      }
     padding-top:1rem;
     .cellWrapper {
         display: flex;

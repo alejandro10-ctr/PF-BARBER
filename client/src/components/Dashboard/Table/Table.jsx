@@ -40,7 +40,7 @@ const List = ({ products, getProducts }) => {
           <TableRow>
             <TableCell className='tableCell'>Traking ID</TableCell>
             <TableCell className='tableCell'>Product</TableCell>
-            <TableCell className='tableCell'>Edit</TableCell>
+            <TableCell className='tableCell'> </TableCell>
             <TableCell className='tableCell'>Price</TableCell>
             <TableCell className='tableCell'>Quality</TableCell>
             <TableCell className='tableCell'>Stock</TableCell>
@@ -65,7 +65,7 @@ const List = ({ products, getProducts }) => {
 
               <TableCell className='tableCell'>
               <Link to={`/dash/product/${row.id}`}>
-                <button>Edit</button>
+                <button class='viewButton'>Edit</button>
               </Link>
                 </TableCell>
               <TableCell className='tableCell'>{row.price}</TableCell>
