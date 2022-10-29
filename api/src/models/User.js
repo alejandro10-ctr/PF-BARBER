@@ -58,6 +58,10 @@ module.exports = (sequelize) => {
           },
         },
       },
+      autByGoogle: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       // googleId: {
       //   type: DataTypes.STRING,
       // },

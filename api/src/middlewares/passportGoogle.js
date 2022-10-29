@@ -32,6 +32,7 @@ passport.use(
         done(null, user);
       } else {
         let newUser = User.create({
+          id: profile.id,
           username: profile.displayName,
           email: profile.emails[0].value,
           //   password: profile._json.sub,
@@ -65,6 +66,9 @@ passport.use(
         let newUser = User.create({
           username: profile.displayName,
           email: profile.emails[0].value,
+          // id: profile.id,
+          autByGoogle: true,
+
           //   password: profile._json.sub,
           // avatar: profile.photos[0].value
         });

@@ -56,8 +56,12 @@ router.get(
     scope: ["profile", "email"],
     session: false,
   }),
-  function (req, res) {
+  async function (req, res) {
     if (req.user) {
+      // console.log("SOY EL ID AL CREAR", req.user);
+      // me traigo el id de la db y se lo asigno al token
+      console.log("soy user id", req.user.id);
+
       const token = jwt.sign({ id: req.user.id }, "secretKey", {
         expiresIn: 60 * 60 * 24, // equivalente a 24 horas
       });
