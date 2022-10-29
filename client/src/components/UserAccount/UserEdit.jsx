@@ -31,18 +31,43 @@ export default function UserEdit() {
         return (
             <form onSubmit={(e) => {
                 e.preventDefault()
-                Swal.fire({
-                    title: 'Do you want to save the changes?',
-                    showDenyButton: true,
-                    confirmButtonText: 'Save',
-                    denyButtonText: `Don't save`,
-                }).then(async (result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        const response = await dispatch(updateUsers(input))
-                        Swal.fire(response, '', 'success')
-                    }
-                })
+                if (!Object.keys(errors).length) {
+                    Swal.fire({
+                        title: 'Do you want to save the changes?',
+                        showDenyButton: true,
+                        confirmButtonText: 'Save',
+                        denyButtonText: `Don't save`,
+                        timer: 5000
+                    }).then(async (result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            const response = await dispatch(updateUsers(input))
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'bottom-end',
+                                showConfirmButton: false,
+                                timer: 4000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'success',
+                                title: response
+                            })
+
+
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Oops...",
+                        text: Object.values(errors).join(", "),
+                    });
+                }
             }}>
                 <h1>Edit user</h1>
                 <div className="field">
@@ -73,6 +98,7 @@ export default function UserEdit() {
                     <label className="label">Name</label>
                     <div className="control">
                         <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : 'Name'}
                             name="name"
                             className="name"
                             type="text"
@@ -88,6 +114,7 @@ export default function UserEdit() {
                     <label className="label">Lastname</label>
                     <div className="control">
                         <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : 'Lastname'}
                             name="lastname"
                             className="lastname"
                             type="text"
@@ -103,6 +130,7 @@ export default function UserEdit() {
                     <label className="label">Phone</label>
                     <div className="control">
                         <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '000-000-0000000'}
                             name="phone"
                             className="phone"
                             type="text"

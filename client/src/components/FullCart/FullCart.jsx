@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Link } from "react-router-dom";
 import { getDBCart, getDBCartValidateStock, getLocalStorage, getPaymentLink } from "../../redux/actions";
+import { Redirect } from 'react-router-dom'
 import style from './FullCart.module.css'
 
 export default function ItemCart() {
@@ -31,7 +32,7 @@ export default function ItemCart() {
 
   useEffect(() => {
     console.log(pay, typeof cartoutstock)
-    if (!Object.keys(pay).length && typeof cartoutstock !== 'undefined'?!cartoutstock.length:false) {
+    if (!Object.keys(pay).length && typeof cartoutstock !== 'undefined' ? !cartoutstock.length : false) {
       dispatch(getPaymentLink(0, userId))
     }
   }, [cartoutstock])
@@ -42,6 +43,12 @@ export default function ItemCart() {
   }, [userId])
 
   let total = 0
+  const redireccionar = () => {
+    window.open(pay.init_point+"", "Mercado pago", "width=800, height=500")
+    console.log("Redireccionando...");
+
+  }
+
 
   return (
 
@@ -117,7 +124,7 @@ export default function ItemCart() {
       }
       <div>
         <h3>Total to pay ${total}</h3>
-        {Object.keys(pay).length ? <a className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""}>GO PAY</a>
+        {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
           :
           userId ?
             <button className={style.button} onClick={(e) => {
