@@ -23,15 +23,12 @@
   transition: 500ms;
 }
 
-
-
-
 .cardProfile {
   background-color: #f5f6f7;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 10px 10px 10px gray;
-  margin: 1rem;
+  margin: auto;
   max-width: 500px;
   min-width: 270px;
   position: relative;
@@ -41,7 +38,7 @@
 
 .cardProfile::before,
 .cardProfile::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }
@@ -51,8 +48,8 @@
   height: 100%;
 
   border-radius: 10px;
-  top: -.7rem;
-  left: -.7rem;
+  top: -0.7rem;
+  left: -0.7rem;
 }
 
 .cardProfile::after {
@@ -99,11 +96,11 @@ img {
 
 .name h4,
 .nameBarra h4 {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .textProfile {
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
@@ -117,7 +114,7 @@ img {
 }
 
 .stats li::marker {
-  content: '•';
+  content: "•";
 }
 
 .stats li h3 {
@@ -125,15 +122,12 @@ img {
 }
 
 .stats li h4 {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
-
 
 .stats {
   justify-content: center;
 }
-
-
 
 .barra {
   display: none;
@@ -163,7 +157,6 @@ img {
 
   .barra {
     display: flex;
-
   }
 
   .info {

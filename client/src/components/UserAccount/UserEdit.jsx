@@ -43,7 +43,7 @@ export default function UserEdit() {
             <hr />
             <div>
                 <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
-                <a href="">Change Password</a>
+                <Link className='button' to='/useredit/changepassword'>Change password</Link>
             </div>
             <form onSubmit={(e) => {
                 e.preventDefault()
@@ -95,29 +95,49 @@ export default function UserEdit() {
                     setIni(true)
                 }
             }}>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <div className="cardProfile">
-                        <div className='barra'>
-                            <div className='imgDivBarra'>
-                                <img src={input?.avatar ? input.avatar.toString() : ''} alt="" />
-                            </div>
-                            <div className='nameBarra'>
-                                <h2>{input?.name}</h2>
-                                <h4>@{input?.user}</h4>
-                            </div>
+                <div className="field">
+                    <div className="control">
+                        <label>
+                            {input ? input.user : ''}
+                        </label>
+
+                    </div>
+                    {errors.user &&
+                        <p className="help-danger">{errors.user}</p>
+                    }
+                </div>
+                <div className="field">
+                    <div className="control">
+                        <div>
+                            {input ? <h1>{input.username}</h1> : ''}
                         </div>
-                        <div className='imgDiv'>
-                            <img src={input?.avatar ? input.avatar.toString() : ''} alt="" />
+                        <div>
+                            {input ? <h3>{input.email}</h3> : ''}
                         </div>
-                        <div className='info'>
-                            <div className='name'>
-                                <h2>{input?.name + ' ' + input?.lastname}</h2>
-                                <h4>@{input?.username}</h4>
-                            </div>
-                            <p className='textProfile'>
-                                {input?.email}
-                            </p>
+
+                    </div>
+                </div>
+                <div className="cardProfile">
+                    <div className='barra'>
+                        <div className='imgDivBarra'>
+                            <img src={input?.avatar.toString()} alt="" />
                         </div>
+                        <div className='nameBarra'>
+                            <h2>{input?.name}</h2>
+                            <h4>@{input?.user}</h4>
+                        </div>
+                    </div>
+                    <div className='imgDiv'>
+                        <img src={input?.avatar.toString()} alt="" />
+                    </div>
+                    <div className='info'>
+                        <div className='name'>
+                            <h2>{input?.name + ' ' + input?.lastname}</h2>
+                            <h4>@{input?.username}</h4>
+                        </div>
+                        <p className='textProfile'>
+                            {input?.email}
+                        </p>
                     </div>
                 </div>
 
