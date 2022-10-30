@@ -15,6 +15,7 @@ import HomeNavBar from "./components/HomeNavBar/HomeNavBar"
 
 import "./App.css";
 import ItemCart from "./components/FullCart/FullCart";
+import UserEdit from "./components/UserAccount/UserEdit";
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -70,6 +71,9 @@ function App() {
 
       <Route exact path="/cart">
         <ItemCart />
+      </Route>
+      <Route exact path="/useredit">
+        <UserEdit />
       </Route>
 
       <Route

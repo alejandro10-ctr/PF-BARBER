@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getDBDetailSales, dbCreateDetailSale, dbUpdateDetailSale, dbDeleteDetailSale } = require("../middlewares/getAllDetailSales.js");
+const { getDBDetailSales, getDBDetailSalesValidateStock, dbCreateDetailSale, dbUpdateDetailSale, dbDeleteDetailSale } = require("../middlewares/getAllDetailSales.js");
 const { getDBUserByPk } = require('../middlewares/getAllUsers')
 const router = Router();
 
@@ -7,6 +7,15 @@ router.get("/user/:userId", async (req, res) => {
     try {
         const detailSales = await getDBDetailSales(req.params.userId);
         res.status(200).json(detailSales);
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
+});
+//validar stock, si retorna array vacio esta todo bien
+router.get("/user/:userId/validatestock", async (req, res) => {
+    try {
+        const detailSalesOutStock = await getDBDetailSalesValidateStock(req.params.userId);
+        res.status(200).json(detailSalesOutStock);
     } catch (error) {
         res.status(404).send(error.message);
     }

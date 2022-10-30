@@ -14,6 +14,38 @@ const getDBDetailSales = async (id) => {
     });
     return detailSales;
 };
+const getDBDetailSalesValidateStock = async (id) => {
+    let detailSales = await Detailsale.findAll({
+        where: {
+            userId: id,
+            saleId: null,
+        },
+        include: {
+            model: Product
+        }
+    });
+    let detailSalesOutStock = []
+    detailSales.forEach((detailSale) => {
+        if (detailSale.product.stock < detailSale.quantity) {
+            detailSalesOutStock.push(detailSale)
+        }
+    })
+    return detailSalesOutStock;
+};
+const getDBDetailSalesByPk = async (id, userId) => {
+    let detailSales = await Detailsale.findAll({
+        where: {
+            id,
+            userId,
+            saleId: null,
+        },
+        include: {
+            model: Product,
+            include: Image
+        }
+    });
+    return detailSales;
+};
 const dbCreateDetailSale = async (info, model) => {
     if (Array.isArray(info)) {
         await info.map(async (e) => {
@@ -21,7 +53,6 @@ const dbCreateDetailSale = async (info, model) => {
             delete e.userId
             delete e.product
             delete e.id
-
             const [detailsale, isCreatedDetailSale] = await Detailsale.findOrCreate({
                 where: {
                     productId: e.productId,
@@ -30,17 +61,16 @@ const dbCreateDetailSale = async (info, model) => {
                 },
                 defaults: e
             })
-            //aqui no se actualiza xxxxxxxxxxxxxxxxxxx
-            // if(!isCreatedDetailSale){
-            //     await Detailsale.update(
-            //     e,
-            //     {
-            //         where: {
-            //             id: detailsale.id,
-            //         },
-            //     }
-            // )
-            // }
+            if(!isCreatedDetailSale){
+                await Detailsale.update(
+                e,
+                {
+                    where: {
+                        id: detailsale.id,
+                    },
+                }
+            )
+            }
         })
 
         return "bulk upload detailed sales created successfully"
@@ -58,17 +88,17 @@ const dbCreateDetailSale = async (info, model) => {
                 },
                 defaults: info
             })
-            //no se actualiza
-            // if (!isDetailsale) {
-            //     await Detailsale.update(
-            //         info,
-            //         {
-            //             where: {
-            //                 id: detailsale.id,
-            //             },
-            //         }
-            //     );
-            // }
+            
+            if (!isDetailsale) {
+                await Detailsale.update(
+                    info,
+                    {
+                        where: {
+                            id: detailsale.id,
+                        },
+                    }
+                );
+            }
             return "detail sale created successfully"
         } else {
             throw new Error('missing param')
@@ -109,6 +139,8 @@ const dbDeleteDetailSale = async (id) => {
 }
 module.exports = {
     getDBDetailSales,
+    getDBDetailSalesValidateStock,
+    getDBDetailSalesByPk,
     dbCreateDetailSale,
     dbUpdateDetailSale,
     dbDeleteDetailSale,

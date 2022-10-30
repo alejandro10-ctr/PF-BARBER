@@ -14,6 +14,7 @@ import {
   FILTER_SHOP,
   //TYPES,
   UPDATE_CART,
+  GET_VALIDATESTOCK_CART,
   ADD_TO_CART,
   SUBTRACT_FROM_CART,
   REMOVE_ITEM_FROM_CART,
@@ -31,6 +32,7 @@ const initialState = {
   detail: {},
   allProducts: [],
   cart: [],
+  cartoutstock: undefined,
   localStorage: [],
   filterstate: [],
   error: '',
@@ -115,6 +117,14 @@ export default function reducer(state = initialState, { type, payload, quantity 
       return {
         ...state,
         cart: payload,
+        payMercadoPago: {},
+        cartoutstock: undefined,
+      }
+    }
+    case GET_VALIDATESTOCK_CART: {
+      return {
+        ...state,
+        cartoutstock: payload,
         payMercadoPago: {}
       }
     }

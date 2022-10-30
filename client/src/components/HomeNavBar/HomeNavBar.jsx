@@ -21,6 +21,7 @@ export default function HomeNavBar({ user, pathname }) {
                         <li className="nav-item me-3 me-lg-0">
                             {/* {console.log(name)} */}
                             <span>{userId ? " Welcome " + Object.keys(user).length ? user.username : "" + " 👋" : "Welcome to Barber"}</span>
+
                         </li>
                     </ul>
 
