@@ -63,13 +63,15 @@
   right: -8rem;
 }
 
-img {
-  max-width: 90%;
+.imgProfile {
+  width: 60px;
+  height: 60px;
   display: block;
+  border: 2px solid #4172f5aa;
 }
 
 .cardProfile::after,
-.cardProfile img {
+.cardProfile .imgProfile {
   border-radius: 50%;
 }
 

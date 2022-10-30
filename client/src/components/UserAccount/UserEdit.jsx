@@ -95,31 +95,34 @@ export default function UserEdit() {
                     setIni(true)
                 }
             }}>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <div className="cardProfile">
-                        <div className='barra'>
-                            <div className='imgDivBarra'>
-                                <img src={input?.avatar ? input.avatar.toString() : ''} alt="" />
+                {
+                    input &&
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div className="cardProfile">
+                            <div className='barra'>
+                                <div className='imgDivBarra'>
+                                    <img className="imgProfile" src={input?.avatar ? input.avatar.toString() : 'https://cdn.icon-icons.com/icons2/1146/PNG/512/1486485581-account-audience-person-customer-profile-user_81164.png'} alt="" />
+                                </div>
+                                <div className='nameBarra'>
+                                    <h2>{input?.name ? input.name : ''}</h2>
+                                    <h4>@{input?.user}</h4>
+                                </div>
                             </div>
-                            <div className='nameBarra'>
-                                <h2>{input?.name}</h2>
-                                <h4>@{input?.user}</h4>
+                            <div className='imgDiv'>
+                                <img className="imgProfile" src={input?.avatar ? input.avatar.toString() : 'https://cdn.icon-icons.com/icons2/1146/PNG/512/1486485581-account-audience-person-customer-profile-user_81164.png'} alt="" />
                             </div>
-                        </div>
-                        <div className='imgDiv'>
-                            <img src={input?.avatar ? input.avatar.toString() : ''} alt="" />
-                        </div>
-                        <div className='info'>
-                            <div className='name'>
-                                <h2>{input?.name + ' ' + input?.lastname}</h2>
-                                <h4>@{input?.username}</h4>
+                            <div className='info'>
+                                <div className='name'>
+                                    <h2>{input?.name ? input.name : '' + ' ' + input?.lastname ? input.lastname : ''}</h2>
+                                    <h4>@{input?.username}</h4>
+                                </div>
+                                <p className='textProfile'>
+                                    {input?.email}
+                                </p>
                             </div>
-                            <p className='textProfile'>
-                                {input?.email}
-                            </p>
                         </div>
                     </div>
-                </div>
+                }
 
 
 
