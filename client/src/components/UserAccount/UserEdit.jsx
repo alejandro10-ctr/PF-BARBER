@@ -43,7 +43,7 @@ export default function UserEdit() {
             <hr />
             <div>
                 <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
-                <a href="">Change Password</a>
+                <Link className='button' to='/useredit/changepassword'>Change password</Link>
             </div>
             <form onSubmit={(e) => {
                 e.preventDefault()
@@ -95,6 +95,7 @@ export default function UserEdit() {
                     setIni(true)
                 }
             }}>
+
                 {
                     input &&
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
