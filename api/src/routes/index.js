@@ -18,6 +18,8 @@ const imageController = require("../controllers/image");
 
 const mercadoIndex = require("../controllers/mercadoIndex");
 
+const uploadImg = require("../controllers/uploadImg"); //------upload
+
 const router = Router();
 router.use(json());
 
@@ -37,5 +39,7 @@ router.use("/images", imageController);
 router.use("/auth", authController);
 // router.use("/authGoogle", authController);
 router.use("/payments", mercadoIndex);
+
+router.use("/dash/products/add", uploadImg); //------upload
 
 module.exports = router;

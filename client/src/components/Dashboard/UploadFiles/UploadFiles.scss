@@ -4,7 +4,12 @@
     
     .newContainer {
       flex: 2;
-      
+        img {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
       .top  ,
       .bottom {
         // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -25,16 +30,11 @@
             flex: 1;
             text-align: center;
             
-            img {
-              width: 100px;
-              height: 100px;
-              border-radius: 50%;
-              object-fit: cover;
-            }
+          
           }
           
           .right {
-            flex: 2;
+            flex: 1;
           
             
             form {
@@ -44,7 +44,7 @@
               justify-content: space-around;
               
             .formInput {
-              width: 33%;
+              width: 23%;
   
               label {
                 display: flex;
@@ -65,7 +65,7 @@
             }
             
             button {
-              width: 150px;
+              width: 100px;
               padding: 10px;
               border: none;
               background-color: teal;

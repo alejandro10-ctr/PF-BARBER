@@ -24,7 +24,7 @@ import {
   GET_LOCALSTORAGE,
   GET_PAYMENTS,
   ADD_PROD,
-
+  UPLOAD_IMG,
 } from "./actions";
 
 const initialState = {
@@ -41,7 +41,8 @@ const initialState = {
   localStorage: [],
   filterstate: [],
   error: '',
-  payMercadoPago: {}
+  payMercadoPago: {},
+  uploadImg: "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg",
 
 };
 
@@ -76,6 +77,11 @@ export default function reducer(state = initialState, { type, payload, quantity 
       };
     case SEARCH_PRODUCTS:
       return { ...state, products: payload };
+
+      case UPLOAD_IMG:
+        return {
+          ...state, uploadImg: payload
+      };
 
 case ADD_PROD:
             return {

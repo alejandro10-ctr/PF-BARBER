@@ -16,7 +16,7 @@ export const PRICE_HIGH = "PRICE_HIGH";
 export const GET_DETAILPRODUCT = "GET_DETAILPRODUCT";
 export const FILTER_QUALITY = "FILTER_QUALITY";
 export const FILTER_SHOP = "FILTER_SHOP";
-
+export const UPLOAD_IMG= 'UPLOAD_IMG';
 export const UPDATE_CART = "UPDATE_CART";
 export const GET_VALIDATESTOCK_CART = "GET_VALIDATESTOCK_CART";
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -536,6 +536,7 @@ export function getPaymentLink(productId, userId) {
 }
 
 export function addProd(payload) {
+<<<<<<< HEAD
   return async function (dispatch) {
     try {
       var response = await axios.post("/products", payload);
@@ -548,3 +549,34 @@ export function addProd(payload) {
     }
   };
 }
+=======
+  return async function(dispatch) {
+      try {
+          var response = await axios.post('/products', payload);
+          return dispatch({
+              type: ADD_PROD,
+              payload: response,
+          })
+      } catch (err) {
+          console.log(err);
+      }
+  }}
+
+
+
+  export function uploadImg(payload) {
+    return async function(dispatch) {
+        try {
+            var response = await axios.post('/dash/products/add/', payload, {headers: {"Content-Type": "multipart/form-data"}});
+            console.log(response.data)
+            return dispatch({
+                type: UPLOAD_IMG,
+                payload: response.data, //url
+            })
+            
+        } catch (err) {
+            console.log(err);
+        }
+    }}
+
+>>>>>>> d11db0f (todo lo necesario para que cloudinary funcione)

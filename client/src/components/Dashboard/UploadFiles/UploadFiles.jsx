@@ -1,16 +1,28 @@
-import "./UploadFiles.scss";
-
+import axios from 'react';
+import { useState, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { addProd } from "../../../redux/actions";
+import { uploadImg } from "../../../redux/actions";
+import { useEffect } from "react";
+import { FormControl } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { addProd } from "../../../redux/actions";
+import Box from '@mui/material/Box';
+import NativeSelect from '@mui/material/NativeSelect';
 
 
+
+import "./UploadFiles.scss";
 
 const New = ({ inputs, title }) => {
+  const dispatch = useDispatch()
+  const fileInputRef = useRef(null)
+
   const [file, setFile] = useState("")
+  const imageUrl = useSelector((state) => state.uploadImg)
 
 
   const [info, setInfo] = useState({
@@ -19,99 +31,149 @@ const New = ({ inputs, title }) => {
     price: "",
     stock: "",
     score: 5,
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg",
+    image: "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg",
     quality: ""
   })
-  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+      setInfo({ ...info, image: imageUrl })
+  }, [imageUrl]) //1-corte
+
+  function handleChange(e) {
+e.preventDefault()
+setInfo({...info, [e.target.name]: e.target.value})
+console.log(info)
+  }
+
+
+  function handleChangeImg(event) {
+    event.preventDefault()
+    setFile(event.target.files['0'])
+    const formData = new FormData();
+    formData.append('file', event.target.files['0']);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    //  axios.post(url, formData).then((response) => {
+    //     console.log(response.data);
+    //   });
+   dispatch(uploadImg(formData))
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(addProd(info))
+    if (info.name==="" || info.description === "" || info.price==="" || info.stock==="" || info.quality==="") {
+alert('Complete all the fields')
+//sweet alert
+    }
+    else {
+      dispatch(addProd(info))
+      setInfo({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+        score: 5,
+        image: "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg",
+        quality: ""
+      })
+      setFile("")
+      //sweet alert
+    }
+    
 
+    // const formData = new FormData();
+    // formData.append('file', file);
+    // const config = {
+    //   headers: {
+    //     'content-type': 'multipart/form-data',
+    //   },
+    // };
+    // setInfo({image: imageUrl},dispatch(uploadImg(formData)) )
+    // console.log(info.image)
   }
 
-  //---manejo de cambios
-  function handleChange(e) {
-
-
-    setInfo({ //cambio de estados
-      ...info,
-      [e.target.name]: e.target.value
-
-
-    })
-
-  }
 
   return (
     <div className="new" >
       <Sidebar />
       <div className="newContainer">
         <Navbar />
-        
-        <div className="bottom">
+<img
+            src={
+              file
+                ? URL.createObjectURL(file)
+                : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+            }
+            alt=""
+          />
+        <div className="App">
+          <button
+          onClick={ () => fileInputRef.current?.click()}
+          >Select a file</button>
+          <br /><br />
+          <input ref={fileInputRef} type="file" onChange={handleChangeImg} style={{display: 'none'}} />
+
           
-          <div className="right">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="formInput">
-               
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
-                
-                <div className="left"><label htmlFor="file" align='center'>   Image: <DriveFolderUploadOutlinedIcon className="icon" /></label>
-               
-                
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            /> 
 
-          </div>
-              </div>
-
-<div class="container">
-              <div className="formInput" >
-             
-               
-                <input name="name" type="text" placeholder="Product Name" onChange={(e) => handleChange(e)} />
-              </div>
-              <div className="formInput" ><br />
-          
-                <input name="price" type="text" placeholder="Price" onChange={(e) => handleChange(e)} />
-              </div><br />
-              <div className="formInput">
-                <label>Quality:</label><br />
-                <input  for="name" name="quality" value="basic" id="1" type="radio"  onChange={(e) => handleChange(e)} /> Basic 
-             <input  for="name" name="quality" value="premium" id="2" type="radio" onChange={(e) => handleChange(e)} /> Premium
-              
-              </div>
-             
-              <div className="formInput">
-              
-                <input name="stock" type="text" placeholder="Stock" onChange={(e) => handleChange(e)} />
-              </div><br />
-
-              <div className="formInput">
-              
-                <input name="stock" type="text" placeholder="Description" onChange={(e) => handleChange(e)} />  <br /><br />
-              
-                 <div><button type='submit' >Send</button></div>
-              </div>
-
-             
-               </div>
-            </form>
-          
-          </div>
         </div>
+
+        <FormControl>
+          <InputLabel htmlFor="my-input">Product Name</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.name} name="name" onChange={(e)=>handleChange(e)}/>
+          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+
+        </FormControl><br /><br />
+
+
+        <FormControl>
+          <InputLabel htmlFor="my-input">Price</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.price}  name="price" onChange={(e)=>handleChange(e)} />
+          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+        </FormControl><br /><br />
+
+        <FormControl>
+          <InputLabel htmlFor="my-input">Stock</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.stock}  name="stock" onChange={(e)=>handleChange(e)} />
+          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+        </FormControl><br /><br />
+
+        <FormControl>
+          <InputLabel htmlFor="my-input">Description</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.description}  name="description" onChange={(e)=>handleChange(e)} />
+          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+        </FormControl><br /><br />
+
+        <Box >
+          <FormControl>
+          
+            <NativeSelect
+              defaultValue={30}
+              inputProps={{
+                name: 'quality',
+
+              }}
+              name="quality" onChange={(e)=>handleChange(e)}
+              value={info.quality}
+            >
+              <option hidden value=''>Quality</option>
+              <option value='basic'>Basic</option>
+              <option value='premium'>Premium</option>
+
+            </NativeSelect>
+          </FormControl>
+        </Box><br />
+
+
+     
+        <button type="submit" onClick={(e)=>handleSubmit(e)}>Upload</button>
+
+
+
+
       </div>
     </div>
   );
