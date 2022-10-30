@@ -59,8 +59,12 @@ export function getDBAddresses(userId) {
           payload: response.data,
         });
       }
-    } catch (error) {
-      return error
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -157,9 +161,17 @@ export function createProducts(product) {
     try {
       dispatch(setLoading(true));
       const response = await axios.post(`/products`, product); //chequeada con yei-barbi
-      return response?.data
-    } catch (error) {
-      return error
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -167,9 +179,17 @@ export function updateProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/products/${product.id}`, product); //chequeada con yei-barbi
-      return response?.data
-    } catch (error) {
-      errorCallback && errorCallback(error);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -177,9 +197,17 @@ export function deleteProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`/products/${product.id}`); //chequeada con yei-barbi
-      return response?.data
-    } catch (error) {
-      errorCallback && errorCallback(error);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -193,26 +221,30 @@ export function getDBUser(userId) {
           payload: response.data,
         });
       }
-    } catch (error) {
-      return error
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
 export function createUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
-      dispatch(setLoading(true));
       const response = await axios.post(`/users`, users); //chequeada con yei-barbi
-      if (response?.data) {
-        dispatch(setLoading(false));
-        return dispatch({
-          type: CREATE_USERS,
-          payload: response.data,
-        });
-        //dispatch(getProducts());
-      }
-    } catch (error) {
-      errorCallback && errorCallback(error);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -223,8 +255,12 @@ export function getUsers(errorCallback) {
       if (response?.data) {
         dispatch({ type: GET_USERS, payload: { users: response.data } });
       }
-    } catch (error) {
-      errorCallback && errorCallback(error);
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -232,25 +268,37 @@ export function deleteUsers(users, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`/users/${users.id}`); //falta, se agregara..volver a revisar
-      if (response?.data) {
-        return dispatch({
-          type: DELETE_USERS,
-          payload: response.data,
-        });
-        // dispatch(getProducts());
-      }
-    } catch (error) {
-      errorCallback && errorCallback(error);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
-export function updateUsers(users) {
+export function updateUsers(users, showDialog) {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/users/${users.id}`, users); //LISTO, NO MODIFICAR 
-      return response.data
-    } catch (error) {
-
+      if(showDialog){
+        Toast.fire({
+          icon: 'success',
+          title: response.data
+        })
+      }
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -261,8 +309,12 @@ export function getProductsDetail(id, errorCallback) {
       if (response?.data) {
         dispatch({ type: GET_DETAILPRODUCT, payload: response.data });
       }
-    } catch (error) {
-      errorCallback && errorCallback(error);
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -276,13 +328,12 @@ export function searchProducts(name) {
     try {
       const response = await axios.get(`/products?name=${name}`); //chequeada con yei-barbi
       dispatch({ type: SEARCH_PRODUCTS, payload: response.data });
-    } catch (error) {
-      Swal.fire({
-        icon: "warning",
-        title: "Oops...",
-        text: "We don't found the product ☹!",
-      });
-      //return alert("Please search a product")
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -338,8 +389,12 @@ export function getDBCart(userId) {
       if (response?.data) {
         dispatch({ type: UPDATE_CART, payload: response.data });
       }
-    } catch (error) {
-      return error;
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -350,40 +405,74 @@ export function getDBCartValidateStock(userId) {
       if (response?.data) {
         dispatch({ type: GET_VALIDATESTOCK_CART, payload: response.data });
       }
-    } catch (error) {
-      return error;
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
 
-export function createDBCart(cart, userId) {
+export function createDBCart(cart, userId, showDialog) {
   return async () => {
     try {
-      console.log("createDB", cart);
-      return await axios.post(`/detailsales/user/${userId}`, cart);
-    } catch (error) {
-      return error;
+      const response = await axios.post(`/detailsales/user/${userId}`, cart);
+      if(showDialog){
+        Toast.fire({
+          icon: 'success',
+          title: response.data
+        })
+      }
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
-export function updateDBCart(productInCart) {
+export function updateDBCart(productInCart, showDialog) {
   return async () => {
     try {
-      console.log("updateDB", productInCart);
-      return await axios.put(`/detailsales/${productInCart.id}`, productInCart);
-    } catch (error) {
-      return error;
+      const response = await axios.put(`/detailsales/${productInCart.id}`, productInCart);
+      if(showDialog){
+        Toast.fire({
+          icon: 'success',
+          title: response.data
+        })
+      }
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
 
-export function deleteDBCart(productInCartId) {
+export function deleteDBCart(productInCartId, showDialog) {
   return async () => {
     try {
-      console.log("deleteDB", productInCartId);
-      return await axios.delete(`/detailsales/${productInCartId}`);
-    } catch (error) {
-      return error;
+      const response = await axios.delete(`/detailsales/${productInCartId}`);
+      if(showDialog){
+        Toast.fire({
+          icon: 'success',
+          title: response.data
+        })
+      }
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }
@@ -429,8 +518,12 @@ export function getPaymentLink(productId, userId) {
       if (response?.data) {
         dispatch({ type: GET_PAYMENTS, payload: response.data });
       }
-    } catch (error) {
-      console.log(error);
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
     }
   };
 }

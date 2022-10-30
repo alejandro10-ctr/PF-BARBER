@@ -13,6 +13,17 @@ import {
 import "./ShoppingCart.css";
 
 export const CartContext = createContext();
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
 
 export const CartProvider = ({ children }) => {
     const dispatch = useDispatch();
@@ -62,7 +73,7 @@ export const CartProvider = ({ children }) => {
         if (!isSaveDB && userId) {
             setSaveDB(true);
             //crear en db el carrito 1 sola vez
-           //"guardado el carrito ----> DB"
+            //"guardado el carrito ----> DB"
             dispatch(createDBCart(cartItems, userId));
             //"obteniendo carrito ----> DB"
             Swal.showLoading();
@@ -177,11 +188,11 @@ export const CartProvider = ({ children }) => {
                 dispatch(deleteDBCart(inCart.id));
             }
 
-            Swal.fire({
-                icon: "error",
-                title: "Successfully deleted",
-                text: `Product ${inCart.product.name} delete from cart`,
-            });
+
+            Toast.fire({
+                icon: 'error',
+                title: `Product ${inCart.product.name} delete from cart`
+            })
         }
     };
 

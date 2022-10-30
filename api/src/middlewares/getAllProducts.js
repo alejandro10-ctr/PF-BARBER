@@ -95,7 +95,10 @@ const JSONUsers = [{
 
 const getAllProducts = async () => {
   let products = await Product.findAll({
-    include: Image
+    include: Image,
+    order: [
+        ['id', 'ASC']
+    ]
   });
   if (!products.length) {
     products = await Product.bulkCreate(JSONUsers, { validate: true });
@@ -124,6 +127,9 @@ const getProductByName = async (name) => {
         [Op.iLike]: `%${name}%`,
       },
     },
+    order: [
+        ['id', 'ASC']
+    ]
   });
   if (!product.length) {
     throw new Error("product not found");

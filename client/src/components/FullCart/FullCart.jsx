@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Link } from "react-router-dom";
-import { getDBCart, getDBCartValidateStock, getLocalStorage, getPaymentLink } from "../../redux/actions";
+import { getDBAddress, getDBCart, getDBCartValidateStock, getDBUser, getLocalStorage, getPaymentLink, updateUsers } from "../../redux/actions";
 import { Redirect } from 'react-router-dom'
+import Select from 'react-select'
 import style from './FullCart.module.css'
 
 export default function ItemCart() {
@@ -12,6 +13,8 @@ export default function ItemCart() {
 
   const [update, setUpdate] = useState(true)
   const cart = useSelector((state) => state.cart)
+  const user = useSelector((state) => state.user)
+  let detailaddress = useSelector((state) => state.detailaddress)
   const cartoutstock = useSelector((state) => state.cartoutstock)
   let pay = useSelector((state) => state.payMercadoPago)
 
@@ -19,6 +22,8 @@ export default function ItemCart() {
     if (update) {
       if (userId) {
         dispatch(getDBCart(userId))
+        dispatch(getDBUser(userId))
+        detailaddress = {}
       } else {
         dispatch(getLocalStorage())
       }
@@ -31,25 +36,59 @@ export default function ItemCart() {
 
 
   useEffect(() => {
-    console.log(pay, typeof cartoutstock)
     if (!Object.keys(pay).length && typeof cartoutstock !== 'undefined' ? !cartoutstock.length : false) {
       dispatch(getPaymentLink(0, userId))
     }
   }, [cartoutstock])
 
-
-  useEffect(() => {
-    setUpdate(true)
-  }, [userId])
-
   let total = 0
-  const redireccionar = () => {
-    window.open(pay.init_point+"", "Mercado pago", "width=800, height=500")
-    console.log("Redireccionando...");
 
+  const redireccionar = () => {
+    window.open(pay.init_point + "", "Mercado pago", "width=800, height=500")
+    console.log("Redireccionando...");
   }
 
+  const createSelectAddress = () => {
+    if (Object.keys(user).length) {
+      let options = []
+      let optionDefault = {}
+      if (user.addresses.length) {
+        options = user.addresses.map(address => {
+          if (address.id === user.addressDefault) {
+            optionDefault = {
+              value: address.id,
+              label: address.address
+            }
+          }
+          return {
+            value: address.id,
+            label: address.personReceives + ' - ' + address.address
+          }
+        })
+      }
+      return (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <h1>Address delivery</h1>
+            <Select onChange={(value) => {
+              user.addressDefault = value.value
+              dispatch(updateUsers(user,false))
+            }} options={options} defaultValue={optionDefault}>Select address</Select>
+            <Link to={`/useredit/shippinginfo/0`}>Add address</Link>
+          </div>
 
+        </div>
+      )
+    }
+  }
+  
+  useEffect(() => {
+    if(Object.keys(detailaddress).length && !Object.keys(pay).length){
+      dispatch(getDBCart(userId))
+      dispatch(getDBCartValidateStock(userId))
+    }
+  }, [detailaddress])
+  
   return (
 
     <div className={style.box}>
@@ -122,6 +161,10 @@ export default function ItemCart() {
         :
         <div><h1>No hay nada en el carrito</h1></div>
       }
+      {
+        createSelectAddress()
+      }
+
       <div>
         <h3>Total to pay ${total}</h3>
         {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
@@ -130,8 +173,7 @@ export default function ItemCart() {
             <button className={style.button} onClick={(e) => {
               e.preventDefault()
               if (cart.length) {
-                dispatch(getDBCart(userId))
-                dispatch(getDBCartValidateStock(userId))
+                dispatch(getDBAddress(user.addressDefault))
               }
             }}>BUY NOW</button>
             : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>

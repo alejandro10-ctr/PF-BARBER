@@ -3,7 +3,10 @@ const { Address, conn } = require("../db.js");
 
 const getDBAddresses = async (userId) => {
     let addresses = await Address.findAll({
-        where: { userId }
+        where: { userId },
+        order: [
+            ['id', 'ASC']
+        ]
     })
     return addresses
 }
@@ -11,6 +14,7 @@ const getDBAddresses = async (userId) => {
 const getDBAddressByPk = async (id) => {
     const address = await Address.findOne({
       where: { id },
+
     });
     if (!address) {
       throw new Error("address not found");

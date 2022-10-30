@@ -12,7 +12,7 @@ export function validateUser(values) {
     }
     if (!values.phone) {
         errors.phone = 'Phone is required';
-    } else if (!/^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})\S$/g.test(values.phone)) {
+    } else if (!/^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/g.test(values.phone)) {
         errors.phone = 'Phone is invalid';
     }
     return errors;
@@ -26,12 +26,12 @@ export function validateAddress(values) {
     }
     if (!values.phoneReceives) {
         errors.phoneReceives = 'Phone is required';
-    } else if (!/^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})\S$/g.test(values.phoneReceives)) {
+    } else if (!/^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/g.test(values.phoneReceives)) {
         errors.phoneReceives = 'Phone is invalid';
     }
     if (!values.address) {
         errors.address = 'Address is required';
-    } else if (!/^([A-Za-z0-9#\s]){5,50}\S$/g.test(values.address)) {
+    } else if (!/([A-Za-z0-9#\s]){5,50}\S/g.test(values.address)) {
         errors.address = 'Address is invalid';
     }
     if (!/^([A-Za-z\s]){0,50}$/g.test(values.descriptionPlace)) {
