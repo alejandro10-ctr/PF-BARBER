@@ -1,23 +1,172 @@
-.help-danger{
-    color: red;
+.help-danger {
+  color: red;
 }
+
 .button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 0;
-    background-color: #026773;
-    text-align: center;
-    color: white;
-    width: 240px;
-    height: auto;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    border: none;
-    text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: #026773;
+  text-align: center;
+  color: white;
+  width: 240px;
+  height: auto;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: aqua;
+  transition: 500ms;
+}
+
+
+
+
+.cardProfile {
+  background-color: #f5f6f7;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px gray;
+  margin: 1rem;
+  max-width: 500px;
+  min-width: 270px;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.cardProfile::before,
+.cardProfile::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.cardProfile::before {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 10px;
+  top: -.7rem;
+  left: -.7rem;
+}
+
+.cardProfile::after {
+  height: 15rem;
+  width: 15rem;
+  background-color: #4172f5aa;
+  top: -8rem;
+  right: -8rem;
+}
+
+img {
+  max-width: 90%;
+  display: block;
+}
+
+.cardProfile::after,
+.cardProfile img {
+  border-radius: 50%;
+}
+
+.cardProfile,
+.stats,
+.links {
+  display: flex;
+}
+
+.info {
+  margin-left: 1rem;
+}
+
+.name,
+.nameBarra {
+  margin-bottom: 1rem;
+}
+
+.nameBarra {
+  margin-left: 1rem;
+}
+
+.name h2,
+.nameBarra h2 {
+  font-size: 1rem;
+}
+
+.name h4,
+.nameBarra h4 {
+  font-size: .8rem;
+}
+
+.textProfile {
+  font-size: .9rem;
+  margin-bottom: 1rem;
+}
+
+.stats {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.stats li {
+  min-width: 5rem;
+}
+
+.stats li::marker {
+  content: '•';
+}
+
+.stats li h3 {
+  font-size: 1rem;
+}
+
+.stats li h4 {
+  font-size: .8rem;
+}
+
+
+.stats {
+  justify-content: center;
+}
+
+
+
+.barra {
+  display: none;
+  transition: all 0.2s linear;
+}
+
+.imgDivBarra {
+  width: 5vh;
+}
+
+.nameBarra {
+  min-width: 100px;
+}
+
+@media screen and (max-width: 350px) {
+  .cardProfile {
+    flex-direction: column;
   }
-  
-  .button:hover {
-    background-color: aqua;
-    transition: 500ms;
+
+  .imgDiv {
+    display: none;
   }
+
+  .name {
+    display: none;
+  }
+
+  .barra {
+    display: flex;
+
+  }
+
+  .info {
+    margin-left: 0px;
+  }
+}

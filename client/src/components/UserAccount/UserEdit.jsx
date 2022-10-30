@@ -24,7 +24,7 @@ export default function UserEdit() {
             dispatch(getDBUser(userId))
         }
         if (Object.keys(user).length && userId) {
-            
+
             setErrors(validateUser({ ...user }))
             setIni(true)
             setInput({ ...user })
@@ -48,47 +48,49 @@ export default function UserEdit() {
             <form onSubmit={(e) => {
                 e.preventDefault()
                 if (ini) {
-                if (!Object.keys(errors).length) {
-                    Swal.fire({
-                        title: 'Do you want to save the changes?',
-                        showDenyButton: true,
-                        confirmButtonText: 'Save',
-                        denyButtonText: `Don't save`,
-                        timer: 5000
-                    }).then(async (result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            const response = await dispatch(updateUsers({ ...input, password: bcrypt.hashSync(input.password, 10) }))
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'bottom-end',
-                                showConfirmButton: false,
-                                timer: 4000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            })
-                            Toast.fire({
-                                icon: 'success',
-                                title: response
-                            })
+                    if (!Object.keys(errors).length) {
+                        Swal.fire({
+                            title: 'Do you want to save the changes?',
+                            showDenyButton: true,
+                            confirmButtonText: 'Save',
+                            denyButtonText: `Don't save`,
+                            timer: 5000
+                        }).then(async (result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                console.log(input)
+                                delete input.password
+                                const response = await dispatch(updateUsers({ ...input }))
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'bottom-end',
+                                    showConfirmButton: false,
+                                    timer: 4000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response
+                                })
 
 
-                        }
-                    })
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Oops...",
+                            text: Object.values(errors).join(", "),
+                        });
+                    }
                 } else {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Oops...",
-                        text: Object.values(errors).join(", "),
-                    });
+                    setErrors(validateUser({ ...input }))
+                    setIni(true)
                 }
-            } else {
-                setErrors(validateUser({ ...input }))
-                setIni(true)
-            }
             }}>
                 <div className="field">
                     <div className="control">
@@ -104,13 +106,6 @@ export default function UserEdit() {
                 <div className="field">
                     <div className="control">
                         <div>
-
-                            {input ? (<img src={input.avatar.toString()} alt={input.username} />) : (
-                                <BsPersonSquare />
-                            )}
-                        </div>
-
-                        <div>
                             {input ? <h1>{input.username}</h1> : ''}
                         </div>
                         <div>
@@ -118,10 +113,38 @@ export default function UserEdit() {
                         </div>
 
                     </div>
-                    {errors.email &&
-                        <p className="help-danger">{errors.email}</p>
-                    }
                 </div>
+                <div className="cardProfile">
+                    <div className='barra'>
+                        <div className='imgDivBarra'>
+                            <img src={input?.avatar.toString()} alt="" />
+                        </div>
+                        <div className='nameBarra'>
+                            <h2>{input?.name}</h2>
+                            <h4>@{input?.user}</h4>
+                        </div>
+                    </div>
+                    <div className='imgDiv'>
+                        <img src={input?.avatar.toString()} alt="" />
+                    </div>
+                    <div className='info'>
+                        <div className='name'>
+                            <h2>{input?.name + ' ' + input?.lastname}</h2>
+                            <h4>@{input?.username}</h4>
+                        </div>
+                        <p className='textProfile'>
+                            {input?.email}
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
                 <div className="field">
                     <label className="label">Name</label>
                     <div className="control">
@@ -180,7 +203,7 @@ export default function UserEdit() {
             </form>
 
 
-            <ShowAddresses/>
+            <ShowAddresses />
         </>
         )
     } else {

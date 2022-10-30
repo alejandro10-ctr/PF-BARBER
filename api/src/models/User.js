@@ -73,22 +73,6 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      zipCode: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      address: {
-        type: DataTypes.STRING(50),
-        allowNull: true,
-      },
-      addressDescription: {
-        type: DataTypes.STRING(80),
-        allowNull: true,
-      },
-      city: {
-        type: DataTypes.STRING(50),
-        allowNull: true,
-      },
     },
     {
       timestamp: false,
