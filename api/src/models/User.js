@@ -78,10 +78,10 @@ module.exports = (sequelize) => {
       //     },
       //   },
       // },
-      // isAdmin: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: false,
-      // },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       // available: {
       //   type: DataTypes.BOOLEAN,
       //   defaultValue: true,
