@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUsers, getDBUser } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Redirect } from 'react-router-dom'
+// import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs-react";
 import { validate } from "./validateUserEdit";
 import Swal from "sweetalert2";
 
@@ -41,7 +43,7 @@ export default function UserEdit() {
                     }).then(async (result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                            const response = await dispatch(updateUsers(input))
+                            const response = await dispatch(updateUsers({...input, password: bcrypt.hashSync(input.password, 10) }))
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'bottom-end',
@@ -80,6 +82,22 @@ export default function UserEdit() {
                     </div>
                     {errors.user &&
                         <p className="help-danger">{errors.user}</p>
+                    }
+                </div>
+                <div className="field">
+                    <label className="label">Change password</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '*********'}
+                            name="password"
+                            className="password"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.password : ''}
+                        />
+                    </div>
+                    {errors.phone &&
+                        <p className="help-danger">{errors.phone}</p>
                     }
                 </div>
                 <div className="field">
@@ -142,6 +160,7 @@ export default function UserEdit() {
                         <p className="help-danger">{errors.phone}</p>
                     }
                 </div>
+                
 
                 {!Object.keys(user).length
                     ? <h4>Loading...</h4>
