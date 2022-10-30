@@ -35,6 +35,7 @@ router.use("/products", productController);
 router.use("/images", imageController);
 
 router.use("/auth", authController);
+// router.use("/authGoogle", authController);
 router.use("/payments", mercadoIndex);
 
 module.exports = router;

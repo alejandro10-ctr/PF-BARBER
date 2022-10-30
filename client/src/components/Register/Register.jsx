@@ -25,12 +25,9 @@ export default function Register() {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            lastname: "",
+            username: "",
             email: "",
             password: "",
-            phone: "",
-            user: "",
         },
 
 
@@ -40,28 +37,18 @@ export default function Register() {
             // nickname: Yup.string()
             // .max(15, "Must be 15 character or less")
             // .required('Required'),
-            user: Yup.string()
+            username: Yup.string()
 
             .min(6, "At Least 6 chars.")
-
-
                 .max(15, "Must be 15 character or less")
                 .required('Nickname required'),
-            name: Yup.string()
-                .max(15, "Must be 15 character or less")
-                .required('Name required'),
-            lastname: Yup.string()
-                .max(20, "Must be 20 character or less")
-                .required('Lastname required'),
             email: Yup.string()
                 .email("Invalud email address")
                 .required('Email required'),
             password: Yup.string()
                 .required('No password provided')
                 .min(8, 'At least 8 chars')
-                .max(15, "Must be between 8 and 15 character"),
-
-            phone: Yup.string().required("Phone is required"),
+                .max(15, "Must be between 8 and 15 character")
 
         }),
 
@@ -92,15 +79,15 @@ export default function Register() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-sm"> <div className={styles.font}>
-                                    <input id="user" name="user" type="text" placeholder='Nickname'
+                                    <input id="username" name="username" type="text" placeholder='Nickname'
                                         className="form-control form-control-lg"
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.user}
-                                    /> <span>{formik.touched.user && formik.errors.user ? <label className={styles.errors}>{formik.errors.user} </label> : null}<br /></span></div>
+                                        value={formik.values.username}
+                                    /> <span>{formik.touched.username && formik.errors.username ? <label className={styles.errors}>{formik.errors.username} </label> : null}<br /></span></div>
     
     
-                                    <div className={styles.font}>
+                                    {/* <div className={styles.font}>
     
                                         <input id="name" name="name" type="text" placeholder='Name'
                                             className="form-control form-control-lg"
@@ -120,7 +107,7 @@ export default function Register() {
     
     
     
-    
+     */}
     
                                 </div>
                                 <div className="col-sm">
@@ -154,7 +141,7 @@ export default function Register() {
                            
                                            
     
-     <MaskedInput   
+     {/* <MaskedInput   
       id="phone" name="phone" type="text" 
       placeholder='Phone Number'
       className="form-control form-control-lg"
@@ -162,7 +149,7 @@ export default function Register() {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.phone}
                             mask={[ /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
-                          />
+                          /> */}
          
          
     
@@ -179,11 +166,14 @@ export default function Register() {
     
                                         /> */}
     
+    <div>
+            {/* <a className="enlace" href="http://localhost:3001/auth/google/callback">Registrase con Google</a> */}
+        </div>
     
-                                        <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span>
+                                        {/* <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> */}
     
-                                    </div>
-                                    <div>
+                                    {/* </div> */}
+                                    {/* <div> */}
                                     </div>
     
                                 </div>
