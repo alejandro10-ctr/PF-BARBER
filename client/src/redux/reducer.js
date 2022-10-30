@@ -1,6 +1,8 @@
 
 import {
   SET_LOADING,
+  GET_ADDRESSES,
+  GET_ADDRESS,
   GET_PRODUCTS,
   GET_USER,
   GET_USERS,
@@ -28,6 +30,8 @@ const initialState = {
   loading: false,
   products: [],
   user: {},
+  addresses: [],
+  detailaddress: {},
   users: [],
   detail: {},
   allProducts: [],
@@ -45,6 +49,10 @@ export default function reducer(state = initialState, { type, payload, quantity 
   switch (type) {
     case GET_PAYMENTS:
       return { ...state, payMercadoPago: { ...payload } }
+    case GET_ADDRESSES:
+      return { ...state, addresses: payload};
+    case GET_ADDRESS:
+      return { ...state, detailaddress: payload};
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:

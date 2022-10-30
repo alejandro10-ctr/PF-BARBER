@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import { BsPersonSquare } from "react-icons/bs";
 // import bcrypt from "bcrypt";
 import bcrypt from "bcryptjs-react";
-import { validate } from "./validateUserEdit";
+// import { validate } from "./validate";
 import Swal from "sweetalert2";
 
 import './UserEdit.css'
@@ -27,7 +27,7 @@ export default function ChangePassword() {
     }, [user])
 
     const handleChangeTextBox = (e) => {
-        setErrors(validate({ ...input, [e.target.name]: e.target.value }))
+        // setErrors(validate({ ...input, [e.target.name]: e.target.value }))
         setInput({ ...input, [e.target.name]: e.target.value })
     }
     if (userId) {

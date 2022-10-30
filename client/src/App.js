@@ -18,6 +18,7 @@ import HomeNavBar from "./components/HomeNavBar/HomeNavBar";
 import "./App.css";
 import ItemCart from "./components/FullCart/FullCart";
 import UserEdit from "./components/UserAccount/UserEdit";
+import Swal from "sweetalert2";
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -38,12 +39,7 @@ function App() {
   }, [user]);
   return (
     <div className="App">
-      <Route
-        path="/"
-        render={({ location }) => {
-          return <HomeNavBar user={user} pathname={location.pathname} />;
-        }}
-      ></Route>
+      <HomeNavBar user={user}/>
 
       <Route exact path="/">
         <Home />
@@ -74,9 +70,21 @@ function App() {
       <Route exact path="/useredit">
         <UserEdit />
       </Route>
-      <Route exact path="/useredit/shippinginfo">
-        <DatosDeEnvio />
-      </Route>
+
+      <Route exact path="/useredit/shippinginfo/:addressId" render={({match})=>{
+        try {
+          return <DatosDeEnvio addressId={Math.round(match.params.addressId)}/>
+          
+        } catch (error) {
+          Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: error,
+        });
+        }
+      }}
+        />
+
       <Route exact path="/useredit/changepassword">
         <ChangePassword />
       </Route>
@@ -88,8 +96,12 @@ function App() {
           return <DetailProduct match={match} />;
         }}
       />
+      
     </div>
   );
+}
+function NotFound() {
+  return <>Ha llegado a una página que no existe</>;
 }
 
 export default App;

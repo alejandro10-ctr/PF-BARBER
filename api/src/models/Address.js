@@ -26,6 +26,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(50),
       defaultValue: ""
     },
+    zipCode: {
+      type: DataTypes.STRING(10),
+      defaultValue: ""
+    },
+    country: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
   }, {
     timestamp: false,
     createdAt: false,

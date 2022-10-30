@@ -2,6 +2,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export const SET_LOADING = "SET_LOADING";
+export const GET_ADDRESSES = "GET_ADDRESSES";
+export const GET_ADDRESS = "GET_ADDRESS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USER = "GET_USER";
 export const CREATE_USERS = "CREATE_USERS";
@@ -28,12 +30,115 @@ export const GET_PAYMENTS = "GET_PAYMENTS";
 // export const SORT_SCORE ="SORT_SCORE";
 // export const SCORE_LOWER = "SCORE_LOWER"
 // export const SCORE_HIGH = "SCORE_HIGH"
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export function setLoading(value) {
   return (dispatch) => {
     dispatch({ type: SET_LOADING, payload: { loading: value } });
   };
 }
+
+//---------->Addresses
+export function getDBAddresses(userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/${userId}/addresses`);
+      if (response?.data) {
+        return dispatch({
+          type: GET_ADDRESSES,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      return error
+    }
+  };
+}
+export function getDBAddress(addressId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/address/${addressId}`);
+      if (response?.data) {
+        return dispatch({
+          type: GET_ADDRESS,
+          payload: response.data,
+        });
+      }
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
+    }
+  };
+}
+export function createAddress(address, userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/users/${userId}/addresses`, address);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({ response }) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
+    }
+  };
+}
+export function updateAddress(address) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/users/addresses/${address.id}`, address);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({ response }) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
+    }
+  };
+}
+export function deleteAddress(addressId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/users/addresses/${addressId}`);
+      Toast.fire({
+        icon: 'success',
+        title: response.data
+      })
+      return true
+    } catch ({response}) {
+      Toast.fire({
+        icon: 'warning',
+        title: response.data
+      })
+      return false
+    }
+  };
+}
+//<----------------
+
 
 export function getProducts(errorCallback) {
   return async (dispatch) => {
@@ -139,13 +244,13 @@ export function deleteUsers(users, errorCallback) {
     }
   };
 }
-export function updateUsers(users, errorCallback) {
+export function updateUsers(users) {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/users/${users.id}`, users); //LISTO, NO MODIFICAR 
-        return response.data
+      return response.data
     } catch (error) {
-      
+
     }
   };
 }

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getDBAddresses, dbCreateAddress, dbUpdateAddress, dbDeleteAddress } = require('../middlewares/getAllAddresses.js')
+const { getDBAddresses, getDBAddressByPk, dbCreateAddress, dbUpdateAddress, dbDeleteAddress } = require('../middlewares/getAllAddresses.js')
 const { getDBUserByPk } = require("../middlewares/getAllUsers.js");
 
 const router = Router()
@@ -13,6 +13,14 @@ router.get('/:userId/addresses', async (req, res) => {
     }
 })
 
+router.get("/address/:addressId", async (req, res) => {
+    try {
+      const address = await getDBAddressByPk(req.params.addressId);
+      res.status(200).json(address);
+    } catch (error) {
+      res.status(404).send(error.message);
+    }
+  });
 router.post('/:userId/addresses', async (req, res) => {
     try {
         const user = await getDBUserByPk(req.params.userId);

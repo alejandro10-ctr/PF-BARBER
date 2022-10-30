@@ -7,6 +7,16 @@ const getDBAddresses = async (userId) => {
     })
     return addresses
 }
+
+const getDBAddressByPk = async (id) => {
+    const address = await Address.findOne({
+      where: { id },
+    });
+    if (!address) {
+      throw new Error("address not found");
+    }
+    return address;
+  };
 const dbCreateAddress = async (info) => {
     if (info.personReceives && info.phoneReceives && info.address) {
 
@@ -59,6 +69,7 @@ const dbDeleteAddress = async (id) => {
 
 module.exports = {
     getDBAddresses,
+    getDBAddressByPk,
     dbCreateAddress,
     dbUpdateAddress,
     dbDeleteAddress,

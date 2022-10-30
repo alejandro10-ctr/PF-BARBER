@@ -1,114 +1,159 @@
 import { useEffect, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsers, getDBUser } from '../../redux/actions'
+import { getDBAddress, createAddress, updateAddress } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 // import bcrypt from "bcrypt";
 import bcrypt from "bcryptjs-react";
-import { validate } from "./validateUserEdit";
+import { validateAddress } from "./validate";
 import Swal from "sweetalert2";
 
 import './UserEdit.css'
 
-export default function DatosDeEnvio() {
+export default function DatosDeEnvio({ addressId }) {
     const [input, setInput] = useState()
     const [errors, setErrors] = useState({})
+    const [ini, setIni] = useState(false);
     const { userId, } = useContext(CartContext)
+    const history = useHistory();
     const dispatch = useDispatch()
-    let user = useSelector(state => state.user)
-    useEffect(() => {
-        if (!Object.keys(user).length && userId) {
-            dispatch(getDBUser(userId))
+    let detailaddress = useSelector(state => state.detailaddress)
+    useEffect(async () => {
+        detailaddress = {}
+    }, [addressId])
+    useEffect(async () => {
+        if (!Object.keys(detailaddress).length && userId && addressId) {
+            const { response } = await dispatch(getDBAddress(addressId))
+            if (response?.data) {
+                history.goBack()
+                Swal.fire({
+                    icon: "warning",
+                    title: "Oops...",
+                    text: response?.data,
+                });
+            }
         }
-        if (Object.keys(user).length && userId) {
-            setInput({ ...user })
+        if (Object.keys(detailaddress).length && userId && addressId) {
+            
+            setErrors(validateAddress({ ...detailaddress }))
+            setIni(true)
+            setInput({ ...detailaddress })
+        } else {
+            setInput({
+                personReceives: '',
+                phoneReceives: '',
+                address: '',
+                descriptionPlace: '',
+                zipCode: '',
+                country: '',
+            })
         }
-    }, [user])
+    }, [detailaddress])
 
     const handleChangeTextBox = (e) => {
-        setErrors(validate({ ...input, [e.target.name]: e.target.value }))
+        setIni(true)
+        setErrors(validateAddress({ ...input, [e.target.name]: e.target.value }))
         setInput({ ...input, [e.target.name]: e.target.value })
     }
     if (userId) {
         return (
             <form onSubmit={(e) => {
                 e.preventDefault()
-                if (!Object.keys(errors).length) {
-                    Swal.fire({
-                        title: 'Do you want to save the changes?',
-                        showDenyButton: true,
-                        confirmButtonText: 'Save',
-                        denyButtonText: `Don't save`,
-                        timer: 5000
-                    }).then(async (result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            const response = await dispatch(updateUsers({...input }))
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'bottom-end',
-                                showConfirmButton: false,
-                                timer: 4000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                if (ini) {
+                    if (!Object.keys(errors).length) {
+                        Swal.fire({
+                            title: 'Do you want to save the changes?',
+                            showDenyButton: true,
+                            confirmButtonText: 'Save',
+                            denyButtonText: `Don't save`,
+                            timer: 5000
+                        }).then(async (result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                if (addressId) {
+                                    if (await dispatch(updateAddress({ ...input }))) {
+                                        history.goBack()
+                                    }
+
                                 }
-                            })
-                            Toast.fire({
-                                icon: 'success',
-                                title: response
-                            })
+                                else {
+                                    if (await dispatch(createAddress({ ...input }, userId))) {
+                                        history.goBack()
+                                    }
+                                }
 
 
-                        }
-                    })
+
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Oops...",
+                            text: Object.values(errors).join(", "),
+                        });
+                    }
                 } else {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Oops...",
-                        text: Object.values(errors).join(", "),
-                    });
+                    setErrors(validateAddress({ ...input }))
+                    setIni(true)
                 }
             }}>
-                <h1>Shipping Info</h1>
+                <h1>{addressId?'Update address':'Create address'}</h1>
                 <div className="field">
-                    <label className="label">First Name *</label>
+                    <label className="label">Person receives *</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : 'Name'}
-                            name="name"
-                            className="name"
+                            placeholder={
+                                addressId ?
+                                    !Object.keys(detailaddress).length ?
+                                        'loading...' :
+                                        'Name'
+                                    : 'Name'
+                            }
+                            name="personReceives"
+                            className="personReceives"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.name : ''}
+                            value={input ? input.personReceives : ''}
                         />
                     </div>
-                    {errors.name &&
-                        <p className="help-danger">{errors.name}</p>
+                    {errors.personReceives &&
+                        <p className="help-danger">{errors.personReceives}</p>
                     }
                 </div>
                 <div className="field">
-                    <label className="label">Last Name *</label>
+                    <label className="label">Phone receives Number</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : 'Lastname'}
-                            name="lastname"
-                            className="lastname"
+                            placeholder={addressId ?
+                                !Object.keys(detailaddress).length ?
+                                    'loading...' :
+                                    '000-000-0000000'
+                                :
+                                '000-000-0000000'
+                            }
+                            name="phoneReceives"
+                            className="phoneReceives"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.lastname : ''}
+                            value={input ? input.phoneReceives : ''}
                         />
                     </div>
-                    {errors.lastname &&
-                        <p className="help-danger">{errors.lastname}</p>
+                    {errors.phoneReceives &&
+                        <p className="help-danger">{errors.phoneReceives}</p>
                     }
                 </div>
                 <div className="field">
                     <label className="label">Street Adress *</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : '1234 Main St'}
+                            placeholder={addressId ?
+                                !Object.keys(detailaddress).length ?
+                                    'loading...' :
+                                    '1234 Main St'
+                                :
+                                '1234 Main St'
+                            }
                             name="address"
                             className="address"
                             type="text"
@@ -121,42 +166,60 @@ export default function DatosDeEnvio() {
                     }
                 </div>
                 <div className="field">
-                    <label className="label">Any description</label>
+                    <label className="label">Any description place</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : 'Apartament or suite'}
-                            name="addressDescription"
-                            className="addressDescription"
+                            placeholder={addressId ?
+                                !Object.keys(detailaddress).length ?
+                                    'loading...' :
+                                    'Apartament or suite'
+                                :
+                                'Apartament or suite'
+                            }
+                            name="descriptionPlace"
+                            className="descriptionPlace"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.addressDescription : ''}
+                            value={input ? input.descriptionPlace : ''}
                         />
                     </div>
-                    {errors.addressDescription &&
-                        <p className="help-danger">{errors.addressDescription}</p>
+                    {errors.descriptionPlace &&
+                        <p className="help-danger">{errors.descriptionPlace}</p>
                     }
                 </div>
                 <div className="field">
-                    <label className="label">City</label>
+                    <label className="label">Country</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : 'New York'}
-                            name="city"
-                            className="city"
+                            placeholder={addressId ?
+                                !Object.keys(detailaddress).length ?
+                                    'loading...' :
+                                    'Arauca-Colombia'
+                                :
+                                'Arauca-Colombia'
+                            }
+                            name="country"
+                            className="country"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.city : ''}
+                            value={input ? input.country : ''}
                         />
                     </div>
-                    {errors.city &&
-                        <p className="help-danger">{errors.city}</p>
+                    {errors.country &&
+                        <p className="help-danger">{errors.country}</p>
                     }
                 </div>
                 <div className="field">
                     <label className="label">Zip Code</label>
                     <div className="control">
                         <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : '1234'}
+                            placeholder={addressId ?
+                                !Object.keys(detailaddress).length ?
+                                    'loading...' :
+                                    '1234'
+                                :
+                                '1234'
+                            }
                             name="zipCode"
                             className="zipCode"
                             type="text"
@@ -168,28 +231,17 @@ export default function DatosDeEnvio() {
                         <p className="help-danger">{errors.zipCode}</p>
                     }
                 </div>
-                <div className="field">
-                    <label className="label">Phone Number</label>
-                    <div className="control">
-                        <input
-                            placeholder={!Object.keys(user).length ? 'loading...' : '000-000-0000000'}
-                            name="phone"
-                            className="phone"
-                            type="text"
-                            onChange={handleChangeTextBox}
-                            value={input ? input.phone : ''}
-                        />
-                    </div>
-                    {errors.phone &&
-                        <p className="help-danger">{errors.phone}</p>
-                    }
-                </div>
-                
 
-                {!Object.keys(user).length
-                    ? <h4>Loading...</h4>
-                    :
-                    <button className='button' type="submit">Submit</button>
+
+                {
+                    addressId ?
+
+                        !Object.keys(detailaddress).length
+                            ? <h4>Loading...</h4>
+                            :
+                            <button className='button' type="submit">Update address</button>
+                        :
+                        <button className='button' type="submit">Create address</button>
                 }
             </form>
         )

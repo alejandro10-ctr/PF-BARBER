@@ -1,19 +1,21 @@
 import { useEffect, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Link } from 'react-router-dom'
 import { updateUsers, getDBUser } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
-import { Redirect } from 'react-router-dom'
 import { BsPersonSquare } from "react-icons/bs";
 // import bcrypt from "bcrypt";
 import bcrypt from "bcryptjs-react";
-import { validate } from "./validateUserEdit";
+import { validateUser } from "./validate";
 import Swal from "sweetalert2";
+import ShowAddresses from "./Addresses";
 
 import './UserEdit.css'
 
 export default function UserEdit() {
     const [input, setInput] = useState()
     const [errors, setErrors] = useState({})
+    const [ini, setIni] = useState(false);
     const { userId, } = useContext(CartContext)
     const dispatch = useDispatch()
     let user = useSelector(state => state.user)
@@ -22,18 +24,30 @@ export default function UserEdit() {
             dispatch(getDBUser(userId))
         }
         if (Object.keys(user).length && userId) {
+            
+            setErrors(validateUser({ ...user }))
+            setIni(true)
             setInput({ ...user })
         }
     }, [user])
 
     const handleChangeTextBox = (e) => {
-        setErrors(validate({ ...input, [e.target.name]: e.target.value }))
+        setIni(true)
+        setErrors(validateUser({ ...input, [e.target.name]: e.target.value }))
         setInput({ ...input, [e.target.name]: e.target.value })
     }
     if (userId) {
-        return (
+        return (<>
+
+            <h1>Edit user</h1>
+            <hr />
+            <div>
+                <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
+                <a href="">Change Password</a>
+            </div>
             <form onSubmit={(e) => {
                 e.preventDefault()
+                if (ini) {
                 if (!Object.keys(errors).length) {
                     Swal.fire({
                         title: 'Do you want to save the changes?',
@@ -44,7 +58,7 @@ export default function UserEdit() {
                     }).then(async (result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                            const response = await dispatch(updateUsers({...input, password: bcrypt.hashSync(input.password, 10) }))
+                            const response = await dispatch(updateUsers({ ...input, password: bcrypt.hashSync(input.password, 10) }))
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'bottom-end',
@@ -71,12 +85,11 @@ export default function UserEdit() {
                         text: Object.values(errors).join(", "),
                     });
                 }
+            } else {
+                setErrors(validateUser({ ...input }))
+                setIni(true)
+            }
             }}>
-                <h1>Edit user</h1>
-                <hr />
-                <div>
-                    <a href="http://localhost:3000/useredit/shippinginfo">Shipping Info</a> <a href="">Change Password</a>
-                </div>
                 <div className="field">
                     <div className="control">
                         <label>
@@ -91,10 +104,10 @@ export default function UserEdit() {
                 <div className="field">
                     <div className="control">
                         <div>
-                            
-                            {input ? (<img src={input.avatar} alt={input.username} />) : (
-            <BsPersonSquare />
-          )}
+
+                            {input ? (<img src={input.avatar.toString()} alt={input.username} />) : (
+                                <BsPersonSquare />
+                            )}
                         </div>
 
                         <div>
@@ -118,7 +131,7 @@ export default function UserEdit() {
                             className="name"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.name : ''}
+                            value={input?.name ? input.name : ''}
                         />
                     </div>
                     {errors.name &&
@@ -134,7 +147,7 @@ export default function UserEdit() {
                             className="lastname"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.lastname : ''}
+                            value={input?.lastname ? input.lastname : ''}
                         />
                     </div>
                     {errors.lastname &&
@@ -150,14 +163,14 @@ export default function UserEdit() {
                             className="phone"
                             type="text"
                             onChange={handleChangeTextBox}
-                            value={input ? input.phone : ''}
+                            value={input?.phone ? input.phone : ''}
                         />
                     </div>
                     {errors.phone &&
                         <p className="help-danger">{errors.phone}</p>
                     }
                 </div>
-                
+
 
                 {!Object.keys(user).length
                     ? <h4>Loading...</h4>
@@ -165,6 +178,10 @@ export default function UserEdit() {
                     <button className='button' type="submit">Submit</button>
                 }
             </form>
+
+
+            <ShowAddresses/>
+        </>
         )
     } else {
         return <Redirect to='/' />
