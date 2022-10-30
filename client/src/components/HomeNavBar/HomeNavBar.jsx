@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
-import axios from 'axios'
+
 import { CartContext } from "../Shopping/ShoppingCart";
 import SearchBar from '../SearchBar/SearchBar';
 import styles from "../HomeNavBar/HomeNavBar.module.css";
@@ -9,9 +9,6 @@ import styles from "../HomeNavBar/HomeNavBar.module.css";
 export default function HomeNavBar({ user, pathname }) {
     const { userId, cartItems, SignOff } = useContext(CartContext)
     const cookies = new Cookies()
-
-    // const nombre = async() => { await axios.post('http://localhost:3001/auth/login').then(resp=> resp.data.name)}
-
     return (
         <div >
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,9 +16,8 @@ export default function HomeNavBar({ user, pathname }) {
 
                     <ul className="navbar-nav d-flex flex-row">
                         <li className="nav-item me-3 me-lg-0">
-                            {/* {console.log(name)} */}
                             <span>{userId ? " Welcome " + Object.keys(user).length ? user.username : "" + " 👋" : "Welcome to Barber"}</span>
-
+                            <span>{!!userId && <Link className={styles.button} to='/useredit' >Edit profile</Link>}</span>
                         </li>
                     </ul>
 

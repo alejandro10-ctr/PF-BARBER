@@ -10,8 +10,10 @@ import Register from "./components/Register/Register.jsx";
 import LoginUser from "./components/LoginUser/LoginUser";
 import { CartContext } from "./components/Shopping/ShoppingCart";
 import { getDBUser } from "./redux/actions";
+import DatosDeEnvio from "./components/UserAccount/DatosDeEnvio.jsx";
+import ChangePassword from "./components/UserAccount/ChangePassword.jsx";
 
-import HomeNavBar from "./components/HomeNavBar/HomeNavBar"
+import HomeNavBar from "./components/HomeNavBar/HomeNavBar";
 
 import "./App.css";
 import ItemCart from "./components/FullCart/FullCart";
@@ -25,26 +27,23 @@ import UserEdit from "./components/UserAccount/UserEdit";
 //import { ProvideAuth } from "./use-auth.js";
 //holi
 
-
-
-
 function App() {
-  let { userId } = useContext(CartContext)
-  const dispatch = useDispatch()
-  let user = useSelector(state => state.user)
+  let { userId } = useContext(CartContext);
+  const dispatch = useDispatch();
+  let user = useSelector((state) => state.user);
   useEffect(() => {
     if (!Object.keys(user).length && userId) {
-      dispatch(getDBUser(userId))
+      dispatch(getDBUser(userId));
     }
-  }, [user])
+  }, [user]);
   return (
     <div className="App">
-
-      <Route path="/" render={({ location }) => {
-        return <HomeNavBar user={user} pathname={location.pathname} />
-      }}>
-
-      </Route>
+      <Route
+        path="/"
+        render={({ location }) => {
+          return <HomeNavBar user={user} pathname={location.pathname} />;
+        }}
+      ></Route>
 
       <Route exact path="/">
         <Home />
@@ -75,9 +74,16 @@ function App() {
       <Route exact path="/useredit">
         <UserEdit />
       </Route>
+      <Route exact path="/useredit/shippinginfo">
+        <DatosDeEnvio />
+      </Route>
+      <Route exact path="/useredit/changepassword">
+        <ChangePassword />
+      </Route>
 
       <Route
-        exact path="/product/:id"
+        exact
+        path="/product/:id"
         render={({ match }) => {
           return <DetailProduct match={match} />;
         }}

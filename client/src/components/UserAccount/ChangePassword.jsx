@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 import './UserEdit.css'
 
-export default function UserEdit() {
+export default function ChangePassword() {
     const [input, setInput] = useState()
     const [errors, setErrors] = useState({})
     const { userId, } = useContext(CartContext)

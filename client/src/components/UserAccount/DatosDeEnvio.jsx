@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUsers, getDBUser } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Redirect } from 'react-router-dom'
-import { BsPersonSquare } from "react-icons/bs";
 // import bcrypt from "bcrypt";
 import bcrypt from "bcryptjs-react";
 import { validate } from "./validateUserEdit";
@@ -11,7 +10,7 @@ import Swal from "sweetalert2";
 
 import './UserEdit.css'
 
-export default function UserEdit() {
+export default function DatosDeEnvio() {
     const [input, setInput] = useState()
     const [errors, setErrors] = useState({})
     const { userId, } = useContext(CartContext)
@@ -44,7 +43,7 @@ export default function UserEdit() {
                     }).then(async (result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                            const response = await dispatch(updateUsers({...input, password: bcrypt.hashSync(input.password, 10) }))
+                            const response = await dispatch(updateUsers({...input }))
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'bottom-end',
@@ -72,45 +71,9 @@ export default function UserEdit() {
                     });
                 }
             }}>
-                <h1>Edit user</h1>
-                <hr />
-                <div>
-                    <a href="http://localhost:3000/useredit/shippinginfo">Shipping Info</a> <a href="">Change Password</a>
-                </div>
+                <h1>Shipping Info</h1>
                 <div className="field">
-                    <div className="control">
-                        <label>
-                            {input ? input.user : ''}
-                        </label>
-
-                    </div>
-                    {errors.user &&
-                        <p className="help-danger">{errors.user}</p>
-                    }
-                </div>
-                <div className="field">
-                    <div className="control">
-                        <div>
-                            
-                            {input ? (<img src={input.avatar} alt={input.username} />) : (
-            <BsPersonSquare />
-          )}
-                        </div>
-
-                        <div>
-                            {input ? <h1>{input.username}</h1> : ''}
-                        </div>
-                        <div>
-                            {input ? <h3>{input.email}</h3> : ''}
-                        </div>
-
-                    </div>
-                    {errors.email &&
-                        <p className="help-danger">{errors.email}</p>
-                    }
-                </div>
-                <div className="field">
-                    <label className="label">Name</label>
+                    <label className="label">First Name *</label>
                     <div className="control">
                         <input
                             placeholder={!Object.keys(user).length ? 'loading...' : 'Name'}
@@ -126,7 +89,7 @@ export default function UserEdit() {
                     }
                 </div>
                 <div className="field">
-                    <label className="label">Lastname</label>
+                    <label className="label">Last Name *</label>
                     <div className="control">
                         <input
                             placeholder={!Object.keys(user).length ? 'loading...' : 'Lastname'}
@@ -142,7 +105,71 @@ export default function UserEdit() {
                     }
                 </div>
                 <div className="field">
-                    <label className="label">Phone</label>
+                    <label className="label">Street Adress *</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '1234 Main St'}
+                            name="address"
+                            className="address"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.address : ''}
+                        />
+                    </div>
+                    {errors.address &&
+                        <p className="help-danger">{errors.address}</p>
+                    }
+                </div>
+                <div className="field">
+                    <label className="label">Any description</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : 'Apartament or suite'}
+                            name="addressDescription"
+                            className="addressDescription"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.addressDescription : ''}
+                        />
+                    </div>
+                    {errors.addressDescription &&
+                        <p className="help-danger">{errors.addressDescription}</p>
+                    }
+                </div>
+                <div className="field">
+                    <label className="label">City</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : 'New York'}
+                            name="city"
+                            className="city"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.city : ''}
+                        />
+                    </div>
+                    {errors.city &&
+                        <p className="help-danger">{errors.city}</p>
+                    }
+                </div>
+                <div className="field">
+                    <label className="label">Zip Code</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '1234'}
+                            name="zipCode"
+                            className="zipCode"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.zipCode : ''}
+                        />
+                    </div>
+                    {errors.zipCode &&
+                        <p className="help-danger">{errors.zipCode}</p>
+                    }
+                </div>
+                <div className="field">
+                    <label className="label">Phone Number</label>
                     <div className="control">
                         <input
                             placeholder={!Object.keys(user).length ? 'loading...' : '000-000-0000000'}

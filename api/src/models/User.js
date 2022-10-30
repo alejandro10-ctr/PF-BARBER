@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.NUMERIC,
-        // autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
@@ -16,30 +15,21 @@ module.exports = (sequelize) => {
         type: DataTypes.CHAR,
         allowNull: false,
         unique: false,
-        // validate: {
-        //   // isAlpha: {
-        //   //   msg: "The user must not contain spaces",
-        //   // },
-        //   len: {
-        //     args: [4, 50],
-        //     msg: "The user must only contain at least six letters",
-        //   },
-        // },
       },
-      // name: {
-      //   type: DataTypes.STRING,
-      //   allowNull: true,
-      //   validate: {
-      //     len: {
-      //       args: [2, 50],
-      //       msg: "The name must only contain at least two letters",
-      //     },
-      //   },
-      // },
-      // lastname: {
-      //   type: DataTypes.STRING,
-      //   allowNull: true,
-      // },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          len: {
+            args: [2, 50],
+            msg: "The name must only contain at least two letters",
+          },
+        },
+      },
+      lastname: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       email: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -65,39 +55,40 @@ module.exports = (sequelize) => {
       avatar: {
         type: DataTypes.TEXT,
       },
-      // googleId: {
-      //   type: DataTypes.STRING,
-      // },
-      // phone: {
-      //   type: DataTypes.STRING,
-      //   allowNull: true,
-      //   validate: {
-      //     is: {
-      //       args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
-      //       msg: "Enter a valid phone",
-      //     },
-      //   },
-      // },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          is: {
+            args: /^((\+|)[0-9]{1,3}(-|\s)[0-9]{2,4}(-|\s)[0-9]{6,8})$/,
+            msg: "Enter a valid phone",
+          },
+        },
+      },
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      // available: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: true,
-      // },
-      // isBarber: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: false,
-      // },
-      // addProduct: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: false,
-      // },
-      // deleteProduct: {
-      //   type: DataTypes.BOOLEAN,
-      //   defaultValue: false,
-      // },
+      available: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      zipCode: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      address: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      addressDescription: {
+        type: DataTypes.STRING(80),
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
     },
     {
       timestamp: false,
