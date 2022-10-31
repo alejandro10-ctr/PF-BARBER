@@ -69,10 +69,6 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      available: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
       addressDefault: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
