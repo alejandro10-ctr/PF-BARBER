@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from "yup"
 import  { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie';
-
+import Swal from 'sweetalert2'
 import { CartContext } from "../Shopping/ShoppingCart";
 
 import styles from '../LoginUser/LoginUser.module.css'
@@ -42,7 +42,13 @@ export default function LoginUser() {
 
             console.log(values)
             await axios.post('http://localhost:3001/auth/login', values).then(cred=> document.cookie = `token=${cred.data.token}; max-age=${500*500}; path=/; samesite=strict`
-            )
+            ).catch((error)=> {
+                return (Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.response.data.message}`
+                  }))
+            })
             logIn()
             history.push('/')
         }

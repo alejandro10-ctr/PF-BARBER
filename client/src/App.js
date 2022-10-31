@@ -20,6 +20,7 @@ import ItemCart from "./components/FullCart/FullCart";
 import New from "./components/Dashboard/UploadFiles/UploadFiles";
 import { inputs } from "./components/Dashboard/UploadFiles/formSource";
 import SingleProduct from "./components/Dashboard/SingleProduct/SingleProduct";
+import Logout from "./components/LoginUser/Logout.jsx";
 
 import DatosDeEnvio from "./components/UserAccount/DatosDeEnvio.jsx";
 import ChangePassword from "./components/UserAccount/ChangePassword.jsx";
@@ -108,6 +109,10 @@ function App() {
         const clientId = match.params.clientId
         return <UserEdit clientId={(clientId)}/>
       }}>
+      </Route>
+
+      <Route exact path="/logout">
+        <Logout />
       </Route>
 
       <Route

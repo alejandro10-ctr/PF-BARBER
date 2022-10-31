@@ -71,21 +71,11 @@ export default function UserEdit() {
                     });
                 }
             }}>
-                <h1>Edit user</h1>
-                <div className="field">
-                    <label className="label">User</label>
-                    <div className="control">
-                        <label>
-                            {input ? input.user : ''}
-                        </label>
+                <h1>Change Password</h1>
+                <hr />
 
-                    </div>
-                    {errors.user &&
-                        <p className="help-danger">{errors.user}</p>
-                    }
-                </div>
                 <div className="field">
-                    <label className="label">Change password</label>
+                    <label className="label">Current Password</label>
                     <div className="control">
                         <input
                             placeholder={!Object.keys(user).length ? 'loading...' : '*********'}
@@ -96,8 +86,42 @@ export default function UserEdit() {
                             value={input ? input.password : ''}
                         />
                     </div>
-                    {errors.phone &&
-                        <p className="help-danger">{errors.phone}</p>
+                    {errors.password &&
+                        <p className="help-danger">{errors.password}</p>
+                    }
+                </div>
+
+                <div className="field">
+                    <label className="label">New Password</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '*********'}
+                            name="password"
+                            className="password"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.password : ''}
+                        />
+                    </div>
+                    {errors.password &&
+                        <p className="help-danger">{errors.password}</p>
+                    }
+                </div>
+
+                <div className="field">
+                    <label className="label">Repeat your Password</label>
+                    <div className="control">
+                        <input
+                            placeholder={!Object.keys(user).length ? 'loading...' : '*********'}
+                            name="password"
+                            className="password"
+                            type="text"
+                            onChange={handleChangeTextBox}
+                            value={input ? input.password : ''}
+                        />
+                    </div>
+                    {errors.password &&
+                        <p className="help-danger">{errors.password}</p>
                     }
                 </div>
                 
