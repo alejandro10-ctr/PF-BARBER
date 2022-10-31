@@ -24,13 +24,8 @@ export default function DatosDeEnvio({ addressId }) {
     useEffect(async () => {
         if (!Object.keys(detailaddress).length && userId && addressId) {
             const { response } = await dispatch(getDBAddress(addressId))
-            if (response?.data) {
+            if (response) {
                 history.goBack()
-                Swal.fire({
-                    icon: "warning",
-                    title: "Oops...",
-                    text: response?.data,
-                });
             }
         }
         if (Object.keys(detailaddress).length && userId && addressId) {

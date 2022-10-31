@@ -23,7 +23,7 @@ const getDBUsers = async () => {
 const getDBUserByPk = async (id) => {
   const user = await User.findOne({
     where: { id },
-    include: ["addresses",{
+    include: ["addresses", {
       model: Sale,
       include: {
         model: Detailsale,
@@ -53,20 +53,17 @@ const dbCreateUser = async (info) => {
   await User.create(info)
   return `user ${info.name} created successfully`
 }
-const dbUpdateUser = async (info, id) => {
-  const {response} = await User.update(
-    info,
-    {
-      where: {
-        id,
-      },
-    }
-  );
-  if (response) {
-    return `user ${info.name} updated successfully`;
-  } else {
-    throw new Error("user not found");
+const dbUpdateUser = async (info, modelUser) => {
+  delete info.id
+  delete info.addresses
+  delete info.sales
+  delete info.autByGoogle
+
+  for (const property in info) {
+    modelUser[property] = info[property]
   }
+  modelUser.save()
+  return `user ${info.name} updated successfully`;
 }
 module.exports = {
   getDBUsers,

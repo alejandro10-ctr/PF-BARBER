@@ -104,8 +104,10 @@ function App() {
         <ItemCart />
       </Route>
 
-      <Route exact path="/useredit">
-        <UserEdit />
+      <Route exact path="/useredit/:clientId" render={({match})=>{
+        const clientId = match.params.clientId
+        return <UserEdit clientId={(clientId)}/>
+      }}>
       </Route>
 
       <Route

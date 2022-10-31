@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect, Link, useHistory } from 'react-router-dom'
 import { updateUsers, getDBUser } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
 import { BsPersonSquare } from "react-icons/bs";
@@ -12,16 +12,24 @@ import ShowAddresses from "./Addresses";
 
 import './UserEdit.css'
 
-export default function UserEdit() {
+export default function UserEdit({ clientId}) {
+    const history = useHistory()
     const [input, setInput] = useState()
     const [errors, setErrors] = useState({})
     const [ini, setIni] = useState(false);
-    const { userId, } = useContext(CartContext)
+    let { userId, } = useContext(CartContext)
+    const isClient = clientId !== '0'
+    if (isClient) {
+        userId = clientId
+    }
     const dispatch = useDispatch()
     let user = useSelector(state => state.user)
-    useEffect(() => {
+    useEffect(async () => {
         if (!Object.keys(user).length && userId) {
-            dispatch(getDBUser(userId))
+            const { response } = await dispatch(getDBUser(userId))
+            if (!response) {
+                history.goBack()
+            }
         }
         if (Object.keys(user).length && userId) {
 
@@ -39,12 +47,14 @@ export default function UserEdit() {
     if (userId) {
         return (<>
 
-            <h1>Edit user</h1>
+            <h1>{isClient ? 'Edit to client' : 'Edit my Account'}</h1>
             <hr />
-            <div>
-                <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
-                <Link className='button' to='/useredit/changepassword'>Change password</Link>
-            </div>
+            {!isClient &&
+                <div>
+                    <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
+                    <Link className='button' to='/useredit/changepassword'>Change password</Link>
+                </div>
+            }
             <form onSubmit={(e) => {
                 e.preventDefault()
                 if (ini) {
@@ -58,28 +68,15 @@ export default function UserEdit() {
                         }).then(async (result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                                console.log(input)
                                 delete input.password
                                 if (!input.avatar) {
                                     delete input.avatar
                                 }
-                                const response = await dispatch(updateUsers({ ...input }))
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'bottom-end',
-                                    showConfirmButton: false,
-                                    timer: 4000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    }
-                                })
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: response
-                                })
+                                const response = await dispatch(updateUsers({ ...input },true))
+                                if(response){
+                                    history.goBack()
 
+                                }
 
                             }
                         })
@@ -189,8 +186,9 @@ export default function UserEdit() {
                 }
             </form>
 
-
-            <ShowAddresses />
+            {!isClient &&
+                <ShowAddresses />
+            }
         </>
         )
     } else {

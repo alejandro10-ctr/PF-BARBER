@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 import '../Single/Single.scss';
@@ -27,7 +27,7 @@ const Single = (props) => {
                 <Navbar />
                 <div className='top'>
                     <div className='left'>
-                        <div className='editButton'>Edit</div>
+                        <Link className='editButton' to={`/useredit/${id}`}>Edit</Link>
                         <h1 className='title'> Information</h1>
                         <div className='item'>     
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Falkland_Islands_Penguins_05.jpg/1200px-Falkland_Islands_Penguins_05.jpg"

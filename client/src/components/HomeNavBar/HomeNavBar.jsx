@@ -18,7 +18,7 @@ export default function HomeNavBar({ user }) {
                     <ul className="navbar-nav d-flex flex-row">
                         <li className="nav-item me-3 me-lg-0">
                             <span>{userId ? " Welcome " + Object.keys(user).length ? user.username : "" + " 👋" : "Welcome to Barber"}</span>
-                            <span>{!!userId && <Link className={styles.button} to='/useredit' >Edit profile</Link>}</span>
+                            <span>{!!userId && <Link className={styles.button} to='/useredit/0' >Edit profile</Link>}</span>
                         </li>
                     </ul>
 

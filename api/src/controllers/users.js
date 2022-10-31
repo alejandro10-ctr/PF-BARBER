@@ -45,7 +45,9 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const updatedUser = await dbUpdateUser(req.body, req.params.id);
+    
+    const user = await getDBUserByPk(req.params.id);
+    const updatedUser = await dbUpdateUser(req.body, user);
     res.status(200).send(updatedUser);
   } catch (error) {
     res.status(404).send(error.message);
