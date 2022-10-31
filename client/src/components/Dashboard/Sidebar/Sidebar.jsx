@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
   return (
     <div className='sidebar' >
-        <div className='top'><span className='logo'><img src="https://henrybarbershoplv.square.site/uploads/b/b818a310-a8a8-11eb-b79b-3f3ed2ae8a60/Henry%20barbershop-02.png" alt="logo" /></span></div>
+        <div className='top'><span className='logo'><img src="https://img.freepik.com/premium-vector/vintage-barbershop-logo-template_441059-27.jpg" alt="logo" /></span></div>
         <hr/>
         <div className='center' >
             <ul>
@@ -30,7 +30,7 @@ function Sidebar() {
                         Dashboard</span>
                 </li>
                 </Link>
-                <p className="title">LIST</p>
+              
                 <Link to="/dash/users">
                 <li> <GroupIcon className='icon'></GroupIcon>
                     <span>Users</span>
@@ -45,20 +45,10 @@ function Sidebar() {
                 <li> <CreditCardIcon className='icon'></CreditCardIcon>
                     <span>Orders</span>
                 </li>
-                <p className="title">USEFULL</p>
-                <li> <QueryStatsIcon className='icon'></QueryStatsIcon>
-                    <span>Stats</span>
-                </li>
-                <li> <LocalShippingIcon className='icon'></LocalShippingIcon>
-                    <span>Delivery</span>
-                </li>
-                <li> <NotificationsIcon className='icon'></NotificationsIcon>
-                    <span>Notifications</span>
-                </li>
-                <li> <SettingsIcon className='icon'></SettingsIcon>
-
-                    <span>Settings</span>
-                </li>
+            
+               
+              
+               
                 <p className="title">USER</p>
                 <li> <AccountCircleOutlinedIcon className='icon'></AccountCircleOutlinedIcon>
                     <span>Profile</span>
@@ -69,11 +59,6 @@ function Sidebar() {
             </ul>
             </div>
 
-        <div className='bottom'>
-            <div className="colorOption"></div>
-            <div className="colorOption"></div>
-
-            </div>
     </div>
 
   )
