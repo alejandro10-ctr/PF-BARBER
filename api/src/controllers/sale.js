@@ -3,6 +3,7 @@ const { getDBSalesByUser, dbCreateSale, dbUpdateSale } = require('../middlewares
 const { getDBDetailSales, getDBDetailSalesByPk, getDBDetailSalesValidateStock } = require("../middlewares/getAllDetailSales.js");
 const { getDBUserByPk } = require("../middlewares/getAllUsers.js");
 const { dbUpdateProduct } = require("../middlewares/getAllProducts");
+const { getDBAddressByPk } = require("../middlewares/getAllAddresses");
 const router = Router();
 
 router.get("/user/:userId", async (req, res) => {
@@ -18,9 +19,10 @@ router.get("/user/:userId", async (req, res) => {
 router.post('/user/:userId', async (req, res) => {
     try {
         const user = await getDBUserByPk(req.params.userId);
+        const address = await getDBAddressByPk(user.addressDefault);
         let detailSales = await getDBDetailSales(req.params.userId)
         if (detailSales.length) {
-            const createdSale = await dbCreateSale(req.body, user, detailSales, dbUpdateProduct, getDBDetailSalesValidateStock)
+            const createdSale = await dbCreateSale(req.body, user,address, detailSales, dbUpdateProduct, getDBDetailSalesValidateStock)
             res.status(200).send(createdSale);
         } else {
             throw new Error('detail sales not found')
