@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { User } = require("../db");
+const { transporter } = require("../../configs/mailer");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -45,6 +46,15 @@ passport.deserializeUser(async (id, done) => {
 // );
 
 // Estrategia para Iniciar Sesion
+const sendEmail = async (email) => {
+  await transporter.sendMail({
+    from: '"HENRY BARBER" <foo@example.com>', // sender address
+    to: email, // list of receivers
+    subject: "¡Bienvenido a Henry Barber!", // Subject line
+    text: "¡Gracias! Estamos encantados de que formes parte de nuestra comunidad", // plain text body
+    html: "<b>Al registrarte se te enviaran descuentos =)</b>", // html body
+  });
+};
 
 passport.use(
   "sign-up-google",
@@ -71,7 +81,10 @@ passport.use(
           avatar: profile.photos[0].value,
 
           //   password: profile._json.sub,
+        }).then((user) => {
+          sendEmail(user.dataValues.email);
         });
+
         done(null, profile);
       }
     }
