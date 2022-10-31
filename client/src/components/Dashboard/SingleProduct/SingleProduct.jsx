@@ -1,6 +1,5 @@
 
 import Sidebar from '../Sidebar/Sidebar';
-import Navbar from '../Navbar/Navbar';
 import '../SingleProduct/SingleProduct.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom";
@@ -69,8 +68,7 @@ const SingleProduct = () => {
         <div className='single'>
             <Sidebar />
             <div className='singleContainer'>
-                <Navbar />
-               
+
 <Link to="/dash/products"> <button class='backButton'>Back</button> </Link>
                    
                

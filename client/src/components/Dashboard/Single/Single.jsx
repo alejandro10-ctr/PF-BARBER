@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams } from "react-router-dom";
 import Sidebar from '../Sidebar/Sidebar';
-import Navbar from '../Navbar/Navbar';
+
 import '../Single/Single.scss';
 import { getDBUser, updateUserMartin } from "../../../redux/actions";
 import Swal from 'sweetalert2'
@@ -57,7 +57,7 @@ function handleChange(e) {
         <div className='single'>
             <Sidebar />
             <div className='singleContainer'> 
-                <Navbar />
+
                 {edit === "false"? 
                                 <div className='top'>
                                 <div className='left'>
