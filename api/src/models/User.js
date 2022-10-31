@@ -67,7 +67,7 @@ module.exports = (sequelize) => {
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
       },
       addressDefault: {
         type: DataTypes.INTEGER,
