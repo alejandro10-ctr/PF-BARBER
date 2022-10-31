@@ -291,6 +291,22 @@ export function deleteUsers(users, errorCallback) {
     }
   };
 }
+export function updateUserMartin(id, users) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/users/${id}`, users); //falta, se agregara..volver a revisar
+      if (response?.data) {
+        return dispatch({
+          type: "UPDATE_USERS_MARTIN",
+          payload: response.data,
+        });
+        //dispatch(getProducts());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 export function updateUsers(users, showDialog) {
   return async (dispatch) => {
     try {
@@ -322,12 +338,8 @@ export function updateUsersLogic(id, user) {
       //   });
       // }
       return true;
-    } catch ({ response }) {
-      Toast.fire({
-        icon: "warning",
-        title: response.data,
-      });
-      return false;
+    } catch (error) {
+      console.log(error);
     }
   };
 }

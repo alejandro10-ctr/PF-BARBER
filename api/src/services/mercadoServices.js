@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { getDBDetailSales } = require("../middlewares/getAllDetailSales.js");
-const mercadopago = require("mercadopago");
+// const mercadopago = require("mercadopago");
 
 // const {
 //   id,
@@ -15,7 +15,7 @@ class PaymentService {
     // const products = await getAllProducts();
 
     const car = await getDBDetailSales(userId);
-    let products
+    let products;
     if (Math.round(productId)) {
       const productDetail = await car.find(
         (productDetail) => productDetail.productId === Math.round(productId)
@@ -44,10 +44,10 @@ class PaymentService {
         };
       });
     }
-    
+
     const body = {
       payer_email: "",
-      
+
       items: products,
 
       back_urls: {
@@ -56,7 +56,7 @@ class PaymentService {
         success: "http://localhost:3000/",
       },
     };
-    
+
     const payment = await axios.post(url, body, {
       headers: {
         "Content-Type": "application/json",
