@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const dotenv = require("dotenv");
+const passport = require("passport");
 
 require("./middlewares/passport");
 require("./middlewares/passportGoogle");

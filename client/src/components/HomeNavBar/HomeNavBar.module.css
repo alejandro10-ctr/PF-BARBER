@@ -1,43 +1,24 @@
-.navbarbuttons{
-<<<<<<< HEAD
-    margin-right: 70%;
-    margin: 20%;
-<<<<<<< HEAD
+.navbarbuttons {
+  margin-right: 70%;
+  margin: 20%;
 }
 .button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 0;
-    background-color: #026773;
-    text-align: center;
-    color: white;
-    width: 240px;
-    height: auto;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    border: none;
-    text-decoration: none;
-  }
-  
-  .button:hover {
-    background-color: aqua;
-    transition: 500ms;
-  }
-=======
-    padding-top: 15%;
-}
->>>>>>> 74e4232 (commit navbar home list y product padding-)
-=======
-
-    display: flex;
-    margin-bottom:-4rem;
-    list-style: none;
-
- 
-
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: #026773;
+  text-align: center;
+  color: white;
+  width: 240px;
+  height: auto;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
 }
 
-.title{
-    padding-top:3.8rem;
+.button:hover {
+  background-color: aqua;
+  transition: 500ms;
 }

@@ -53,8 +53,8 @@ const SingleProduct = () => {
     const saveHandle = (e) => {
         setEdit("false")
         setInput({
-            price: e.target.value,
-            stock: e.target.value,
+            price: Number(e.target.value),
+            stock: Number(e.target.value),
             quality: e.target.value,
             description: e.target.value,
         })

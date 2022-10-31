@@ -2,7 +2,7 @@ import axios from 'react';
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProd } from "../../../redux/actions";
-import { uploadImg } from "../../../redux/actions";
+import { uploadImg } from "../../../redux/actions.js";
 import { useEffect } from "react";
 import { FormControl } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';

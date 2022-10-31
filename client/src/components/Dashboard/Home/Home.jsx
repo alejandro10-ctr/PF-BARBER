@@ -29,21 +29,16 @@ function HomeDash() {
           <Chart/>
         </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-     
-=======
-       
-=======
+
         <div className="listConteiner">
           <div className="listTitle">Store</div>
               <Table/>
         </div>
->>>>>>> 9041481 (ojala no haya conflicto)
+
     
 
 
->>>>>>> 0d0c47e (buenos cambios)
+
       </div>
     </div>
   )

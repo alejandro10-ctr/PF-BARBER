@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         defaultValue: "",
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         defaultValue: 0,
       },
       quality: {
@@ -42,8 +42,8 @@ module.exports = (sequelize) => {
       score: {
         type: DataTypes.INTEGER,
         defaultValue: 5,
-        validate: { min: 1, max: 5 }
-      }
+        validate: { min: 1, max: 5 },
+      },
     },
     {
       timestamp: false,
