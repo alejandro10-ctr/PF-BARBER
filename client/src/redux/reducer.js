@@ -4,6 +4,8 @@ import {
   GET_ADDRESSES,
   GET_ADDRESS,
   GET_PRODUCTS,
+  CLEAR_MYUSER,
+  GET_MYUSER,
   GET_USER,
   GET_USERS,
   GET_DETAILPRODUCT,
@@ -30,6 +32,7 @@ import {
 const initialState = {
   loading: false,
   products: [],
+  myUser: {},
   user: {},
   addresses: [],
   detailaddress: {},
@@ -64,6 +67,10 @@ export default function reducer(state = initialState, { type, payload, quantity 
         products: [...payload],
         filterstate: [...payload],
       };
+    case CLEAR_MYUSER:
+      return { ...state, myUser: {}};
+    case GET_MYUSER:
+      return { ...state, myUser: payload };
     case GET_USER:
       return { ...state, user: payload };
     case GET_USERS:

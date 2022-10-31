@@ -9,25 +9,31 @@ import {
   createDBCart,
   updateDBCart,
   deleteDBCart,
+  clearMyUser,
+  getDBMyUser,
 } from "../../redux/actions";
 import "./ShoppingCart.css";
+import { useHistory } from "react-router-dom";
 
 export const CartContext = createContext();
 const Toast = Swal.mixin({
   toast: true,
-  position: "bottom-end",
+  position: 'bottom-end',
   showConfirmButton: false,
   timer: 4000,
   timerProgressBar: true,
   didOpen: (toast) => {
-    toast.addEventListener("mouseenter", Swal.stopTimer);
-    toast.addEventListener("mouseleave", Swal.resumeTimer);
-  },
-});
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export const CartProvider = ({ children }) => {
+  const history = useHistory()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const myUser = useSelector((state) => state.myUser);
+  const [updateUser, setUpdateUser] = useState(false);
   const [cartItems, setCartItems] = useState(() => {
     try {
       const productosenLocalStorage = localStorage.getItem("products");
@@ -42,13 +48,14 @@ export const CartProvider = ({ children }) => {
       const token = cookies.get("token");
       if (token) {
         const tokenDecode = jwt_decode(token);
-        return tokenDecode.id;
+        return tokenDecode.id
       }
       return 0;
     } catch (error) {
       return 0;
     }
-  };
+
+  }
   const [userId, setUserId] = useState(verificar());
 
   const [isSaveDB, setSaveDB] = useState(() => {
@@ -64,17 +71,34 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("products", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  useEffect(() => {}, [userId]);
-  useEffect(() => {
+  useEffect(async () => {
+    if (userId) {
+      //"obtener la info del logueado ----> DB"
+      const response = await dispatch(getDBMyUser(userId))
+      if (response) {
+      } else {
+        SignOff()
+      }
+    }
+  }, [updateUser]);
+  useEffect(async () => {
     localStorage.setItem("isSaveDB", isSaveDB);
-    if (!isSaveDB && userId) {
-      setSaveDB(true);
-      //crear en db el carrito 1 sola vez
-      //"guardado el carrito ----> DB"
-      dispatch(createDBCart(cartItems, userId));
-      //"obteniendo carrito ----> DB"
-      Swal.showLoading();
-      setTimeout(() => dispatch(getDBCart(userId)), 1000);
+    if (userId) {
+      //"obtener la info del logueado ----> DB"
+      const response = await dispatch(getDBMyUser(userId))
+      if (response) {
+        if (!isSaveDB) {
+          setSaveDB(true);
+          //crear en db el carrito 1 sola vez
+          //"guardado el carrito ----> DB"
+          dispatch(createDBCart(cartItems, userId));
+          //"obteniendo carrito ----> DB"
+          Swal.showLoading();
+          setTimeout(() => dispatch(getDBCart(userId)), 1000);
+        }
+      } else {
+        SignOff()
+      }
     }
   }, [isSaveDB]);
 
@@ -87,13 +111,17 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
   //-----------------> Login
   const logIn = () => {
-    setUserId(verificar());
+    setUserId(verificar())
     setSaveDB(false);
   };
   const SignOff = () => {
-    setUserId(verificar());
+    const cookies = new Cookies();
+    cookies.remove('token')
+    setUserId(verificar())
     setCartItems([]);
     dispatch(updateToCart([]));
+    dispatch(clearMyUser())
+    history.push('/')
   };
   //<--------------
 
@@ -185,10 +213,11 @@ export const CartProvider = ({ children }) => {
         dispatch(deleteDBCart(inCart.id));
       }
 
+
       Toast.fire({
-        icon: "error",
-        title: `Product ${inCart.product.name} delete from cart`,
-      });
+        icon: 'error',
+        title: `Product ${inCart.product.name} delete from cart`
+      })
     }
   };
 
@@ -196,6 +225,8 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         userId,
+        myUser,
+        setUpdateUser,updateUser,
         logIn,
         SignOff,
         cartItems,

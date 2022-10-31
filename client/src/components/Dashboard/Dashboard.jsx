@@ -1,34 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import HomeDash from './Home/Home'
 import "./Dashboard.scss"
-import jwt_decode from "jwt-decode";
-import Cookies from 'universal-cookie';
-import  { Redirect } from 'react-router-dom'
 
 
 
 function Dashboard() {
+ 
+    return(<div>
 
-  const cookies = new Cookies()
-  const token = cookies.get("token");
-  let tokem = ''
-   if(token) {
-       tokem = jwt_decode(token);
-  }
+      <HomeDash />
 
-  if(tokem.isAdmin) {
-    return (
-      <div>
-        
-       <HomeDash/>
-  
-      </div>
-    )
-  } else {
+    </div>)
 
-    return <Redirect to='/'  />
-  }
-  
 }
 
 export default Dashboard

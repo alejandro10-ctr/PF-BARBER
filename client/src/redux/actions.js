@@ -5,6 +5,8 @@ export const SET_LOADING = "SET_LOADING";
 export const GET_ADDRESSES = "GET_ADDRESSES";
 export const GET_ADDRESS = "GET_ADDRESS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
+export const CLEAR_MYUSER = "CLEAR_MYUSER";
+export const GET_MYUSER = "GET_MYUSER";
 export const GET_USER = "GET_USER";
 export const CREATE_USERS = "CREATE_USERS";
 export const GET_USERS = "GET_USERS";
@@ -220,6 +222,30 @@ export function deleteProducts(product, errorCallback) {
 //     }
 //   };
 // }
+export function clearMyUser() {
+  return {
+    type: CLEAR_MYUSER,
+  };
+}
+export function getDBMyUser(userId) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/users/${userId}`); //chequeada con yei-barbi
+      if (response?.data) {
+        return dispatch({
+          type: GET_MYUSER,
+          payload: response.data,
+        });
+      }
+    } catch ({ response }) {
+      Toast.fire({
+        icon: "warning",
+        title: response.data,
+      });
+      return false;
+    }
+  };
+}
 export function getDBUser(userId) {
   return async (dispatch) => {
     try {
