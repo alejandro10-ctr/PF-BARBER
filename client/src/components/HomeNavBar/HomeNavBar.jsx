@@ -23,7 +23,7 @@ export default function HomeNavBar({ user }) {
     // const isAdmin = tokenDecode.isAdmin
 
 
-    if (!Object.keys(myUser).length) {
+    if (!!userId &&!Object.keys(myUser).length) {
         return <h1>Cargando...</h1>
     }
     else {
