@@ -77,6 +77,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       timestamp: false,
