@@ -44,6 +44,10 @@ module.exports = (sequelize) => {
         defaultValue: 5,
         validate: { min: 1, max: 5 },
       },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       timestamp: false,
