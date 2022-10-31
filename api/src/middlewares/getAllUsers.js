@@ -58,7 +58,7 @@ const dbUpdateUser = async (info, modelUser) => {
   delete info.addresses
   delete info.sales
   delete info.autByGoogle
-
+console.log(modelUser)
   for (const property in info) {
     modelUser[property] = info[property]
   }

@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { getDBDetailSales } = require("../middlewares/getAllDetailSales.js");
+const mercadopago = require("mercadopago");
 
 // const {
 //   id,
@@ -21,6 +22,7 @@ class PaymentService {
       );
       products = [
         {
+          id: productDetail.productId,
           title: productDetail.product.name,
           description: productDetail.product.description,
           picture_url: productDetail.product.image,
@@ -32,19 +34,20 @@ class PaymentService {
     } else {
       products = car.map((e) => {
         return {
+          id: e.productId,
           title: e.product.name,
           description: e.product.description,
           picture_url: e.product.image,
           category_id: e.product.quality,
           quantity: e.quantity,
-          unit_price: e.product.price,
+          unit_price: Number(e.product.price),
         };
       });
     }
-
+    
     const body = {
       payer_email: "",
-
+      
       items: products,
 
       back_urls: {
@@ -53,14 +56,13 @@ class PaymentService {
         success: "http://localhost:3000/",
       },
     };
-
+    
     const payment = await axios.post(url, body, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
       },
     });
-
     return payment.data;
   }
 

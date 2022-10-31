@@ -21,11 +21,11 @@ const getDBAddressByPk = async (id) => {
     }
     return address;
   };
-const dbCreateAddress = async (info) => {
+const dbCreateAddress = async (info, userId) => {
     if (info.personReceives && info.phoneReceives && info.address) {
 
         return await Address.findOrCreate({
-            where: { address: info.address },
+            where: { address: info.address, userId },
             defaults: info
         })
 

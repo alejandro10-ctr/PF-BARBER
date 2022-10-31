@@ -4,7 +4,8 @@ import { userColumns} from "./datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../../../redux/actions';
+import { getUsers, updateUsersLogic } from '../../../redux/actions';
+import Swal from "sweetalert2";
 
 const Datatable = () => {
   const dispatch = useDispatch()
@@ -18,9 +19,34 @@ const Datatable = () => {
     dispatch(getUsers())
   }, [])
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  let handleDelete = (id, user) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        // user.isActive = false
+        console.log('SOY USER', user)
+        dispatch(updateUsersLogic(id, {isActive: false}))
+      }
+      getUsers()
+      getUsers()
+    }
+    )
+    getUsers()
+
+
+  }
 
   const actionColumn = [
     {
@@ -28,17 +54,19 @@ const Datatable = () => {
       headerName: "Action",
       width: 200,
       renderCell: (params) => {
+        console.log('soy params', params)
         return (
           <div className="cellAction">
             <Link to={`/dash/users/${params.id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
-            <div
+            {/* <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick= {({user = user.id}) => handleDelete(user)}
             >
               Delete
-            </div>
+            </div> */}
+            <button className="deleteButton" onClick= {({id = params.row.id}) => handleDelete(id)}>Delete</button>
           </div>
         );
       },

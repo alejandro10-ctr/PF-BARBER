@@ -34,26 +34,28 @@ const getDBSaleByPk = async (id) => {
     }
     return sale;
 };
-const dbCreateSale = async (info, user, detailSales, dbUpdateProduct, getDBDetailSalesValidateStock) => {
+const dbCreateSale = async (info, user, address, detailSales, dbUpdateProduct, getDBDetailSalesValidateStock) => {
     delete info.userId
     delete info.id
     info.state = false
+    info.personReceives = address.personReceives
+    info.phoneReceives = address.phoneReceives
+    info.address = address.address
+    info.descriptionPlace = address.descriptionPlace
 
     let notStock = await getDBDetailSalesValidateStock(user.id)
-    if(notStock.length){
+    if (notStock.length) {
         throw new Error(`not in stock`) //se cancela la compra, o sea se devuelve el dinero
-    }else{
+    } else {
         let sale = await Sale.create(info)
         await user.addSale(sale)
         await sale.addDetailsales(detailSales)
-    
+
         sale = await getDBSaleByPk(sale.id)
-            await sale.detailsales.map(async (detailSale) => {
-    
-                console.log(detailSale.product.stock, detailSale.quantity)
-                detailSale.product.stock -= detailSale.quantity
-                await dbUpdateProduct({ stock: detailSale.product.stock }, detailSale.productId)
-            })
+        await sale.detailsales.map(async (detailSale) => {
+            detailSale.product.stock -= detailSale.quantity
+            await dbUpdateProduct({ stock: detailSale.product.stock }, detailSale.productId)
+        })
         return `sale created successfully`
     }
 }

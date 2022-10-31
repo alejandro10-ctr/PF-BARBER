@@ -1,5 +1,5 @@
 // import React from 'react'
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import '../Table/Table.scss';
 import Table from '@mui/material/Table';
@@ -11,17 +11,47 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getProducts } from '../../../redux/actions';
+import { updateProducts, getProducts } from '../../../redux/actions';
 import img from "./img/star.png";
+import Swal from "sweetalert2";
 
 const List = ({ products, getProducts }) => {
 
+  const dispatch = useDispatch() 
+let id
   useEffect(() => {
     getProducts()
   },[])
   
   let handleEdit = (e) =>{
     console.log(e.target.value)
+  }
+  let handleDelete = (id, product) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        product.isActive = false
+        dispatch(updateProducts(id, product))
+      }
+      getProducts()
+      getProducts()
+    }
+    )
+    getProducts()
+
+
   }
 
   return (
@@ -40,6 +70,7 @@ const List = ({ products, getProducts }) => {
           <TableRow>
             <TableCell className='tableCell'>Traking ID</TableCell>
             <TableCell className='tableCell'>Product</TableCell>
+            <TableCell className='tableCell'> </TableCell>
             <TableCell className='tableCell'> </TableCell>
             <TableCell className='tableCell'>Price</TableCell>
             <TableCell className='tableCell'>Quality</TableCell>
@@ -67,6 +98,13 @@ const List = ({ products, getProducts }) => {
               <Link to={`/dash/product/${row.id}`}>
                 <button class='viewButton'>Edit</button>
               </Link>
+              
+                </TableCell>
+                <TableCell className='tableCell'>
+              
+                <button onClick= {({id = row.id}) => handleDelete(id, row)} class='viewButtonRojo'>Delete</button>
+             
+              
                 </TableCell>
               <TableCell className='tableCell'>{row.price}</TableCell>
               <TableCell className='tableCell'>{row.quality}</TableCell>

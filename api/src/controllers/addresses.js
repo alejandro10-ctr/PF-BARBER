@@ -15,16 +15,16 @@ router.get('/:userId/addresses', async (req, res) => {
 
 router.get("/address/:addressId", async (req, res) => {
     try {
-      const address = await getDBAddressByPk(req.params.addressId);
-      res.status(200).json(address);
+        const address = await getDBAddressByPk(req.params.addressId);
+        res.status(200).json(address);
     } catch (error) {
-      res.status(404).send(error.message);
+        res.status(404).send(error.message);
     }
-  });
+});
 router.post('/:userId/addresses', async (req, res) => {
     try {
         const user = await getDBUserByPk(req.params.userId);
-        const [address, createdAddress] = await dbCreateAddress(req.body)
+        const [address, createdAddress] = await dbCreateAddress(req.body, req.params.userId)
         if (createdAddress || !address.userId) {
             user.addAddress(address)
             res.status(200).send(`address ${req.body.address} created successfully`);

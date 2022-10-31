@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link, useHistory } from 'react-router-dom'
 import { updateUsers, getDBUser } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
-import { BsPersonSquare } from "react-icons/bs";
-// import bcrypt from "bcrypt";
-import bcrypt from "bcryptjs-react";
 import { validateUser } from "./validate";
 import Swal from "sweetalert2";
 import ShowAddresses from "./Addresses";
@@ -26,7 +23,7 @@ export default function UserEdit({ clientId}) {
     let user = useSelector(state => state.user)
     useEffect(async () => {
         if (!Object.keys(user).length && userId) {
-            const { response } = await dispatch(getDBUser(userId))
+            const response  = await dispatch(getDBUser(userId))
             if (!response) {
                 history.goBack()
             }

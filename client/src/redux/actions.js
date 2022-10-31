@@ -311,6 +311,26 @@ export function updateUsers(users, showDialog) {
     }
   };
 }
+export function updateUsersLogic(id, user) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/users/${id}`, user); //LISTO, NO MODIFICAR
+      // if (showDialog) {
+      //   Toast.fire({
+      //     icon: "success",
+      //     title: response.data,
+      //   });
+      // }
+      return true;
+    } catch ({ response }) {
+      Toast.fire({
+        icon: "warning",
+        title: response.data,
+      });
+      return false;
+    }
+  };
+}
 export function getProductsDetail(id, errorCallback) {
   return async (dispatch) => {
     try {

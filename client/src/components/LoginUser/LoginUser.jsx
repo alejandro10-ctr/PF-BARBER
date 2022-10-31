@@ -84,7 +84,7 @@ export default function LoginUser() {
                         </div>
 
                         <div>
-            <a className="enlace" href="http://localhost:3001/auth/google/signup">Iniciar con Google</a>
+            <a className="enlace" href={`${axios.defaults.baseURL}/auth/google/signup`}>Iniciar con Google</a>
         </div>
     
                         {/*  submit - home  */}
