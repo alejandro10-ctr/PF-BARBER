@@ -4,7 +4,7 @@ import { userColumns} from "./datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, updateUsers } from '../../../redux/actions';
+import { getUsers, updateUsersLogic } from '../../../redux/actions';
 import Swal from "sweetalert2";
 
 const Datatable = () => {
@@ -19,7 +19,7 @@ const Datatable = () => {
     dispatch(getUsers())
   }, [])
 
-  let handleDelete = (user, showDialog) => {
+  let handleDelete = (id, user) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -35,8 +35,9 @@ const Datatable = () => {
           'Your file has been deleted.',
           'success'
         )
-        user.isActive = false
-        dispatch(updateUsers(user, showDialog))
+        // user.isActive = false
+        console.log('SOY USER', user)
+        dispatch(updateUsersLogic(id, {isActive: false}))
       }
       getUsers()
       getUsers()
@@ -53,6 +54,7 @@ const Datatable = () => {
       headerName: "Action",
       width: 200,
       renderCell: (params) => {
+        console.log('soy params', params)
         return (
           <div className="cellAction">
             <Link to={`/dash/users/${params.id}`} style={{ textDecoration: "none" }}>
@@ -64,7 +66,7 @@ const Datatable = () => {
             >
               Delete
             </div> */}
-            <button className="deleteButton" onClick= {(user= params.id) => handleDelete(user)}>Delete</button>
+            <button className="deleteButton" onClick= {({id = params.row.id}) => handleDelete(id)}>Delete</button>
           </div>
         );
       },

@@ -65,18 +65,18 @@ exports.login = async (req, res) => {
     }
 
     if (user.isActive === false) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message:
-            "You account is Inactive, send an email to recover your account ",
-        });
+      res.clearCookie("token");
+      return res.status(404).json({
+        success: false,
+        message:
+          "You account is Inactive, send an email to recover your account ",
+      });
     }
 
     const payload = {
       user: user.username,
       id: user.id,
+      isAdmin: user.isAdmin,
     };
     const token = jwt.sign(payload, "secretKey", { expiresIn: "1d" });
     const cookiesOptions = {
@@ -89,9 +89,9 @@ exports.login = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Logged in successfully",
-      // token: "Bearer " + token,
       token: token,
       name: user.username,
+      isAdmin: user.isAdmin,
     });
   });
 };
