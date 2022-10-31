@@ -92,6 +92,7 @@ exports.login = async (req, res) => {
       token: token,
       name: user.username,
       isAdmin: user.isAdmin,
+      isActive: req.user.isActive,
     });
   });
 };
@@ -129,7 +130,13 @@ const sendEmail = async (email) => {
 exports.loginGoogle = async (req, res) => {
   if (req.user) {
     console.log(req.user.id);
-    const token = jwt.sign({ id: req.user.id }, "secretKey", {
+    const payload = {
+      user: req.user.username,
+      id: req.user.id,
+      isAdmin: req.user.isAdmin,
+      isActive: req.user.isActive,
+    };
+    const token = jwt.sign(payload, "secretKey", {
       expiresIn: 60 * 60 * 24, // equivalente a 24 horas
     });
     // console.log("token");
