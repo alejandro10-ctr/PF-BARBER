@@ -180,39 +180,46 @@ export function createProducts(product) {
 export function updateProducts(id, product) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/products/${product.id}`, product); //chequeada con yei-barbi
+      const response = await axios.put(`/products/${id}`, product); //chequeada con yei-barbi
       Toast.fire({
         icon: "success",
         title: response.data,
       });
       return true;
-    } catch ({ response }) {
-      Toast.fire({
-        icon: "warning",
-        title: response.data,
-      });
-      return false;
+    } catch (error) {
+      // console.log(error);
     }
   };
 }
+
 export function deleteProducts(product, errorCallback) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`/products/${product.id}`); //chequeada con yei-barbi
-      Toast.fire({
-        icon: "success",
-        title: response.data,
-      });
-      return true;
-    } catch ({ response }) {
-      Toast.fire({
-        icon: "warning",
-        title: response.data,
-      });
-      return false;
+      return response?.data;
+    } catch (error) {
+      errorCallback && errorCallback(error);
     }
   };
 }
+// export function deleteProducts(product, errorCallback) {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.delete(`/products/${product.id}`); //chequeada con yei-barbi
+//       Toast.fire({
+//         icon: "success",
+//         title: response.data,
+//       });
+//       return true;
+//     } catch ({ response }) {
+//       Toast.fire({
+//         icon: "warning",
+//         title: response.data,
+//       });
+//       return false;
+//     }
+//   };
+// }
 export function getDBUser(userId) {
   return async (dispatch) => {
     try {
