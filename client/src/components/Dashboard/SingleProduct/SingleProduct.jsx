@@ -74,7 +74,7 @@ const SingleProduct = () => {
                
                 <div className='top'>
                     <div className='left'> 
-                        <h1 className='title'> {edit === "false" ? "Information" : "Edit information"}</h1>
+                        <h1 className='title'> {edit === "false" ? "" : "Edit information"}</h1>
                         {edit === "false" ?
                             <div className='item'>
                                 <div >
@@ -149,9 +149,7 @@ const SingleProduct = () => {
                     </div>
                     <div className='right'></div>
                 </div>
-                <div className='bottom'>
-                    <h1 className='title'> Last Transactions</h1>
-                </div>
+               
             </div>
         </div>
     )
