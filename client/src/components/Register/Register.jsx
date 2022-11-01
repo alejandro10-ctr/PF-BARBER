@@ -80,11 +80,11 @@ export default function Register() {
                             <div className="row">
                                 <div className="col-sm"> <div className={styles.font}>
                                     <input id="username" name="username" type="text" placeholder='Nickname'
-                                        className="form-control form-control-lg"
+                                        className="form-control form-control-lg w-50 p-2 "
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.username}
-                                    /> <span>{formik.touched.username && formik.errors.username ? <label className={styles.errors}>{formik.errors.username} </label> : null}<br /></span></div>
+                                    /> <span>{formik.touched.username && formik.errors.username ? <label className={styles.errorsName}>{formik.errors.username} </label> : null}<br /></span></div>
     
     
                                     {/* <div className={styles.font}>
@@ -110,23 +110,23 @@ export default function Register() {
      */}
     
                                 </div>
-                                <div className="col-sm">
+                                <div >
                                     <div className={styles.font}>
                                         <input id="email" name="email" type="text" placeholder='sakura@gmail.com'
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg w-50 p-2" 
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.email} />
-                                        <span>{formik.touched.email && formik.errors.email ? <label className={styles.errors}>{formik.errors.email}</label> : null}<br /></span>    </div>
+                                        <span>{formik.touched.email && formik.errors.email ? <label className={styles.errorsMail}>{formik.errors.email}</label> : null}<br /></span>    </div>
     
     
                                     <div className={styles.font}>
                                         <input id="password" name="password" type="password" placeholder='Password'
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg w-50 p-2"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.password} />
-                                        <span>{formik.touched.password && formik.errors.password ? <label className={styles.errors}>{formik.errors.password}</label> : null}<br /></span> </div>
+                                        <span>{formik.touched.password && formik.errors.password ? <label className={styles.errorsPassword}>{formik.errors.password}</label> : null}<br /></span> </div>
     
     
     

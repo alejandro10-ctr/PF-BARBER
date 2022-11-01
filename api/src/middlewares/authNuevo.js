@@ -92,7 +92,7 @@ exports.login = async (req, res) => {
       token: token,
       name: user.username,
       isAdmin: user.isAdmin,
-      isActive: req.user.isActive,
+      isActive: user.isActive,
     });
   });
 };
