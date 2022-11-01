@@ -12,7 +12,7 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import Box from '@mui/material/Box';
 import NativeSelect from '@mui/material/NativeSelect';
 import Swal from 'sweetalert2'
-
+import { FormHelperText } from '@mui/material';
 
 import "./UploadFiles.scss";
 
@@ -21,6 +21,7 @@ const New = ({ inputs, title }) => {
   const fileInputRef = useRef(null)
 
   const [file, setFile] = useState("")
+  const [error, setErr] = useState(true) 
   const imageUrl = useSelector((state) => state.uploadImg)
 
 
@@ -43,6 +44,13 @@ const New = ({ inputs, title }) => {
     e.preventDefault()
     setInfo({ ...info, [e.target.name]: e.target.value })
     console.log(info)
+
+
+    setErr(validate({ //validate
+      ...info,
+      [e.target.name]: e.target.value 
+  
+      }));
   }
 
 
@@ -101,7 +109,15 @@ const New = ({ inputs, title }) => {
     // console.log(info.image)
   }
 
-
+  function validate(info){
+    let keep = {};
+    let regexName = new RegExp('^[a-zA-Z ]{2,30}$'); 
+ 
+    if(info.name.length>0 && !regexName.test(info.name))  keep.name = 'You need a name for the product!';
+  
+  
+  return keep;
+  }
   return (
     <div className="new" >
       <Sidebar />
@@ -128,8 +144,8 @@ const New = ({ inputs, title }) => {
         <FormControl>
           <InputLabel htmlFor="my-input">Product Name</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={info.name} name="name" onChange={(e) => handleChange(e)} />
-          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-
+          <FormHelperText id="my-helper-text">{error.name && (<label>{error.name}</label>)}</FormHelperText>
+          {/* <span> {error.name && (<label className={styles.errorMens}>{error.name}</label>)} <br /></span>  */}
         </FormControl><br /><br />
 
 
