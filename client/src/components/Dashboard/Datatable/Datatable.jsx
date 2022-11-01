@@ -69,7 +69,7 @@ const Datatable = () => {
             <button className="deleteButton" onClick= {({id = params.row.id}) => handleDelete(id)}>Delete</button>
           </div>
         );
-      },
+      },    
     },
   ];
   return (
@@ -83,6 +83,7 @@ const Datatable = () => {
       <DataGrid
         className="datagrid"
         rows={users}
+        
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

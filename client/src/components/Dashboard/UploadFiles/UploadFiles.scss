@@ -4,8 +4,32 @@
 
   display: flex;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 1%;
 
+
+  .buttoncin{
+    border-radius: 5px;
+    color: #7451f8;
+    border: 1px dotted rgba(0, 0, 139, 0.596);
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+
+  }
+
+  .fileButton{
+    margin-top: 3%;
+    border-radius: 5px;
+    color: #7451f8;
+    border: 1px dotted rgba(0, 0, 139, 0.596);
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .labelErr{
+    color: #7451f8;
+  }
   .newContainer {
 
 
@@ -19,6 +43,7 @@
       height: 100px;
       border-radius: 50%;
       object-fit: cover;
+      
     }
 
     .top,
@@ -76,7 +101,7 @@
           }
 
           button {
-            width: 100px;
+            width: 20px;
             padding: 10px;
             border: none;
             background-color: teal;

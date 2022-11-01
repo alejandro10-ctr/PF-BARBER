@@ -111,9 +111,8 @@ const New = ({ inputs, title }) => {
 
   function validate(info){
     let keep = {};
-    let regexName = new RegExp('^[a-zA-Z ]{2,30}$'); 
- 
-    if(info.name.length>0 && !regexName.test(info.name))  keep.name = 'You need a name for the product!';
+  
+    if(info.name.length> 20 )  keep.name = 'Limit of 20 chars!';
     if(info.price.length > 4 ) keep.price='Just 4 digit';
     if(info.stock.length > 2 ) keep.stock='Just 2 digit';
     if(info.description.length >= 50 ) keep.description='Limit of 50 chars';
@@ -133,7 +132,7 @@ const New = ({ inputs, title }) => {
           alt=""
         />
         <div className="App">
-          <button
+          <button className='fileButton'
             onClick={() => fileInputRef.current?.click()}
           >Select a file</button>
           <br /><br />
@@ -146,28 +145,28 @@ const New = ({ inputs, title }) => {
         <FormControl>
           <InputLabel htmlFor="my-input">Product Name</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={info.name} name="name" onChange={(e) => handleChange(e)} />
-          <FormHelperText id="my-helper-text">{error.name && (<label>{error.name}</label>)}</FormHelperText>
+          <FormHelperText id="my-helper-text">{error.name && (<label className='labelErr'>{error.name}</label>)}</FormHelperText>
           {/* <span> {error.name && (<label className={styles.errorMens}>{error.name}</label>)} <br /></span>  */}
         </FormControl><br /><br />
 
 
         <FormControl>
           <InputLabel htmlFor="my-input">Price</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.price} name="price" onChange={(e) => handleChange(e)} />
-          <FormHelperText id="my-helper-text">{error.price && (<label>{error.price}</label>)}</FormHelperText>
+          <Input id="my-input" aria-describedby="my-helper-text" type= "number" value={info.price} name="price" onChange={(e) => handleChange(e)} />
+          <FormHelperText id="my-helper-text">{error.price && (<label className='labelErr'>{error.price}</label>)}</FormHelperText>
       
         </FormControl><br /><br />
 
         <FormControl>
           <InputLabel htmlFor="my-input">Stock</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.stock} name="stock" onChange={(e) => handleChange(e)} />
-          <FormHelperText id="my-helper-text">{error.stock && (<label>{error.stock}</label>)}</FormHelperText>
+          <Input id="my-input" aria-describedby="my-helper-text" type= "number" value={info.stock} name="stock" onChange={(e) => handleChange(e)} />
+          <FormHelperText id="my-helper-text">{error.stock && (<label className='labelErr'>{error.stock}</label>)}</FormHelperText>
         </FormControl><br /><br />
 
         <FormControl>
           <InputLabel htmlFor="my-input">Description</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={info.description} name="description" onChange={(e) => handleChange(e)} />
-          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+          <FormHelperText id="my-helper-text">{error.description && (<label className='labelErr'>{error.description}</label>)}</FormHelperText>
         </FormControl><br /><br />
 
         <Box >
@@ -192,7 +191,7 @@ const New = ({ inputs, title }) => {
 
 
 
-        <button type="submit" onClick={(e) => handleSubmit(e)}>Upload</button>
+        <button type="submit" className='buttoncin' onClick={(e) => handleSubmit(e)}>Upload</button>
 
 
 
