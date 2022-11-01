@@ -107,7 +107,7 @@ let id
                 </TableCell>
                 <TableCell className='tableCell'>
               
-                <button onClick= {({id = row.id}) => handleDelete(id, row)} class='viewButton'>Delete</button>
+                <button onClick= {({id = row.id}) => handleDelete(id, row)} class='viewButtonRed'>Delete</button>
              
               
                 </TableCell>
