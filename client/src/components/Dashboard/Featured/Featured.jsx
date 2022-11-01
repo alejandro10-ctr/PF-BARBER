@@ -5,19 +5,23 @@ import { CircularProgressbar } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function Featured() {
+    const dispatch = useDispatch()
+    const users = useSelector((state)=> state.users)
     return (
         <div className='featured'>
             <div className="top">
-                <h1 className="title">Total Revenue</h1>
-                <MoreVertOutlinedIcon fontSize='small' />
+                <h1 className="title">Total Users</h1>
+               
             </div>
             <div className="bottom">
                 <div className="featuredChart">
-                    <CircularProgressbar value={70} text={"70%"} strokeWidth={2} />
+                    <CircularProgressbar value={users.length} text={users.length + "%"} strokeWidth={6} />
                 </div>
-                <p className="title">Total sales made today</p>
+                <p className="title">{"Goals " + users.length + "/100 users"}</p>
                 <p className="amount">$420</p>
                 <p className="desc">Sales made today</p>
                 <div className="summary">

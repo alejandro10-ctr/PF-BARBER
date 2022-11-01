@@ -29,27 +29,28 @@
         }
     }
     hr{
-        height: 0;
+        height: 0rem;
         border: 1px solid rgb(171, 165, 165)
     }
     .center{
         padding-left: 10px;
         ul{
             
-            margin: 0;
+            margin: -7px;
             padding: 0;
             list-style: none;
             .title{
-                font-size: 10px;
+                font-size: 12px;
                 font-weight: bold;
                 color: #999;
-                margin-top: 10px;
-                margin-bottom: 5px;
+                margin-top: 20px;
+                margin-bottom: 15px;
             }
             li{
                 display: flex;
                 align-items: center;
-                padding: 8px;
+                padding-top:20px;
+                padding-bottom: 20px;
                 cursor: pointer;
 
                 &:hover{
