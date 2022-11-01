@@ -10,6 +10,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 
@@ -22,14 +23,14 @@ function Sidebar() {
         <div className='center' >
             <ul>
                 <p className="title">MAIN</p>
-                <a href="/dash">
+                <Link to="/dash">
 
                 <li>
                         <DashboardIcon className='icon'></DashboardIcon>
                     <span> 
                         Dashboard</span>
                 </li>
-                </a>
+                </Link>
               
                 <Link to="/dash/users">
                 <li> <GroupIcon className='icon'></GroupIcon>
@@ -45,7 +46,14 @@ function Sidebar() {
                 <li> <CreditCardIcon className='icon'></CreditCardIcon>
                     <span>Orders</span>
                 </li>
-            
+                <Link to="/dash/reviews">
+
+<li>
+        <InventoryOutlinedIcon className='icon'></InventoryOutlinedIcon>
+    <span> 
+        Reviews</span>
+</li>
+</Link>
                
               
                
