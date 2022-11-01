@@ -24,7 +24,7 @@
   vertical-align: top;
   background-color: #f0f0f067;
   height: 30em;
-  width: 610px;
+  width: 380px;
   display: -webkit-box;
   display: -ms-flexbox;
   position: relative;
@@ -46,6 +46,7 @@
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
   text-shadow: 2px 2px 8px #8a9bff;
+  padding: 30px;
 }
 
 .font {
@@ -54,11 +55,31 @@
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
 }
-
-.errors {
+.errorsName {
   color: rgb(47, 47, 48);
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
+  position: absolute;
+  top: 48px;
+  left: 63px;
+}
+
+.errorsMail {
+  color: rgb(47, 47, 48);
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 130px;
+  left: 80px;
+}
+
+.errorsPassword {
+  color: rgb(47, 47, 48);
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 210px;
+  left: 53px;
 }
 
 .buttonred {
@@ -74,6 +95,9 @@
   color: #ffffff;
   text-decoration: none;
   margin: 4%;
+  position: absolute;
+  top: 372px;
+  left: 190px;
 }
 .buttonred:hover,
 .buttonred:focus {
@@ -120,6 +144,9 @@
   text-decoration: none;
   margin: 4%;
   width: 126.71px;
+  position: absolute;
+  top: 372px;
+  left: 40px;
 }
 .buttonblue:hover,
 .buttonblue:focus {

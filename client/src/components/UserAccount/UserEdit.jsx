@@ -105,8 +105,8 @@ export default function UserEdit({ clientId }) {
 
                     {
                         input &&
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            <div className="cardProfile">
+                        <div style={{ display: 'flex', justifyContent: 'center', padding:"30px" }}>
+                           
                                 <div className='barra'>
                                     <div className='imgDivBarra'>
                                         <img className="imgProfile" src={input?.avatar ? input.avatar.toString() : 'https://cdn.icon-icons.com/icons2/1146/PNG/512/1486485581-account-audience-person-customer-profile-user_81164.png'} alt="" />
@@ -128,7 +128,7 @@ export default function UserEdit({ clientId }) {
                                         {input?.email}
                                     </p>
                                 </div>
-                            </div>
+                            
                         </div>
                     }
 

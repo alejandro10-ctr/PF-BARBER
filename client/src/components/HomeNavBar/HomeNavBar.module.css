@@ -1,3 +1,33 @@
+.pepe {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(69, 86, 102, 1) 0%,
+    rgba(34, 34, 34, 1) 90%
+  );
+  height: 6rem;
+  /* align-items: flex-end; */
+}
+
+.containersession {
+  display: flex;
+  align-items: center;
+}
+
+.linkssesion {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 235px;
+}
+
+.linkssesion:hover {
+  color: white;
+}
+
 .navbarbuttons {
   margin-right: 70%;
   margin: 20%;
@@ -6,7 +36,7 @@
   display: inline-block;
   margin-top: 10px;
   padding: 10px 0;
-  background-color: #026773;
+  background-color: white;
   text-align: center;
   color: white;
   width: 240px;
@@ -18,7 +48,55 @@
   text-decoration: none;
 }
 
+.locu {
+  justify-content: space-between;
+}
+
+.removebg {
+  filter: brightness(1.1);
+  mix-blend-mode: multiply;
+}
+
+.move {
+  position: absolute;
+  left: 1;
+}
+
+.username {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  color: #ffffff8c;
+  position: absolute;
+  left: 150px;
+}
+
 .button:hover {
-  background-color: aqua;
+  background-color: white;
   transition: 500ms;
+}
+
+.buttonPencil {
+  display: contents;
+  margin-top: 1px;
+  padding: 2px 0;
+  /* background-color: gray; */
+  text-align: center;
+  color: white;
+  width: 30px;
+  height: -9px;
+  font-size: 1px;
+  font-weight: 700;
+  border-radius: 20px;
+  border: none;
+  text-decoration: none;
+}
+
+.move {
+  left: 100px;
+}
+
+.buttonPencil:hover {
+  /* background-color: grey; */
+  transition: 500ms;
+  color: white;
 }
