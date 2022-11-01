@@ -27,7 +27,7 @@ const Score = () => {
     dispatch(getProducts())
     dispatch(getProductsDetail(1))
     return () => { dispatch(clearDetail([])) }
-  }, [])
+  }, [score])
 
 
   const saveHandle = (e) => {
@@ -36,17 +36,14 @@ const Score = () => {
     setScore({
       score: e.target.value
     })
-    dispatch(getProducts())
-    dispatch(getProductsDetail(1))
     
-    
+    dispatch(updateProducts(1, score), getProducts())
+
   }
-  dispatch(updateProducts(1, score))
 
 
   return (
-    <div>
-      Score
+    <div>Score
     <select name="score" id="score" onChange={(e) => handleChange(e)}>
     <option hidden value="">select score</option>
         <option value={1} name="score">1</option>
