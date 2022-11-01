@@ -22,14 +22,14 @@ function Sidebar() {
         <div className='center' >
             <ul>
                 <p className="title">MAIN</p>
-                <Link to="/dash">
+                <a href="/dash">
 
                 <li>
                         <DashboardIcon className='icon'></DashboardIcon>
                     <span> 
                         Dashboard</span>
                 </li>
-                </Link>
+                </a>
               
                 <Link to="/dash/users">
                 <li> <GroupIcon className='icon'></GroupIcon>
