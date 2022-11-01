@@ -114,7 +114,9 @@ const New = ({ inputs, title }) => {
     let regexName = new RegExp('^[a-zA-Z ]{2,30}$'); 
  
     if(info.name.length>0 && !regexName.test(info.name))  keep.name = 'You need a name for the product!';
-  
+    if(info.price.length > 4 ) keep.price='Just 4 digit';
+    if(info.stock.length > 2 ) keep.stock='Just 2 digit';
+    if(info.description.length >= 50 ) keep.description='Limit of 50 chars';
   
   return keep;
   }
@@ -152,13 +154,14 @@ const New = ({ inputs, title }) => {
         <FormControl>
           <InputLabel htmlFor="my-input">Price</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={info.price} name="price" onChange={(e) => handleChange(e)} />
-          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+          <FormHelperText id="my-helper-text">{error.price && (<label>{error.price}</label>)}</FormHelperText>
+      
         </FormControl><br /><br />
 
         <FormControl>
           <InputLabel htmlFor="my-input">Stock</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" value={info.stock} name="stock" onChange={(e) => handleChange(e)} />
-          {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
+          <FormHelperText id="my-helper-text">{error.stock && (<label>{error.stock}</label>)}</FormHelperText>
         </FormControl><br /><br />
 
         <FormControl>
