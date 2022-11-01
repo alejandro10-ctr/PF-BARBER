@@ -21,7 +21,7 @@ import New from "./components/Dashboard/UploadFiles/UploadFiles";
 import { inputs } from "./components/Dashboard/UploadFiles/formSource";
 import SingleProduct from "./components/Dashboard/SingleProduct/SingleProduct";
 import Logout from "./components/LoginUser/Logout.jsx";
-
+import Score from "./components/Score/Score.jsx"
 import DatosDeEnvio from "./components/UserAccount/DatosDeEnvio.jsx";
 import ChangePassword from "./components/UserAccount/ChangePassword.jsx";
 import UserEdit from "./components/UserAccount/UserEdit";
@@ -63,6 +63,10 @@ function App() {
         <Products />
       </Route>
 
+
+<Route exact path="/score">
+  <Score/>
+</Route>
       <Route exact path="/dash">
         <Dashboard />
       </Route>
