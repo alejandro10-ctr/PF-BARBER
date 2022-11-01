@@ -91,10 +91,10 @@ export const CartProvider = ({ children }) => {
           setSaveDB(true);
           //crear en db el carrito 1 sola vez
           //"guardado el carrito ----> DB"
-          dispatch(createDBCart(cartItems, userId));
+          await dispatch(createDBCart(cartItems, userId));
           //"obteniendo carrito ----> DB"
           Swal.showLoading();
-          setTimeout(() => dispatch(getDBCart(userId)), 1000);
+          await dispatch(getDBCart(userId))
         }
       } else {
         SignOff()
@@ -106,7 +106,7 @@ export const CartProvider = ({ children }) => {
     if (userId) {
       setCartItems([...cart]);
       //"finalCartDB"
-      Swal.hideLoading("Listo");
+      Swal.hideLoading();
     }
   }, [cart]);
   //-----------------> Login
@@ -125,7 +125,7 @@ export const CartProvider = ({ children }) => {
   };
   //<--------------
 
-  const addItemToCart = (detailProduct, quantity) => {
+  const addItemToCart = async (detailProduct, quantity) => {
     const inCart = cartItems.find(
       (productInCart) => productInCart.productId === detailProduct.id
     );
@@ -159,10 +159,10 @@ export const CartProvider = ({ children }) => {
         cartItems.push(detailSale);
         setCartItems([...cartItems]);
         if (userId) {
-          dispatch(createDBCart(detailSale, userId));
+          await dispatch(createDBCart(detailSale, userId, true));
           //"obteniendo carrito ----> DB"
           Swal.showLoading();
-          setTimeout(() => dispatch(getDBCart(userId)), 1000);
+          await dispatch(getDBCart(userId))
         } else dispatch(updateToCart(cartItems));
 
         return;

@@ -5,27 +5,12 @@ import Widget from '../Widget/Widget'
 import Featured from '../Featured/Featured'
 import Chart from '../Chart/Chart'
 import Table from '../Table/Table'
-import jwt_decode from "jwt-decode";
-import Cookies from 'universal-cookie';
-import  { Redirect } from 'react-router-dom'
 
 
 
 function HomeDash() {
-
-  const cookies = new Cookies()
-  const token = cookies.get("token");
-  let tokem = ''
-   if(token) {
-       tokem = jwt_decode(token);
-  }
-
-
-
-  if(tokem.isAdmin) {
     return (
 
-    
       <div className='home'>
         <Sidebar />
   
@@ -56,12 +41,6 @@ function HomeDash() {
       </div>
     )
 
-  } else {
-    return <Redirect to='/'  />
   }
-
-
-  
-}
 
 export default HomeDash

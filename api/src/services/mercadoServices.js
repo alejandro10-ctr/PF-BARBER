@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { getDBDetailSales } = require("../middlewares/getAllDetailSales.js");
-// const mercadopago = require("mercadopago");
+const mercadopago = require("mercadopago");
 
 // const {
 //   id,
@@ -9,6 +9,9 @@ const { getDBDetailSales } = require("../middlewares/getAllDetailSales.js");
 class PaymentService {
   async createPayment(productId, userId) {
     const url = "https://api.mercadopago.com/checkout/preferences";
+    mercadopago.configure({
+      access_token: process.env.ACCESS_TOKEN,
+    });
 
     // const idFront = axios.get
 
@@ -45,6 +48,7 @@ class PaymentService {
       });
     }
 
+
     const body = {
       payer_email: "",
 
@@ -56,14 +60,9 @@ class PaymentService {
         success: "http://localhost:3000/",
       },
     };
-
-    const payment = await axios.post(url, body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-      },
-    });
-    return payment.data;
+    const payment = await mercadopago.preferences.create(body)
+    return payment.response
+    ;
   }
 
   async createSubscription() {
