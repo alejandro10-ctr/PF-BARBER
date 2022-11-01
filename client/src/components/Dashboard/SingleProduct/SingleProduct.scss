@@ -4,18 +4,31 @@
     display: flex;
     width: 100%;
 
+    .editing {
+        position: absolute;
+        border-radius: 5px;
+        color: darkblue;
+        margin-top:-2.5rem;
+        margin-left: -1.25rem;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+        font-size: 15px;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
 
+    }
 
 
     .editButton {
 
-        padding: 2px 5px;
+
         border-radius: 5px;
         color: darkblue;
         border: 1px dotted rgba(0, 0, 139, 0.596);
         cursor: pointer;
         font-size: 35px;
     }
+    
 
     .backButton {
         display: flex;
@@ -29,10 +42,10 @@
     }
     
   .edit{
-    display: flex;
-  justify-content: space-between;
+    background-color: black;
 
   }
+
 
 
     .singleContainer {
