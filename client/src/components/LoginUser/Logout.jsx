@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
 import { CartContext } from "../Shopping/ShoppingCart";
+import styles from './Logout.module.css';
 
 
 
@@ -17,7 +18,7 @@ import { CartContext } from "../Shopping/ShoppingCart";
     }
     
   return (
-    <div>
+    <div className={styles.background}>
         <h3>Are you sure you want to sign out?</h3>
         <button class="btn btn-dark" onClick={(e) => { onClickFunc(e)}}>Sign out</button>
     </div>
