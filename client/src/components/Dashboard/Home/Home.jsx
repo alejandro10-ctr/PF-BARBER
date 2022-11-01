@@ -28,7 +28,6 @@ function HomeDash() {
     
       <div className='home'>
         <Sidebar />
-  
         <div className="homeContainer">
         <div className="widgets">
           <Widget isUser="true" type="user" />
@@ -36,22 +35,10 @@ function HomeDash() {
           <Widget type="order" />
           <Widget type="balance" />
         </div>
-  
           <div className='charts'>
             <Featured />
             <Chart/>
           </div>
-  
-  
-          <div className="listConteiner">
-            <div className="listTitle">Store</div>
-                <Table/>
-          </div>
-  
-      
-  
-  
-  
         </div>
       </div>
     )

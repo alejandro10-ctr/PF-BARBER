@@ -11,7 +11,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import Box from '@mui/material/Box';
 import NativeSelect from '@mui/material/NativeSelect';
-
+import Swal from 'sweetalert2'
 
 
 import "./UploadFiles.scss";
@@ -36,13 +36,13 @@ const New = ({ inputs, title }) => {
 
 
   useEffect(() => {
-      setInfo({ ...info, image: imageUrl })
+    setInfo({ ...info, image: imageUrl })
   }, [imageUrl]) //1-corte
 
   function handleChange(e) {
-e.preventDefault()
-setInfo({...info, [e.target.name]: e.target.value})
-console.log(info)
+    e.preventDefault()
+    setInfo({ ...info, [e.target.name]: e.target.value })
+    console.log(info)
   }
 
 
@@ -59,14 +59,14 @@ console.log(info)
     //  axios.post(url, formData).then((response) => {
     //     console.log(response.data);
     //   });
-   dispatch(uploadImg(formData))
+    dispatch(uploadImg(formData))
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (info.name==="" || info.description === "" || info.price==="" || info.stock==="" || info.quality==="") {
-alert('Complete all the fields')
-//sweet alert
+    if (info.name === "" || info.description === "" || info.price === "" || info.stock === "" || info.quality === "") {
+      alert('Complete all the fields')
+      //sweet alert
     }
     else {
       dispatch(addProd(info))
@@ -80,9 +80,15 @@ alert('Complete all the fields')
         quality: ""
       })
       setFile("")
-      //sweet alert
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Upload Succefully!',
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
-    
+
 
     // const formData = new FormData();
     // formData.append('file', file);
@@ -100,28 +106,28 @@ alert('Complete all the fields')
     <div className="new" >
       <Sidebar />
       <div className="newContainer">
-<img
-            src={
-              file
-                ? URL.createObjectURL(file)
-                : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-            }
-            alt=""
-          />
+        <img
+          src={
+            file
+              ? URL.createObjectURL(file)
+              : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+          }
+          alt=""
+        />
         <div className="App">
           <button
-          onClick={ () => fileInputRef.current?.click()}
+            onClick={() => fileInputRef.current?.click()}
           >Select a file</button>
           <br /><br />
-          <input ref={fileInputRef} type="file" onChange={handleChangeImg} style={{display: 'none'}} />
+          <input ref={fileInputRef} type="file" onChange={handleChangeImg} style={{ display: 'none' }} />
 
-          
+
 
         </div>
 
         <FormControl>
           <InputLabel htmlFor="my-input">Product Name</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.name} name="name" onChange={(e)=>handleChange(e)}/>
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.name} name="name" onChange={(e) => handleChange(e)} />
           {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
 
         </FormControl><br /><br />
@@ -129,32 +135,32 @@ alert('Complete all the fields')
 
         <FormControl>
           <InputLabel htmlFor="my-input">Price</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.price}  name="price" onChange={(e)=>handleChange(e)} />
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.price} name="price" onChange={(e) => handleChange(e)} />
           {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
         </FormControl><br /><br />
 
         <FormControl>
           <InputLabel htmlFor="my-input">Stock</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.stock}  name="stock" onChange={(e)=>handleChange(e)} />
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.stock} name="stock" onChange={(e) => handleChange(e)} />
           {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
         </FormControl><br /><br />
 
         <FormControl>
           <InputLabel htmlFor="my-input">Description</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" value={info.description}  name="description" onChange={(e)=>handleChange(e)} />
+          <Input id="my-input" aria-describedby="my-helper-text" value={info.description} name="description" onChange={(e) => handleChange(e)} />
           {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
         </FormControl><br /><br />
 
         <Box >
           <FormControl>
-          
+
             <NativeSelect
               defaultValue={30}
               inputProps={{
                 name: 'quality',
 
               }}
-              name="quality" onChange={(e)=>handleChange(e)}
+              name="quality" onChange={(e) => handleChange(e)}
               value={info.quality}
             >
               <option hidden value=''>Quality</option>
@@ -166,8 +172,8 @@ alert('Complete all the fields')
         </Box><br />
 
 
-     
-        <button type="submit" onClick={(e)=>handleSubmit(e)}>Upload</button>
+
+        <button type="submit" onClick={(e) => handleSubmit(e)}>Upload</button>
 
 
 
