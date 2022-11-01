@@ -64,9 +64,6 @@ function App() {
       </Route>
 
 
-<Route exact path="/score">
-  <Score/>
-</Route>
       <Route exact path="/dash">
         <Dashboard />
       </Route>

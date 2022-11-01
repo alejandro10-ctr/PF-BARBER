@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductsDetail, getDBCart, getPaymentLink, getDBUser } from "../../redux/actions";
 import { CartContext } from "../Shopping/ShoppingCart";
+import Score from "../Score/Score"
 
 import s from './DetailProducts.module.css'
 
@@ -92,6 +93,7 @@ function DetailProduct({ match }) {
         <h3>Price: ${product.price}</h3>
         <h3>{product.quality}</h3>
         <h3>{product.description}</h3>
+        <h3>Score: {product.score}</h3>
         {console.log("productInCart", productInCar)}
         <div>
 
@@ -138,7 +140,7 @@ function DetailProduct({ match }) {
         }
 
       </div>
-
+<Score></Score>
 
     </div>
   );
