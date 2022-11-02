@@ -48,7 +48,6 @@ class PaymentService {
       });
     }
 
-
     const body = {
       payer_email: "",
 
@@ -60,9 +59,8 @@ class PaymentService {
         success: "http://localhost:3000/",
       },
     };
-    const payment = await mercadopago.preferences.create(body)
-    return payment.response
-    ;
+    const payment = await mercadopago.preferences.create(body);
+    return payment.response;
   }
 
   async createSubscription() {

@@ -18,18 +18,18 @@ import { useHistory } from "react-router-dom";
 export const CartContext = createContext();
 const Toast = Swal.mixin({
   toast: true,
-  position: 'bottom-end',
+  position: "bottom-end",
   showConfirmButton: false,
   timer: 4000,
   timerProgressBar: true,
   didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 export const CartProvider = ({ children }) => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const myUser = useSelector((state) => state.myUser);
@@ -48,14 +48,13 @@ export const CartProvider = ({ children }) => {
       const token = cookies.get("token");
       if (token) {
         const tokenDecode = jwt_decode(token);
-        return tokenDecode.id
+        return tokenDecode.id;
       }
       return 0;
     } catch (error) {
       return 0;
     }
-
-  }
+  };
   const [userId, setUserId] = useState(verificar());
 
   const [isSaveDB, setSaveDB] = useState(() => {
@@ -74,10 +73,10 @@ export const CartProvider = ({ children }) => {
   useEffect(async () => {
     if (userId) {
       //"obtener la info del logueado ----> DB"
-      const response = await dispatch(getDBMyUser(userId))
+      const response = await dispatch(getDBMyUser(userId));
       if (response) {
       } else {
-        SignOff()
+        SignOff();
       }
     }
   }, [updateUser]);
@@ -85,7 +84,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("isSaveDB", isSaveDB);
     if (userId) {
       //"obtener la info del logueado ----> DB"
-      const response = await dispatch(getDBMyUser(userId))
+      const response = await dispatch(getDBMyUser(userId));
       if (response) {
         if (!isSaveDB) {
           setSaveDB(true);
@@ -94,10 +93,10 @@ export const CartProvider = ({ children }) => {
           await dispatch(createDBCart(cartItems, userId));
           //"obteniendo carrito ----> DB"
           Swal.showLoading();
-          await dispatch(getDBCart(userId))
+          await dispatch(getDBCart(userId));
         }
       } else {
-        SignOff()
+        SignOff();
       }
     }
   }, [isSaveDB]);
@@ -111,17 +110,17 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
   //-----------------> Login
   const logIn = () => {
-    setUserId(verificar())
+    setUserId(verificar());
     setSaveDB(false);
   };
   const SignOff = () => {
     const cookies = new Cookies();
-    cookies.remove('token')
-    setUserId(verificar())
+    cookies.remove("token");
+    setUserId(verificar());
     setCartItems([]);
     dispatch(updateToCart([]));
-    dispatch(clearMyUser())
-    history.push('/')
+    dispatch(clearMyUser());
+    history.push("/");
   };
   //<--------------
 
@@ -162,7 +161,7 @@ export const CartProvider = ({ children }) => {
           await dispatch(createDBCart(detailSale, userId, true));
           //"obteniendo carrito ----> DB"
           Swal.showLoading();
-          await dispatch(getDBCart(userId))
+          await dispatch(getDBCart(userId));
         } else dispatch(updateToCart(cartItems));
 
         return;
@@ -213,11 +212,10 @@ export const CartProvider = ({ children }) => {
         dispatch(deleteDBCart(inCart.id));
       }
 
-
       Toast.fire({
-        icon: 'error',
-        title: `Product ${inCart.product.name} delete from cart`
-      })
+        icon: "error",
+        title: `Product ${inCart.product.name} delete from cart`,
+      });
     }
   };
 
@@ -226,7 +224,8 @@ export const CartProvider = ({ children }) => {
       value={{
         userId,
         myUser,
-        setUpdateUser,updateUser,
+        setUpdateUser,
+        updateUser,
         logIn,
         SignOff,
         cartItems,

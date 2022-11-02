@@ -45,7 +45,7 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.5.4",
     "react-text-mask": "^5.5.0",
-    "reactstrap": "^9.1.4",
+    "reactstrap": "^9.1.5",
     "recharts": "^2.1.15",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",

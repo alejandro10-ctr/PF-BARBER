@@ -75,7 +75,7 @@ function Sidebar() {
     } else {
         return (
             <div className='sidebar' >
-                <div className='top'><span className='logo'><img src="https://img.freepik.com/premium-vector/vintage-barbershop-logo-template_441059-27.jpg" alt="logo" /></span></div>
+                <div className='top'><span className='logo'><img src="https://cdn.discordapp.com/attachments/1026475887874539562/1037179521243304067/cositas3.png" alt="logo" /></span></div>
                 <hr />
                 <div className='center' >
                     <ul>
