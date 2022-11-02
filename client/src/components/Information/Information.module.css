@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap");
+
 .cuestions{
     margin-top: 20px;
     font-size:30px;
@@ -5,3 +7,10 @@
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
 }
+
+.title {
+    font-size: 50px;
+    font-family: "Anton", sans-serif;
+    color: rgba(240, 248, 255, 0.781);
+    text-align: center;
+  }
