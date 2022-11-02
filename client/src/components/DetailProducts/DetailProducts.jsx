@@ -118,6 +118,7 @@ function DetailProduct({ match }) {
             </div>
             <div className={s.columna}>
               <h3 className={s.quality}>QUALITY: {product.quality}</h3>
+              <h3 className={s.quality}>SCORE: {product.score}</h3>
               {/* <h3 className={s.score}>SCORE: { <Score score={product.score}/>}</h3> */}
               <div className={s.btncarrito}>
         
