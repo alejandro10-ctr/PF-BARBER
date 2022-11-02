@@ -64,13 +64,15 @@ router.get("/subscripcion", (req, res) => {
 router.get("/generar", async (req, res) => {
   //   console.log("");
   const body = {
-    payer_email: "",
+    // payer_email: "",
 
-    items: {
-      id: 1,
-      quantity: 1,
-      unit_price: 100,
-    },
+    items: [
+      {
+        id: 1,
+        quantity: 1,
+        unit_price: 100,
+      },
+    ],
 
     back_urls: {
       failure: "http://localhost:3000/",
