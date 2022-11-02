@@ -24,7 +24,8 @@ function Widget({type, isUser, isProducts}) {
 
 
     const amount = 100
-    const productss = products.length
+    const productss = products.filter(e => e.isActive !== false)
+    const productsFilter = productss.length
     const userss = users.length
 
     switch(type){
@@ -56,7 +57,7 @@ function Widget({type, isUser, isProducts}) {
         <div className="left">
              <span className="title">{data.title}</span>
              <span className="counter">{data.ifMoney && "$"}{isUser ? userss : null}</span>
-             <span className="counter">{data.ifMoney && "$"}{isProducts ? productss : null}</span>
+             <span className="counter">{data.ifMoney && "$"}{isProducts ? productsFilter : null}</span>
              <span className="link">{data.link}</span>
              </div>
         <div className="right">

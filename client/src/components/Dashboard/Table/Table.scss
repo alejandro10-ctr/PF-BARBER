@@ -34,6 +34,13 @@
         border: 1px dotted rgba(0, 0, 139, 0.596);
         cursor: pointer;
       }
+      .viewButtonRed{
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: rgb(177, 0, 0);
+        border: 1px dotted rgba(139, 0, 0, 0.596);
+        cursor: pointer;
+      }
     padding-top:1rem;
     .cellWrapper {
         display: flex;
