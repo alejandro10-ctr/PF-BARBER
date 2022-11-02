@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
+
+.background {
+  background-image: url(../Home/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  margin: 0% 0%;
+  text-align: center;
+
+  background-position-x: center;
+  width: 100%;
+  height: 140%;
+}
+
+.tabla {
+  width: 100%;
+}
+.tamanoimg {
+  max-width: 150px;
+  max-height: 100px;
+  margin-right: 20%;
+  margin-left: 20%;
+  border-radius: 25%;
+}
+.text {
+  text-transform: uppercase;
+
+  width: 150px;
+  margin-right: 40px;
+}
+.title {
+  font-family: "Quicksand", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+.elementosTabla {
+  background-color: grey;
+}
+.tbodyStilos {
+  background-color: rgb(229, 221, 221);
+  bottom: 45%;
+}
+.Total {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-right: -79%;
+}
+.bottonInicio {
+  text-decoration: none;
+  color: white;
+}
+/* 
+.botones{
+    
+};
+ */
+.add {
+  position: relative;
+  left: 200px;
+  bottom: 175px;
+  margin-top: 2.5px;
+}
+.sub {
+  position: relative;
+  left: 200px;
+  bottom: 175px;
+}
+.del {
+  position: relative;
+  left: 200px;
+  bottom: 172px;
+}

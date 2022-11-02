@@ -1,68 +1,99 @@
+
 import {
   SET_LOADING,
+  GET_ADDRESSES,
+  GET_ADDRESS,
   GET_PRODUCTS,
-  CREATE_PRODUCTS,
-  UPDATE_PRODUCTS,
-  DELETE_PRODUCTS,
-  CREATE_USERS,
+  CLEAR_MYUSER,
+  GET_MYUSER,
+  GET_USER,
   GET_USERS,
-  UPDATE_USERS,
-  DELETE_USERS,
   GET_DETAILPRODUCT,
   CLEAR_PRODUCTS_DETAILS,
   SEARCH_PRODUCTS,
   PRICE_LOWER,
   PRICE_HIGH,
-  TYPES,
-  SORT_SCORE,
+  //SORT_SCORE,
   FILTER_QUALITY,
-  FILTER_SHOP
+  FILTER_SHOP,
+  //TYPES,
+  UPDATE_CART,
+  GET_VALIDATESTOCK_CART,
+  ADD_TO_CART,
+  SUBTRACT_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
+  CLEAR_CART,
+  GET_LOCALSTORAGE,
+  GET_PAYMENTS,
+  ADD_PROD,
+  UPLOAD_IMG,
 } from "./actions";
 
 const initialState = {
   loading: false,
   products: [],
+  myUser: {},
+  user: {},
+  addresses: [],
+  detailaddress: {},
   users: [],
-  detail: [],
+  detail: {},
   allProducts: [],
   cart: [],
+  cartoutstock: undefined,
   localStorage: [],
   filterstate: [],
   error: '',
+  payMercadoPago: {},
+  uploadImg: "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg",
+
 };
 
+export default function reducer(state = initialState, { type, payload, quantity }) {
 
-
-export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_PAYMENTS:
+      return { ...state, payMercadoPago: { ...payload } }
+    case GET_ADDRESSES:
+      return { ...state, addresses: payload};
+    case GET_ADDRESS:
+      return { ...state, detailaddress: payload};
     case SET_LOADING:
       return { ...state, ...payload };
     case GET_PRODUCTS:
-      return { ...state, allProducts: [...payload], products: [...payload], filterstate: [...payload] };
-    // case CREATE_PRODUCTS:
-    //   return { ...state, products: payload };
-    case UPDATE_PRODUCTS:
-      return { ...state, products: payload };
-    case DELETE_PRODUCTS:
-      return { ...state, products: payload };
-    case CREATE_USERS:
-      return { ...state, users: payload };
+      return {
+        ...state,
+        allProducts: [...payload],
+        products: [...payload],
+        filterstate: [...payload],
+      };
+    case CLEAR_MYUSER:
+      return { ...state, myUser: {}};
+    case GET_MYUSER:
+      return { ...state, myUser: payload };
+    case GET_USER:
+      return { ...state, user: payload };
     case GET_USERS:
       return { ...state, users: payload };
-    case UPDATE_USERS:
-      return { ...state, users: payload };
-    case DELETE_USERS:
-      return { ...state };
     case GET_DETAILPRODUCT:
       return { ...state, detail: payload };
     case CLEAR_PRODUCTS_DETAILS:
       return {
         ...state,
-        detail: [],
+        detail: {},
       };
     case SEARCH_PRODUCTS:
       return { ...state, products: payload };
 
+      case UPLOAD_IMG:
+        return {
+          ...state, uploadImg: payload
+      };
+
+case ADD_PROD:
+            return {
+                ...state,
+            };
     //--------------------------SCORE
     // case SORT_SCORE:
     // const sortScore = state.products
@@ -89,119 +120,188 @@ export default function reducer(state = initialState, { type, payload }) {
     // }
     //--------------------------PRICE
     case PRICE_HIGH:
-      let stateProd = state.products
+      let stateProd = state.products;
       return {
         ...state,
-        products: stateProd.slice().sort((a, b) => {
-
-          return a.price - b.price
-        }).reverse()
-      }
+        products: stateProd
+          .slice()
+          .sort((a, b) => {
+            return a.price - b.price;
+          })
+          .reverse(),
+      };
     case PRICE_LOWER:
-      let statePr = state.products
+      let statePr = state.products;
       return {
         ...state,
         products: statePr.slice().sort((a, b) => {
-          return a.price - b.price
-        })
-
-      }
-
-    case TYPES.ADD_TO_CART: {
-      let newItem = state.products.find(product => product.id === payload); // CHEQUEAR QUE SEA PRODUCTSTOCART.ID O PRODUCTS.ID
-      // console.log(newItem)
-      let itemInCart = state.cart.find(item => item.id === newItem.id)
-
-      return itemInCart ? {
-        ...state,
-        cart: state.cart.map(item => item.id === newItem.id ? {
-          ...item,
-          quantity: item.quantity + 1
-        } : item)
-      }
-        :
-        {
-          ...state,
-          cart: [...state.cart, { ...newItem, quantity: 1 }],
-        }
-
-    }
-    case TYPES.REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find(item => item.id === payload);
-
-      return itemToDelete.quantity > 1 ? {
-        ...state,
-        cart: state.cart.map(item => item.id === payload ? { ...item, quantity: item.quantity - 1 } : item)
-      }
-        :
-        {
-          ...state,
-          cart: state.cart.filter(item => item.id !== payload)
-        };
-    }
-    case TYPES.REMOVE_ALL_FROM_CART: {
+          return a.price - b.price;
+        }),
+      };
+    // ---------------------> Carrito
+    case UPDATE_CART: {
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== payload),
+        cart: payload,
+        payMercadoPago: {},
+        cartoutstock: undefined,
       }
     }
-    case TYPES.CLEAR_CART:
-      return 'shoppingInitialState';
+    case GET_VALIDATESTOCK_CART: {
+      return {
+        ...state,
+        cartoutstock: payload,
+        payMercadoPago: {}
+      }
+    }
+    case ADD_TO_CART: {
+      let itemInCart = state.cart.find(item => item.productId === payload.id)
+      return itemInCart ? {
+        ...state,
+        cart: state.cart.map(item => item.productId === payload.id && quantity ? quantity : item.quantity + 1 <= payload.stock ? {
+          ...item,
+          quantity: item.quantity + 1
+        } : item),
 
-    // case FILTER_QUALITY:    
+      }
+        :
+        {
+          ...state,
+          cart: quantity ? quantity : 1 <= payload.stock ?
+            [...state.cart,
+            {
+              id: state.cart.length + 1,
+              quantity: quantity ? quantity : 1,
+              iva: 0,
+              description: "",
+              state: 2,
+              descriptionState: "",
+              productId: payload.id,
+              saleId: null,
+              userId: null,
+              product: payload
+            }]
+            :
+            [...state.cart],
+        }
+    }
+    case SUBTRACT_FROM_CART: {
+      let itemToDelete = state.cart.find(item => item.productId === payload.id);
+
+      return itemToDelete?.quantity > 1 ? {
+        ...state,
+        cart: state.cart.map(item => item.productId === payload.id ? { ...item, quantity: --item.quantity } : item)
+      }
+        :
+        {
+          ...state
+        }
+    }
+    case REMOVE_ITEM_FROM_CART: {
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.productId !== payload.id),
+      };
+    }
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
+
+
+    case GET_LOCALSTORAGE:
+      const storage = localStorage.getItem("products")
+      return {
+        ...state,
+        cart: storage ? JSON.parse(storage) : [],
+      };
+    // <------------------------
+
+
+    // cart: state.cart.filter((item) => item.id !== payload),
+
+
+    // case FILTER_QUALITY:
     // const all = state.products;
     // const filter = payload === 'Premium' ? all.filter(r => r.quality === "Premium"): all.filter(r => r.quality === "Basic")
     // return {
     //     ...state,
     //     allProducts: filter //lista que recortamos lo que necesitemos
     // };
+    // case FILTER_QUALITY: FABRI CAMBIOS ?? 
+    //   const all = state.allProducts;
+    //   const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter
+    //   const filter =
+    //     payload === "default"
+    //       ? all
+    //       : all.filter(
+    //           (r) => r.quality.toLowerCase() === payload.toLowerCase()
+    //         );
+    //   return {
+    //     ...state,
+    //     products: filter,
+    //     filterstate: filter,
+    //   };
+
     case FILTER_QUALITY:
       const all = state.allProducts;
-      const filter = payload === 'default' ? all: all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
+      const filter = payload === 'default' ? all : all.filter(r => r.quality.toLowerCase() === payload.toLowerCase())
       return {
         ...state,
-      products: filter,
-      filterstate: filter
+        products: filter,
+        filterstate: filter
       };
     case FILTER_SHOP:
       const allAccesory = state.filterstate;
 
-      const logicFilter = payload === 'all' ? allAccesory
-        : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+      const logicFilter =
+        payload === "all"
+          ? allAccesory
+          : allAccesory.filter((r) =>
+            r.name.toLowerCase().includes(payload.toLowerCase())
+          );
 
       return {
         ...state,
-        products: logicFilter
+        products: logicFilter,
       };
 
+    // case FILTER_SHOP:
+    //   const allAccesory = state.products;
 
-      // case FILTER_SHOP:
-      //   const allAccesory = state.products;
-        
-      //   if (allAccesory) {
-  
-      //     const logicFilter = payload === 'all' ? allAccesory
-      //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
-      //     return {
-      //       ...state,
-      //       allProducts: logicFilter
-      //     };
-      //   } else if (!allAccesory) {
-      //     const logicFilter = payload === 'all' ? allAccesory
-      //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
-      //     return {
-      //       ...state,
-      //       filterstate: logicFilter
-      //     };
-      //   }
-      //-------------error
-      case "FAILURE":
-        return{
-          ...state,
-          error: payload
-        }
+    //   if (allAccesory) {
+
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       allProducts: logicFilter
+    //     };
+    //   } else if (!allAccesory) {
+    //     const logicFilter = payload === 'all' ? allAccesory
+    //       : allAccesory.filter(r => r.name.toLowerCase().includes(payload.toLowerCase()))
+    //     return {
+    //       ...state,
+    //       filterstate: logicFilter
+    //     };
+    //   }
+    //-------------error
+    case "FAILURE":
+      return {
+        ...state,
+        error: payload
+      }
+    // error: payload,
+    //}
 
     default:
       return state;
   }
 };
+//}

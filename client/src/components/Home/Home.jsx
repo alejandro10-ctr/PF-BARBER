@@ -1,44 +1,48 @@
-import React from "react";
+import React, {useContext, useEffect} from "react"
 import { Link } from "react-router-dom";
 import Carrusel from "../carrusel/carrusel";
 import styles from "./Home.module.css";
+import { Button } from "reactstrap";
+import { CartContext } from "../Shopping/ShoppingCart";
+
+import {
+  getDBUser,
+  getDBCart,
+} from "../../redux/actions";
+import { useSelector, useDispatch } from 'react-redux'
+import HomeNavBar from "../HomeNavBar/HomeNavBar";
+
+
 export default function Home() {
+
+  
+  const { userId } = useContext(CartContext)
+  const dispatch = useDispatch()
+    useEffect(() => {
+      if (userId) {
+        dispatch(getDBUser(userId))
+        dispatch(getDBCart(userId))
+        }
+    }, []);
+  
   return (
     <div className={styles.background}>
-      <div className={styles.title}>
-        {/* <img
-          src="https://w7.pngwing.com/pngs/139/83/png-transparent-scissors-angle-technic-scissors.png"
-          className="tijeraImgen"
-        ></img> */}
-        <h1>BARBER 'S APP</h1>
-      </div>
-      <Carrusel />
-      <br />
+      <div className={styles.title}><h1>BARBER 'S APP</h1>
+    
+      <Carrusel /><br /></div>
+  
+      <div className={styles.buttonLinks}>
 
-      <div className={styles.buttons}>
-        <button className={styles.myButton}><Link to="/AboutUs"> Developers</Link></button>
-
-        <button className={styles.myButton}><Link to=""> Services </Link></button>
-
-        <button className={styles.myButton}><Link to="/shop"> Shop </Link></button>
-
-        <button className={styles.myButton} ><Link to=""> Sign Up!</Link></button>
-
-        <button className={styles.myButton}><Link to=""> Create Account </Link></button>
-      </div>
-
-
-      <br /> 
-
-      <h3>Pay with MercadoPago</h3>
-      <img
-        src="http://d3ugyf2ht6aenh.cloudfront.net/stores/001/718/448/products/d_738371-mla49316492518_032022-f1-ed4272fc0b58b093aa16519683623243-640-0.jpg"
-        width="100"
-        height="100"
-        alt="Mercado de Pago"
-      ></img>
-      <br />
-      <br />
+        <Button color="dark"><Link className={styles.button} to=""> {" "} Services{" "}  </Link></Button>
+        <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  Developers </Link> </Button>
+        <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
+      </div><br />
+    
+      <h3 className={styles.subtitle}>  Check our Ecommerce! <svg xmlns="http://www.w3.org/2000/svg" width="26" height="23" fill="pink" className="bi bi-chat-heart-fill" viewBox="0 0 16 16">
+  <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15Zm0-9.007c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+</svg></h3>
+    
+     
     </div>
   );
 }

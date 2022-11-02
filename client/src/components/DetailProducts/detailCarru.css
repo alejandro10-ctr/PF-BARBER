@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap");
+
+.detCarrContainer {
+  position: relative;
+  margin-top: 1%;
+  background-color: white;
+  width: 500px;
+  /* margin-left: 39.5%; */
+  margin: 0 auto;
+  border-radius: 25px;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.dtCarrImg {
+  width: "50%";
+  height: "250px";
+  /* box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+ */
+}
+
+.dtCarrName {
+  font-family: "Anton&family";
+}
+
+.dtCarrQuality {
+  padding-top: -3px;
+  padding-bottom: 3px;
+  text-align: center;
+}

@@ -11,16 +11,16 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(256),
         defaultValue: "",
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         defaultValue: 0,
       },
       quality: {
         type: DataTypes.ENUM(["basic", "premium"]),
-        allowNull: false,
+        defaultValue: "basic",
         validate: {
           isIn: {
             args: [["basic", "premium"]],
@@ -31,20 +31,23 @@ module.exports = (sequelize) => {
       },
       stock: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
+        defaultValue: 10,
       },
 
       image: {
         type: DataTypes.TEXT,
-        allowNull: false,
         defaultValue:
           "https://consumercomplaintscourt.com/wp-content/uploads/2015/12/no_uploaded.png",
       },
       score: {
         type: DataTypes.INTEGER,
-        defaultValue: 1,
-        validate: { min: 1, max: 5 }
-      }
+        defaultValue: 5,
+        validate: { min: 1, max: 5 },
+      },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       timestamp: false,
