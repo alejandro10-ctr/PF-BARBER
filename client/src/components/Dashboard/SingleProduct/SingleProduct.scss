@@ -1,22 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
+
 .single {
     display: flex;
     width: 100%;
 
+    .editing {
+        position: absolute;
+        border-radius: 5px;
+        color: darkblue;
+        margin-top:-2.5rem;
+        margin-left: -1.25rem;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+        font-size: 15px;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+
+    }
 
 
+    .editButton {
 
-        .editButton {
 
-            padding: 2px 5px;
-            border-radius: 5px;
-            color: darkblue;
-            border: 1px dotted rgba(0, 0, 139, 0.596);
-            cursor: pointer;
-            font-size: 35px;
-      }    
-
-        
+        border-radius: 5px;
+        color: darkblue;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+        font-size: 35px;
+    }
     
+
+    .backButton {
+        display: flex;
+    
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: darkblue;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+        font-size: 13px;
+    }
+    
+  .edit{
+    background-color: black;
+
+  }
+
+
 
     .singleContainer {
         flex: 6;
@@ -55,7 +85,12 @@
                         .itemTitle {
                             margin-bottom: 10px;
                             color: #555;
+
                         }
+
+                        font-family: 'Quicksand',
+                        sans-serif;
+
 
                         .detailItem {
                             margin-bottom: 10px;
@@ -63,7 +98,7 @@
 
                             .itemKey {
                                 font-weight: bold;
-                                color: gray;
+                                color: rgb(22, 22, 22);
                                 margin-right: 10px;
 
                             }
@@ -97,6 +132,8 @@
             margin: 20px;
 
         }
+
+        
     }
 
 

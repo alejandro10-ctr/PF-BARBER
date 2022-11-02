@@ -44,6 +44,7 @@ let id
         )
         product.isActive = false
         dispatch(updateProducts(id, product))
+        getProducts()
       }
       getProducts()
       getProducts()
@@ -84,8 +85,12 @@ let id
         <TableBody>
           {products.sort((a, b) => {
             return a.id - b.id;
-          }).map((row) => (
-            <TableRow key={row.id}>
+          }).map((row) => row.isActive ?(
+      
+    
+              
+              <TableRow key={row.id}>
+
               <TableCell >{row.id}</TableCell>
               <TableCell className='tableCell'>
                 <div className='cellWrapper'>
@@ -102,7 +107,7 @@ let id
                 </TableCell>
                 <TableCell className='tableCell'>
               
-                <button onClick= {({id = row.id}) => handleDelete(id, row)} class='viewButtonRojo'>Delete</button>
+                <button onClick= {({id = row.id}) => handleDelete(id, row)} class='viewButtonRed'>Delete</button>
              
               
                 </TableCell>
@@ -114,10 +119,13 @@ let id
                   : row.score === 3 ? <div><img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> </div>
                     : row.score === 4 ? <div><img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img></div>
                       : <div><img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img> <img src={img} alt="Img Not Found."></img></div>}</TableCell>
+                    
+            </TableRow> 
 
-            </TableRow>
-          ))}
-        </TableBody>
+
+           ): "")}
+           
+        </TableBody> 
       </Table>
     </TableContainer>
   )

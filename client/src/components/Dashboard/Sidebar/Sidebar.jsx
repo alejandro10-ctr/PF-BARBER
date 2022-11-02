@@ -6,13 +6,21 @@ import StoreIcon from '@mui/icons-material/Store';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import HomeIcon from '@mui/icons-material/Home';
+
 import { Link, Redirect } from 'react-router-dom';
 import { CartContext } from '../../Shopping/ShoppingCart';
 
 
 
+
 function Sidebar() {
     let { myUser, setUpdateUser, updateUser } = useContext(CartContext)
+
+
+    
 
     useEffect(async () => {
         setUpdateUser(!updateUser)
@@ -53,6 +61,7 @@ function Sidebar() {
                         <li> <CreditCardIcon className='icon'></CreditCardIcon>
                             <span>Orders</span>
                         </li>
+
 
 
 
