@@ -144,13 +144,6 @@ const Ecommerce = ({
         </div><br />
 
 
-
-
-
-
-
-
-
         <Paginado className={s.paginado}pag={pag}
           setCurrentPage={setCurrentPage}
           max={max} />

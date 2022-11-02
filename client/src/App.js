@@ -87,7 +87,7 @@ function App() {
 
       <Route exact path="/">
         <Home />
-        <Footer/>
+ 
       </Route>
 
 
