@@ -10,14 +10,15 @@ import {
   CarouselCaption,
 } from "reactstrap";
 
-<source />;
 
 
+<source />
 
 
 const items = 
 [
     {
+      id: 1,
       name: "Beard Balm",
       price: 200,
       quality: "premium",
@@ -28,6 +29,7 @@ const items =
         caption: "",
     },
     {
+      id: 2,
       name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
       price: 5400,
       quality: "basic",
@@ -38,6 +40,7 @@ const items =
         caption: "",
     },
     {
+      id: 3,
       name: "Edwin Jagger Marfil",
       price: 200,
       quality: "premium",
@@ -48,6 +51,7 @@ const items =
         caption: "",
     },
     {
+      id: 4,
       name: "Brosh Super Hard Gel 200gr",
       price: 200,
       quality: "basic",
@@ -58,6 +62,7 @@ const items =
         caption: "",
     },
     {
+      id: 5,
       name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
       price: 200,
       quality: "premium",
@@ -68,6 +73,7 @@ const items =
         caption: "",
     },
     {
+      id: 6,
       name: "Fatip Chrome Slant Double Edge Safety Razor",
       price: 200,
       quality: "premium",
@@ -78,6 +84,7 @@ const items =
         caption: "",
     },
     {
+      id: 7,
       name: "Omega Garnet Shaving Bowl",
       price: 200,
       quality: "basic",
@@ -88,6 +95,7 @@ const items =
         caption: "",
     },
     {
+      id: 8,
       name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
       price: 200,
       quality: "basic",
@@ -98,6 +106,7 @@ const items =
         caption: "",
     },
     {
+      id: 9,
       name: "Baxter of California Shave Tonic",
       price: 200,
       quality: "premium",
@@ -108,6 +117,7 @@ const items =
         caption: "",
     },
     {
+      id: 10,
       name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
       price: 300,
       quality: "basic",
@@ -118,6 +128,7 @@ const items =
         caption: "",
     },
     {
+      id: 11,
       name: "Hey Joe Pre Shave Oil 50ml",
       price: 200,
       quality: "premium",
@@ -128,6 +139,7 @@ const items =
         caption: "",
     },
     {
+      id: 12,
       name: "After Shave BeardLovers",
       price: 200,
       quality: "basic",
@@ -138,6 +150,7 @@ const items =
         caption: "",
     },
     {
+      id: 13,
       name: "Cella Milano Bio Aloe Vera After Shave Balm 100ml",
       price: 200,
       quality: "premium",
@@ -222,7 +235,10 @@ class Carrusel extends Component {
           key={item}
         >
           <div className="detCarrContainer">
+            <a href={`/product/${item.id}`}>
+              
           <img src={item.image} alt={item.altText} with="50%" height="250px" />
+            </a>
           <h3 >{item.name}</h3>
           <h4 >${item.price}</h4>
           <h5 >Quality: {item.quality}</h5>
