@@ -100,11 +100,11 @@ margin-left: -48%;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
   margin-right: 3%;
-  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+ 
   border-radius: 10px;
   box-shadow: 3px 3px 3px 0px rgba(231, 226, 226, 0.75);
+  width: 15%;
 }
 .red:hover {
 	background:linear-gradient(to bottom, #8f0e02 5%, #880d04 100%);
@@ -114,8 +114,6 @@ margin-left: -48%;
 	position:relative;
 	top:1px;
 }
-
-        
 
 .blue {
 	box-shadow:inset 0px 1px 0px 0px #4b0903;
@@ -132,12 +130,13 @@ margin-left: -48%;
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
-  margin-right: 3%;
-  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
+
+ 
   border-radius: 10px;
   box-shadow: 3px 3px 3px 0px rgba(231, 226, 226, 0.75);
+  width: 15%;
 }
 .blue:hover {
 	background:linear-gradient(to bottom, #8f0e02 5%, #880d04 100%);
@@ -147,3 +146,5 @@ margin-left: -48%;
 	position:relative;
 	top:1px;
 }
+
+        
