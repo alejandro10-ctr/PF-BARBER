@@ -30,21 +30,21 @@ export default function Home() {
     <div className={styles.background}>
       <div className={styles.title}><h1>BARBER 'S APP</h1>
     
-      <Carrusel /><br /></div>
+      <Carrusel /></div>
   
       <div className={styles.buttonLinks}>
-
-
-        <Button color="dark"> <Link className={styles.button} to="/information"> Customer Support </Link> </Button>
+  <Button color="dark"> <Link className={styles.button} to="/information"> Customer Support </Link> </Button>
        
         <Button color="dark"> <Link className={styles.button} to="/AboutUs"> About Us </Link> </Button>
 
         <Button color="dark"><Link className={styles.button} to="/shop"> Shop </Link> </Button>
+
+      
       </div><br />
     
 
 
-
+<Footer/>
      
     </div>
   );
