@@ -8,7 +8,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
-import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 
 import { Link, Redirect } from 'react-router-dom';
@@ -21,48 +20,7 @@ function Sidebar() {
     let { myUser, setUpdateUser, updateUser } = useContext(CartContext)
 
 
-                <li>
-                        <DashboardIcon className='icon'></DashboardIcon>
-                    <span> 
-                        Dashboard</span>
-                </li>
-                </Link>
-              
-                <Link to="/dash/users">
-                <li> <GroupIcon className='icon'></GroupIcon>
-                    <span>Users</span>
-                   
-                </li>
-                    </Link>
-                    <Link to="/dash/products">
-                <li> <StoreIcon className='icon'></StoreIcon>
-                    <span>Products</span>
-                </li>
-                    </Link>
-                <li> <CreditCardIcon className='icon'></CreditCardIcon>
-                    <span>Orders</span>
-                </li>
-                <Link to="/dash/reviews">
-
-<li>
-        <InventoryOutlinedIcon className='icon'></InventoryOutlinedIcon>
-    <span> 
-        Reviews</span>
-</li>
-</Link>
-               
-              
-               
-                <p className="title">USER</p>
-                <Link to="/">
-                <li> <HomeIcon className='icon'></HomeIcon>
-                    <span>Home</span>
-                </li></Link>
-                <li> <ExitToAppOutlinedIcon className='icon'></ExitToAppOutlinedIcon>
-                    <span>Logout</span>
-                </li>
-            </ul>
-            </div>
+    
 
     useEffect(async () => {
         setUpdateUser(!updateUser)
