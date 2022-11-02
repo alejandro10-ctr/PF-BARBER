@@ -3,7 +3,7 @@ import styles from "./Information.module.css";
 
 const Information = () => {
   return (
-  <div><br /> <br /><h1 className={styles.title}> FAQ </h1><br />
+  <div className={styles.background}><br /> <br /><h1 className={styles.title}> FAQ </h1><br />
   
 
 <h4 className={styles.cuestions}>🛒 How do I know if I registered correctly? You will receive a registration confirmation email!</h4><br />
