@@ -35,7 +35,7 @@ export default function Home() {
       <div className={styles.buttonLinks}>
 
 
-        <Button color="dark"> <Link className={styles.button} to="/information">    {" "}  Information </Link> </Button>
+        <Button color="dark"> <Link className={styles.button} to="/information">    {" "}  Customer Support </Link> </Button>
        
         <Button color="dark"> <Link className={styles.button} to="/AboutUs">    {" "}  About Us </Link> </Button>
 
