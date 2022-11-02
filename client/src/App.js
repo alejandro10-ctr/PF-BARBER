@@ -27,6 +27,7 @@ import ChangePassword from "./components/UserAccount/ChangePassword.jsx";
 import UserEdit from "./components/UserAccount/UserEdit";
 import Swal from "sweetalert2";
 import Footer from "./components/Footer/Footer";
+import Information from "./components/Information/Information";
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -103,6 +104,10 @@ function App() {
       </Route>
       <Route exact path="/aboutus">
         <AboutUs />
+      </Route>
+
+      <Route exact path="/information">
+        <Information />
       </Route>
 
       <Route exact path="/payments/pay">

@@ -6,66 +6,27 @@ export default function AboutUs() {
   return (
     <div className={styles.background}> 
       <div className={styles.card}>
-        <h1 className={styles.title}>About Us</h1>
+        
 
         <div className={styles.git}>
-     
+     <h1 className={styles.title}>Our History</h1>
 
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/brbnoriega"
 
-          >
-            Barbara Noriega
-          </a>
-          <br />
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/HORO98"
-
-          >
-            Martin Horodeski
-          </a>
-          <br />
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/AlejandroDiez"
-
-          >
-            Alejandro Diez
-          </a>
-          <br />
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/FedeSaffores"
-
-          >
-            Federico Saffores
-          </a>
-          <br />
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/fbrz1"
-
-          >
-            Fabrizio Alderete
-          </a>
-          <br />
-        </div>
         <div className="texto"><br />
 
 
-          <h3 className={styles.fontText}>  This platform is an amazing beauty and grooming marketplace which
-            connects the clients to the barber professionals of their choice.{" "}
+          <h3 className={styles.fontText}> It all started in the city of Rosario, a barber's chair, 
+          a razor, and the intrigue of knowing what had happened to the traditional barber shops of yesteryear; 
+          at that time (year 2008) there was not the boom that we know today.
+In 2015 we decided to take the final step and transform ourselves into barbers, 
+barbershops and hairdressers, providing traditional and contemporary cutting and 
+shaving services and adding services and professionals over time, creating a unique 
+space where image care, good service and enjoyment of the stay are characteristic.
+            
 
-            Developing a software for a hair salon is one of the best ways to
-            increase the revenue in this world of digitalization.   </h3>
+              </h3>
 
+            </div>
         </div>
       </div>
     </div>
