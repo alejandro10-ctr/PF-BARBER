@@ -67,7 +67,9 @@ const Ecommerce = ({
   //paginado
   const [pag, setCurrentPage] = useState(1)// inicializacion
   const [productsPerPage, setPerPage] = useState(6) //cant x pag 
+  products = products.filter(e => e.isActive !== false)
   const max = Math.ceil(products.length / productsPerPage); //max pag posible REDONDE HACIA ARRIBA 
+  
   const sliceProduct = products.slice((pag - 1) * productsPerPage,
     ((pag - 1) * productsPerPage) + productsPerPage)// corte de elementos x pag
 
