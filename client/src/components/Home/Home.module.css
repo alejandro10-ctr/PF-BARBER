@@ -28,12 +28,13 @@
 
 .buttonLinks {
   display: grid;
-  width: 70%;
+  width: 30rem;
 
   gap: 15px;
-  margin-left: 16%;
+  margin-left: 32.5%;
   text-align: center;
-  margin-top: 1%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .subtitle {
