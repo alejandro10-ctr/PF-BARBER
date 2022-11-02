@@ -1,3 +1,8 @@
+.background{
+
+    background-image: url(../Home/background.png);
+
+}
 .containerCard {
   margin: auto;
   /* margin-top: 30px; */

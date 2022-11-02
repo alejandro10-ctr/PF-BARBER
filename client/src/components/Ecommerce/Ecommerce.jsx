@@ -104,7 +104,7 @@ const Ecommerce = ({
 
 
   return (
-    <div>
+    <div className={s.background}>
       <div>
      
 
