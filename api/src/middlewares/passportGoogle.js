@@ -49,7 +49,8 @@ passport.use(
 
           //   password: profile._json.sub,
         }).then((user) => {
-          sendEmail(user.dataValues.email);
+          // sendEmail(user.dataValues.email);
+          
         });
 
         done(null, profile);
