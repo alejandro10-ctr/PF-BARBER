@@ -54,6 +54,8 @@ module.exports = (sequelize) => {
       },
       avatar: {
         type: DataTypes.TEXT,
+        defaultValue:
+          "https://images-ext-1.discordapp.net/external/NnblQAGxBt7WJ7uKiIHEUG4WpH6Ln-sHnF0HMg2D1vU/https/cdn.icon-icons.com/icons2/1146/PNG/512/1486485581-account-audience-person-customer-profile-user_81164.png",
       },
       phone: {
         type: DataTypes.STRING,

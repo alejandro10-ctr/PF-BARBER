@@ -78,6 +78,7 @@ const dbCreateDetailSale = async (info, model) => {
         if (info.productId && info.quantity) {
             delete info.saleId
             delete info.userId
+            const product = info.product
             delete info.product
             delete info.id
             const [detailsale, isDetailsale] = await Detailsale.findOrCreate({
@@ -99,7 +100,7 @@ const dbCreateDetailSale = async (info, model) => {
                     }
                 );
             }
-            return "detail sale created successfully"
+            return `${product.name} has been added to cart`
         } else {
             throw new Error('missing param')
         }

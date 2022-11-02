@@ -12,7 +12,13 @@ const Score = () => {
 
     const [score, setScore] = useState({score: ""})
 
+let arrayScore = {products: products}
 
+let scorcito = (idProduct, score )=>{
+
+
+
+}
 
   let handleChange = (e) =>{
     e.preventDefault()
@@ -33,7 +39,6 @@ const Score = () => {
 
 
   const saveHandle = (e) => {
-    
     
     setScore({
       score: e.target.value

@@ -8,7 +8,7 @@ const JSONUsers = [{
   stock: 7,
   image: "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp",
   score: 3,
-  description:' It is a high-quality concentrated shaving cream with a high proportion of glycerin for a smooth and moisturizing shave. The cream can be applied by brush or by hand, this action produces a rich, abundant lather that softens the beard for a quick and comfortable shave. ',
+  description:' It is a high-quality concentrated shaving cream with a high proportion of glycerin for a smooth and moisturizing shave. The cream can be applied by brush ',
 }, {
   name: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
   price: 5400,
@@ -16,7 +16,7 @@ const JSONUsers = [{
   stock: 6,
   image: "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg",
   score: 4,
-  description: "This product has an extraordinary and modern design. It features an easy and quick system to replace blades. It can be adjusted in 6 different positions. 1 to 2 recommended for beginners. Progressively when you will fill confident adjust it at higher numbers to provide you a more aggressive and closer shave.",
+  description: "This product has an extraordinary and modern design. It features an easy and quick system to replace blades. It can be adjusted in 6 different positions.",
 },
 {
   name: "Edwin Jagger Marfil",
@@ -25,7 +25,7 @@ const JSONUsers = [{
   stock: 9,
   image: "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg",
   score: 5,
-  description: 'The safety razor with an open tooth comb has been developed specially for practised wet shavers. Due to the principle of its construction, which features a special blade angle, the new model allows a vigorous, very direct shaving technique. As on safety razors with closed combs, the curved blade is exposed and clamped in place by the curvature of the cap. '
+  description: 'The safety razor with an open tooth comb has been developed specially for practised wet shavers. Due to the principle of its construction,'
 },
 {
   name: "Brosh Super Hard Gel 200gr",
@@ -34,7 +34,7 @@ const JSONUsers = [{
   stock: 11,
   image: "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg",
   score: 3,
-  description: "This product offers a modern fresh fern aroma which has been specially formulated for Sensitive Skin. This gel will certainly help those gentlemen who have trouble with damage to the skin whilst shaving."
+  description: "This product offers a modern fresh fern aroma which has been specially formulated for Sensitive Skin. This gel will certainly help those "
 },
 {
   name: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
@@ -43,7 +43,7 @@ const JSONUsers = [{
   stock: 9,
   image: "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg",
   score: 5,
-  description: "Exclusive limited editions of shaving brushes, 'basic' brushes with all types of hair, shaving accessories and a new line of after shaves with a markedly classic character, which renews and improves the essence of the authentic barbershop."
+  description: "Exclusive limited editions of shaving brushes, 'basic' brushes with all types of hair, shaving accessories and a new line of after shaves with a"
 },
 {
   name: "Fatip Chrome Slant Double Edge Safety Razor",
@@ -52,7 +52,7 @@ const JSONUsers = [{
   stock: 2,
   image: "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg",
   score: 3,
-  description: "The cap of the razor can be released with a simple twist of the small wheel at the end of the handle. The open comb remains firmly attached to the handle. Used blades can then be removed safely and replaced with new ones. "
+  description: "The cap of the razor can be released with a simple twist of the small wheel at the end of the handle. The open comb remains firmly attached to the handle."
 },
 {
   name: "Omega Garnet Shaving Bowl",
@@ -61,7 +61,7 @@ const JSONUsers = [{
   stock: 4,
   image: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg",
   score: 1,
-  description: "Alum is a well-known astringent mineral which has been used as a cosmetic for more than 2000 years. Alum stone will allow you to stop blinding any small cut produce during shaving or close any open pore."
+  description: "Alum is a well-known astringent mineral which has been used as a cosmetic for more than 2000 years. Alum stone will allow you to stop blinding any "
 },
 {
   name: "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
@@ -79,7 +79,7 @@ const JSONUsers = [{
   stock: 12,
   image: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg",
   score: 2,
-  description: "The first hair lotion from Barber Mind, good for the scalp and helps to get thick and healthy hair. The fresh pines and their menthol and eucaliptus contained in the formula, give it properties for a healthier scalp. It also helps refrain hair loss."
+  description: "The first hair lotion from Barber Mind, good for the scalp and helps to get thick and healthy hair. The fresh pines and their menthol and eucaliptus containe"
 },
 {
   name: "Captain Fawcett Barberism Pre-Shave Oil 50ml",
@@ -97,7 +97,7 @@ const JSONUsers = [{
   stock: 7,
   image: "https://www.giftsandcare.com/7783-large_default/hey-joe-pre-shave-oil-50ml.jpg",
   score: 1,
-  description: "Since 1957, Osma offers to customer’s high quality products dedicated to wet shaving. In respect to the craft traditions, rigorous selection of our raw materials, choice of natural ingredients are the values which we always put forward in the creation of our products."
+  description: "Since 1957, Osma offers to customer’s high quality products dedicated to wet shaving. In respect to the craft traditions, rigorous selection of our raw materials"
 },
 {
   name: "After Shave BeardLovers",
@@ -115,7 +115,7 @@ const JSONUsers = [{
   stock: 4,
   image: "https://www.giftsandcare.com/13418-large_default/cella-milano-bio-aloe-vera-after-shave-balm-100ml.jpg",
   score: 2,
-  description: "An invigorating, fresh composition with oakmoss and mint fragrances. Obtained from aloe plants in the coastal regions of Spain. Selected natural ingredients soothe and refresh the skin. Aloe Vera regenerates and moisturises. The lotion relieves any irritation and prevents dryness."
+  description: "Obtained from aloe plants in the coastal regions of Spain. Selected natural ingredients soothe and refresh the skin. Aloe Vera regenerates and moisturises"
 }
 ]
 
