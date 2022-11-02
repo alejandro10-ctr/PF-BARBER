@@ -47,8 +47,6 @@ class PaymentService {
         };
       });
     }
-
-
     const body = {
       payer_email: "",
 
@@ -57,12 +55,16 @@ class PaymentService {
       back_urls: {
         failure: "http://localhost:3000/",
         pending: "http://localhost:3000/",
-        success: "http://localhost:3000/",
+        success: "http://localhost:3001/payments/test",
       },
+
+      notification_url: "hola.com",
     };
-    const payment = await mercadopago.preferences.create(body)
-    return payment.response
-    ;
+
+    mercadopago.preferences
+      .create(body)
+      .then((response) => res.json(response))
+      .catch((err) => console.log(err));
   }
 
   async createSubscription() {
