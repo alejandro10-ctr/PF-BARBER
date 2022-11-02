@@ -26,6 +26,7 @@ import DatosDeEnvio from "./components/UserAccount/DatosDeEnvio.jsx";
 import ChangePassword from "./components/UserAccount/ChangePassword.jsx";
 import UserEdit from "./components/UserAccount/UserEdit";
 import Swal from "sweetalert2";
+import Footer from "./components/Footer/Footer";
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -37,6 +38,9 @@ import Swal from "sweetalert2";
 var URLactual = window.location;
 
 function App() {
+
+
+
   let { userId } = useContext(CartContext);
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
@@ -47,14 +51,15 @@ function App() {
   }, [user]);
   return (
     <div className="App">
+      
       {!URLactual.pathname.includes("/dash") ? (
         <Route
-          path="/"
-          render={({ location }) => {
-            return <HomeNavBar user={user} pathname={location.pathname} />;
-          }}
+        path="/"
+        render={({ location }) => {
+          return <HomeNavBar user={user} pathname={location.pathname} />;
+        }}
         ></Route>
-      ) : null}
+        ) : null}
 
       <Route exact path="/dash/users">
         <List />
@@ -81,7 +86,9 @@ function App() {
 
       <Route exact path="/">
         <Home />
+        <Footer/>
       </Route>
+
 
       <Route exact path="/register">
         <Register />

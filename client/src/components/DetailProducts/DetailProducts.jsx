@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 // import Score from '../Score/score'
 import Carrusel from "./detailCarru";
 import s from "./DetailProducts.module.css";
+import Score from "../Score/Score"
 // import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
@@ -120,6 +121,7 @@ function DetailProduct({ match }) {
               <h3 className={s.quality}>QUALITY: {product.quality}</h3>
               <h3 className={s.quality}>SCORE: {product.score}</h3>
               {/* <h3 className={s.score}>SCORE: { <Score score={product.score}/>}</h3> */}
+             
               <div className={s.btncarrito}>
         
         {productInCar ? (
@@ -252,7 +254,7 @@ function DetailProduct({ match }) {
       <br>
       </br>
        </div>
-
+       <Score></Score>
        <h2>Featured Products</h2>
        
       
