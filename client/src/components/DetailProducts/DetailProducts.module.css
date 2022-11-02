@@ -1,20 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap");
+
+.background {
+  background-image: url(../Home/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  text-align: center;
+
+  background-position-x: center;
+  width: 100%;
+  height: 100%;
+  /*   width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  margin: 0% 0%;
+  text-align: center;
+  background-position-x: center; */
+}
+
 .button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 0;
-    background-color: #026773;
-    text-align: center;
-    color: white;
-    width: 240px;
-    height: auto;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    border: none;
-    text-decoration: none;
-  }
-  
-  .button:hover {
-    background-color: aqua;
-    transition: 500ms;
-  }
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: #026773;
+  text-align: center;
+  color: white;
+  width: 240px;
+  height: auto;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: aqua;
+  transition: 500ms;
+}
+.name {
+  overflow: auto;
+  margin-top: 15px;
+  font-size: 50px;
+  text-transform: uppercase;
+  color: rgb(48, 48, 110);
+  overflow: hidden;
+  font-family: "Anton&family";
+  text-align: start;
+  width: 650px;
+}
+.price {
+  text-transform: uppercase;
+  font-family: "Anton&family";
+  margin-left: -500px;
+
+  margin-top: 35px;
+  left: 2%;
+}
+.quality {
+  text-transform: uppercase;
+  font-family: "Anton&family";
+
+  margin-top: 35px;
+  text-align: left;
+  right: 426px;
+}
+.img {
+  margin-top: 10px;
+  padding: 4.5px;
+  border-radius: 25px;
+  border: 5px;
+  height: 340px;
+  position: absolute;
+  right: 45%;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.inicio {
+  text-transform: uppercase;
+}
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.889);
+  height: 400px;
+  padding: 20px;
+  border-radius: 25px;
+  border: 5px solid rgba(157, 154, 154, 0);
+  margin-top: 6%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.score {
+  margin-top: 2px;
+
+  right: 410px;
+  font-family: "Anton&family";
+  text-align: left;
+}
+.inisec {
+  font-family: "Anton&family";
+}
+.seMore {
+  position: absolute;
+  bottom: 100px;
+  right: 43%;
+}
+.quantity {
+  font-family: "Anton&family";
+  text-transform: uppercase;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+}
+
+.btncarrito {
+  top: 19%;
+  right: 4.5%;
+  display: flex;
+}
+.quantity {
+  top: 0%;
+  left: -235px;
+}
+.btnSubstract {
+  margin: 3px;
+  top: 6rem;
+  right: 250px;
+}
+.btnAdd {
+  top: 6rem;
+  right: 250px;
+}

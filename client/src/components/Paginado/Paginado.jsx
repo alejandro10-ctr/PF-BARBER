@@ -29,7 +29,7 @@ export default function Paginado({ pag, setCurrentPage, max, className }) {
   return (
     <Pagination className={className}>
       <PaginationItem>
-        <PaginationLink onClick={prevPage} href="#" previous />
+       
       </PaginationItem>
       {arreglito
         ? arreglito.map((m) => (
@@ -42,7 +42,7 @@ export default function Paginado({ pag, setCurrentPage, max, className }) {
         : "not array"}
 
       <PaginationItem>
-        <PaginationLink onClick={nextPage} href="#" next />
+      
         {/*</PaginationLink> */}
       </PaginationItem>
     </Pagination>

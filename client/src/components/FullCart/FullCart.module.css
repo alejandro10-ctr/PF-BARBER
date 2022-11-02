@@ -1,116 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
 
-.background{
-    background-image: url('cartBackground.jpg');
+.background {
+  background-image: url(../Home/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  margin: 0% 0%;
+  text-align: center;
+
+  background-position-x: center;
+  width: 100%;
+  height: 140%;
 }
 
-
-.box{
-    margin-top: 3%;
-	text-align: center;
-	display: inline-block;
-	vertical-align: top;
-	background-color: #f0f0f067;
-	height:20em;
-	width: 90%;
-	display:-webkit-box;
-	display:-ms-flexbox;
-    position:relative;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	-ms-flex-direction:column;
-	flex-direction:column;
-
-	-webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-	-o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-	transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-	border-radius:65px;
-
+.tabla {
+  width: 100%;
 }
-
-.title{
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
+.tamanoimg {
+  max-width: 150px;
+  max-height: 100px;
+  margin-right: 20%;
+  margin-left: 20%;
+  border-radius: 25%;
 }
+.text {
+  text-transform: uppercase;
 
-.container{
-    max-width:95%;
-    width:90%;
-    list-style-type:none;
-    margin:20px auto;
-  
-    padding-right: 2rem;
-    background-color:#eee;
-
-    /*Flexbox setup*/
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-
+  width: 150px;
+  margin-right: 40px;
 }
-
-.containerItem{
-    max-width:95%;
-    width:1380px;
-    list-style-type:none;
-    margin:20px auto;
-
-    background-color:#eee;
-
-    /*Flexbox setup*/
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-
-
-
+.title {
+  font-family: "Quicksand", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5%;
 }
-
-.tamanoimg{
-    max-width:150px;
-    max-height: 100px;
-    margin-right: -4rem;
-    margin-left: -4rem;
-
+.elementosTabla {
+  background-color: grey;
+}
+.tbodyStilos {
+  background-color: rgb(229, 221, 221);
+  bottom: 45%;
+}
+.Total {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-right: -79%;
+}
+.bottonInicio {
+  text-decoration: none;
+  color: white;
+}
+/* 
+.botones{
     
+};
+ */
+.add {
+  position: relative;
+  left: 200px;
+  bottom: 175px;
+  margin-top: 2.5px;
 }
-
-.text{
-    border-collapse: collapse;
-    
-    width: 150px;
-    
-    
-    
+.sub {
+  position: relative;
+  left: 200px;
+  bottom: 175px;
 }
-h5{
-    padding-left: 2rem;
+.del {
+  position: relative;
+  left: 200px;
+  bottom: 172px;
 }
-
-.price{
-    margin-left: 3rem;
-
-
-}
-.button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 0;
-    background-color: #026773;
-    text-align: center;
-    color: white;
-    width: 240px;
-    height: auto;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    border: none;
-    text-decoration: none;
-  }
-  
-  .button:hover {
-    background-color: #08a1b1;
-    transition: 500ms;
-  }

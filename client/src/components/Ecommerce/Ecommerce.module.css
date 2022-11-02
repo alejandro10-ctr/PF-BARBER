@@ -1,31 +1,37 @@
 .containerCard {
   margin: auto;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   width: 1400px;
   padding: 30px;
-
+  height: auto;
   background-color: #6363638e;
   border-radius: 30px;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
   gap: 40px;
 }
 
 .img {
-  height: 400px;
+  /* height: 200px; */
+  margin-top: 35px;
+  width: 130px;
 
-  width: 350px;
+  /* object-fit: cover; */
+}
 
-  object-fit: cover;
+.paginado {
+  display: flex;
+  justify-content: center;
 }
 
 .products {
-  height: auto;
+  height: 36rem;
+  /* margin-top: -190px; */
   background-color: white;
   border-radius: 10px;
-  padding: 30px 10px;
+  /* padding: 50px 10px; */
 
   display: flex;
   flex-direction: column;
@@ -44,9 +50,9 @@
   font-family: Montserrat;
   font-weight: 540;
   text-align: center;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   font-size: 28px;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .divStyle {
@@ -67,6 +73,7 @@
   background-color: transparent;
   font-size: 32px;
   width: 100%;
+  /* margin-bottom: 1px; */
 }
 
 .productQuality {
@@ -83,8 +90,8 @@ select::-ms-expand {
 
 .button {
   display: inline-block;
-  margin-top: 10px;
-  padding: 10px 0;
+  margin-top: -200px;
+  /* padding: 10px 0; */
   background-color: #026773;
   text-align: center;
   color: white;
@@ -102,74 +109,9 @@ select::-ms-expand {
   transition: 500ms;
 }
 
-/* .select {
-  /* styling */
-/* background-color: white;
-  border: thin solid blue;
-  border-radius: 4px;
-  display: inline-block;
-  font: inherit;
-  line-height: 1.5em;
-  padding: 0.5em 3.5em 0.5em 1em; */
-
-/* reset */
-/* 
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; 
-}*/
-
-/* .select {
-  width: 100%;
-  min-width: 15ch;
-  max-width: 30ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.25rem;
-  border: thin solid blue;
-  border-radius: 4px;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-} */
-
-/* .btn {
-  margin: 10px 5px;
-  height: 30px;
-
-  background-color: #026773;
-  color: white;
-  border-radius: 10px;
-  border: none;
-
-  font-weight: 700;
-  font-size: 14px;
-
-  cursor: pointer;
+.carrito {
+  margin-top: -15px;
 }
-
-.btn:hover {
-  background-color: #3ca6a6;
-  color: white;
-}
-
-.button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 0;
-  background-color: #026773;
-  text-align: center;
-  color: white;
-  width: 240px;
-  height: auto;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 8px;
-  border: none;
-} */
 
 .selectFilterSort {
   margin-top: 15px;
@@ -179,16 +121,15 @@ select::-ms-expand {
 .select {
   width: 7%;
 }
-.pag{
-  
-    display:flex;
-    justify-content: center;
-  }
-.selectors{
+.pag {
   display: flex;
-  justify-content:center;
-  margin-top: 25px;
+  justify-content: center;
 }
-.select{
-  width:15px;
+/* .selectors {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+} */
+.select {
+  width: 15px;
 }
