@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className={s.container}>
 
-        <h1>Footer</h1>
+        <h1>Social Media</h1>
     </div>
   )
 }
