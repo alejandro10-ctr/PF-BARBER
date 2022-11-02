@@ -8,7 +8,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
-import HomeIcon from '@mui/icons-material/Home';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 import { Link, Redirect } from 'react-router-dom';
 import { CartContext } from '../../Shopping/ShoppingCart';
@@ -67,12 +67,18 @@ function Sidebar() {
 
 
                         <p className="title">USER</p>
-                        <li> <AccountCircleOutlinedIcon className='icon'></AccountCircleOutlinedIcon>
-                            <span>Profile</span>
+
+
+                        <Link to="/">
+                        <li> <HomeOutlinedIcon className='icon'></HomeOutlinedIcon>
+                            <span>Home</span>
                         </li>
+                        </Link>
+                        <Link to="/logout">
                         <li> <ExitToAppOutlinedIcon className='icon'></ExitToAppOutlinedIcon>
                             <span>Logout</span>
                         </li>
+                        </Link>
                     </ul>
                 </div>
 

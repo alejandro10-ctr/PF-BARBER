@@ -35,10 +35,15 @@
   text-align: center;
   margin-top: 5%;
   margin-bottom: 5%;
+
 }
 
 .subtitle {
   font-family: "Anton", sans-serif;
 
   color: rgba(23, 23, 24, 0.781);
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none;
 }
