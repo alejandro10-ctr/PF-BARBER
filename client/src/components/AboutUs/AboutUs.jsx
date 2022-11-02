@@ -4,20 +4,13 @@ import styles from "./AboutUs.module.css";
 
 export default function AboutUs() {
   return (
-    <div className={styles.background}>
+    <div className={styles.background}> 
       <div className={styles.card}>
-        <h1 className={styles.title}>Developers</h1>
+        <h1 className={styles.title}>About Us</h1>
 
         <div className={styles.git}>
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/Yeiberey"
+     
 
-          >
-            Yeyber Reyes
-          </a>
-          <br />
           <a
             target="_blank"
             rel="noopener"

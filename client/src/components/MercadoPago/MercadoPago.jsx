@@ -25,7 +25,7 @@ export default function MercadoPago() {
 
     return (
         <div>
-            <a target="_blank" rel="noopener" href={pay.init_point}> Mercado Pago</a>
+            <a rel="noopener" href={pay.init_point}> Mercado Pago</a>
 
 
 

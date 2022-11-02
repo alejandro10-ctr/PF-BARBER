@@ -59,7 +59,8 @@ export default function ItemCart() {
 
   return (
     <div className={style.background}>
-      <h1 className={style.title}>Your Cart</h1>
+      {/* <h1 className={style.title}>{""}</h1> */}
+      <br/>
 
       {/*     <div className={style.container}>
         <h5 className={style.subtitle}>Name </h5>
@@ -118,7 +119,9 @@ export default function ItemCart() {
                       <td>{productInCart.product.price}</td>
                       <td>{productInCart.product.stock}</td>
                       <td>{productInCart.quantity}</td>
-                      <td>{productInCart.product.quality}</td>
+                      <td className={style.cualiti}>
+                        {productInCart.product.quality}
+                      </td>
                       <td>{productInCart.product.score}</td>
                       <td>
                         {productInCart.product.price * productInCart.quantity}
@@ -126,99 +129,73 @@ export default function ItemCart() {
                     </tr>
                   </tbody>
                 </table>
-                {/*  <h3 className={style.text}>{productInCart.product.name}</h3>
-                <img
-                  src={productInCart.product.image}
-                  className={style.tamanoimg}
-                  alt="img product"
-                /> */}
                 <br></br>
-                <br></br>
-                {/*    <h3 className={style.price}>{productInCart.product.price}</h3>
-                <br></br>
-
-                <h3 className={style.stock}>{productInCart.product.stock}</h3>
-                <br></br>
-                <h3 className={style.quantity}>
-                  {productInCart.product.quantity}
-                </h3>
-                <h3> {productInCart.product.quality}</h3>
-                <h3> {productInCart.product.score}</h3> */}
-
+               
+                <h5>QUANTITY</h5>
                 <span className={style.botones}>
-                  <div className={style.sub}>
                   <button
-                  type="button"
-                  class="btn btn-dark"
+                    type="button"
+                    class="btn btn-dark"
                     onClick={async (e) => {
                       e.preventDefault();
                       await subtractItemToCart(productInCart.product);
                     }}
                   >
+                    {" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="36"
-                      height="26"
+                      width="25"
+                      height="25"
                       fill="currentColor"
-                      className="bi bi-cart-dash"
+                      class="bi bi-cart-dash-fill"
                       viewBox="0 0 16 16"
                     >
-                      <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z" />
+                    </svg>{" "}
                   </button>
-                  </div>
                   {/*   <h3> {productInCart.quantity}</h3> */}
-                  <div className={style.add}>
                   <button
-                   type="button"
-                   class="btn btn-dark"
+                    type="button"
+                    class="btn btn-dark"
                     onClick={async (e) => {
                       e.preventDefault();
                       console.log(e);
                       await addItemToCart(productInCart.product);
                     }}
                   >
-                    {" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="36"
-                      height="26"
+                      width="25"
+                      height="25"
                       fill="currentColor"
-                      className="bi bi-cart-plus"
+                      class="bi bi-cart-plus-fill"
                       viewBox="0 0 16 16"
                     >
-                      <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>{" "}
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                    </svg>
                   </button>
-                  </div>
                   {/*  <h5>
                     {productInCart.product.price * productInCart.quantity}
                   </h5> */}
-                  <div className={style.del}>
                   <button
-                  type="button"
-                  class="btn btn-dark"
+                    type="button"
+                    class="btn btn-dark"
                     onClick={async (e) => {
                       e.preventDefault();
                       await deleteItemToCart(productInCart.product);
                     }}
                   >
-                    {" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="36"
-                      height="26"
+                      width="25"
+                      height="25"
                       fill="currentColor"
-                      className="bi bi-cart-x"
+                      class="bi bi-cart-x-fill"
                       viewBox="0 0 16 16"
                     >
-                      <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>{" "}
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z" />
+                    </svg>
                   </button>
-                  </div>
                 </span>
               </div>
             </div>
@@ -226,7 +203,7 @@ export default function ItemCart() {
         })
       ) : (
         <div>
-          <h1>Nothing in cart</h1>
+          <h1>No hay nada en el carrito</h1>
         </div>
       )}
       <div>
@@ -244,7 +221,7 @@ export default function ItemCart() {
           </a>
         ) : userId ? (
           <button
-            className={style.button}
+            class="btn btn-dark "
             onClick={(e) => {
               e.preventDefault();
               if (cart.length) {
@@ -263,6 +240,8 @@ export default function ItemCart() {
             </Link>
           </Button>
         )}
+        <br></br>
+        <br></br>
       </div>
     </div>
   );
