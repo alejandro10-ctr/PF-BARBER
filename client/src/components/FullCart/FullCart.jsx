@@ -2,67 +2,100 @@ import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Link } from "react-router-dom";
-import {
-  getDBCart,
-  getDBCartValidateStock,
-  getLocalStorage,
-  getPaymentLink,
-} from "../../redux/actions";
-import { Redirect } from "react-router-dom";
-import style from "./FullCart.module.css";
-import { Button } from "reactstrap";
+import { getDBAddress, getDBCart, getDBCartValidateStock, getDBUser, getLocalStorage, getPaymentLink, updateUsers } from "../../redux/actions";
+import { Redirect } from 'react-router-dom'
+import Select from 'react-select'
+import style from './FullCart.module.css'
 
 export default function ItemCart() {
-  const { userId, deleteItemToCart, subtractItemToCart, addItemToCart } =
-    useContext(CartContext);
-  const dispatch = useDispatch();
+  const { userId, deleteItemToCart, subtractItemToCart, addItemToCart } = useContext(CartContext)
+  const dispatch = useDispatch()
 
-  const [update, setUpdate] = useState(true);
-  const cart = useSelector((state) => state.cart);
-  const cartoutstock = useSelector((state) => state.cartoutstock);
-  let pay = useSelector((state) => state.payMercadoPago);
+  const [update, setUpdate] = useState(true)
+  const cart = useSelector((state) => state.cart)
+  const user = useSelector((state) => state.user)
+  let detailaddress = useSelector((state) => state.detailaddress)
+  const cartoutstock = useSelector((state) => state.cartoutstock)
+  let pay = useSelector((state) => state.payMercadoPago)
 
   useEffect(() => {
     if (update) {
       if (userId) {
-        dispatch(getDBCart(userId));
+        dispatch(getDBCart(userId))
+        dispatch(getDBUser(userId))
+        detailaddress = {}
       } else {
-        dispatch(getLocalStorage());
+        dispatch(getLocalStorage())
       }
-      setUpdate(false);
+      setUpdate(false)
     }
-  }, [update]);
+  }, [update])
   useEffect(() => {
-    setUpdate(true);
-  }, [userId]);
+    setUpdate(true)
+  }, [userId])
+
 
   useEffect(() => {
-    console.log(pay, typeof cartoutstock);
-    if (
-      !Object.keys(pay).length && typeof cartoutstock !== "undefined"
-        ? !cartoutstock.length
-        : false
-    ) {
-      dispatch(getPaymentLink(0, userId));
+    if (!Object.keys(pay).length && typeof cartoutstock !== 'undefined' ? !cartoutstock.length : false) {
+      dispatch(getPaymentLink(0, userId))
     }
-  }, [cartoutstock]);
+  }, [cartoutstock])
 
-  useEffect(() => {
-    setUpdate(true);
-  }, [userId]);
+  let total = 0
 
-  let total = 0;
   const redireccionar = () => {
-    window.open(pay.init_point + "", "Mercado pago", "width=800, height=500");
+    window.open(pay.init_point + "", "Mercado pago", "width=800, height=500")
     console.log("Redireccionando...");
-  };
+  }
 
+  const createSelectAddress = () => {
+    if (Object.keys(user).length) {
+      let options = []
+      let optionDefault = {}
+      if (user.addresses.length) {
+        options = user.addresses.map(address => {
+          if (address.id === user.addressDefault) {
+            optionDefault = {
+              value: address.id,
+              label: address.address
+            }
+          }
+          return {
+            value: address.id,
+            label: address.personReceives + ' - ' + address.address
+          }
+        })
+      }
+      return (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <h1>Address delivery</h1>
+            <Select onChange={(value) => {
+              user.addressDefault = value.value
+              dispatch(updateUsers(user,false))
+            }} options={options} defaultValue={optionDefault}>Select address</Select>
+            <Link to={`/useredit/shippinginfo/0`}>Add address</Link>
+          </div>
+
+        </div>
+      )
+    }
+  }
+  
+  useEffect(() => {
+    if(Object.keys(detailaddress).length && !Object.keys(pay).length){
+      dispatch(getDBCart(userId))
+      dispatch(getDBCartValidateStock(userId))
+    }
+  }, [detailaddress])
+  
   return (
-    <div className={style.background}>
-      {/* <h1 className={style.title}>{""}</h1> */}
-      <br/>
 
-      {/*     <div className={style.container}>
+    <div className={style.box}>
+      <h1 className={style.title}>You Cart</h1>
+{/* 
+      <div className={style.container}>
+
         <h5 className={style.subtitle}>Name </h5>
         <h5 className={style.subtitle}>Image</h5>
         <h5 className={style.subtitle}>Price</h5>
@@ -72,27 +105,23 @@ export default function ItemCart() {
         <h5 className={style.subtitle}>Score </h5>
         <h5 className={style.subtitle}>Total</h5>
         <br></br>
+
       </div> */}
 
-      {cart.length ? (
+      {cart.length ?
         cart.map((productInCart) => {
-          total += productInCart.product.price * productInCart.quantity;
+
+          total += productInCart.product.price * productInCart.quantity
 
           return (
             <div key={productInCart.product.id} className={style.containerItem}>
-              {cartoutstock?.map((itemOutStock) => {
-                if (
-                  itemOutStock.id === productInCart.id &&
-                  itemOutStock.quantity > itemOutStock.product.stock
-                ) {
-                  return (
-                    <h2 key={productInCart.product.id} style={{ color: "red" }}>
-                      Not in stock
-                    </h2>
-                  );
+              {cartoutstock?.map(itemOutStock => {
+                if (itemOutStock.id === productInCart.id && itemOutStock.quantity > itemOutStock.product.stock) {
+
+                  return <h2 key={productInCart.product.id} style={{ color: 'red' }}>Not in stock</h2>
                 }
               })}
-              <div className={style.containerItem}>
+                            <div className={style.containerItem}>
                 <table className={style.tabla}>
                   <thead className={style.elementosTabla}>
                     <th>NAME</th>
@@ -199,50 +228,33 @@ export default function ItemCart() {
                 </span>
               </div>
             </div>
-          );
+          )
         })
-      ) : (
-        <div>
-          <h1>No hay nada en el carrito</h1>
-        </div>
-      )}
+        :
+        <div><h1>No hay nada en el carrito</h1></div>
+      }
+      {
+        createSelectAddress()
+      }
+
       <div>
-        <h3 className={style.Total}>Total to pay ${total}</h3>
-        {Object.keys(pay).length ? (
-          <a
-            id="gopay"
-            className={style.button}
-            target="_blank"
-            rel="noopener"
-            href={pay.init_point + ""}
-            onClick={redireccionar()}
-          >
-            GO PAY
-          </a>
-        ) : userId ? (
-          <button
-            class="btn btn-dark "
-            onClick={(e) => {
-              e.preventDefault();
+        <h3>Total to pay ${total}</h3>
+        {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
+          :
+          userId ?
+            <button className={style.button} onClick={(e) => {
+              e.preventDefault()
               if (cart.length) {
-                dispatch(getDBCart(userId));
-                dispatch(getDBCartValidateStock(userId));
+                dispatch(getDBAddress(user.addressDefault))
               }
-            }}
-          >
-            BUY NOW
-          </button>
-        ) : (
-          <Button color="dark">
-            {" "}
-            <Link to="/login" className={style.bottonInicio}>
-              Iniciar sesión para comprar
-            </Link>
-          </Button>
-        )}
-        <br></br>
-        <br></br>
+            }}>BUY NOW</button>
+            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
+        }
+
       </div>
     </div>
-  );
-}
+
+  )
+
+
+};
