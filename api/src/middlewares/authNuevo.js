@@ -12,32 +12,45 @@ exports.register = async (req, res) => {
       error: "Must complete all fields",
     });
   } else {
-    let passHash = await bcryptjs.hash(password, 8);
-    const user = User.create({
-      username: username,
-      password: passHash,
-      email: email,
-      id: Math.random() * passHash.length,
-    })
-      .then((user) => {
-        sendEmail(email);
-        res.send({
-          success: true,
-          message: "User succesfully add",
-          user: {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-          },
-        });
-      })
-      .catch((err) => {
-        res.send({
-          success: false,
-          message: "Something went wrong",
-          error: err,
-        });
+    let existe = await User.findAll({ where: { email } });
+    // console.log(existe);
+    // console.log("existe==", existe.length);
+    // console.log("existe numb", Number(existe));
+    if (existe.length === 1) {
+      // console.log("existe2", existe);
+
+      return res.status(404).json({
+        success: false,
+        error: "Usuario ya registrado",
       });
+    } else if (existe.length === 0) {
+      let passHash = await bcryptjs.hash(password, 8);
+      const user = User.create({
+        username: username,
+        password: passHash,
+        email: email,
+        id: Math.random() * passHash.length,
+      })
+        .then((user) => {
+          sendEmail(email);
+          res.send({
+            success: true,
+            message: "Thanks for register <3, now sign in!",
+            user: {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+            },
+          });
+        })
+        .catch((err) => {
+          res.send({
+            success: false,
+            message: "Something went wrong",
+            error: err,
+          });
+        });
+    }
   }
 };
 
@@ -77,6 +90,7 @@ exports.login = async (req, res) => {
       user: user.username,
       id: user.id,
       isAdmin: user.isAdmin,
+      isActive: user.isActive,
     };
     const token = jwt.sign(payload, "secretKey", { expiresIn: "1d" });
     const cookiesOptions = {
