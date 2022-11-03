@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
-.box{
+.box {
   background: url("background.jpg");
-  min-height:90vh;
+  min-height: 90vh;
   width: 100%;
 }
 .nothingInThecart {
   background: url("background.jpg");
   width: 100%;
-  height: 83vh;
+  height: 95vh;
 }
 
 .tabla {
@@ -71,23 +71,22 @@
   left: 200px;
   bottom: 172px;
 }
-.hola{
-
+.hola {
   margin-top: -8rem;
   padding-bottom: 3.5rem;
 }
 
-.containerItem{
- padding-top: 2rem;
+.containerItem {
+  padding-top: 2rem;
   padding-bottom: 1rem;
 }
 
-.adressed{
+.adressed {
   display: inline-block;
   border-radius: 4px;
   background-color: #111115ed;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   font-size: 28px;
   padding: 5px;

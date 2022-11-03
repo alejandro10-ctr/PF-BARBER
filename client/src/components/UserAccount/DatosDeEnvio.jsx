@@ -4,6 +4,8 @@ import { getDBAddress, createAddress, updateAddress } from '../../redux/actions'
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Redirect, useHistory } from 'react-router-dom'
 // import bcrypt from "bcrypt";
+import './Addresses.css'
+
 import bcrypt from "bcryptjs-react";
 import { validateAddress } from "./validate";
 import Swal from "sweetalert2";
@@ -51,7 +53,7 @@ export default function DatosDeEnvio({ addressId }) {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
     if (userId) {
-        return (
+        return ( <div className="box">
             <form onSubmit={(e) => {
                 e.preventDefault()
                 if (ini) {
@@ -236,9 +238,10 @@ export default function DatosDeEnvio({ addressId }) {
                             :
                             <button className='button' type="submit">Update address</button>
                         :
-                        <button className='button' type="submit">Create address</button>
+                        <button class='btn btn-dark ' type="submit">Create address</button>
                 }
             </form>
+            </div>
         )
     } else {
         return <Redirect to='/' />

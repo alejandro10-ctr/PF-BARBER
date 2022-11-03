@@ -55,14 +55,14 @@ export default function UserEdit({ clientId }) {
             history.goBack()
         }
         else {
-            return (<>
+            return (<div className="box">
 
                 <h1>{isClient ? 'Edit to client' : 'Edit my Account'}</h1>
                 <hr />
                 {!isClient &&
                     <div>
                         <Link className='button' to='/useredit/shippinginfo/0' >Create address</Link>
-                        <Link className='button' to='/useredit/changepassword'>Change password</Link>
+
                     </div>
                 }
                 <form onSubmit={(e) => {
@@ -113,7 +113,7 @@ export default function UserEdit({ clientId }) {
                                     </div>
                                     <div className='nameBarra'>
                                         <h2>{input?.name ? input.name : ''}</h2>
-                                        <h4>@{input?.user}</h4>
+                                        <h1>@{input?.user}</h1>
                                     </div>
                                 </div>
                                 <div className='imgDiv'>
@@ -232,7 +232,7 @@ export default function UserEdit({ clientId }) {
                 {!isClient &&
                     <ShowAddresses />
                 }
-            </>
+            </div>
             )
         }
     } else {

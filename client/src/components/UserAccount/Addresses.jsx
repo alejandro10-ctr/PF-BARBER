@@ -28,7 +28,7 @@ export default function ShowAddresses() {
 
     if (userId) {
         return (
-            <>
+            <div>
 
                 {
                     addresses.map((address) => {
@@ -38,11 +38,11 @@ export default function ShowAddresses() {
 
                                         <div className="back">
                                             <div>
+                                                <Link className='button' to={`/useredit/shippinginfo/${address.id}`} >Edit</Link>
                                                 <button className="button deleteAddress" onClick={async () => {
                                                     await dispatch(deleteAddress(address.id))
                                                     setIni(false)
-                                                }}>X</button>
-                                                <Link className='button' to={`/useredit/shippinginfo/${address.id}`} >Edit</Link>
+                                                }}>Delete Adress</button>
 
                                             </div>
                                             <h1 className="text">{address.personReceives}
@@ -60,7 +60,7 @@ export default function ShowAddresses() {
                         )
                     })
                 }
-            </>
+            </div>
         )
     } else {
         <Redirect to={history.goBack()} />
