@@ -36,7 +36,7 @@ function DetailProduct({ match }) {
   }
   const [productInCar, setProducInCar] = useState(updateProductInCar());
 
-  
+
 
   useEffect(() => {
     if (update) {
@@ -78,168 +78,153 @@ function DetailProduct({ match }) {
     <div className={s.background}>
       <div>
 
-          <div className={s.contenedor}>
-            <div>
-              <h3 className={s.name}>{product.name}</h3>
-              <h3 className={s.price}>Price:${product.price}</h3>
+        <div className={s.contenedor}>
+          <div>
+            <h3 className={s.name}>{product.name}</h3>
+            <span className={s.quality}>Quality - {product.quality}</span> <br /><br />
+            <h5 className={s.description}>{product.description}</h5>
+            <h3 className={s.quality}>SCORE: {product.score}⭐️</h3>
+            <div className={s.scoreSubmit}> <Score></Score> </div>
+
+
+          </div>
+          <div>
+            <img src={product.image} alt={product.image} className={s.img} />
+            <div className={s.btncarrito}>
+              <div className={s.carrBtns}>
+                {/*  {productInCar ? ( */}
+                <span className={s.btnDelete}>
+                  <button
+                    class="btn btn-dark"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      await deleteItemToCart(product);
+                      // history.push('/shop')
+                    }}
+                  >
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      class="bi bi-cart-x-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z" />
+                    </svg>
+                  </button>
+                </span>
+
+                <span className={s.btnSubstract}>
+                  <button
+                    class="btn btn-dark"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      await subtractItemToCart(product);
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      class="bi bi-cart-dash-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z" />
+                    </svg>{" "}
+                  </button>
+                </span>
+                {/* ) : null} */}
+                {/* {productInCar ? ( */}
+                <span className={s.btnAdd}>
+                  <button
+                    class="btn btn-dark"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      await addItemToCart(product);
+                    }}
+                  >
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      class="bi bi-cart-plus-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                    </svg>{" "}
+                  </button>
+                </span>
+              </div>
+             
             </div>
-            <div>
-              <img src={product.image} alt={product.image} className={s.img} />
-            </div>
-            <div className={s.columna}> 
-              <h3 className={s.quality}>QUALITY: {product.quality}</h3>
-              <h3 className={s.quality}>SCORE: {product.score}</h3>
+
+
+            <div className={s.columna}>
               {/* <h3 className={s.score}>SCORE: { <Score score={product.score}/>}</h3> */}
-          
 
               <div className={s.quantity}>
-          {     
-            productInCar ? 
-             (
-              <h3>Quantity: {productInCar.quantity}</h3>
-            
-            ) : null
-              }
+                <h3 className={s.price}>Price: $ {product.price}</h3>
+                <br />
+                {
+                  productInCar ?
+                    (
+                      <h3>Quantity: <br />{productInCar.quantity}</h3>
+
+                    ) : null
+                }
               </div>
-              <div className={s.btncarrito}>
-          <div className={s.carrBtns}>
-       {/*  {productInCar ? ( */}
-          <span className={s.btnDelete}>
-          <button
-            class="btn btn-dark"
-            onClick={async (e) => {
-              e.preventDefault();
-              await deleteItemToCart(product);
-              // history.push('/shop')
-            }}
-          >
-            {" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="currentColor"
-              class="bi bi-cart-x-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z" />
-            </svg>
-          </button>
-        </span>
 
-            <span className={s.btnSubstract}>
-              <button
-                class="btn btn-dark"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  await subtractItemToCart(product);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  fill="currentColor"
-                  class="bi bi-cart-dash-fill"
-                  viewBox="0 0 16 16"
+
+
+              {Object.keys(pay).length ? (
+                <a
+                  className={s.button}
+                  target="_blank"
+                  rel="noopener"
+                  href={pay.init_point + ""}
                 >
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z" />
-                </svg>{" "}
-              </button>
-            </span>
-          {/* ) : null} */}
-          {/* {productInCar ? ( */}
-            <span className={s.btnAdd}>
-              <button
-                class="btn btn-dark"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  await addItemToCart(product);
-                }}
-              >
-                {" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  fill="currentColor"
-                  class="bi bi-cart-plus-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
-                </svg>{" "}
-              </button>
-            </span>
+                  GO PAY
+                </a>
+              ) : userId ? (
+                <Link to="/cart">
+
+                  <div className={s.button}>
+                    <button
+
+                      class="btn btn-dark"
+
+                    >
+                      BUY NOW
+                    </button>
+                  </div>
+                </Link>
+              ) : (
+                ""
+              )}
+
             </div>
-        
-
-        {Object.keys(pay).length ? (
-          <a
-            className={s.button}
-            target="_blank"
-            rel="noopener"
-            href={pay.init_point + ""}
-          >
-            GO PAY
-          </a>
-        ) : userId ? (
-          <Link to="/cart">
-          
-          <div className={s.button}>
-          <button
-            
-            class = "btn btn-dark" 
-            
-          >
-            BUY NOW
-          </button>
           </div>
-          </Link>
-        ) : (
-       <div className={s.inisec}>
-       
-            <Link to="/login">
-              {" "}
-              <Button color="dark" outline className={s.inicio}>
-                Inicia sesión para comprar
-              </Button>
-            </Link>
-          </div>
-        )}
-           <div className={s.scoreSubmit}>
-       <Score></Score>
-       </div>
-      </div>
-            </div> 
 
 
-            {console.log("productInCart", productInCar)}
-          
-          
-      </div>
-       <div className="" >
+
+        </div>
+        {/* <div className="" ><br />
        <h2 className={s.interested}>You may also be interested in... </h2>
-       </div>
+       </div> */}
+
+      </div>
       <br>
       </br>
-       </div>
-       <br>
-       </br>
-       
+      {/* <Carrusel/> */}
 
-<br>
-</br>
-<br>
-</br>
 
-        {
 
-        <div>
-      <Carrusel/>
-      </div>  
 
-        }      
-      
     </div>
   );
 }
