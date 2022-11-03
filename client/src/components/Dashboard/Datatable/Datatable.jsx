@@ -116,7 +116,7 @@ const Datatable = () => {
               >
                 Delete
               </div> */}
-              <button className="deleteButton" onClick= {() => handleActive(params.id)}>Active</button>
+              <button className="activeButton" onClick= {() => handleActive(params.id)}>Active</button>
             </div>
           ); 
         }

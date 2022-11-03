@@ -75,5 +75,12 @@
         border: 1px dotted rgba(220, 20, 60, 0.6);
         cursor: pointer;
       }
+      .activeButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: rgb(40, 169, 1);
+        border: 1px dotted rgb(67, 220, 20);
+        cursor: pointer;
+      }
     }
   }
