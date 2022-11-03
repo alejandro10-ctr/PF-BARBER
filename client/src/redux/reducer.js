@@ -30,6 +30,7 @@ import {
 } from "./actions";
 
 const initialState = {
+  score: [],
   loading: false,
   products: [],
   myUser: {},
@@ -52,6 +53,8 @@ const initialState = {
 export default function reducer(state = initialState, { type, payload, quantity }) {
 
   switch (type) {
+    case "PUSH_SCORE":
+      return{...state, score:[...state.score, payload]}
     case GET_PAYMENTS:
       return { ...state, payMercadoPago: { ...payload } }
     case GET_ADDRESSES:

@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { clearDetail, getProducts, getProductsDetail, updateProducts } from "../../redux/actions";
+import { clearDetail, getProducts, getProductsDetail, pushScore, updateProducts } from "../../redux/actions";
 
 const Score = () => {
 
@@ -9,25 +9,22 @@ const Score = () => {
 
     const dispatch = useDispatch()
     const products = useSelector((state) => state.products)
+    const detail = useSelector((state) => state.detail)
+    const scorees= useSelector((state) => state.score)
+    const productDetail = getProductsDetail(id)
 
-    const [score, setScore] = useState({score: ""})
-
-let arrayScore = {products: products}
-
-let scorcito = (idProduct, score )=>{
-
+    const [score, setScore] = useState("")
 
 
-}
+
 
   let handleChange = (e) =>{
     e.preventDefault()
-    setScore(({
-      ...score,
-      [e.target.name]: e.target.value
+    setScore(
+   e.target.value
       
-    })
-    );
+    )
+    
     dispatch(getProducts())
    
   }
@@ -38,15 +35,34 @@ let scorcito = (idProduct, score )=>{
   }, [score])
 
 
-  const saveHandle = (e) => {
-    
-    setScore({
-      score: e.target.value
-    })
-    
-    dispatch(updateProducts(id, score), getProducts())
 
-  }
+
+// for (let i = 0; i < array.length; i++) {
+//   for (let j = 1; j < array.length; j++) {
+
+    
+//   }
+// }
+const [contador, setContador] = useState(0)
+const [arrayScores, setarrayScores] = useState([])
+const [arrays, setArrays] = useState({contador})
+
+// console.log("soy el producto", detail)
+const saveHandle = (e) => {
+//   let total=0,numeros = [1, 2, 3, 4, 5];
+// numeros.forEach(function(a){total += a;});
+// console.log(total);
+let total = 0
+  setScore(e.target.value)
+  setContador(contador+1)
+  console.log(contador)
+  let scoreesMap = scorees.forEach(e => total=  total + Number(e))
+  let promedio = scoreesMap
+  dispatch(pushScore(score))
+  dispatch(updateProducts(id, {score}))
+  console.log(scorees)
+  console.log("promedio",scoreesMap)
+}
 
 
   return (

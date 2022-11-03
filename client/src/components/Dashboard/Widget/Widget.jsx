@@ -31,11 +31,11 @@ function Widget({type, isUser, isProducts}) {
     switch(type){
 
         case "user":
-            data ={title:"USERS", ifMoney: false, link:<a href="/dash/users">See all users</a>, icon: <Person2OutlinedIcon className='icon' style={{color: "crimson", backgroundColor: "rgba(255, 0, 0, 0.2)"}}/>,
+            data ={title:"ACTIVE USERS", ifMoney: false, link:<a href="/dash/users">See all users</a>, icon: <Person2OutlinedIcon className='icon' style={{color: "crimson", backgroundColor: "rgba(255, 0, 0, 0.2)"}}/>,
     };
     break;
     case "order":
-            data ={title:"ORDERS", ifMoney: false, link:<a href="/dash/orders">View all orders</a>, icon: <LocalGroceryStoreOutlinedIcon className='icon' style={{color: "goldenrod", backgroundColor: "rgba(218, 165, 32, 0.2)"}}/>,
+            data ={title:"REVIEWS", ifMoney: false, link:<a href="/dash/reviews">View all reviews</a>, icon: <LocalGroceryStoreOutlinedIcon className='icon' style={{color: "goldenrod", backgroundColor: "rgba(218, 165, 32, 0.2)"}}/>,
     };
     break;
     case "earning":

@@ -9,6 +9,7 @@ import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import StarsOutlinedIcon from '@mui/icons-material/StarsOutlined';
 
 import { Link, Redirect } from 'react-router-dom';
 import { CartContext } from '../../Shopping/ShoppingCart';
@@ -58,9 +59,11 @@ function Sidebar() {
                                 <span>Products</span>
                             </li>
                         </Link>
-                        <li> <CreditCardIcon className='icon'></CreditCardIcon>
-                            <span>Orders</span>
+                        <Link to="/dash/reviews">
+                        <li> <StarsOutlinedIcon className='icon'></StarsOutlinedIcon>
+                            <span>Reviews</span>
                         </li>
+                        </Link>
 
 
 
