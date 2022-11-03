@@ -173,7 +173,7 @@ function DetailProduct({ match }) {
                 {
                   productInCar ?
                     (
-                      <h3>Quantity: <br />{productInCar.quantity}</h3>
+                      <h3 className={s.premiumBasic}>Quantity: <br />{productInCar.quantity}</h3>
 
                     ) : null
                 }
