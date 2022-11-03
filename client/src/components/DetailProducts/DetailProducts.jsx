@@ -247,7 +247,6 @@ function DetailProduct({ match }) {
             </div>
 
 
-            {console.log("productInCart", productInCar)}
           
           
       </div>

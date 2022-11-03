@@ -28,6 +28,7 @@ import UserEdit from "./components/UserAccount/UserEdit";
 import Swal from "sweetalert2";
 import Footer from "./components/Footer/Footer";
 import Information from "./components/Information/Information";
+import Reviews from "./components/Dashboard/Reviews/Reviews"
 
 //import { createProducts, getProducts } from "./store/actions";
 //import ShoppingCart from "./components/Shopping/ShoppingCart";
@@ -87,6 +88,10 @@ function App() {
 
       <Route exact path="/">
         <Home />
+ 
+      </Route>
+      <Route exact path="/dash/reviews">
+        <Reviews/>
  
       </Route>
 

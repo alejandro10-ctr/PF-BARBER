@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { clearDetail, getProducts, getProductsDetail, updateProducts } from "../../redux/actions";
+import { clearDetail, getProducts, getProductsDetail, pushScore, updateProducts } from "../../redux/actions";
 
 const Score = () => {
 
@@ -9,25 +9,22 @@ const Score = () => {
 
     const dispatch = useDispatch()
     const products = useSelector((state) => state.products)
+    const detail = useSelector((state) => state.detail)
+    const scorees= useSelector((state) => state.score)
+    const productDetail = getProductsDetail(id)
 
-    const [score, setScore] = useState({score: ""})
-
-let arrayScore = {products: products}
-
-let scorcito = (idProduct, score )=>{
-
+    const [score, setScore] = useState([])
 
 
-}
+
 
   let handleChange = (e) =>{
     e.preventDefault()
-    setScore(({
-      ...score,
-      [e.target.name]: e.target.value
+    setScore(
+   e.target.value
       
-    })
-    );
+    )
+    
     dispatch(getProducts())
    
   }
@@ -38,15 +35,36 @@ let scorcito = (idProduct, score )=>{
   }, [score])
 
 
-  const saveHandle = (e) => {
-    
-    setScore({
-      score: e.target.value
-    })
-    
-    dispatch(updateProducts(id, score), getProducts())
 
-  }
+
+// for (let i = 0; i < array.length; i++) {
+//   for (let j = 1; j < array.length; j++) {
+
+    
+//   }
+// }
+const [contador, setContador] = useState(1)
+const [arrayScores, setarrayScores] = useState([])
+const [arrays, setArrays] = useState({contador})
+
+// console.log("soy el producto", detail)
+const saveHandle = (e) => {
+  setScore(e.target.value)
+  setContador(contador+1)
+  console.log(contador)
+
+  let initialState= 0
+
+  let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
+  console.log('total',total)
+  let promedio = total / contador
+  console.log("promedio", promedio)
+  let promedioRedondeado = Math.round(promedio)
+  console.log("promedioRedondeado", promedioRedondeado);
+  dispatch(pushScore(score))
+  dispatch(updateProducts(id, {score:promedioRedondeado}))
+
+}
 
 
   return (

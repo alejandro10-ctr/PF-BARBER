@@ -49,7 +49,11 @@ export function setLoading(value) {
     dispatch({ type: SET_LOADING, payload: { loading: value } });
   };
 }
-
+export function pushScore(score){
+  return (dispatch) => {
+    dispatch({type: "PUSH_SCORE", payload: score})
+  }
+}
 //---------->Addresses
 export function getDBAddresses(userId) {
   return async (dispatch) => {
