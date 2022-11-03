@@ -56,15 +56,23 @@ const saveHandle = (e) => {
 
   dispatch(pushScore(score))
   let initialState= 0
-  if(contador == 0){
+  if(contador == 1){
     dispatch(pushScore(Number(detail.score)))
     let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
     let promedio = total / contador
     let promedioRedondeado = Math.round(promedio)
     dispatch(updateProducts(id, {promedio: promedio}))
     dispatch(updateProducts(id, {score:promedioRedondeado}))
+  }
+  else if(contador >= 1 && contador <3){
+    let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
+    let promedio = total / contador
+    let promedioRedondeado = Math.round(promedio)
+    dispatch(updateProducts(id, {promedio: promedio}))
+    dispatch(updateProducts(id, {score:promedioRedondeado}))
     dispatch(updateProducts(id, {isReview: true}))
-  }else{
+  }
+  else{
 
     let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
     let promedio = total / contador
