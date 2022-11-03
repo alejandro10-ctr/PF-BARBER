@@ -13,7 +13,7 @@ const Score = () => {
     const scorees= useSelector((state) => state.score)
     const productDetail = getProductsDetail(id)
 
-    const [score, setScore] = useState("")
+    const [score, setScore] = useState([])
 
 
 
@@ -43,7 +43,7 @@ const Score = () => {
     
 //   }
 // }
-const [contador, setContador] = useState(0)
+const [contador, setContador] = useState(1)
 const [arrayScores, setarrayScores] = useState([])
 const [arrays, setArrays] = useState({contador})
 
@@ -52,16 +52,18 @@ const saveHandle = (e) => {
 //   let total=0,numeros = [1, 2, 3, 4, 5];
 // numeros.forEach(function(a){total += a;});
 // console.log(total);
-let total = 0
+// let total = 0
   setScore(e.target.value)
   setContador(contador+1)
   console.log(contador)
-  let scoreesMap = scorees.forEach(e => total=  total + Number(e))
-  let promedio = scoreesMap
+
+  let initialState= 0
+
+  let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
+  console.log('total',total)
   dispatch(pushScore(score))
   dispatch(updateProducts(id, {score}))
-  console.log(scorees)
-  console.log("promedio",scoreesMap)
+
 }
 
 
