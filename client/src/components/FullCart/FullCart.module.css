@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
 .box{
   background: url("background.jpg");
+  min-height:90vh;
+  width: 100%;
 }
 .nothingInThecart {
   background: url("background.jpg");
