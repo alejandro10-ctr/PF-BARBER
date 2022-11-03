@@ -246,7 +246,7 @@ export default function ItemCart() {
                 dispatch(getDBAddress(user.addressDefault))
               }
             }}>BUY NOW</button>
-            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
+            : <Link to='/login'><button className={style.button}> Sign UP for buy!</button></Link>
         }
         </div>
     </div>
