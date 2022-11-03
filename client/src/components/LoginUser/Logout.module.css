@@ -9,7 +9,7 @@ h3 {
 }
 
 .background {
-  background-image: url("barberbackground.jpg");
+  background-image: url("background.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
