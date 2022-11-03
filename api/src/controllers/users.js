@@ -36,6 +36,13 @@ router.get("/:id", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
+    const adminCreated = await dbCreateUser({
+      id: 1,
+      username: "admin",
+      email: "admin@mail.com",
+      password: "admin",
+      isAdmin: true
+    })
     const userCreated = await dbCreateUser(req.body);
     res.send(userCreated);
   } catch (error) {
