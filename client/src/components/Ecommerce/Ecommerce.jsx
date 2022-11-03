@@ -106,16 +106,7 @@ const Ecommerce = ({
   return (
     <div className={s.background}>
       <div>
-     
-
-
-        {/* ---------------Searchbar--------------- */}
-
         <SearchBar setCurrentPage={setCurrentPage} />
-  
-       
-
-    
 
         {/* price sort */}
         <div className={s.selectors}> 
