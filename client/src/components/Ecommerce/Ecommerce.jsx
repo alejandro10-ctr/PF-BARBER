@@ -111,17 +111,13 @@ const Ecommerce = ({
 
         {/* ---------------Searchbar--------------- */}
 
-
         <SearchBar setCurrentPage={setCurrentPage} />
-        {/* buttons filter Quality */}
+  
         <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
         <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
         <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
 
-        {/* <SearchBar setCurrentPage={setCurrentPage}/> */}
-
-
-
+    
 
         {/* price sort */}
         <div >

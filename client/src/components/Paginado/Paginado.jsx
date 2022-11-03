@@ -1,4 +1,6 @@
 import React from "react";
+import styles from '../Paginado/Paginado.module.css'
+
 import {
   Pagination,
   PaginationItem,
@@ -27,13 +29,17 @@ export default function Paginado({ pag, setCurrentPage, max, className }) {
     setCurrentPage(Number(click.target.value));
   }
   return (
-    <Pagination className={className}>
-      <PaginationItem>
+
+    <div>
+      
+    <Pagination className={styles.paginado}>
+      <button  className={styles.arrow} onClick={prevPage}>&#8249;</button>
+      <PaginationItem className={styles.pagination}>
        
       </PaginationItem>
       {arreglito
         ? arreglito.map((m) => (
-            <PaginationItem key={m}>
+            <PaginationItem key={m} className={styles.pagination}>
               <PaginationLink value={m} onClick={handleClick}>
                 {m}
               </PaginationLink>
@@ -41,10 +47,10 @@ export default function Paginado({ pag, setCurrentPage, max, className }) {
           ))
         : "not array"}
 
-      <PaginationItem>
+      <PaginationItem className={styles.pagination}>
       
         {/*</PaginationLink> */}
-      </PaginationItem>
-    </Pagination>
+      </PaginationItem> <button className={styles.arrow}  onClick={nextPage}>&#8250;</button>
+    </Pagination></div>
   );
 }

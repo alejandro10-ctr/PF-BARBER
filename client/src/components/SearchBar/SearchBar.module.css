@@ -41,10 +41,10 @@
 
 .buttonStyle:hover {
   border: 1px solid #f3efed77;
-  background: #867a7277;
+  background: #f1ece877;
   background-image: radial-gradient(
  
   );
-  color: #3a393877;
+  color: #fafafa77;
   text-decoration: none;
 }
