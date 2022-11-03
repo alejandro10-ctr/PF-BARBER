@@ -4,6 +4,7 @@
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     padding: 10px;
     height: 30rem;
+    
   
     .top {
       display: flex;
@@ -26,11 +27,12 @@
       gap: 15px;
   
       .featuredChart {
-        width: 100px;
+        width: 300px;
         height: 100px;
       }
   
       .title {
+        margin-top: 15rem;
         font-weight: 500;
         color: gray;
       }
