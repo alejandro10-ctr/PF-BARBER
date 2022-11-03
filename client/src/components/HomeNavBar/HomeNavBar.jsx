@@ -55,7 +55,9 @@ export default function HomeNavBar({ user }) {
                         
 
                         {!!myUser?.isAdmin&&
-                            <Link to="/dash"><button>ADMIN DASH</button></Link>}
+                      
+                            <Link to="/dash"><button className={styles.adressed}>ADMIN DASH</button></Link>}
+                         
                         <ul className="navbar-nav d-flex flex-row" >
 
                             {!!userId && <li className="nav-item me-3 me-lg-0">

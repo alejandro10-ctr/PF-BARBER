@@ -75,7 +75,10 @@ export default function ItemCart() {
               user.addressDefault = value.value
               dispatch(updateUsers(user,false))
             }} options={options} defaultValue={optionDefault}>Select address</Select>
+            <div className={style.adressed}>
             <Link to={`/useredit/shippinginfo/0`}>Add address</Link>
+
+            </div>
           </div>
 
         </div>
@@ -146,7 +149,7 @@ export default function ItemCart() {
                 </table>
                 <br></br>
                
-                <h5>QUANTITY</h5>
+              
                 <span className={style.botones}>
                   <button
                     type="button"
@@ -156,21 +159,7 @@ export default function ItemCart() {
                       await subtractItemToCart(productInCart.product);
                     }}
                   > 
-      <div>
-        <h3>Total: ${total}</h3>
-        {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
-          :
-          userId ?
-            <button className={style.topeo} onClick={(e) => {
-              e.preventDefault()
-              if (cart.length) {
-                dispatch(getDBAddress(user.addressDefault))
-              }
-            }}>BUY NOW</button>
-            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
-        }
 
-      </div>
                     {" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +218,7 @@ export default function ItemCart() {
                   </button>
                 </span>
                 {
-        createSelectAddress()
+       
       }
               </div>
             </div>
@@ -241,7 +230,25 @@ export default function ItemCart() {
         <img src={logo} alt="empty cart" />
         </div>
       }
-     
+            <div className = {style.hola}>
+        
+        
+
+      <h3>Total: ${total}</h3>
+        
+       {createSelectAddress()}
+     {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
+          :
+          userId ?
+            <button className={style.adressed} onClick={(e) => {
+              e.preventDefault()
+              if (cart.length) {
+                dispatch(getDBAddress(user.addressDefault))
+              }
+            }}>BUY NOW</button>
+            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
+        }
+        </div>
     </div>
 
   )

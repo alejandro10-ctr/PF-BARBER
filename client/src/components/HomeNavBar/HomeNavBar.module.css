@@ -116,3 +116,20 @@
   transition: 500ms;
   color: grey;
 }
+
+.adressed{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #111115ed;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 5px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-left: 60rem;
+  margin-top: 4rem;
+  font-size: 0.8rem;
+}
