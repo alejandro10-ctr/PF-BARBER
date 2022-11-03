@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 // import PhoneInput from 'react-phone-number-input';
+import Swal from 'sweetalert2'
+
 import MaskedInput from 'react-text-mask';
 // import 'react-phone-number-input/style.css';
 import styles from '../Register/Register.module.css';
@@ -54,7 +56,16 @@ export default function Register() {
 
 
         onSubmit: async (values) => {
-            await axios.post('http://localhost:3001/auth/register', values)
+            await axios.post('http://localhost:3001/auth/register', values).then(res=> (Swal.fire({
+                icon: 'success',
+                title: `${res.data.message}`,
+                showConfirmButton: false,
+                timer: 2000
+              }))).catch(error=> (Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${error.response.data.error}`
+              })) )
             history.push('/login')
         }
 
