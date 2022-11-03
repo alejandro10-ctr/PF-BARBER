@@ -23,7 +23,7 @@ const uploadImg = require("../controllers/uploadImg"); //------upload
 const router = Router();
 router.use(json());
 
-router.use("/auth", authController);
+// router.use("/auth", authController);
 router.use("/users", userController);
 // router.use('/addresses', addressController);
 
