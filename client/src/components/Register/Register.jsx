@@ -10,7 +10,7 @@ import Select from 'react-select';
 import MaskedInput from 'react-text-mask';
 // import 'react-phone-number-input/style.css';
 import styles from '../Register/Register.module.css';
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 
 export default function Register() {
@@ -39,7 +39,7 @@ export default function Register() {
             // .required('Required'),
             username: Yup.string()
 
-            .min(6, "At Least 6 chars.")
+                .min(6, "At Least 6 chars.")
                 .max(15, "Must be 15 character or less")
                 .required('Nickname required'),
             email: Yup.string()
@@ -67,8 +67,8 @@ export default function Register() {
     // ]
 
 
-    if(cookies.get('token')) {
-        return <Redirect to='/'  />
+    if (cookies.get('token')) {
+        return <Redirect to='/' />
     } else {
 
         return (
@@ -85,41 +85,20 @@ export default function Register() {
                                         onBlur={formik.handleBlur}
                                         value={formik.values.username}
                                     /> <span>{formik.touched.username && formik.errors.username ? <label className={styles.errorsName}>{formik.errors.username} </label> : null}<br /></span></div>
-    
-    
-                                    {/* <div className={styles.font}>
-    
-                                        <input id="name" name="name" type="text" placeholder='Name'
-                                            className="form-control form-control-lg"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.name}
-                                        />  <span>{formik.touched.name && formik.errors.name ? <label className={styles.errors}>{formik.errors.name}</label> : null}<br /></span></div>
-    
-    
-                                    <div className={styles.font}>
-                                        <input id="lastname" name="lastname" type="text" placeholder='Lastname'
-                                            className="form-control form-control-lg"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.lastname} />
-                                        <span> {formik.touched.lastname && formik.errors.lastname ? <label className={styles.errors}>{formik.errors.lastname}</label> : null}<br /> </span> </div>
-    
-    
-    
-     */}
-    
+
+
+
                                 </div>
                                 <div >
                                     <div className={styles.font}>
-                                        <input id="email" name="email" type="text" placeholder='sakura@gmail.com'
-                                            className="form-control form-control-lg w-50 p-2" 
+                                        <input id="email" name="email" type="text" placeholder='barbers@gmail.com'
+                                            className="form-control form-control-lg w-50 p-2"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.email} />
                                         <span>{formik.touched.email && formik.errors.email ? <label className={styles.errorsMail}>{formik.errors.email}</label> : null}<br /></span>    </div>
-    
-    
+
+
                                     <div className={styles.font}>
                                         <input id="password" name="password" type="password" placeholder='Password'
                                             className="form-control form-control-lg w-50 p-2"
@@ -127,81 +106,37 @@ export default function Register() {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.password} />
                                         <span>{formik.touched.password && formik.errors.password ? <label className={styles.errorsPassword}>{formik.errors.password}</label> : null}<br /></span> </div>
-    
-    
-    
-                                    <div className={styles.font}>
-                                     
+
                             
+                                    <div className={styles.font}>
+                                        <div>
+                                            {/* <a className="enlace" href="http://localhost:3001/auth/google/callback">Registrase con Google</a> */}
+                                        </div>
+                                        <div className={styles.move}><br /><br />
+                                            <a class="btn btn-primary btn-sm" href={`${axios.defaults.baseURL}/auth/google/signup`}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                                                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
+                                            </svg>  Register with Google</a>   
                                             
-    
-    
-    
-    
-                           
-                                           
-    
-     {/* <MaskedInput   
-      id="phone" name="phone" type="text" 
-      placeholder='Phone Number'
-      className="form-control form-control-lg"
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.phone}
-                            mask={[ /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
-                          /> */}
-         
-         
-    
-                                        {/* <PhoneInput
-                                            placeholder="Enter phone number"
-                                            value={valuePhone}
-                                            onChange={setPhone}
-                                            id="phone"
-                                            name='phone' */}
-    
-                                        {/* onChange={formik.handleChange('phone')}
-                                             onBlur={formik.handleBlur('phone')}
-                                        
-    
-                                        /> */}
-    
-    <div>
-            {/* <a className="enlace" href="http://localhost:3001/auth/google/callback">Registrase con Google</a> */}
-        </div>
-        <div className={styles.move}>
-            <a class="btn btn-primary btn-sm" href={`${axios.defaults.baseURL}/auth/google/signup`}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
-  <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
-</svg> Register with Google</a>
-        </div>
-    
-                                        {/* <span>{formik.touched.phone && formik.errors.phone ? <label className={styles.errors}>{formik.errors.phone}</label> : null}<br /></span> */}
-    
-                                    {/* </div> */}
-                                    {/* <div> */}
-                                    </div>
-    
-                                </div>
-                            </div><br />
-                            {/* <select id="genre" name='genre' onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}  value={formik.values.genre}>
-                            <option type="string" id="genre" name='genre'  value='man'>Men</option>
-                            <option type="string" id="genre" name='genre'  value='woman'>Woman</option>
-                            <option type="string" id="genre" name='genre'  value='binarie'>Non-binary</option>
-                        </select> */}
-                            {/* <Select options={options} className="form-control form-control-lg" /> */}
-                        </div><br />
-                        <div>
-                            <div><Link to='/'><button className={styles.buttonblue}>Home</button></Link>
-                                <button className={styles.buttonred} type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
+                                            
+                                            <div>
+                            <div><Link to='/'><button className={styles.red}>Home</button></Link>
+                                <button className={styles.blue}  type='submit' onChange={formik.handleChange} onBlur={formik.handleBlur}> Submit</button>
                             </div>
                         </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
                     </form>
-    
+
                 </div>
             </>
-    
-    
+
+
         )
 
     }

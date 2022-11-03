@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Quicksand:wght@300&display=swap");
 
+
+.background{
+    background-image: url("faqBackg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    margin: 0% 0%;
+    text-align: center;
+    background-position-x: center;
+    width: 100%;
+    height: 83vh;
+}
+
+
 .cuestions{
     margin-top: 20px;
     font-size:30px;
