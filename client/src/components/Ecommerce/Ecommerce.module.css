@@ -83,7 +83,7 @@
 }
 
 .productQuality {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   line-height: 1;
   font-size: 20px;
@@ -98,7 +98,7 @@ select::-ms-expand {
   display: inline-block;
   margin-top: -200px;
   /* padding: 10px 0; */
-  background-color: #026773;
+  background-color: #0b0c0c;
   text-align: center;
   color: white;
   width: 240px;
@@ -111,7 +111,8 @@ select::-ms-expand {
 }
 
 .button:hover {
-  background-color: aqua;
+  background-color: rgba(113, 116, 116, 0.603);
+  color: rgba(14, 4, 4, 0.534);
   transition: 500ms;
 }
 
@@ -144,6 +145,8 @@ margin-left: 1%;
   font-weight: bolder;
   margin-right: 3%;
 }
+
+
 
 
 

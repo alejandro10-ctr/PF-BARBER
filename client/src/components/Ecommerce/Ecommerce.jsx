@@ -181,7 +181,7 @@ const Ecommerce = ({
                     <div className={s.productInfo}>
                       <h4 className={s.productPrice}> ${product.price}</h4>
                     </div>
-                    <Link to={`/product/${product.id}`} className={s.button}>BUY</Link>
+                    <Link to={`/product/${product.id}`} className={s.button}>ADD</Link>
                   </div>
 
 
@@ -203,9 +203,9 @@ const Ecommerce = ({
                     />
                   } */}
                     <img className={s.img} src={e.image} alt="img"></img>
-                    <div className={s.productInfo}>
-                      <h2 className={s.productInfo}>{e.name}</h2>
-                      <h3 className={s.productPrice}> ${e.price}</h3>
+                    <div className={s.render}>
+                      <h2>{e.name}</h2>
+                      <h3> ${e.price}</h3>
                       <h3>Quality: {e.quality}</h3>
                     </div>
                     {/* <Link to={`/product/${e.id}`} className={s.button}>BUY</Link> */}
