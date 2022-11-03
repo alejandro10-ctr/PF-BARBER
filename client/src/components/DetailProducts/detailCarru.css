@@ -5,6 +5,7 @@
   margin-top: 1%;
   background-color: white;
   width: 500px;
+  height: 400px;
   /* margin-left: 39.5%; */
   margin: 0 auto;
   border-radius: 25px;
@@ -14,15 +15,41 @@
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.dtCarrImg {
-  width: "50%";
-  height: "250px";
-  /* box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+/*   .imagenCarr{
+    width: 150px;
+    height: 200px;
+    border-radius: 15px;
+    align-items: center;
+  }
+
  */
+
+.dtCarrImg {
+  /* width: 50%;
+    height: 250px; */
+  margin-top: 5px;
+  /* box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    */
+}
+
+.dta {
+  display: flex;
+  position: relative;
+  bottom: 50px;
+}
+
+.dtCarrDatos {
+  display: flex;
+  position: relative;
+  margin-top: 3px;
+  bottom: 30px;
 }
 
 .dtCarrName {
   font-family: "Anton&family";
+  text-align: center;
+  display: flex;
+  position: relative;
 }
 
 .dtCarrQuality {

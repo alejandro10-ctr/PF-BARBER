@@ -4,36 +4,22 @@
   background-image: url(../Home/background.png);
   background-repeat: no-repeat;
   background-size: cover;
-
+  position: absolute;
+  margin: 0% 0%;
   text-align: center;
 
   background-position-x: center;
   width: 100%;
-  height: 100%;
-  /*   width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  margin: 0% 0%;
-  text-align: center;
-  background-position-x: center; */
+  height: 140%;
 }
 
 .button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 0;
-  background-color: #026773;
-  text-align: center;
-  color: white;
-  width: 240px;
-  height: auto;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 8px;
-  border: none;
-  text-decoration: none;
+  display: flex;
+  position: relative;
+  top: 260px;
+  right: 500px;
+  bottom: 0;
+  left: -490px;
 }
 
 .button:hover {
@@ -54,18 +40,20 @@
 .price {
   text-transform: uppercase;
   font-family: "Anton&family";
-  margin-left: -500px;
+  margin-left: -300px;
 
   margin-top: 35px;
   left: 2%;
 }
 .quality {
+  position: relative;
   text-transform: uppercase;
   font-family: "Anton&family";
-
+  margin-right: 40px;
   margin-top: 35px;
   text-align: left;
-  right: 426px;
+  top: 23px;
+  right: 226px;
 }
 .img {
   margin-top: 10px;
@@ -95,51 +83,125 @@
   padding-top: 10px;
   padding-right: 20px;
   padding-bottom: 10px;
-
+  font-family: "Anton&fanily";
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .score {
+  position: absolute;
+  display: flex;
+  right: 0px;
+  bottom: 70px;
   margin-top: 2px;
 
-  right: 410px;
   font-family: "Anton&family";
-  text-align: left;
+  /*  text-align: left; */
 }
 .inisec {
   font-family: "Anton&family";
+  display: flex;
+  position: absolute;
+  top: 290px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 .seMore {
   position: absolute;
   bottom: 100px;
   right: 43%;
 }
+
+.columna {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 75%;
+}
+
 .quantity {
   font-family: "Anton&family";
   text-transform: uppercase;
+  display: flex;
+  position: absolute;
+  top: 70px;
+  right: 200px;
+  left: -230px;
+  bottom: 0px;
 }
 
-.columna {
-  display: flex;
-  flex-direction: column;
+.carrBtns {
+  position: relative;
+  top: 140px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
 
 .btncarrito {
-  top: 19%;
-  right: 4.5%;
+  font-family: "Anton&family";
+  left: 10px;
   display: flex;
+  position: relative;
+  bottom: 110px;
 }
-.quantity {
+/* .quantity {
   top: 0%;
   left: -235px;
-}
+} */
 .btnSubstract {
-  margin: 3px;
+  margin-left: 2px;
+  bottom: 30px;
   top: 6rem;
-  right: 250px;
+  right: 500px;
 }
 .btnAdd {
+  margin-left: 2px;
+  bottom: 30px;
   top: 6rem;
-  right: 250px;
+  right: 500px;
+}
+
+.scoreSubmit {
+  display: flex;
+  position: absolute;
+
+  top: 80px;
+  right: 20px;
+}
+
+.interested {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carrusel {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrusel-items {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 30px 0px;
+}
+
+.carrusel-item {
+  min-width: 300px;
+  max-width: 300px;
+  height: 200px;
+  outline: 2px solid black;
+}
+
+.carrusel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carrusel-item:hover {
+  transform: scale(1.2);
 }

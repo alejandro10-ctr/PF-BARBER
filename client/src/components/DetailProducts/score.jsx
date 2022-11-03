@@ -12,10 +12,11 @@ import {
 import { CartContext } from "../Shopping/ShoppingCart";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
+// import Score from '../Score/score'
 import Carrusel from "./detailCarru";
 import s from "./DetailProducts.module.css";
 import Score from "../Score/Score"
-
+// import styles from '../DetailProducts/DetailProducts.module.css';
 
 function DetailProduct({ match }) {
   const { userId, addItemToCart, subtractItemToCart, deleteItemToCart } =
@@ -35,8 +36,6 @@ function DetailProduct({ match }) {
     );
   }
   const [productInCar, setProducInCar] = useState(updateProductInCar());
-
-  
 
   useEffect(() => {
     if (update) {
@@ -74,10 +73,42 @@ function DetailProduct({ match }) {
     }
   }, []);
 
+//-------carrusel
+  let items = document.querySelectorAll('.carousel .carousel-item')
+
+  items.forEach((el) => {
+      const minPerSlide = 4
+      let next = el.nextElementSibling
+      for (var i=1; i<minPerSlide; i++) {
+          if (!next) {
+              // wrap carousel by using first child
+            next = items[0]
+          }
+          let cloneChild = next.cloneNode(true)
+          el.appendChild(cloneChild.children[0])
+          next = next.nextElementSibling
+      }
+  })
+
+
+
+
+
   return (
     <div className={s.background}>
       <div>
+        {/* <Link to="/">Back</Link> */}
+        {/* <Link to={`/yourCart/${id}`} onClick={()=> addToCart(id)}>Want to Buy🛒</Link> */}
 
+        <hr />
+        {/*  <div className={s.seMore}>
+        <Link to="/shop">
+          {" "}
+          <button className={s.button}>See more products!</button>
+        </Link>
+      </div>
+ */}
+        {/* Card */}
           <div className={s.contenedor}>
             <div>
               <h3 className={s.name}>{product.name}</h3>
@@ -86,31 +117,21 @@ function DetailProduct({ match }) {
             <div>
               <img src={product.image} alt={product.image} className={s.img} />
             </div>
-            <div className={s.columna}> 
+            <div className={s.columna}>
               <h3 className={s.quality}>QUALITY: {product.quality}</h3>
               <h3 className={s.quality}>SCORE: {product.score}</h3>
               {/* <h3 className={s.score}>SCORE: { <Score score={product.score}/>}</h3> */}
-          
-
-              <div className={s.quantity}>
-          {     
-            productInCar ? 
-             (
-              <h3>Quantity: {productInCar.quantity}</h3>
-            
-            ) : null
-              }
-              </div>
+             
               <div className={s.btncarrito}>
-          <div className={s.carrBtns}>
-       {/*  {productInCar ? ( */}
+        
+        {productInCar ? (
           <span className={s.btnDelete}>
           <button
             class="btn btn-dark"
             onClick={async (e) => {
               e.preventDefault();
               await deleteItemToCart(product);
-              // history.push('/shop')
+              history.push('/shop')
             }}
           >
             {" "}
@@ -126,7 +147,8 @@ function DetailProduct({ match }) {
             </svg>
           </button>
         </span>
-
+        ) : null}
+          {productInCar ? (
             <span className={s.btnSubstract}>
               <button
                 class="btn btn-dark"
@@ -147,8 +169,8 @@ function DetailProduct({ match }) {
                 </svg>{" "}
               </button>
             </span>
-          {/* ) : null} */}
-          {/* {productInCar ? ( */}
+          ) : null}
+          {productInCar ? (
             <span className={s.btnAdd}>
               <button
                 class="btn btn-dark"
@@ -170,7 +192,13 @@ function DetailProduct({ match }) {
                 </svg>{" "}
               </button>
             </span>
+            
+          ) : null}
+          {productInCar ? (
+            <div className={s.quantity}>
+              <h3>Quantity: {productInCar.quantity}</h3>
             </div>
+          ) : null}
         
 
         {Object.keys(pay).length ? (
@@ -183,22 +211,31 @@ function DetailProduct({ match }) {
             GO PAY
           </a>
         ) : userId ? (
-          <Link to="/cart">
-          
-          <div className={s.button}>
           <button
-            
-            class = "btn btn-dark" 
-            
+            className={s.button}
+            onClick={(e) => {
+              e.preventDefault();
+              if (cart.length) {
+                // const productInCar = cart.find((productInCar) => productInCar.productId === id)
+                console.log(productInCar, cart);
+                if (Object.keys(product).length) {
+                  if (!productInCar?.quantity) Swal.showLoading();
+                  setGoPay(true);
+                  addItemToCart(product, productInCar?.quantity);
+                }
+              } else {
+                if (Object.keys(product).length) {
+                  setGoPay(true);
+                  addItemToCart(product);
+                }
+              }
+            }}
           >
             BUY NOW
           </button>
-          </div>
-          </Link>
         ) : (
-       <div className={s.inisec}>
-       
-            <Link to="/login">
+          <div className={s.inisec}>
+            <Link to="/shop">
               {" "}
               <Button color="dark" outline className={s.inicio}>
                 Inicia sesión para comprar
@@ -206,40 +243,23 @@ function DetailProduct({ match }) {
             </Link>
           </div>
         )}
-           <div className={s.scoreSubmit}>
-       <Score></Score>
-       </div>
       </div>
-            </div> 
+            </div>
 
 
-            {console.log("productInCart", productInCar)}
           
           
       </div>
-       <div className="" >
-       <h2 className={s.interested}>You may also be interested in... </h2>
-       </div>
       <br>
       </br>
        </div>
-       <br>
-       </br>
+       <Score></Score>
+       <h2>Featured Products</h2>
        
-
-<br>
-</br>
-<br>
-</br>
-
-        {
-
-        <div>
-      <Carrusel/>
-      </div>  
-
-        }      
       
+      <div>
+      <Carrusel/>
+      </div>
     </div>
   );
 }

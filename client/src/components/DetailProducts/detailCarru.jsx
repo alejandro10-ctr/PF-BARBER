@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
-import  "./detailCarru.css"
+import  "./DetailProducts.module.css"
 import {
   Carousel,
   CarouselItem,
@@ -12,11 +11,68 @@ import {
 
 
 
-<source />
+
 
 
 const items = 
 [
+ {
+   src:  "https://http2.mlstatic.com/D_NQ_NP_2X_959303-MLA51602582272_092022-F.webp",
+   altText: "Imagen 1",
+   caption: "Beard Balm",
+
+ },
+ {
+   src:  "https://www.giftsandcare.com/12277-home_default_carousel/muehle-razor-gillette-fusion-vivo-series-plumtree.jpg",
+   altText: "Imagen 2",
+   caption: "Mühle Razor Gillette® Fusion Vivo Series Plumtree",
+ },
+ {
+   src:  "https://www.giftsandcare.com/9786-large_default/maquinilla-de-afeitar-clasica-plaza-edwin-jagger-marfil.jpg",
+   altText: "Imagen 3",
+   caption: "Edwin Jagger Marfil",
+ },
+ {
+   src:  "https://www.giftsandcare.com/14216-large_default/brosh-super-hard-gel-200gr.jpg",
+   altText: "Imagen 4",
+   caption: "Brosh Super Hard Gel 200gr",
+
+ },
+ {
+   src:  "https://www.giftsandcare.com/1621-large_default/muehle-double-edge-safety-razor-r89-rose-gold-close-comb-.jpg",
+   altText: "Imagen 5",
+   caption: "Mühle Double Edge Safety Razor R89 Rose Gold Close Comb",
+ },
+ {
+   src:  "https://www.giftsandcare.com/17239-large_default/fatip-chrome-slant-double-edge-safety-razor.jpg",
+   altText: "Imagen 6",
+   caption: "Fatip Chrome Slant Double Edge Safety Razor",
+ },
+ /* {
+   src: "Omega Garnet Shaving Bowl",
+   altText: "Imagen 7",
+   caption: "https://www.giftsandcare.com/6329-large_default/brocha-de-afeitar-pelo-sintetico-roja-omega-s10018.jpg",
+ },
+ {
+   src:  "Fatip Piccolo Gold Slant Close Open Double Edge Safety Razor",
+   altText: "Imagen 8",
+   caption: "https://www.giftsandcare.com/16511-large_default/fatip-piccolo-gold-slant-close-open-double-edge-safety-razor.jpg",
+ },
+ {
+   src: "Baxter of California Shave Tonic" ,
+   altText: "Imagen 9",
+   caption: "https://www.giftsandcare.com/9869-large_default/dear-barber-shave-oil-30ml.jpg",
+ },
+ {
+   src:  "Captain Fawcett Barberism Pre-Shave Oil 50ml",
+   altText: "Imagen 10",
+   caption: "https://www.giftsandcare.com/9427-large_default/aceite-pre-afeitado-barberism-captain-fawcett-50ml.jpg",
+ }, */
+ 
+]; 
+
+
+/* [
     {
       id: 1,
       name: "Beard Balm",
@@ -160,27 +216,9 @@ const items =
         altText: "Imagen 1",    
         caption: "",
     },
-  ];
+  ]; */
 
 
-/* [
-  {
-    src: "https://images-ext-1.discordapp.net/external/IHmjbdPQ1srrMct2wEIsWndgH8zBYkVzP4jgKXbqZoM/%3Fcs%3Dsrgb%26dl%3Dpexels-cottonbro-3998425.jpg%26fm%3Djpg/https/images.pexels.com/photos/3998425/pexels-photo-3998425.jpeg?width=396&height=594",
-    altText: "Imagen 1",
-    caption: "",
-
-  },
-  {
-    src: "https://images-ext-2.discordapp.net/external/aRgQroxSYDekLnL_FNcaYmNcbVRbxKk3a3m9v5t7KVI/%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1260%26h%3D750%26dpr%3D1/https/images.pexels.com/photos/3993470/pexels-photo-3993470.jpeg?width=396&height=594",
-    altText: "Imagen 2",
-    caption: "",
-  },
-  {
-    src: "https://images-ext-1.discordapp.net/external/y5Rvako0Wa_cluT9a7qOqiMPsdCFqDOgm5KYGco9Ing/%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D600%26lazy%3Dload/https/images.pexels.com/photos/9992817/pexels-photo-9992817.jpeg?width=396&height=594",
-    altText: "Imagen 3",
-    caption: "",
-  },
-]; */
 
 class Carrusel extends Component {
   constructor(props) {
@@ -232,20 +270,12 @@ class Carrusel extends Component {
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}
-          key={item}
+          key={item.src}
         >
-          <div className="detCarrContainer">
-            <a href={`/product/${item.id}`}>
-              
-          <img src={item.image} alt={item.altText} with="50%" height="250px" />
-            </a>
-          <h3 >{item.name}</h3>
-          <h4 >${item.price}</h4>
-          <h5 >Quality: {item.quality}</h5>
-          </div>
-          
+      
+      <img  src={item.src} alt={item.altText} height="350px" />
           <CarouselCaption
-            captionText={item.caption}
+            /*  captionText={item.caption}  */
             captionHeader={item.caption}
           />
         </CarouselItem>

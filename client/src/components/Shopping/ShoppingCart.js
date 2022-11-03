@@ -29,7 +29,6 @@ const Toast = Swal.mixin({
 });
 
 export const CartProvider = ({ children }) => {
-  
   const history = useHistory();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -207,6 +206,7 @@ export const CartProvider = ({ children }) => {
     if (inCart) {
       cartItems.splice(cartItems.indexOf(inCart), 1);
       setCartItems([...cartItems]);
+      inCart.quantity = 0;
 
       dispatch(updateToCart(cartItems));
       if (userId) {
@@ -220,29 +220,26 @@ export const CartProvider = ({ children }) => {
     }
   };
 
- if (myUser?.isActive == false) {
-    return SignOff()
-
-} else { 
-
-  return (
-  
-    <CartContext.Provider
-      value={{
-        userId,
-        myUser,
-        setUpdateUser,
-        updateUser,
-        logIn,
-        SignOff,
-        cartItems,
-        addItemToCart,
-        subtractItemToCart,
-        deleteItemToCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );}
-
+  if (myUser?.isActive == false) {
+    return SignOff();
+  } else {
+    return (
+      <CartContext.Provider
+        value={{
+          userId,
+          myUser,
+          setUpdateUser,
+          updateUser,
+          logIn,
+          SignOff,
+          cartItems,
+          addItemToCart,
+          subtractItemToCart,
+          deleteItemToCart,
+        }}
+      >
+        {children}
+      </CartContext.Provider>
+    );
+  }
 };

@@ -155,15 +155,13 @@ export default function ItemCart() {
                       e.preventDefault();
                       await subtractItemToCart(productInCart.product);
                     }}
-                  > {
-        createSelectAddress()
-      }
+                  > 
       <div>
         <h3>Total: ${total}</h3>
         {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
           :
           userId ?
-            <button className={style.button} onClick={(e) => {
+            <button className={style.topeo} onClick={(e) => {
               e.preventDefault()
               if (cart.length) {
                 dispatch(getDBAddress(user.addressDefault))
@@ -206,6 +204,7 @@ export default function ItemCart() {
                       <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
                     </svg>
                   </button>
+                  
                   {/*  <h5>
                     {productInCart.product.price * productInCart.quantity}
                   </h5> */}
@@ -229,6 +228,9 @@ export default function ItemCart() {
                     </svg>
                   </button>
                 </span>
+                {
+        createSelectAddress()
+      }
               </div>
             </div>
           )

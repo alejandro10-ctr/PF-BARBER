@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
 
-.nothingInThecart{
-  background: url('background.jpg');
+.nothingInThecart {
+  background: url("background.jpg");
   width: 100%;
   height: 83vh;
 }
@@ -39,16 +39,17 @@
   text-transform: uppercase;
   font-size: 20px;
 
-
   margin-top: 5px;
   /* margin-right: -79%; */
+}
 
+.topeo {
+  margin-left: 100px;
 }
 .bottonInicio {
   text-decoration: none;
   color: white;
 }
-
 
 .add {
   position: relative;
