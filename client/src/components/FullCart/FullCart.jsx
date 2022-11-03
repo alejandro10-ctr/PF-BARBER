@@ -92,21 +92,6 @@ export default function ItemCart() {
   return (
 
     <div className={style.box}>
-      <h1 className={style.title}>You Cart</h1>
-{/* 
-      <div className={style.container}>
-
-        <h5 className={style.subtitle}>Name </h5>
-        <h5 className={style.subtitle}>Image</h5>
-        <h5 className={style.subtitle}>Price</h5>
-        <h5 className={style.subtitle}>Stock </h5>
-        <h5 className={style.subtitle}>Quantity </h5>
-        <h5 className={style.subtitle}>Quality </h5>
-        <h5 className={style.subtitle}>Score </h5>
-        <h5 className={style.subtitle}>Total</h5>
-        <br></br>
-
-      </div> */}
 
       {cart.length ?
         cart.map((productInCart) => {
@@ -169,7 +154,24 @@ export default function ItemCart() {
                       e.preventDefault();
                       await subtractItemToCart(productInCart.product);
                     }}
-                  >
+                  > {
+        createSelectAddress()
+      }
+      <div>
+        <h3>Total: ${total}</h3>
+        {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
+          :
+          userId ?
+            <button className={style.button} onClick={(e) => {
+              e.preventDefault()
+              if (cart.length) {
+                dispatch(getDBAddress(user.addressDefault))
+              }
+            }}>BUY NOW</button>
+            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
+        }
+
+      </div>
                     {" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -231,27 +233,12 @@ export default function ItemCart() {
           )
         })
         :
-        <div><h1>No hay nada en el carrito</h1></div>
+        
+        <div className={style.nothingInThecart}>
+        <img src="https://o.remove.bg/downloads/3983e9e2-3742-4d3e-b5b8-68a1ac0ab6b4/cart-removebg-preview.png" alt="" />
+        </div>
       }
-      {
-        createSelectAddress()
-      }
-
-      <div>
-        <h3>Total to pay ${total}</h3>
-        {Object.keys(pay).length ? <a id="gopay" className={style.button} target="_blank" rel="noopener" href={pay.init_point + ""} onClick={redireccionar()}>GO PAY</a>
-          :
-          userId ?
-            <button className={style.button} onClick={(e) => {
-              e.preventDefault()
-              if (cart.length) {
-                dispatch(getDBAddress(user.addressDefault))
-              }
-            }}>BUY NOW</button>
-            : <Link to='/login'><button className={style.button}> Iniciar sesión para comprar</button></Link>
-        }
-
-      </div>
+     
     </div>
 
   )
