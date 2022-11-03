@@ -48,6 +48,15 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
+      isReview: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      promedio: {
+        type: DataTypes.STRING,
+        defaultValue: 0,
+        validate: { min: 0, max: 5 },
+      },
     },
     {
       timestamp: false,

@@ -17,7 +17,7 @@ function HomeDash() {
         <div className="widgets">
           <Widget isUser="true" type="user" />
           <Widget  isProducts= "true" type="earning" />
-          <Widget type="order" />
+          <Widget isReview = "true" type="order" />
           <Widget type="balance" />
         </div>
           <div className='charts'>

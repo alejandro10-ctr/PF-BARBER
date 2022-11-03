@@ -11,6 +11,7 @@ const Score = () => {
     const products = useSelector((state) => state.products)
     const detail = useSelector((state) => state.detail)
     const scorees= useSelector((state) => state.score)
+    
     const productDetail = getProductsDetail(id)
 
     const [score, setScore] = useState([])
@@ -61,9 +62,11 @@ const saveHandle = (e) => {
   console.log("promedio", promedio)
   let promedioRedondeado = Math.round(promedio)
   console.log("promedioRedondeado", promedioRedondeado);
+
+  dispatch(updateProducts(id, {promedio: promedio}))
   dispatch(pushScore(score))
   dispatch(updateProducts(id, {score:promedioRedondeado}))
-
+  dispatch(updateProducts(id, {isReview: true}))
 }
 
 

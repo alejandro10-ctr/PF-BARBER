@@ -7,7 +7,7 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, getProducts } from '../../../redux/actions';
-function Widget({type, isUser, isProducts}) {
+function Widget({type, isUser, isProducts, isReview}) {
 
     let data;
     let dispatch = useDispatch()
@@ -27,6 +27,7 @@ function Widget({type, isUser, isProducts}) {
     const productss = products.filter(e => e.isActive !== false)
     const productsFilter = productss.length
     const userss = users.filter(e => e.isActive !== false).length
+    const productsReivew = products.filter(e => e.isReview !== false).length
 
     switch(type){
 
@@ -43,7 +44,7 @@ function Widget({type, isUser, isProducts}) {
     };
     break;
     case "balance":
-            data ={title:"Mercado Pago", ifMoney: false, link:<a href="https://www.mercadopago.com.ar/home"><img src='https://d1161c5903.clvaw-cdnwnd.com/44b76df625b5df4c64733857e9b94307/200000154-493204a2cc/700/logo-mercadopago-300x257.png' width={'60'} height={'50'}></img></a>, icon: <AccountBalanceWalletOutlinedIcon className='icon' style={{color: "purple", backgroundColor: "rgba(128, 0, 128, 0.2)"}}/>,
+            data ={title:"MERCADO PAGO", ifMoney: false, link:<a href="https://www.mercadopago.com.ar/home"><img src='https://d1161c5903.clvaw-cdnwnd.com/44b76df625b5df4c64733857e9b94307/200000154-493204a2cc/700/logo-mercadopago-300x257.png' width={'60'} height={'50'}></img></a>, icon: <AccountBalanceWalletOutlinedIcon className='icon' style={{color: "purple", backgroundColor: "rgba(128, 0, 128, 0.2)"}}/>,
     };
     break;
     default:
@@ -58,6 +59,7 @@ function Widget({type, isUser, isProducts}) {
              <span className="title">{data.title}</span>
              <span className="counter">{data.ifMoney && "$"}{isUser ? userss : null}</span>
              <span className="counter">{data.ifMoney && "$"}{isProducts ? productsFilter : null}</span>
+             <span className="counter">{data.ifMoney && "$"}{isReview ? productsReivew : null}</span>
              <span className="link">{data.link}</span>
              </div>
         <div className="right">
