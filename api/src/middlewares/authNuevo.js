@@ -155,8 +155,8 @@ exports.loginGoogle = async (req, res) => {
     });
     // console.log("token");
     res.cookie("token", token);
-    res.redirect("http://localhost:3000/");
+    res.redirect("https://barberspf.vercel.app");
   } else {
-    res.redirect("http://localhost:3000/login");
+    res.redirect("https://barberspf.vercel.app/login");
   }
 };

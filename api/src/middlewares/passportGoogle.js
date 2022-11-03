@@ -30,7 +30,7 @@ passport.use(
       clientID:
         "877624758917-d8cb6f147jp9cnrp524d0fupcuka3dvs.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:3001/auth/google/signup",
+      callbackURL: "https://barberspf.vercel.app/auth/google/signup",
     },
     async (accessToken, refreshToken, profile, done) => {
       const user = await User.findOne({
@@ -50,7 +50,6 @@ passport.use(
           //   password: profile._json.sub,
         }).then((user) => {
           sendEmail(user.dataValues.email);
-          
         });
 
         done(null, profile);
