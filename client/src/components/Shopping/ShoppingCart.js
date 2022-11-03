@@ -13,7 +13,7 @@ import {
   getDBMyUser,
 } from "../../redux/actions";
 import "./ShoppingCart.css";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export const CartContext = createContext();
 const Toast = Swal.mixin({
@@ -29,6 +29,7 @@ const Toast = Swal.mixin({
 });
 
 export const CartProvider = ({ children }) => {
+  
   const history = useHistory();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -219,7 +220,13 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+ if (myUser?.isActive == false) {
+    return SignOff()
+
+} else { 
+
   return (
+  
     <CartContext.Provider
       value={{
         userId,
@@ -236,5 +243,6 @@ export const CartProvider = ({ children }) => {
     >
       {children}
     </CartContext.Provider>
-  );
+  );}
+
 };

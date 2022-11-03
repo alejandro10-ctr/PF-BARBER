@@ -26,7 +26,7 @@ function Widget({type, isUser, isProducts}) {
     const amount = 100
     const productss = products.filter(e => e.isActive !== false)
     const productsFilter = productss.length
-    const userss = users.length
+    const userss = users.filter(e => e.isActive !== false).length
 
     switch(type){
 

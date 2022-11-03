@@ -4,7 +4,7 @@ import { userColumns} from "./datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, updateUsersLogic } from '../../../redux/actions';
+import { getUsers, updateUserMartin } from '../../../redux/actions';
 import Swal from "sweetalert2";
 
 const Datatable = () => {
@@ -13,13 +13,13 @@ const Datatable = () => {
 
   console.log(users)
 
-  const [data, setData] = useState();
+  const [data, setData] = useState("");
 
   useEffect(() => {
     dispatch(getUsers())
-  }, [])
+  }, [data])
 
-  let handleDelete = (id, user) => {
+  let handleDelete = (id, users) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -36,8 +36,40 @@ const Datatable = () => {
           'success'
         )
         // user.isActive = false
-        console.log('SOY USER', user)
-        dispatch(updateUsersLogic(id, {isActive: false}))
+        console.log('SOY USER', id)
+        setData("hola")
+        dispatch(updateUserMartin(id, {isActive: false}))
+        getUsers()
+      }
+      getUsers()
+      getUsers()
+    }
+    )
+    getUsers()
+
+
+  }
+  let handleActive = (id, users) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        // user.isActive = false
+        console.log('SOY USER', id)
+        setData("chau")
+        dispatch(updateUserMartin(id, {isActive: true}))
+        getUsers()
       }
       getUsers()
       getUsers()
@@ -55,6 +87,9 @@ const Datatable = () => {
       width: 200,
       renderCell: (params) => {
         console.log('soy params', params)
+        if(params.row.isActive === true){
+
+       
         return (
           <div className="cellAction">
             <Link to={`/dash/users/${params.id}`} style={{ textDecoration: "none" }}>
@@ -66,9 +101,25 @@ const Datatable = () => {
             >
               Delete
             </div> */}
-            <button className="deleteButton" onClick= {({id = params.row.id}) => handleDelete(id)}>Delete</button>
+            <button className="deleteButton" onClick= {() => handleDelete(params.id)}>Delete</button>
           </div>
-        );
+        ); }
+        else{
+          return (
+            <div className="cellAction">
+              <Link to={`/dash/users/${params.id}`} style={{ textDecoration: "none" }}>
+                <div className="viewButton">View</div>
+              </Link>
+              {/* <div
+                className="deleteButton"
+                onClick= {({user = user.id}) => handleDelete(user)}
+              >
+                Delete
+              </div> */}
+              <button className="deleteButton" onClick= {() => handleActive(params.id)}>Active</button>
+            </div>
+          ); 
+        }
       },    
     },
   ];
