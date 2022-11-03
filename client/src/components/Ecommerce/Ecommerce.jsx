@@ -113,15 +113,18 @@ const Ecommerce = ({
 
         <SearchBar setCurrentPage={setCurrentPage} />
   
-        <button id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
-        <button id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
-        <button id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
+       
 
     
 
         {/* price sort */}
-        <div >
-          <label>Price </label>
+        <div className={s.selectors}> 
+        
+        <button className={s.select} id="All" name="All" value="default" onClick={quality => handleQuality(quality)}>All</button>
+        <button className={s.select} id="Premium" name="Premium" value="Premium" onClick={quality => handleQuality(quality)}> Premium</button>
+        <button className={s.select} id="Basic" name="Basic" value="Basic" onClick={quality => handleQuality(quality)}>Basic</button>
+
+          <label> Price </label>
           <select className={s.select} onChange={sort => handleSort(sort)}>
             <option hidden value=''>⇅</option>
             <option value='high'>+</option>
@@ -129,7 +132,7 @@ const Ecommerce = ({
           </select>
 
           {/* filter anidado */}
-          <label>Category</label>
+          <label> Category</label>
           <select className={s.select} onChange={shop => handleShop(shop)}>
             <option hidden value="all">Shop</option>
             <option value="all">All</option>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap');
 .background{
 
     background-image: url(../Home/background.png);
@@ -125,16 +126,24 @@ select::-ms-expand {
 
 .select {
   width: 7%;
+margin-right: 2%;
+background-color: rgba(32, 30, 29, 0.747);
+color: white;
+border-radius: 14%;
+margin-left: 1%;
 }
 .pag {
   display: flex;
   justify-content: center;
 }
-/* .selectors {
+.selectors {
   display: flex;
   justify-content: center;
   margin-top: 25px;
-} */
-.select {
-  width: 15px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bolder;
+  margin-right: 3%;
 }
+
+
+
