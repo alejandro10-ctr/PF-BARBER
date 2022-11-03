@@ -24,6 +24,11 @@
   -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
   border-radius: 65px;
+  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px rgba(231, 226, 226, 0.75);
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Noto+Sans:wght@200&display=swap");
@@ -74,6 +79,16 @@
   color: #ffffff;
   text-decoration: none;
   margin: 4%;
+  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px rgba(231, 226, 226, 0.75);
+  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px rgba(231, 226, 226, 0.75);
 }
 .buttonred:hover,
 .buttonred:focus {
@@ -120,6 +135,11 @@
   text-decoration: none;
   margin: 4%;
   width: 126.71px;
+  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px rgba(231, 226, 226, 0.75);
 }
 .buttonblue:hover,
 .buttonblue:focus {
