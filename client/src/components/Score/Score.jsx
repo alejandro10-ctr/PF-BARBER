@@ -54,19 +54,29 @@ const saveHandle = (e) => {
   setContador(contador+1)
   console.log(contador)
 
-  let initialState= 0
-
-  let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
-  console.log('total',total)
-  let promedio = total / contador
-  console.log("promedio", promedio)
-  let promedioRedondeado = Math.round(promedio)
-  console.log("promedioRedondeado", promedioRedondeado);
-
-  dispatch(updateProducts(id, {promedio: promedio}))
   dispatch(pushScore(score))
-  dispatch(updateProducts(id, {score:promedioRedondeado}))
-  dispatch(updateProducts(id, {isReview: true}))
+  let initialState= 0
+  if(contador == 0){
+    dispatch(pushScore(Number(detail.score)))
+    let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
+    let promedio = total / contador
+    let promedioRedondeado = Math.round(promedio)
+    dispatch(updateProducts(id, {promedio: promedio}))
+    dispatch(updateProducts(id, {score:promedioRedondeado}))
+    dispatch(updateProducts(id, {isReview: true}))
+  }else{
+
+    let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
+    let promedio = total / contador
+    let promedioRedondeado = Math.round(promedio)
+    console.log('total',total)
+    console.log("promedio", promedio)
+    console.log("promedioRedondeado", promedioRedondeado);
+    
+    dispatch(updateProducts(id, {promedio: promedio}))
+    dispatch(updateProducts(id, {score:promedioRedondeado}))
+    dispatch(updateProducts(id, {isReview: true}))
+  }
 }
 
 

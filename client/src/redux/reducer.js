@@ -1,4 +1,5 @@
 
+
 import {
   SET_LOADING,
   GET_ADDRESSES,
@@ -29,7 +30,9 @@ import {
   UPLOAD_IMG,
 } from "./actions";
 
+
 const initialState = {
+  
   score: [],
   loading: false,
   products: [],
@@ -66,6 +69,7 @@ export default function reducer(state = initialState, { type, payload, quantity 
     case GET_PRODUCTS:
       return {
         ...state,
+       
         allProducts: [...payload],
         products: [...payload],
         filterstate: [...payload],
@@ -79,7 +83,7 @@ export default function reducer(state = initialState, { type, payload, quantity 
     case GET_USERS:
       return { ...state, users: payload };
     case GET_DETAILPRODUCT:
-      return { ...state, detail: payload };
+      return { ...state, detail: payload};
     case CLEAR_PRODUCTS_DETAILS:
       return {
         ...state,
