@@ -6,6 +6,7 @@ import { getDBAddress, getDBCart, getDBCartValidateStock, getDBUser, getLocalSto
 import { Redirect } from 'react-router-dom'
 import Select from 'react-select'
 import style from './FullCart.module.css'
+import logo from '../FullCart/changuito.png'
 
 export default function ItemCart() {
   const { userId, deleteItemToCart, subtractItemToCart, addItemToCart } = useContext(CartContext)
@@ -235,7 +236,7 @@ export default function ItemCart() {
         :
         
         <div className={style.nothingInThecart}>
-        <img src="https://o.remove.bg/downloads/3983e9e2-3742-4d3e-b5b8-68a1ac0ab6b4/cart-removebg-preview.png" alt="" />
+        <img src={logo} alt="empty cart" />
         </div>
       }
      
