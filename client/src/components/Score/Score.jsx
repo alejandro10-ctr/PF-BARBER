@@ -49,10 +49,6 @@ const [arrays, setArrays] = useState({contador})
 
 // console.log("soy el producto", detail)
 const saveHandle = (e) => {
-//   let total=0,numeros = [1, 2, 3, 4, 5];
-// numeros.forEach(function(a){total += a;});
-// console.log(total);
-// let total = 0
   setScore(e.target.value)
   setContador(contador+1)
   console.log(contador)
@@ -61,8 +57,12 @@ const saveHandle = (e) => {
 
   let total = scorees.reduce((a, b) => Number(a) + Number(b), initialState);
   console.log('total',total)
+  let promedio = total / contador
+  console.log("promedio", promedio)
+  let promedioRedondeado = Math.round(promedio)
+  console.log("promedioRedondeado", promedioRedondeado);
   dispatch(pushScore(score))
-  dispatch(updateProducts(id, {score}))
+  dispatch(updateProducts(id, {score:promedioRedondeado}))
 
 }
 
