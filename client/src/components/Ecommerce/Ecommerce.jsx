@@ -150,7 +150,7 @@ const Ecommerce = ({
                     <img className={s.img} src={product.image} alt="img" ></img>
                     <h4 >{product.quality.toUpperCase()}</h4>
                     </div>
-                    <h3>{findProductCar?.quantity}</h3>
+                    <h3 className={s.quantityChange}>in cart: {findProductCar?.quantity ? findProductCar.quantity : 0}</h3>
                     <div>
                       
                       <button className={s.carrito} onClick={async (e) => {
@@ -180,7 +180,7 @@ const Ecommerce = ({
                     <div className={s.productInfo}>
                       <h4 className={s.productPrice}> ${product.price}</h4>
                     </div>
-                    <Link to={`/product/${product.id}`} className={s.button}>ADD</Link>
+                    <Link to={`/product/${product.id}`} className={s.button}>SHOW DETAIL</Link>
                   </div>
 
                 );

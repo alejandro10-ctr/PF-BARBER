@@ -112,7 +112,9 @@ select::-ms-expand {
   border: none;
   text-decoration: none;
 }
-
+.quantityChange{
+  color: rgba(14, 4, 4, 0.534);
+}
 .button:hover {
   background-color: rgba(113, 116, 116, 0.603);
   color: rgba(14, 4, 4, 0.534);

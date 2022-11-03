@@ -14,8 +14,8 @@ import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import Carrusel from "./detailCarru";
 import s from "./DetailProducts.module.css";
-import Score from "../Score/Score"
-
+import Score from "../Score/Score";
+import Carruselsito from './Carruselsito';
 
 function DetailProduct({ match }) {
   const { userId, addItemToCart, subtractItemToCart, deleteItemToCart } =
@@ -220,7 +220,9 @@ function DetailProduct({ match }) {
       </div>
       <br>
       </br>
-      {/* <Carrusel/> */}
+
+      {<div><Carruselsito/></div>}
+      
 
 
 
